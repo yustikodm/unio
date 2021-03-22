@@ -1,19 +1,19 @@
 <!-- Country Id Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('country_id', 'Country Id:') !!}
-    {!! Form::number('country_id', null, ['class' => 'form-control']) !!}
+    {!! Form::select('country_id', $countryItems, null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- State Id Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('state_id', 'State Id:') !!}
-    {!! Form::number('state_id', null, ['class' => 'form-control']) !!}
+    {!! Form::select('state_id', $stateItems, null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- District Id Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('district_id', 'District Id:') !!}
-    {!! Form::number('district_id', null, ['class' => 'form-control']) !!}
+    {!! Form::select('district_id', $districtItems, null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Name Field -->

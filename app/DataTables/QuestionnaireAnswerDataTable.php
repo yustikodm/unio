@@ -29,7 +29,7 @@ class QuestionnaireAnswerDataTable extends DataTable
      */
     public function query(QuestionnaireAnswer $model)
     {
-        return $model->newQuery();
+        return $model->newQuery()->with(['questionnaire', 'user']);
     }
 
     /**
@@ -65,8 +65,8 @@ class QuestionnaireAnswerDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'questionairre_id',
-            'user_id',
+            'questionnaire.question',
+            'user.name',
             'answer'
         ];
     }

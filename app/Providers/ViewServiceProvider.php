@@ -1,6 +1,11 @@
 <?php
 
 namespace App\Providers;
+use App\Models\Currency;
+use App\Models\District;
+use App\Models\Questionnaire;
+use App\Models\State;
+use App\Models\Country;
 
 use App\Models\Barang;
 use App\Models\Pelanggan;
@@ -25,6 +30,8 @@ use App\Models\TipeParameter;
 use App\Models\TipeBarang;
 use App\Models\MetodePembayaran;
 use App\Models\Bank;
+use App\Models\University;
+use App\Models\UniversityFaculties;
 use App\Models\Voucher;
 use App\User;
 use App\Models\LevelMitra;
@@ -55,6 +62,83 @@ class ViewServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        // University Majors
+        View::composer(['university_majors.fields'], function ($view) {
+            $universityItems = University::pluck('name', 'id')->toArray();
+            $view->with('universityItems', $universityItems);
+        });
+
+        View::composer(['university_majors.fields'], function ($view) {
+            $facultyItems = UniversityFaculties::pluck('name', 'id')->toArray();
+            $view->with('facultyItems', $facultyItems);
+        });
+
+        // University Faculty
+        View::composer(['university_faculties.fields'], function ($view) {
+            $universityItems = University::pluck('name', 'id')->toArray();
+            $view->with('universityItems', $universityItems);
+        });
+
+        // University
+        View::composer(['universities.fields'], function ($view) {
+            $districtItems = District::pluck('name', 'id')->toArray();
+            $view->with('districtItems', $districtItems);
+        });
+        View::composer(['universities.fields'], function ($view) {
+            $stateItems = State::pluck('name', 'id')->toArray();
+            $view->with('stateItems', $stateItems);
+        });
+        View::composer(['universities.fields'], function ($view) {
+            $countryItems = Country::pluck('name','id')->toArray();
+            $view->with('countryItems', $countryItems);
+        });
+
+        // Currency
+        View::composer(['currency.fields'], function ($view) {
+            $countryItems = Country::pluck('name','id')->toArray();
+            $view->with('countryItems', $countryItems);
+        });
+
+        // questionnaireAnswer
+        View::composer(['questionnaire_answers.fields'], function ($view) {
+            $questionnaireItems = Questionnaire::pluck('question','id')->toArray();
+            $view->with('questionnaireItems', $questionnaireItems);
+        });
+        View::composer(['questionnaire_answers.fields'], function ($view) {
+            $userItems = User::pluck('name','id')->toArray();
+            $view->with('userItems', $userItems);
+        });
+
+        // State
+        View::composer(['districts.fields'], function ($view) {
+            $districtItems = State::pluck('name','id')->toArray();
+            $view->with('districtItems', $districtItems);
+        });
+
+        // State
+        View::composer(['states.fields'], function ($view) {
+            $countryItems = Country::pluck('name','id')->toArray();
+            $view->with('countryItems', $countryItems);
+        });
+
+        // Boarding house
+        View::composer(['boarding_houses.fields'], function ($view) {
+            $currencyItems = Currency::pluck('name', 'id')->toArray();
+            $view->with('currencyItems', $currencyItems);
+        });
+        View::composer(['boarding_houses.fields'], function ($view) {
+            $districtItems = District::pluck('name', 'id')->toArray();
+            $view->with('districtItems', $districtItems);
+        });
+        View::composer(['boarding_houses.fields'], function ($view) {
+            $stateItems = State::pluck('name', 'id')->toArray();
+            $view->with('stateItems', $stateItems);
+        });
+        View::composer(['boarding_houses.fields'], function ($view) {
+            $countryItems = Country::pluck('name','id')->toArray();
+            $view->with('countryItems', $countryItems);
+        });
+
         // Voucher
         View::composer(['voucher.fields'], function ($view) {
             $jabatan = Jabatan::pluck('nama','id')->toArray();

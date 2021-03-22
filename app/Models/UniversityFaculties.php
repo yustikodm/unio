@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Eloquent as Model;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -19,7 +19,7 @@ class UniversityFaculties extends Model
     use SoftDeletes;
 
     public $table = 'university_faculties';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -60,5 +60,9 @@ class UniversityFaculties extends Model
         'deleted_at' => 'nullable'
     ];
 
-    
+    public function university(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(University::class, 'university_id');
+    }
+
 }

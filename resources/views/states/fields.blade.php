@@ -1,7 +1,7 @@
 <!-- Country Id Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('country_id', 'Country Id:') !!}
-    {!! Form::number('country_id', null, ['class' => 'form-control']) !!}
+    {!! Form::label('country_id', 'Country:') !!}
+    {!! Form::select('country_id', $countryItems, null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Name Field -->

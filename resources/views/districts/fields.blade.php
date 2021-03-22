@@ -1,7 +1,7 @@
 <!-- State Id Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('state_id', 'State Id:') !!}
-    {!! Form::number('state_id', null, ['class' => 'form-control']) !!}
+    {!! Form::label('state_id', 'State:') !!}
+    {!! Form::select('state_id', $districtItems, null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Name Field -->

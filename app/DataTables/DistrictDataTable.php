@@ -29,7 +29,7 @@ class DistrictDataTable extends DataTable
      */
     public function query(District $model)
     {
-        return $model->newQuery();
+        return $model->newQuery()->with(['state']);
     }
 
     /**
@@ -65,8 +65,8 @@ class DistrictDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'state_id',
-            'name'
+            'name',
+            'state.name'
         ];
     }
 

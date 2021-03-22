@@ -29,7 +29,7 @@ class StateDataTable extends DataTable
      */
     public function query(State $model)
     {
-        return $model->newQuery();
+        return $model->newQuery()->with(['country']);
     }
 
     /**
@@ -65,8 +65,8 @@ class StateDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'country_id',
-            'name'
+            'name',
+            'country.name'
         ];
     }
 

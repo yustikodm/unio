@@ -1,13 +1,13 @@
 <!-- University Id Field -->
 <div class="form-group">
-    {!! Form::label('university_id', 'University Id:') !!}
-    <p>{{ $universityMajor->university_id }}</p>
+    {!! Form::label('university_id', 'University:') !!}
+    <p>{{ $universityMajor->university->name }}</p>
 </div>
 
 <!-- Faculty Id Field -->
 <div class="form-group">
-    {!! Form::label('faculty_id', 'Faculty Id:') !!}
-    <p>{{ $universityMajor->faculty_id }}</p>
+    {!! Form::label('faculty_id', 'Faculty:') !!}
+    <p>{{ $universityMajor->faculty->name }}</p>
 </div>
 
 <!-- Name Field -->
@@ -26,11 +26,5 @@
 <div class="form-group">
     {!! Form::label('accreditation', 'Accreditation:') !!}
     <p>{{ $universityMajor->accreditation }}</p>
-</div>
-
-<!-- Temp Field -->
-<div class="form-group">
-    {!! Form::label('temp', 'Temp:') !!}
-    <p>{{ $universityMajor->temp }}</p>
 </div>
 

@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Eloquent as Model;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -18,7 +18,7 @@ class District extends Model
     use SoftDeletes;
 
     public $table = 'districts';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -56,5 +56,9 @@ class District extends Model
         'deleted_at' => 'nullable'
     ];
 
-    
+
+    public function state()
+    {
+        return $this->belongsTo(State::class, 'state_id');
+    }
 }

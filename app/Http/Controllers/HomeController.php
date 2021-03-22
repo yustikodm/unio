@@ -27,13 +27,9 @@ class HomeController extends Controller
      * @return void
      */
 
-    public function __construct(PenjualanRepository $penjualan, PelangganRepository $pelanggan, MitraRepository $mitra, BarangRepository $barang)
+    public function __construct()
     {
         $this->middleware('auth');
-        $this->penjualanRepository = $penjualan;
-        $this->pelangganRepository = $pelanggan;
-        $this->mitraRepository = $mitra;
-        $this->barangRepository = $barang;
     }
 
     /**
@@ -54,33 +50,6 @@ class HomeController extends Controller
         // Auth::user()->assignRole('admin');
 
         // dd(User::doesntHave('roles')->get());
-
-        $data['penjualan'] = $this->penjualanRepository->all();
-        $data['pelanggan'] = $this->pelangganRepository->all();
-        $data['mitra'] = $this->mitraRepository->all();
-        $data['barang'] = $this->barangRepository->all();
-        return view('home', $data);
-    }
-
-    public function cobaPrinter(Request $request){
-
-        $nama_printer = $request->input('nama_printer');
-        try {
-            $c = new WindowsPrintConnector($nama_printer);
-            $printer = new Printer($c);
-            $printer->text("Printer ".$nama_printer." Tersedia");
-            $printer->close();
-            $data = [
-                'success' => true,
-                'msg' => "OK"
-            ];
-            echo json_encode($data);
-        } catch(Exception $e) {
-            $data = [
-                'success' => false,
-                'msg' => "Couldn't print to this printer: " . $e -> getMessage() . "\n"
-            ];
-            echo json_encode($data);
-        }
+        return view('home', $data = []);
     }
 }

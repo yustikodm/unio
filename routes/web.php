@@ -240,3 +240,6 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('transaksiDibatalkan', 'PenjualanController@transaksiDibatalkan')->name('transaksiDibatalkan');*/
 });
+
+
+Route::resource('boardingHouses', 'BoardingHouseController');

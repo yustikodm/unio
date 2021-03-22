@@ -211,6 +211,12 @@
     </li>
 @endcan
 
+@can('boardingHouses.index')
+    <li class="{{ Request::is('boardingHouses*') ? 'active' : '' }}">
+        <a href="{{ route('boardingHouses.index') }}"><i class="fa fa-home"></i><span>Boarding Houses</span></a>
+    </li>
+@endcan
+
 
 {{-- Setting --}}
 {{--@can('fa-circle-thin')--}}

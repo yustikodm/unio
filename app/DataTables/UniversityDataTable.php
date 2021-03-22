@@ -29,7 +29,7 @@ class UniversityDataTable extends DataTable
      */
     public function query(University $model)
     {
-        return $model->newQuery();
+        return $model->newQuery()->with(['country', 'state', 'district']);
     }
 
     /**
@@ -65,15 +65,14 @@ class UniversityDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'country_id',
-            'state_id',
-            'district_id',
             'name',
-            'description',
             'logo_src',
             'type',
             'accreditation',
-            'address'
+            'address',
+            'country.name',
+            'state.name',
+            'district.name',
         ];
     }
 

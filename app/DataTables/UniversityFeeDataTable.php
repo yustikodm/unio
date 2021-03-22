@@ -29,7 +29,7 @@ class UniversityFeeDataTable extends DataTable
      */
     public function query(UniversityFee $model)
     {
-        return $model->newQuery();
+        return $model->newQuery()->with(['']);
     }
 
     /**
@@ -65,10 +65,10 @@ class UniversityFeeDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'university_id',
-            'faculty_id',
-            'major_id',
-            'currency_id',
+            'university.name',
+            'faculty.name',
+            'major.name',
+            'currency.name',
             'type',
             'admission_fee',
             'semester_fee',

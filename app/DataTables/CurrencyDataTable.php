@@ -29,7 +29,7 @@ class CurrencyDataTable extends DataTable
      */
     public function query(Currency $model)
     {
-        return $model->newQuery();
+        return $model->newQuery()->with(['country']);
     }
 
     /**
@@ -65,7 +65,7 @@ class CurrencyDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'country_id',
+            'country.name',
             'code',
             'name'
         ];

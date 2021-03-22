@@ -1,13 +1,13 @@
-<!-- Questionairre Id Field -->
+<!-- questionnaire Id Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('questionairre_id', 'Questionairre Id:') !!}
-    {!! Form::number('questionairre_id', null, ['class' => 'form-control']) !!}
+    {!! Form::label('questionnaire_id', 'questionnaire:') !!}
+    {!! Form::select('questionnaire_id',$questionnaireItems, null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- User Id Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('user_id', 'User Id:') !!}
-    {!! Form::number('user_id', null, ['class' => 'form-control']) !!}
+    {!! Form::label('user_id', 'User:') !!}
+    {!! Form::select('user_id', $userItems, null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Answer Field -->

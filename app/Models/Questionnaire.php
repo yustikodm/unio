@@ -19,7 +19,7 @@ class Questionnaire extends Model
     use SoftDeletes;
 
     public $table = 'questionnaires';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -54,11 +54,11 @@ class Questionnaire extends Model
     public static $rules = [
         'question' => 'required|string|max:255',
         'type' => 'required|string|max:255',
-        'answer_choice' => 'required|string|max:255',
+        'answer_choice' => 'nullable',
         'created_at' => 'nullable',
         'updated_at' => 'nullable',
         'deleted_at' => 'nullable'
     ];
 
-    
+
 }

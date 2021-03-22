@@ -1,7 +1,7 @@
 <!-- State Id Field -->
 <div class="form-group">
-    {!! Form::label('state_id', 'State Id:') !!}
-    <p>{{ $district->state_id }}</p>
+    {!! Form::label('state_id', 'State:') !!}
+    <p>{{ $district->state->name }}</p>
 </div>
 
 <!-- Name Field -->

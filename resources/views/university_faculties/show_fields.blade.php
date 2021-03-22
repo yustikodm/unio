@@ -1,7 +1,7 @@
 <!-- University Id Field -->
 <div class="form-group">
-    {!! Form::label('university_id', 'University Id:') !!}
-    <p>{{ $universityFaculties->university_id }}</p>
+    {!! Form::label('university_id', 'University:') !!}
+    <p>{{ $universityFaculties->university->name }}</p>
 </div>
 
 <!-- Name Field -->

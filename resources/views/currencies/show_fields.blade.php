@@ -1,7 +1,7 @@
 <!-- Country Id Field -->
 <div class="form-group">
-    {!! Form::label('country_id', 'Country Id:') !!}
-    <p>{{ $currency->country_id }}</p>
+    {!! Form::label('country_id', 'Country:') !!}
+    <p>{{ $currency->country->name }}</p>
 </div>
 
 <!-- Code Field -->

@@ -2,11 +2,11 @@
 
 namespace App\DataTables;
 
-use App\Models\UniversityFaculties;
+use App\Models\BoardingHouse;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
 
-class UniversityFacultiesDataTable extends DataTable
+class BoardingHouseDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -18,18 +18,18 @@ class UniversityFacultiesDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'university_faculties.datatables_actions');
+        return $dataTable->addColumn('action', 'boarding_houses.datatables_actions');
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\UniversityFaculties $model
+     * @param \App\Models\BoardingHouse $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(UniversityFaculties $model)
+    public function query(BoardingHouse $model)
     {
-        return $model->newQuery()->with(['university']);
+        return $model->newQuery()->with(['country','currency','state','district']);
     }
 
     /**
@@ -65,9 +65,16 @@ class UniversityFacultiesDataTable extends DataTable
     protected function getColumns()
     {
         return [
+            'country.name',
+            'state.name',
+            'district.name',
+            'currency.name',
             'name',
             'description',
-            'university.name'
+            'price',
+            'address',
+            'phone',
+            'picture'
         ];
     }
 
@@ -78,6 +85,6 @@ class UniversityFacultiesDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'university_faculties_datatable_' . time();
+        return 'boarding_houses_datatable_' . time();
     }
 }

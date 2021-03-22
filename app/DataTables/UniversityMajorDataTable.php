@@ -29,7 +29,7 @@ class UniversityMajorDataTable extends DataTable
      */
     public function query(UniversityMajor $model)
     {
-        return $model->newQuery();
+        return $model->newQuery()->with(['university', 'faculty']);
     }
 
     /**
@@ -65,12 +65,11 @@ class UniversityMajorDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'university_id',
-            'faculty_id',
             'name',
             'description',
             'accreditation',
-            'temp'
+            'university.name',
+            'faculty.name',
         ];
     }
 

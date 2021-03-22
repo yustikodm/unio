@@ -1,13 +1,13 @@
 <!-- University Id Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('university_id', 'University Id:') !!}
-    {!! Form::number('university_id', null, ['class' => 'form-control']) !!}
+    {!! Form::label('university_id', 'University:') !!}
+    {!! Form::select('university_id', $universityItems, null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Faculty Id Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('faculty_id', 'Faculty Id:') !!}
-    {!! Form::number('faculty_id', null, ['class' => 'form-control']) !!}
+    {!! Form::label('faculty_id', 'Faculty:') !!}
+    {!! Form::select('faculty_id', $facultyItems, null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Name Field -->
@@ -26,12 +26,6 @@
 <div class="form-group col-sm-6">
     {!! Form::label('accreditation', 'Accreditation:') !!}
     {!! Form::text('accreditation', null, ['class' => 'form-control','maxlength' => 255,'maxlength' => 255,'maxlength' => 255]) !!}
-</div>
-
-<!-- Temp Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('temp', 'Temp:') !!}
-    {!! Form::text('temp', null, ['class' => 'form-control','maxlength' => 255,'maxlength' => 255,'maxlength' => 255]) !!}
 </div>
 
 <!-- Submit Field -->

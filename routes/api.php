@@ -28,6 +28,8 @@ Route::resource('permissions', 'PermissionAPIController');
 
 Route::group(['middleware' => ['api']], function () {
 
+    Route::resource('boarding_houses', 'BoardingHouseAPIController');
+
     Route::resource('articles', 'ArticleAPIController');
 
     Route::resource('countries', 'CountryAPIController');
