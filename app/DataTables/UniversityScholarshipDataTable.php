@@ -29,7 +29,7 @@ class UniversityScholarshipDataTable extends DataTable
      */
     public function query(UniversityScholarship $model)
     {
-        return $model->newQuery();
+        return $model->newQuery()->with(['university']);
     }
 
     /**
@@ -65,7 +65,7 @@ class UniversityScholarshipDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'university_id',
+            'university.name',
             'description',
             'picture',
             'year'

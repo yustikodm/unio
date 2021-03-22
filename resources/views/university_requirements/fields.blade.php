@@ -1,13 +1,13 @@
 <!-- University Id Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('university_id', 'University Id:') !!}
-    {!! Form::number('university_id', null, ['class' => 'form-control']) !!}
+    {!! Form::select('university_id', $universityItems, null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Major Id Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('major_id', 'Major Id:') !!}
-    {!! Form::number('major_id', null, ['class' => 'form-control']) !!}
+    {!! Form::select('major_id', $majorItems, null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Name Field -->

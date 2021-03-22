@@ -29,7 +29,7 @@ class VendorServiceDataTable extends DataTable
      */
     public function query(VendorService $model)
     {
-        return $model->newQuery();
+        return $model->newQuery()->with(['vendor']);
     }
 
     /**
@@ -65,7 +65,7 @@ class VendorServiceDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'vendor_id',
+            'vendor.name',
             'name',
             'description',
             'picture',

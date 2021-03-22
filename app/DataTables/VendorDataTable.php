@@ -29,7 +29,7 @@ class VendorDataTable extends DataTable
      */
     public function query(Vendor $model)
     {
-        return $model->newQuery();
+        return $model->newQuery()->with(['category']);
     }
 
     /**
@@ -65,7 +65,7 @@ class VendorDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'vendor_category_id',
+            'category.name',
             'name',
             'description',
             'picture',

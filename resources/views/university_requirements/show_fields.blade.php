@@ -1,13 +1,13 @@
 <!-- University Id Field -->
 <div class="form-group">
-    {!! Form::label('university_id', 'University Id:') !!}
-    <p>{{ $universityRequirement->university_id }}</p>
+    {!! Form::label('university_id', 'University:') !!}
+    <p>{{ $universityRequirement->university->name }}</p>
 </div>
 
 <!-- Major Id Field -->
 <div class="form-group">
-    {!! Form::label('major_id', 'Major Id:') !!}
-    <p>{{ $universityRequirement->major_id }}</p>
+    {!! Form::label('major_id', 'Major:') !!}
+    <p>{{ $universityRequirement->major->name }}</p>
 </div>
 
 <!-- Name Field -->

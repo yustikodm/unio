@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Eloquent as Model;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -25,7 +25,7 @@ class Vendor extends Model
     use SoftDeletes;
 
     public $table = 'vendors';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -84,5 +84,9 @@ class Vendor extends Model
         'phone' => 'nullable|string|max:20'
     ];
 
-    
+    public function category(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(VendorCategory::class, 'vendor_category_id');
+    }
+
 }

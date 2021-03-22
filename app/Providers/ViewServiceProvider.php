@@ -32,6 +32,8 @@ use App\Models\MetodePembayaran;
 use App\Models\Bank;
 use App\Models\University;
 use App\Models\UniversityFaculties;
+use App\Models\UniversityMajor;
+use App\Models\VendorCategory;
 use App\Models\Voucher;
 use App\User;
 use App\Models\LevelMitra;
@@ -62,6 +64,34 @@ class ViewServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        // Vendor
+        View::composer(['vendors.fields'], function ($view) {
+            $categoryItems = VendorCategory::pluck('name', 'id')->toArray();
+            $view->with('categoryItems', $categoryItems);
+        });
+
+        // University Scholarship
+        View::composer(['university_scholarships.fields'], function ($view) {
+            $universityItems = University::pluck('name', 'id')->toArray();
+            $view->with('universityItems', $universityItems);
+        });
+
+        // University Scholarship
+        View::composer(['university_scholarships.fields'], function ($view) {
+            $universityItems = University::pluck('name', 'id')->toArray();
+            $view->with('universityItems', $universityItems);
+        });
+
+        // University Requirement
+        View::composer(['university_requirements.fields'], function ($view) {
+            $universityItems = University::pluck('name', 'id')->toArray();
+            $view->with('universityItems', $universityItems);
+        });
+        View::composer(['university_requirements.fields'], function ($view) {
+            $majorItems = UniversityMajor::pluck('name', 'id')->toArray();
+            $view->with('majorItems', $majorItems);
+        });
+
         // University Majors
         View::composer(['university_majors.fields'], function ($view) {
             $universityItems = University::pluck('name', 'id')->toArray();

@@ -1,7 +1,7 @@
 <!-- University Id Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('university_id', 'University Id:') !!}
-    {!! Form::number('university_id', null, ['class' => 'form-control']) !!}
+    {!! Form::select('university_id', $universityItems, null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Description Field -->

@@ -29,7 +29,7 @@ class UniversityRequirementDataTable extends DataTable
      */
     public function query(UniversityRequirement $model)
     {
-        return $model->newQuery();
+        return $model->newQuery()->with(['university', 'major']);
     }
 
     /**
@@ -65,8 +65,8 @@ class UniversityRequirementDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'university_id',
-            'major_id',
+            'university.name',
+            'major.name',
             'name',
             'value',
             'description'

@@ -29,7 +29,7 @@ class UniversityFeeDataTable extends DataTable
      */
     public function query(UniversityFee $model)
     {
-        return $model->newQuery()->with(['']);
+        return $model->newQuery()->with(['university', 'faculty', 'major']);
     }
 
     /**
