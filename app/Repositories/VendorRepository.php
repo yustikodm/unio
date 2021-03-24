@@ -4,6 +4,9 @@ namespace App\Repositories;
 
 use App\Models\Vendor;
 use App\Repositories\BaseRepository;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * Class VendorRepository

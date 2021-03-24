@@ -73,7 +73,7 @@ class Vendor extends Model
         'vendor_category_id' => 'required|integer',
         'name' => 'required|string|max:50',
         'description' => 'nullable|string',
-        'picture' => 'nullable|string',
+        'picture' => 'nullable|file',
         'email' => 'nullable|string|max:255',
         'back_account_number' => 'nullable|string|max:255',
         'website' => 'nullable|string|max:255',

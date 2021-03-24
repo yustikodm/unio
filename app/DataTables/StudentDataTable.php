@@ -29,7 +29,7 @@ class StudentDataTable extends DataTable
      */
     public function query(Student $model)
     {
-        return $model->newQuery();
+        return $model->newQuery()->with(['guardian', 'user', 'religion']);
     }
 
     /**
@@ -65,10 +65,7 @@ class StudentDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'user_id',
-            'guardian_id',
             'username',
-            'password',
             'name',
             'picture',
             'school_origin',
@@ -77,7 +74,7 @@ class StudentDataTable extends DataTable
             'birth_place',
             'email',
             'nik',
-            'religion_id',
+            'religion.name',
             'address',
             'phone'
         ];

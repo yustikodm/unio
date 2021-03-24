@@ -1,7 +1,7 @@
 <!-- Vendor Id Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('vendor_id', 'Vendor Id:') !!}
-    {!! Form::number('vendor_id', null, ['class' => 'form-control']) !!}
+    {!! Form::label('vendor_id', 'Vendor:') !!}
+    {!! Form::select('vendor_id', $vendorItems, null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Name Field -->
@@ -19,7 +19,7 @@
 <!-- Picture Field -->
 <div class="form-group col-sm-12 col-lg-12">
     {!! Form::label('picture', 'Picture:') !!}
-    {!! Form::textarea('picture', null, ['class' => 'form-control']) !!}
+    {!! Form::select('picture', null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Price Field -->

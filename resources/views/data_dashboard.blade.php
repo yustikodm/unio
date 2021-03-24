@@ -2,7 +2,7 @@
     <div class="col-md-3">
         <div class="small-box bg-aqua">
             <div class="inner">
-                <h3>777</h3>
+                <h3>{{ $university }}</h3>
 
                 <p>University</p>
             </div>
@@ -17,7 +17,7 @@
     <div class="col-md-3">
         <div class="small-box bg-yellow">
         <div class="inner">
-          <h3>2045</h3>
+          <h3>{{ $student }}</h3>
 
           <p>Student</p>
         </div>
@@ -29,7 +29,7 @@
     <div class="col-md-3">
         <div class="small-box bg-red">
         <div class="inner">
-          <h3>1500</h3>
+          <h3>{{ $parent }}</h3>
 
           <p>Parent</p>
         </div>
@@ -41,7 +41,7 @@
     <div class="col-md-3">
         <div class="small-box bg-green">
         <div class="inner">
-          <h3>212</h3>
+          <h3>{{ $vendor }}</h3>
 
           <p>Vendor</p>
         </div>

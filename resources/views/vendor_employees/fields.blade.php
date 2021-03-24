@@ -1,7 +1,7 @@
 <!-- Vendor Id Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('vendor_id', 'Vendor Id:') !!}
-    {!! Form::number('vendor_id', null, ['class' => 'form-control']) !!}
+    {!! Form::select('vendor_id', $vendorItems, null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Name Field -->

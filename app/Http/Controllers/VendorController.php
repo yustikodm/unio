@@ -6,9 +6,11 @@ use App\DataTables\VendorDataTable;
 use App\Http\Requests;
 use App\Http\Requests\CreateVendorRequest;
 use App\Http\Requests\UpdateVendorRequest;
+use App\Models\Vendor;
 use App\Repositories\VendorRepository;
 use Flash;
 use App\Http\Controllers\AppBaseController;
+use Illuminate\Support\Facades\Storage;
 use Response;
 
 class VendorController extends AppBaseController
@@ -53,7 +55,14 @@ class VendorController extends AppBaseController
     {
         $input = $request->all();
 
-        $vendor = $this->vendorRepository->create($input);
+        $save = $this->vendorRepository->create($input);
+        if ($save) {
+            $image = $request->file('picture');
+            $save->picture = $image->hashName();
+            $save->save();
+
+            Storage::disk('public')->put('vendors/', $image, 'public');
+        }
 
         Flash::success('Vendor saved successfully.');
 
@@ -80,7 +89,7 @@ class VendorController extends AppBaseController
         return view('vendors.show')->with('vendor', $vendor);
     }
 
-    /**
+    /**id
      * Show the form for editing the specified Vendor.
      *
      * @param  int $id

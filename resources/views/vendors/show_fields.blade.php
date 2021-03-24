@@ -1,3 +1,10 @@
+<!-- Picture Field -->
+<div class="form-group">
+    {!! Form::label('picture', 'Picture:') !!}
+    <br>
+    <img style="width: 25%" src="{{ asset('storage/vendors/'.$vendor->picture) }}" alt="">
+</div>
+
 <!-- Vendor Category Id Field -->
 <div class="form-group">
     {!! Form::label('vendor_category_id', 'Vendor Category Id:') !!}
@@ -14,12 +21,6 @@
 <div class="form-group">
     {!! Form::label('description', 'Description:') !!}
     <p>{{ $vendor->description }}</p>
-</div>
-
-<!-- Picture Field -->
-<div class="form-group">
-    {!! Form::label('picture', 'Picture:') !!}
-    <p>{{ $vendor->picture }}</p>
 </div>
 
 <!-- Email Field -->

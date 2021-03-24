@@ -65,11 +65,11 @@ class VendorServiceDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'vendor.name',
             'name',
             'description',
             'picture',
-            'price'
+            'price',
+            'vendor.name',
         ];
     }
 

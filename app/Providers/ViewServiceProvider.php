@@ -3,6 +3,7 @@
 namespace App\Providers;
 use App\Models\Currency;
 use App\Models\District;
+use App\Models\Guardian;
 use App\Models\Questionnaire;
 use App\Models\State;
 use App\Models\Country;
@@ -14,6 +15,7 @@ use App\Models\Pekerjaan;
 use App\Models\Kota;
 use App\Models\SatuanBarang;
 use App\Models\KategoriBarang;
+use App\Models\Student;
 use App\Models\SubkategoriBarang;
 use App\Models\Jabatan;
 use App\Models\Pegawai;
@@ -33,6 +35,7 @@ use App\Models\Bank;
 use App\Models\University;
 use App\Models\UniversityFaculties;
 use App\Models\UniversityMajor;
+use App\Models\Vendor;
 use App\Models\VendorCategory;
 use App\Models\Voucher;
 use App\User;
@@ -64,6 +67,28 @@ class ViewServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        // Students
+        View::composer(['students.fields'], function ($view) {
+            $guardianItems = Guardian::pluck('name', 'id')->toArray();
+            $view->with('vendorItems', $guardianItems);
+        });
+        View::composer(['students.fields'], function ($view) {
+            $guardianItems = Guardian::pluck('name', 'id')->toArray();
+            $view->with('vendorItems', $guardianItems);
+        });
+
+        // Vendor Employee
+        View::composer(['vendor_employees.fields'], function ($view) {
+            $vendorItems = Vendor::pluck('name', 'id')->toArray();
+            $view->with('vendorItems', $vendorItems);
+        });
+
+        // Vendor Service
+        View::composer(['vendor_services.fields'], function ($view) {
+            $vendorItems = Vendor::pluck('name', 'id')->toArray();
+            $view->with('vendorItems', $vendorItems);
+        });
+
         // Vendor
         View::composer(['vendors.fields'], function ($view) {
             $categoryItems = VendorCategory::pluck('name', 'id')->toArray();

@@ -65,7 +65,6 @@ class VendorDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'category.name',
             'name',
             'description',
             'picture',
@@ -73,7 +72,8 @@ class VendorDataTable extends DataTable
             'back_account_number',
             'website',
             'address',
-            'phone'
+            'phone',
+            'category.name',
         ];
     }
 

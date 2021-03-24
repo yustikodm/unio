@@ -19,7 +19,7 @@
 <!-- Picture Field -->
 <div class="form-group col-sm-12 col-lg-12">
     {!! Form::label('picture', 'Picture:') !!}
-    {!! Form::textarea('picture', null, ['class' => 'form-control']) !!}
+    {!! Form::file('picture', null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Email Field -->

@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Eloquent as Model;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -29,7 +29,7 @@ class Guardian extends Model
     use SoftDeletes;
 
     public $table = 'guardians';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -100,5 +100,5 @@ class Guardian extends Model
         'deleted_at' => 'nullable'
     ];
 
-    
+
 }

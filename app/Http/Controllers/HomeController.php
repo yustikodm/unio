@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Guardian;
+use App\Models\Student;
+use App\Models\University;
+use App\Models\Vendor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Repositories\PenjualanRepository;
@@ -35,21 +39,15 @@ class HomeController extends Controller
     /**
      * Show the application dashboard.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\Response|\Illuminate\View\View
      */
     public function index()
     {
-        // $role = Role::create(['name' => 'customer']);
-        // $permission = Permission::create(['name' => 'edit profile']);
-
-        // $role->givePermissionTo($permission);
-        // $permission->assignRole($role);
-
-        // dd(Auth::user()->hasRole('writer'));
-
-        // Auth::user()->assignRole('admin');
-
-        // dd(User::doesntHave('roles')->get());
-        return view('home', $data = []);
+        return view('home', [
+            'university' => University::query()->count(),
+            'student' => Student::query()->count(),
+            'parent' => Guardian::query()->count(),
+            'vendor' => Vendor::query()->count()
+        ]);
     }
 }

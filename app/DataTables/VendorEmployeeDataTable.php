@@ -29,7 +29,7 @@ class VendorEmployeeDataTable extends DataTable
      */
     public function query(VendorEmployee $model)
     {
-        return $model->newQuery();
+        return $model->newQuery()->with(['vendor']);
     }
 
     /**
@@ -65,7 +65,7 @@ class VendorEmployeeDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'vendor_id',
+            'vendor.name',
             'name',
             'birthdate',
             'position',
