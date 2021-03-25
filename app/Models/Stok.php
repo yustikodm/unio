@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Eloquent as Model;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -19,7 +19,7 @@ class Stok extends Model
 
     public $table = 'stok';
     protected $primaryKey = 'barang_id';
-    
+
     protected $dates = ['deleted_at'];
 
     public $fillable = [

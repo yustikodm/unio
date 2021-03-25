@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Eloquent as Model;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -23,7 +23,7 @@ class KartuStokPenjualan extends Model
     use SoftDeletes;
 
     public $table = 'kartu_stok_penjualan';
-    
+
 
     protected $dates = ['deleted_at'];
 
@@ -69,6 +69,4 @@ class KartuStokPenjualan extends Model
         'stok_akhir' => 'required|numeric',
         'tanggal' => 'required'
     ];
-
-    
 }

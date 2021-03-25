@@ -5,6 +5,7 @@ namespace App\DataTables;
 use App\Models\District;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
+use Yajra\DataTables\Html\Column;
 
 class DistrictDataTable extends DataTable
 {
@@ -18,7 +19,11 @@ class DistrictDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'districts.datatables_actions');
+        return $dataTable->addColumn('action', 'districts.datatables_actions')
+            ->editColumn('state.name', function ($query) {
+                return '<a href="' . route('states.show', $query->state->id) . '">' . $query->state->name . '</a>';
+            })
+            ->rawColumns(['action', 'state.name']);
     }
 
     /**
@@ -65,8 +70,8 @@ class DistrictDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'name',
-            'state.name'
+            Column::make('name')->title('District'),
+            Column::make('state.name')->title('State'),
         ];
     }
 

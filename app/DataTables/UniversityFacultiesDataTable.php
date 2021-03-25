@@ -5,6 +5,7 @@ namespace App\DataTables;
 use App\Models\UniversityFaculties;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
+use Yajra\DataTables\Html\Column;
 
 class UniversityFacultiesDataTable extends DataTable
 {
@@ -18,7 +19,11 @@ class UniversityFacultiesDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'university_faculties.datatables_actions');
+        return $dataTable->addColumn('action', 'university_faculties.datatables_actions')
+            ->editColumn('university.name', function ($query) {
+                return '<a href="' . route('universities.show', $query->university->id) . '">' . $query->university->name . '</a>';
+            })
+            ->rawColumns(['action', 'university.name']);;
     }
 
     /**
@@ -65,9 +70,9 @@ class UniversityFacultiesDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'name',
-            'description',
-            'university.name'
+            Column::make('name')->title('Faculty'),
+            Column::make('description')->title('Description'),
+            Column::make('university.name')->title('University'),
         ];
     }
 

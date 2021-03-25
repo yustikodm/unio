@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Eloquent as Model;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -22,7 +22,7 @@ class TerimaBarang extends Model
     use SoftDeletes;
 
     public $table = 'terima_barang';
-    
+
 
     protected $dates = ['deleted_at'];
 
@@ -65,7 +65,7 @@ class TerimaBarang extends Model
         'supplier_id' => 'required|numeric',
         // 'tanggal' => 'required'
     ];
-    
+
     public static $editRules = [
         'purchase_order_id' => 'required|numeric',
         // 'kode' => 'required',
@@ -73,6 +73,4 @@ class TerimaBarang extends Model
         'supplier_id' => 'required|numeric',
         // 'tanggal' => 'required'
     ];
-
-    
 }

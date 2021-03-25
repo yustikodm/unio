@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Eloquent as Model;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -21,12 +21,12 @@ class BarangKirim extends Model
     use SoftDeletes;
 
     public $table = 'barang_kirim';
-    
+
 
     protected $dates = ['deleted_at'];
-    
 
-    public $fillable = [    
+
+    public $fillable = [
         'kirim_barang_id',
         'barang_id',
         'jumlah',
@@ -55,6 +55,4 @@ class BarangKirim extends Model
         'barang_id' => 'required',
         'jumlah' => 'required'
     ];
-
-    
 }

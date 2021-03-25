@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Eloquent as Model;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -18,7 +18,7 @@ class Poin extends Model
     use SoftDeletes;
 
     public $table = 'poin';
-    
+
 
     protected $dates = ['deleted_at'];
 
@@ -49,6 +49,4 @@ class Poin extends Model
         'mitra_id' => 'required|numeric|unique:poin,mitra_id',
         'poin' => 'required|numeric'
     ];
-
-    
 }

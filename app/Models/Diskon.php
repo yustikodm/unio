@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Eloquent as Model;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -18,7 +18,7 @@ class Diskon extends Model
     use SoftDeletes;
 
     public $table = 'diskon';
-    
+
 
     protected $dates = ['deleted_at'];
 
@@ -56,6 +56,4 @@ class Diskon extends Model
         'diskon' => 'required|numeric',
         'tipe' => 'required'
     ];
-
-    
 }

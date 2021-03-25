@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Eloquent as Model;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -22,7 +22,7 @@ class Pegawai extends Model
     use SoftDeletes;
 
     public $table = 'pegawai';
-    
+
 
     protected $dates = ['deleted_at'];
 
@@ -66,6 +66,4 @@ class Pegawai extends Model
         'telepon' => 'required|nullable',
         'jabatan_id' => 'required|nullable|numeric'
     ];
-
-    
 }

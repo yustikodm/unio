@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Eloquent as Model;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -17,14 +17,11 @@ class Country extends Model
     use SoftDeletes;
 
     public $table = 'countries';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
-
     protected $dates = ['deleted_at'];
-
-
 
     public $fillable = [
         'name'
@@ -51,6 +48,4 @@ class Country extends Model
         'updated_at' => 'nullable',
         'deleted_at' => 'nullable'
     ];
-
-    
 }

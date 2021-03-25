@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Eloquent as Model;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -23,7 +23,7 @@ class PenerimaanRetur extends Model
     use SoftDeletes;
 
     public $table = 'penerimaan_retur';
-    
+
 
     protected $dates = ['deleted_at'];
 
@@ -75,6 +75,4 @@ class PenerimaanRetur extends Model
         'keterangan' => 'required',
         // 'status' => 'required'
     ];
-
-    
 }

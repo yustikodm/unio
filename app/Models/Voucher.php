@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Eloquent as Model;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -56,6 +56,4 @@ class Voucher extends Model
         'diskon' => 'required|numeric',
         'tipe' => 'required',
     ];
-
-
 }

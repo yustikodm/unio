@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Eloquent as Model;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -19,7 +19,7 @@ class Referral extends Model
     use SoftDeletes;
 
     public $table = 'referral';
-    
+
     protected $dates = ['deleted_at'];
 
     public $fillable = [
@@ -47,6 +47,4 @@ class Referral extends Model
         'parent_id' => 'required|numeric',
         'child_id' => 'required|numeric'
     ];
-
-    
 }

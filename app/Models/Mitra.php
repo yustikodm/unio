@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Eloquent as Model;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -63,12 +63,10 @@ class Mitra extends Model
         'tanggal_akhir' => 'required'
     ];
 
-    public static $editRules = [
+    public static $editRules = [];
 
-    ];
-
-    public function pelanggan() {
+    public function pelanggan()
+    {
         return $this->belongsTo('App\Models\Pelanggan');
     }
-
 }

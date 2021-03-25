@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Eloquent as Model;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -18,7 +18,7 @@ class Parameter extends Model
     use SoftDeletes;
 
     public $table = 'parameter';
-    
+
 
     protected $dates = ['deleted_at'];
 
@@ -51,6 +51,4 @@ class Parameter extends Model
         'value' => 'required',
         'tipe' => 'required'
     ];
-
-    
 }

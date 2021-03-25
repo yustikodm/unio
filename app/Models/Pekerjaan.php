@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Eloquent as Model;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -17,7 +17,7 @@ class Pekerjaan extends Model
     use SoftDeletes;
 
     public $table = 'pekerjaan';
-    
+
 
     protected $dates = ['deleted_at'];
 
@@ -49,5 +49,5 @@ class Pekerjaan extends Model
     // public function pelanggan() {
     //     return $this->hasMany('App\Models\Pelanggan');
     // }
-    
+
 }

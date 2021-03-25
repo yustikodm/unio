@@ -5,6 +5,7 @@ namespace App\DataTables;
 use App\Models\QuestionnaireAnswer;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
+use Yajra\DataTables\Html\Column;
 
 class QuestionnaireAnswerDataTable extends DataTable
 {
@@ -19,6 +20,10 @@ class QuestionnaireAnswerDataTable extends DataTable
         $dataTable = new EloquentDataTable($query);
 
         return $dataTable->addColumn('action', 'questionnaire_answers.datatables_actions');
+        // ->editColumn('country.name', function ($query) {
+        //      return '<a href="' . route('countries.show', $query->country->id) . '">' . $query->country->name . '</a>';
+        // })
+        // ->rawColumns(['action', 'country.name']);
     }
 
     /**
@@ -65,9 +70,9 @@ class QuestionnaireAnswerDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'questionnaire.question',
-            'user.name',
-            'answer'
+            Column::make('questionnaire.question')->title('Question'),
+            Column::make('user.name')->title('User'),
+            Column::make('answer')->title('Answer'),
         ];
     }
 

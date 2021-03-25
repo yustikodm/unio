@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Eloquent as Model;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -17,7 +17,7 @@ class Kota extends Model
     use SoftDeletes;
 
     public $table = 'kota';
-    
+
 
     protected $dates = ['deleted_at'];
 
@@ -46,7 +46,8 @@ class Kota extends Model
         'nama' => 'required'
     ];
 
-    public function pelanggan() {
-        return $this->hasMany('App\Models\Pelanggan');        
+    public function pelanggan()
+    {
+        return $this->hasMany('App\Models\Pelanggan');
     }
 }

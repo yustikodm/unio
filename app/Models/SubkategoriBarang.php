@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Eloquent as Model;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -17,7 +17,7 @@ class SubkategoriBarang extends Model
     use SoftDeletes;
 
     public $table = 'subkategori_barang';
-    
+
 
     protected $dates = ['deleted_at'];
 
@@ -45,6 +45,4 @@ class SubkategoriBarang extends Model
     public static $rules = [
         'nama' => 'required'
     ];
-
-    
 }

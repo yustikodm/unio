@@ -5,6 +5,7 @@ namespace App\DataTables;
 use App\Models\BoardingHouse;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
+use Yajra\DataTables\Html\Column;
 
 class BoardingHouseDataTable extends DataTable
 {
@@ -18,7 +19,20 @@ class BoardingHouseDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'boarding_houses.datatables_actions');
+        return $dataTable->addColumn('action', 'boarding_houses.datatables_actions')
+            ->editColumn('country.name', function ($query) {
+                return '<a href="' . route('countries.show', $query->country->id) . '">' . $query->country->name . '</a>';
+            })
+            ->editColumn('state.name', function ($query) {
+                return '<a href="' . route('states.show', $query->state->id) . '">' . $query->state->name . '</a>';
+            })
+            ->editColumn('district.name', function ($query) {
+                return '<a href="' . route('districts.show', $query->district->id) . '">' . $query->district->name . '</a>';
+            })
+            ->editColumn('currency.name', function ($query) {
+                return '<a href="' . route('currencies.show', $query->currency->id) . '">' . $query->currency->name . '</a>';
+            })
+            ->rawColumns(['action', 'country.name', 'state.name', 'district.name', 'currency.name']);
     }
 
     /**
@@ -29,7 +43,7 @@ class BoardingHouseDataTable extends DataTable
      */
     public function query(BoardingHouse $model)
     {
-        return $model->newQuery()->with(['country','currency','state','district']);
+        return $model->newQuery()->with(['country', 'currency', 'state', 'district']);
     }
 
     /**
@@ -65,16 +79,13 @@ class BoardingHouseDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'country.name',
-            'state.name',
-            'district.name',
-            'currency.name',
-            'name',
-            'description',
-            'price',
-            'address',
-            'phone',
-            'picture'
+            Column::make('country.name')->title('Country'),
+            Column::make('state.name')->title('State'),
+            Column::make('district.name')->title('District'),
+            Column::make('currency.name')->title('Currency'),
+            Column::make('name')->title('Name'),
+            Column::make('price')->title('Price'),
+            Column::make('phone')->title('Phone'),
         ];
     }
 

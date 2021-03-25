@@ -5,6 +5,7 @@ namespace App\DataTables;
 use App\Models\Currency;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
+use Yajra\DataTables\Html\Column;
 
 class CurrencyDataTable extends DataTable
 {
@@ -18,7 +19,11 @@ class CurrencyDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'currencies.datatables_actions');
+        return $dataTable->addColumn('action', 'currencies.datatables_actions')
+        ->editColumn('country.name', function ($query) {
+            return '<a href="' . route('countries.show', $query->country->id) . '">' . $query->country->name . '</a>';
+        })
+        ->rawColumns(['action', 'country.name']);
     }
 
     /**
@@ -65,9 +70,9 @@ class CurrencyDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'country.name',
-            'code',
-            'name'
+            Column::make('code')->title('Code'),
+            Column::make('name')->title('Currency'),
+            Column::make('country.name')->title('Country'),
         ];
     }
 

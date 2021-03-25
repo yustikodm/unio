@@ -5,6 +5,7 @@ namespace App\DataTables;
 use App\Models\State;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
+use Yajra\DataTables\Html\Column;
 
 class StateDataTable extends DataTable
 {
@@ -18,7 +19,11 @@ class StateDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'states.datatables_actions');
+        return $dataTable->addColumn('action', 'states.datatables_actions')
+            ->editColumn('country.name', function ($query) {
+                return '<a href="' . route('countries.show', $query->country->id) . '">' . $query->country->name . '</a>';
+            })
+            ->rawColumns(['action', 'country.name']);
     }
 
     /**
@@ -65,8 +70,8 @@ class StateDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'name',
-            'country.name'
+            Column::make('name')->title('State'),
+            Column::make('country.name')->title('Country'),
         ];
     }
 

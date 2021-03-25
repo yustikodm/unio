@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Eloquent as Model;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -18,7 +18,7 @@ class Bonus extends Model
     use SoftDeletes;
 
     public $table = 'bonus';
-    
+
 
     protected $dates = ['deleted_at'];
 
@@ -53,6 +53,4 @@ class Bonus extends Model
     public static $editRules = [
         'bonus' => 'required'
     ];
-
-    
 }

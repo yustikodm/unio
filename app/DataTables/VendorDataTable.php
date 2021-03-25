@@ -5,6 +5,7 @@ namespace App\DataTables;
 use App\Models\Vendor;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
+use Yajra\DataTables\Html\Column;
 
 class VendorDataTable extends DataTable
 {
@@ -18,7 +19,14 @@ class VendorDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'vendors.datatables_actions');
+        return $dataTable->addColumn('action', 'vendors.datatables_actions')
+            ->editColumn('category.name', function ($query) {
+                return '<a href="' . route('vendorCategories.show', $query->category->id) . '">' . $query->category->name . '</a>';
+            })
+            ->editColumn('picture', function ($query) {
+                return '<img src="' . url($query->picture) . '" width="90">';
+            })
+            ->rawColumns(['action', 'category.name', 'picture']);
     }
 
     /**
@@ -65,15 +73,11 @@ class VendorDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'name',
-            'description',
-            'picture',
-            'email',
-            'back_account_number',
-            'website',
-            'address',
-            'phone',
-            'category.name',
+            Column::make('name')->title('Vendor Name'),
+            Column::make('picture')->title('Logo'),
+            Column::make('phone')->title('Phone'),
+            Column::make('back_account_number')->title('Bank Account'),
+            Column::make('category.name')->title('Category'),
         ];
     }
 

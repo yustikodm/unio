@@ -5,6 +5,7 @@ namespace App\DataTables;
 use App\Models\University;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
+use Yajra\DataTables\Html\Column;
 
 class UniversityDataTable extends DataTable
 {
@@ -18,7 +19,14 @@ class UniversityDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'universities.datatables_actions');
+        return $dataTable->addColumn('action', 'universities.datatables_actions')
+            ->editColumn('country.name', function ($query) {
+                return '<a href="' . route('countries.show', $query->country->id) . '">' . $query->country->name . '</a>';
+            })
+            ->editColumn('logo_src', function ($query) {
+                return '<img src="' . url($query->logo_src) . '" width="90">';
+            })
+            ->rawColumns(['action', 'country.name', 'logo_src']);
     }
 
     /**
@@ -65,14 +73,11 @@ class UniversityDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'name',
-            'logo_src',
-            'type',
-            'accreditation',
-            'address',
-            'country.name',
-            'state.name',
-            'district.name',
+            Column::make('name')->title('University'),
+            Column::make('logo_src')->title('Logo'),
+            Column::make('type')->title('Type'),
+            Column::make('accreditation')->title('Accreditation'),
+            Column::make('country.name')->title('Country'),
         ];
     }
 

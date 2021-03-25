@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Eloquent as Model;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -19,7 +19,7 @@ class Promo extends Model
     use SoftDeletes;
 
     public $table = 'promo';
-    
+
 
     protected $dates = ['deleted_at'];
 
@@ -38,7 +38,7 @@ class Promo extends Model
      * @var array
      */
     protected $casts = [
-        'id' => 'integer',        
+        'id' => 'integer',
         'barang_id' => 'string',
         // 'tanggal_mulai' => 'date',
         // 'tanggal_berakhir' => 'date'
@@ -53,11 +53,10 @@ class Promo extends Model
         'barang_id' => 'required|unique:promo,barang_id',
         // 'tanggal_mulai' => 'required',
         // 'tanggal_berakhir' => 'required'
-    ]; 
+    ];
 
     public static $editRules = [
         // 'tanggal_mulai' => 'required',
         // 'tanggal_berakhir' => 'required'
-    ];   
-    
+    ];
 }

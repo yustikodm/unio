@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Eloquent as Model;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -20,7 +20,7 @@ class HistoryKlaimHadiah extends Model
     use SoftDeletes;
 
     public $table = 'history_klaim_hadiah';
-    
+
 
     protected $dates = ['deleted_at'];
 
@@ -58,10 +58,8 @@ class HistoryKlaimHadiah extends Model
         'status' => 'required'
     ];
 
-    public static $editRules = [        
+    public static $editRules = [
         'keterangan' => 'required',
         'status' => 'required'
     ];
-
-    
 }

@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Eloquent as Model;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -59,6 +59,4 @@ class Questionnaire extends Model
         'updated_at' => 'nullable',
         'deleted_at' => 'nullable'
     ];
-
-
 }

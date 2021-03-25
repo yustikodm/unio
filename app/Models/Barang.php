@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Eloquent as Model;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -62,13 +62,14 @@ class Barang extends Model
         'tipe' => 'required'
     ];
 
-    public static function getStokHarga($id) {
+    public static function getStokHarga($id)
+    {
         return Barang::leftJoin('stok', 'barang.id', '=', 'stok.barang_id')
-                ->leftJoin('harga', 'barang.id', '=', 'harga.barang_id')
-                ->leftJoin('diskon', 'barang.id', '=', 'diskon.barang_id')
-                ->where('stok', '!=', null)
-                ->where('harga', '!=', null)
-                ->where('barang.id', $id)
-                ->select('barang.*', 'stok.stok', 'harga.harga', 'diskon.diskon', 'diskon.tipe as tipe_diskon')->get();
+            ->leftJoin('harga', 'barang.id', '=', 'harga.barang_id')
+            ->leftJoin('diskon', 'barang.id', '=', 'diskon.barang_id')
+            ->where('stok', '!=', null)
+            ->where('harga', '!=', null)
+            ->where('barang.id', $id)
+            ->select('barang.*', 'stok.stok', 'harga.harga', 'diskon.diskon', 'diskon.tipe as tipe_diskon')->get();
     }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Eloquent as Model;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -84,7 +84,8 @@ class Pelanggan extends Model
         // 'tanggal_daftar' => 'required'
     ];
 
-    public function kota() {
+    public function kota()
+    {
         return $this->belongsTo('App\Models\Kota', 'kota_id');
     }
 

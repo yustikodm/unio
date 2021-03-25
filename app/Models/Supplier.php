@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Eloquent as Model;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -30,7 +30,7 @@ class Supplier extends Model
     use SoftDeletes;
 
     public $table = 'supplier';
-    
+
 
     protected $dates = ['deleted_at'];
 
@@ -97,6 +97,4 @@ class Supplier extends Model
         'npwp' => 'required',
         'rekening' => 'required'
     ];
-
-    
 }

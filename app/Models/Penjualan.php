@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Eloquent as Model;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -94,6 +94,4 @@ class Penjualan extends Model
         // 'nama_rekening' => 'required',
         // 'nomor_rekening' => 'required'
     ];
-
-
 }

@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Eloquent as Model;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -18,7 +18,7 @@ class LevelMitra extends Model
     use SoftDeletes;
 
     public $table = 'level_mitra';
-    
+
 
     protected $dates = ['deleted_at'];
 
@@ -49,6 +49,4 @@ class LevelMitra extends Model
         'kode' => 'required',
         'nama' => 'required'
     ];
-
-    
 }
