@@ -54,7 +54,14 @@ class UniversityMajorAPIController extends AppBaseController
      */
     public function store(CreateUniversityMajorAPIRequest $request)
     {
-        $input = $request->all();
+        $input = $request->only([
+            'university_id',
+            'faculty_id',
+            'name',
+            'description',
+            'accreditation',
+            'temp'
+        ]);
 
         $universityMajor = $this->universityMajorRepository->create($input);
 
@@ -92,7 +99,14 @@ class UniversityMajorAPIController extends AppBaseController
      */
     public function update($id, UpdateUniversityMajorAPIRequest $request)
     {
-        $input = $request->all();
+        $input = $request->only([
+            'university_id',
+            'faculty_id',
+            'name',
+            'description',
+            'accreditation',
+            'temp'
+        ]);
 
         /** @var UniversityMajor $universityMajor */
         $universityMajor = $this->universityMajorRepository->find($id);

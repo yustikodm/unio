@@ -53,7 +53,7 @@ class RoleAPIController extends AppBaseController
      */
     public function store(CreateRoleAPIRequest $request)
     {
-        $input = $request->all();
+        $input = $request->only(['name', 'guard_name',]);
 
         $role = $this->roleRepository->create($input);
 
@@ -91,7 +91,7 @@ class RoleAPIController extends AppBaseController
      */
     public function update($id, UpdateRoleAPIRequest $request)
     {
-        $input = $request->all();
+        $input = $request->only(['name', 'guard_name']);
 
         /** @var Role $role */
         $role = $this->roleRepository->find($id);

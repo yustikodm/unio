@@ -54,7 +54,7 @@ class UniversityScholarshipAPIController extends AppBaseController
      */
     public function store(CreateUniversityScholarshipAPIRequest $request)
     {
-        $input = $request->all();
+        $input = $request->only([]);
 
         $universityScholarship = $this->universityScholarshipRepository->create($input);
 
@@ -92,7 +92,12 @@ class UniversityScholarshipAPIController extends AppBaseController
      */
     public function update($id, UpdateUniversityScholarshipAPIRequest $request)
     {
-        $input = $request->all();
+        $input = $request->all([
+            'university_id',
+            'description',
+            'picture',
+            'year'
+        ]);
 
         /** @var UniversityScholarship $universityScholarship */
         $universityScholarship = $this->universityScholarshipRepository->find($id);

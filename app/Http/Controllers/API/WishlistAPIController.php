@@ -54,7 +54,13 @@ class WishlistAPIController extends AppBaseController
      */
     public function store(CreateWishlistAPIRequest $request)
     {
-        $input = $request->all();
+        $input = $request->only([
+            'university_id',
+            'major_id',
+            'service_id',
+            'user_id',
+            'description'
+        ]);
 
         $wishlist = $this->wishlistRepository->create($input);
 
@@ -92,7 +98,13 @@ class WishlistAPIController extends AppBaseController
      */
     public function update($id, UpdateWishlistAPIRequest $request)
     {
-        $input = $request->all();
+        $input = $request->only([
+            'university_id',
+            'major_id',
+            'service_id',
+            'user_id',
+            'description'
+        ]);
 
         /** @var Wishlist $wishlist */
         $wishlist = $this->wishlistRepository->find($id);

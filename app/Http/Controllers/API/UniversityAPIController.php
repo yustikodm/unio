@@ -52,7 +52,17 @@ class UniversityAPIController extends AppBaseController
      */
     public function store(CreateUniversityAPIRequest $request)
     {
-        $input = $request->all();
+        $input = $request->only([
+            'country_id',
+            'state_id',
+            'district_id',
+            'name',
+            'description',
+            'logo_src',
+            'type',
+            'accreditation',
+            'address'
+        ]);
 
         $university = $this->universityRepository->create($input);
 
@@ -90,7 +100,17 @@ class UniversityAPIController extends AppBaseController
      */
     public function update($id, UpdateUniversityAPIRequest $request)
     {
-        $input = $request->all();
+        $input = $request->only([
+            'country_id',
+            'state_id',
+            'district_id',
+            'name',
+            'description',
+            'logo_src',
+            'type',
+            'accreditation',
+            'address'
+        ]);
 
         /** @var University $university */
         $university = $this->universityRepository->find($id);

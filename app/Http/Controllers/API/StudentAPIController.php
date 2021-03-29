@@ -54,7 +54,23 @@ class StudentAPIController extends AppBaseController
      */
     public function store(CreateStudentAPIRequest $request)
     {
-        $input = $request->all();
+        $input = $request->only([
+            'user_id',
+            'guardian_id',
+            'username',
+            'password',
+            'name',
+            'picture',
+            'school_origin',
+            'graduation_year',
+            'birth_date',
+            'birth_place',
+            'email',
+            'nik',
+            'religion_id',
+            'address',
+            'phone'
+        ]);
 
         $student = $this->studentRepository->create($input);
 
@@ -92,7 +108,23 @@ class StudentAPIController extends AppBaseController
      */
     public function update($id, UpdateStudentAPIRequest $request)
     {
-        $input = $request->all();
+        $input = $request->only([
+            'user_id',
+            'guardian_id',
+            'username',
+            'password',
+            'name',
+            'picture',
+            'school_origin',
+            'graduation_year',
+            'birth_date',
+            'birth_place',
+            'email',
+            'nik',
+            'religion_id',
+            'address',
+            'phone'
+        ]);
 
         /** @var Student $student */
         $student = $this->studentRepository->find($id);

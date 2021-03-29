@@ -3,6 +3,7 @@
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class CreateDefaultUsersSeeder extends Seeder
 {

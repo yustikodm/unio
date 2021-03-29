@@ -54,7 +54,18 @@ class BoardingHouseAPIController extends AppBaseController
      */
     public function store(CreateBoardingHouseAPIRequest $request)
     {
-        $input = $request->all();
+        $input = $request->only([
+            'country_id',
+            'state_id',
+            'district_id',
+            'currency_id',
+            'name',
+            'description',
+            'price',
+            'address',
+            'phone',
+            'picture'
+        ]);
 
         $boardingHouse = $this->boardingHouseRepository->create($input);
 
@@ -92,7 +103,18 @@ class BoardingHouseAPIController extends AppBaseController
      */
     public function update($id, UpdateBoardingHouseAPIRequest $request)
     {
-        $input = $request->all();
+        $input = $request->only([
+            'country_id',
+            'state_id',
+            'district_id',
+            'currency_id',
+            'name',
+            'description',
+            'price',
+            'address',
+            'phone',
+            'picture'
+        ]);
 
         /** @var BoardingHouse $boardingHouse */
         $boardingHouse = $this->boardingHouseRepository->find($id);

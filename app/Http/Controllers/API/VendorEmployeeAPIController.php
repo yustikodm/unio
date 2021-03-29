@@ -54,7 +54,17 @@ class VendorEmployeeAPIController extends AppBaseController
      */
     public function store(CreateVendorEmployeeAPIRequest $request)
     {
-        $input = $request->all();
+        $input = $request->only([
+            'vendor_id',
+            'name',
+            'birthdate',
+            'position',
+            'phone',
+            'email',
+            'address',
+            'picture',
+            'description'
+        ]);
 
         $vendorEmployee = $this->vendorEmployeeRepository->create($input);
 

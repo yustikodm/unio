@@ -54,7 +54,17 @@ class VendorAPIController extends AppBaseController
      */
     public function store(CreateVendorAPIRequest $request)
     {
-        $input = $request->all();
+        $input = $request->only([
+            'vendor_category_id',
+            'name',
+            'description',
+            'picture',
+            'email',
+            'back_account_number',
+            'website',
+            'address',
+            'phone'
+        ]);
 
         $vendor = $this->vendorRepository->create($input);
 
@@ -92,7 +102,17 @@ class VendorAPIController extends AppBaseController
      */
     public function update($id, UpdateVendorAPIRequest $request)
     {
-        $input = $request->all();
+        $input = $request->only([
+            'vendor_category_id',
+            'name',
+            'description',
+            'picture',
+            'email',
+            'back_account_number',
+            'website',
+            'address',
+            'phone'
+        ]);
 
         /** @var Vendor $vendor */
         $vendor = $this->vendorRepository->find($id);

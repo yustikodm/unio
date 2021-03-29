@@ -54,7 +54,7 @@ class DistrictAPIController extends AppBaseController
      */
     public function store(CreateDistrictAPIRequest $request)
     {
-        $input = $request->all();
+        $input = $request->only(['state_id', 'name']);
 
         $district = $this->districtRepository->create($input);
 
@@ -92,7 +92,7 @@ class DistrictAPIController extends AppBaseController
      */
     public function update($id, UpdateDistrictAPIRequest $request)
     {
-        $input = $request->all();
+        $input = $request->only(['state_id', 'name']);
 
         /** @var District $district */
         $district = $this->districtRepository->find($id);

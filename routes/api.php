@@ -13,20 +13,26 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::post('register', 'AuthAPIController.php@register');
 
-Route::get('permissions/role-has-permission', 'PermissionAPIController@roleHasPermission');
-Route::get('permissions/refresh-permissions', 'PermissionAPIController@refreshPermissions');
-Route::post('permissions/give-permission-to-role', 'PermissionAPIController@givePermissionToRole');
-Route::post('permissions/revoke-permission-to-role', 'PermissionAPIController@revokePermissionToRole');
+Route::post('login', 'AuthAPIController.php@login');
 
-Route::resource('roles', 'RoleAPIController');
+Route::group(['middleware' => ['auth:api']], function () {
+    Route::middleware('auth:api')->get('/user', function (Request $request) {
+        return $request->user();
+    });
 
-Route::resource('permissions', 'PermissionAPIController');
+    Route::get('permissions/role-has-permission', 'PermissionAPIController@roleHasPermission');
 
-Route::group(['middleware' => ['api']], function () {
+    Route::get('permissions/refresh-permissions', 'PermissionAPIController@refreshPermissions');
+
+    Route::post('permissions/give-permission-to-role', 'PermissionAPIController@givePermissionToRole');
+
+    Route::post('permissions/revoke-permission-to-role', 'PermissionAPIController@revokePermissionToRole');
+
+    Route::resource('roles', 'RoleAPIController');
+
+    Route::resource('permissions', 'PermissionAPIController');
 
     Route::resource('boarding_houses', 'BoardingHouseAPIController');
 
@@ -40,7 +46,7 @@ Route::group(['middleware' => ['api']], function () {
 
     Route::resource('currencies', 'CurrencyAPIController');
 
-    Route::resource('religions', 'ReligionAPIController');
+    Route::resource('<relig></relig>ions', 'ReligionAPIController');
 
     Route::resource('questionnaires', 'QuestionnaireAPIController');
 
@@ -73,4 +79,8 @@ Route::group(['middleware' => ['api']], function () {
     Route::resource('wishlists', 'WishlistAPIController');
 
     Route::resource('carts', 'CartAPIController');
+
+    Route::get('users/profile', 'UserAPIConctroller@profile')->middleware('auth:api');
+
+    Route::get('users/show/{id}', 'UserAPIConctroller@show')->middleware('auth:api');
 });

@@ -69,6 +69,7 @@ class User extends Authenticatable
         'phone',
         'email_verified_at',
         'image_path',
+        'api_token'
     ];
 
     /**
@@ -125,7 +126,7 @@ class User extends Authenticatable
     public function getImagePathAttribute($value)
     {
         if (!empty($value)) {
-            return $this->imageUrl(self::IMAGE_PATH.DIRECTORY_SEPARATOR.$value);
+            return $this->imageUrl(self::IMAGE_PATH . DIRECTORY_SEPARATOR . $value);
         }
 
         return getUserImageInitial($this->id, $this->name);
@@ -141,6 +142,6 @@ class User extends Authenticatable
             return true;
         }
 
-        return $this->traitDeleteImage(self::IMAGE_PATH.DIRECTORY_SEPARATOR.$image);
+        return $this->traitDeleteImage(self::IMAGE_PATH . DIRECTORY_SEPARATOR . $image);
     }
 }

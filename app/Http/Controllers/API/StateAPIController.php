@@ -54,7 +54,7 @@ class StateAPIController extends AppBaseController
      */
     public function store(CreateStateAPIRequest $request)
     {
-        $input = $request->all();
+        $input = $request->only(['country_id', 'name']);
 
         $state = $this->stateRepository->create($input);
 
@@ -92,7 +92,7 @@ class StateAPIController extends AppBaseController
      */
     public function update($id, UpdateStateAPIRequest $request)
     {
-        $input = $request->all();
+        $input = $request->only(['country_id', 'name']);
 
         /** @var State $state */
         $state = $this->stateRepository->find($id);

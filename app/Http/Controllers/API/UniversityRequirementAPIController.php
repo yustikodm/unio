@@ -54,7 +54,13 @@ class UniversityRequirementAPIController extends AppBaseController
      */
     public function store(CreateUniversityRequirementAPIRequest $request)
     {
-        $input = $request->all();
+        $input = $request->only([
+            'university_id',
+            'major_id',
+            'name',
+            'value',
+            'description'
+        ]);
 
         $universityRequirement = $this->universityRequirementRepository->create($input);
 
@@ -92,7 +98,13 @@ class UniversityRequirementAPIController extends AppBaseController
      */
     public function update($id, UpdateUniversityRequirementAPIRequest $request)
     {
-        $input = $request->all();
+        $input = $request->only([
+            'university_id',
+            'major_id',
+            'name',
+            'value',
+            'description'
+        ]);
 
         /** @var UniversityRequirement $universityRequirement */
         $universityRequirement = $this->universityRequirementRepository->find($id);

@@ -20,7 +20,7 @@ class CreateStudentsTable extends Migration
             $table->string('username', 255)->nullable();
             $table->string('password', 255)->nullable();
             $table->string('name', 255)->nullable();
-            $table->longText('picture');
+            $table->longText('picture')->nullable();
             $table->string('school_origin', 255)->nullable();
             $table->integer('graduation_year')->nullable();
             $table->date('birth_date')->nullable();

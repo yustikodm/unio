@@ -54,7 +54,7 @@ class ReligionAPIController extends AppBaseController
      */
     public function store(CreateReligionAPIRequest $request)
     {
-        $input = $request->all();
+        $input = $request->only(['name']);
 
         $religion = $this->religionRepository->create($input);
 
@@ -92,7 +92,7 @@ class ReligionAPIController extends AppBaseController
      */
     public function update($id, UpdateReligionAPIRequest $request)
     {
-        $input = $request->all();
+        $input = $request->only(['name']);
 
         /** @var Religion $religion */
         $religion = $this->religionRepository->find($id);

@@ -54,7 +54,7 @@ class VendorCategoryAPIController extends AppBaseController
      */
     public function store(CreateVendorCategoryAPIRequest $request)
     {
-        $input = $request->all();
+        $input = $request->only(['name', 'description']);
 
         $vendorCategory = $this->vendorCategoryRepository->create($input);
 
@@ -92,7 +92,7 @@ class VendorCategoryAPIController extends AppBaseController
      */
     public function update($id, UpdateVendorCategoryAPIRequest $request)
     {
-        $input = $request->all();
+        $input = $request->only(['name', 'description']);
 
         /** @var VendorCategory $vendorCategory */
         $vendorCategory = $this->vendorCategoryRepository->find($id);

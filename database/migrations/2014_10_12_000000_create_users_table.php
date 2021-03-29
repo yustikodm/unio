@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('phone')->nullable();
             $table->rememberToken();
             $table->string('image_path')->nullable();
+            $table->string('api_token', 100)->unique()->nullable()->default(null);
             $table->timestamps();
         });
     }

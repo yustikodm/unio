@@ -52,7 +52,13 @@ class ArticleAPIController extends AppBaseController
      */
     public function store(CreateArticleAPIRequest $request)
     {
-        $input = $request->all();
+        $input = $request->all([
+            'title',
+            'slug',
+            'description',
+            'user_id',
+            'picture'
+        ]);
 
         $article = $this->articleRepository->create($input);
 
@@ -81,7 +87,7 @@ class ArticleAPIController extends AppBaseController
 
     /**
      * Update the specified Article in storage.
-     * PUT/PATCH /articles/{id}
+     * PWUT/PATCH /articles/{id}
      *
      * @param int $id
      * @param UpdateArticleAPIRequest $request
@@ -90,7 +96,13 @@ class ArticleAPIController extends AppBaseController
      */
     public function update($id, UpdateArticleAPIRequest $request)
     {
-        $input = $request->all();
+        $input = $request->all([
+            'title',
+            'slug',
+            'description',
+            'user_id',
+            'picture'
+        ]);
 
         /** @var Article $article */
         $article = $this->articleRepository->find($id);

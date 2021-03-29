@@ -17,7 +17,7 @@ class CreateUniversityFacultiesTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('university_id')->unsigned();
             $table->string('name', 255);
-            $table->string('description', 255);
+            $table->string('description', 255)->nullable();
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('university_id')->references('id')->on('universities');

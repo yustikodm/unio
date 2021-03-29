@@ -31,7 +31,7 @@
 <!-- Picture Field -->
 <div class="form-group col-sm-12 col-lg-12">
     {!! Form::label('picture', 'Picture:') !!}
-    {!! Form::textarea('picture', null, ['class' => 'form-control']) !!}
+    {!! Form::file('picture', null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- School Origin Field -->
@@ -53,12 +53,13 @@
 </div>
 
 @push('scripts')
-    <script type="text/javascript">
-        $('#birth_date').datetimepicker({
-            format: 'YYYY-MM-DD HH:mm:ss',
-            useCurrent: false
-        })
-    </script>
+<script type="text/javascript">
+    $('#birth_date').datetimepicker({
+        format: 'YYYY-MM-DD HH:mm:ss'
+        , useCurrent: false
+    })
+
+</script>
 @endpush
 
 <!-- Birth Place Field -->

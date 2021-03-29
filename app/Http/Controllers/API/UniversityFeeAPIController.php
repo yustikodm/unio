@@ -54,7 +54,16 @@ class UniversityFeeAPIController extends AppBaseController
      */
     public function store(CreateUniversityFeeAPIRequest $request)
     {
-        $input = $request->all();
+        $input = $request->only([
+            'university_id',
+            'faculty_id',
+            'major_id',
+            'currency_id',
+            'type',
+            'admission_fee',
+            'semester_fee',
+            'description'
+        ]);
 
         $universityFee = $this->universityFeeRepository->create($input);
 
@@ -92,7 +101,16 @@ class UniversityFeeAPIController extends AppBaseController
      */
     public function update($id, UpdateUniversityFeeAPIRequest $request)
     {
-        $input = $request->all();
+        $input = $request->only([
+            'university_id',
+            'faculty_id',
+            'major_id',
+            'currency_id',
+            'type',
+            'admission_fee',
+            'semester_fee',
+            'description'
+        ]);
 
         /** @var UniversityFee $universityFee */
         $universityFee = $this->universityFeeRepository->find($id);

@@ -26,8 +26,8 @@ class Role extends Model
 
 
     public $fillable = [
-        'name',
-        'guard_name'
+    'name',
+    'guard_name'
     ];
 
     /**
