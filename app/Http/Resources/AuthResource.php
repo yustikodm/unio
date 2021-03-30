@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class DistrictResource extends JsonResource
+class AuthResource extends JsonResource
 {
   /**
    * Transform the resource into an array.
@@ -17,10 +17,11 @@ class DistrictResource extends JsonResource
   {
     return [
       'id' => $this->id,
-      'name' => $this->name,
-      'state' => new StateResource($this->state),
-      'created_at' => Carbon::parse($this->created_at)->format('d/m/Y H:i:s'),
-      'updated_at' => Carbon::parse($this->updated_at)->format('d/m/Y H:i:s')
+      'username' => $this->username,
+      'email' => $this->email,
+      'image_path' => $this->image_path,
+      'joined' => Carbon::parse($this->created_at)->format('d/m/Y H:i:s'),
+      'api_token' => $this->api_tokenw
     ];
   }
 }

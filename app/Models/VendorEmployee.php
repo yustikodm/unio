@@ -22,71 +22,67 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class VendorEmployee extends Model
 {
-    use SoftDeletes;
+  use SoftDeletes;
 
-    public $table = 'vendor_employees';
+  public $table = 'vendor_employees';
 
-    const CREATED_AT = 'created_at';
-    const UPDATED_AT = 'updated_at';
+  const CREATED_AT = 'created_at';
+  const UPDATED_AT = 'updated_at';
 
+  protected $dates = ['deleted_at'];
 
-    protected $dates = ['deleted_at'];
+  public $fillable = [
+    'vendor_id',
+    'name',
+    'birthdate',
+    'position',
+    'phone',
+    'email',
+    'address',
+    'picture',
+    'description'
+  ];
 
+  /**
+   * The attributes that should be casted to native types.
+   *
+   * @var array
+   */
+  protected $casts = [
+    'id' => 'integer',
+    'vendor_id' => 'integer',
+    'name' => 'string',
+    'birthdate' => 'date',
+    'position' => 'string',
+    'phone' => 'string',
+    'email' => 'string',
+    'address' => 'string',
+    'picture' => 'string',
+    'description' => 'string'
+  ];
 
+  /**
+   * Validation rules
+   *
+   * @var array
+   */
+  public static $rules = [
+    'vendor_id' => 'required|integer',
+    'name' => 'nullable|string|max:255',
+    'birthdate' => 'nullable',
+    'position' => 'nullable|string|max:255',
+    'phone' => 'nullable|string|max:255',
+    'email' => 'nullable|string|max:255',
+    'address' => 'nullable|string|max:255',
+    'picture' => 'nullable|string|max:255',
+    'description' => 'nullable|string|max:255',
+    'created_at' => 'nullable',
+    'updated_at' => 'nullable',
+    'deleted_at' => 'nullable'
+  ];
 
-    public $fillable = [
-        'vendor_id',
-        'name',
-        'birthdate',
-        'position',
-        'phone',
-        'email',
-        'address',
-        'picture',
-        'description'
-    ];
-
-    /**
-     * The attributes that should be casted to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'id' => 'integer',
-        'vendor_id' => 'integer',
-        'name' => 'string',
-        'birthdate' => 'date',
-        'position' => 'string',
-        'phone' => 'string',
-        'email' => 'string',
-        'address' => 'string',
-        'picture' => 'string',
-        'description' => 'string'
-    ];
-
-    /**
-     * Validation rules
-     *
-     * @var array
-     */
-    public static $rules = [
-        'vendor_id' => 'required|integer',
-        'name' => 'nullable|string|max:255',
-        'birthdate' => 'nullable',
-        'position' => 'nullable|string|max:255',
-        'phone' => 'nullable|string|max:255',
-        'email' => 'nullable|string|max:255',
-        'address' => 'nullable|string|max:255',
-        'picture' => 'nullable|string|max:255',
-        'description' => 'nullable|string|max:255',
-        'created_at' => 'nullable',
-        'updated_at' => 'nullable',
-        'deleted_at' => 'nullable'
-    ];
-
-    public function vendor()
-    {
-        return $this->belongsTo(Vendor::class, 'vendor_id');
-    }
-
+  public function vendor()
+  {
+    return $this->belongsTo(Vendor::class, 'vendor_id');
+  }
 }

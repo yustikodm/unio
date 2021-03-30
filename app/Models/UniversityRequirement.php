@@ -18,63 +18,60 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class UniversityRequirement extends Model
 {
-    use SoftDeletes;
+  use SoftDeletes;
 
-    public $table = 'university_requirements';
+  public $table = 'university_requirements';
 
-    const CREATED_AT = 'created_at';
-    const UPDATED_AT = 'updated_at';
+  const CREATED_AT = 'created_at';
+  const UPDATED_AT = 'updated_at';
 
+  protected $dates = ['deleted_at'];
 
-    protected $dates = ['deleted_at'];
+  public $fillable = [
+    'university_id',
+    'major_id',
+    'name',
+    'value',
+    'description'
+  ];
 
+  /**
+   * The attributes that should be casted to native types.
+   *
+   * @var array
+   */
+  protected $casts = [
+    'id' => 'integer',
+    'university_id' => 'integer',
+    'major_id' => 'integer',
+    'name' => 'string',
+    'value' => 'integer',
+    'description' => 'string'
+  ];
 
+  /**
+   * Validation rules
+   *
+   * @var array
+   */
+  public static $rules = [
+    'university_id' => 'required|integer',
+    'major_id' => 'required|integer',
+    'name' => 'required|string|max:255',
+    'value' => 'required|integer',
+    'description' => 'nullable|string',
+    'created_at' => 'nullable',
+    'updated_at' => 'nullable',
+    'deleted_at' => 'nullable'
+  ];
 
-    public $fillable = [
-        'university_id',
-        'major_id',
-        'name',
-        'value',
-        'description'
-    ];
-
-    /**
-     * The attributes that should be casted to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'id' => 'integer',
-        'university_id' => 'integer',
-        'major_id' => 'integer',
-        'name' => 'string',
-        'value' => 'integer',
-        'description' => 'string'
-    ];
-
-    /**
-     * Validation rules
-     *
-     * @var array
-     */
-    public static $rules = [
-        'university_id' => 'required|integer',
-        'major_id' => 'required|integer',
-        'name' => 'required|string|max:255',
-        'value' => 'required|integer',
-        'description' => 'nullable|string',
-        'created_at' => 'nullable',
-        'updated_at' => 'nullable',
-        'deleted_at' => 'nullable'
-    ];
-
-    public function university(): \Illuminate\Database\Eloquent\Relations\BelongsTo
-    {
-        return $this->belongsTo(University::class, 'university_id');
-    }
-
-    public function major(): \Illuminate\Database\Eloquent\Relations\BelongsTo
-    {
-        return $this->belongsTo(UniversityMajor::class, 'major_id');
-    }
+  public function university(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+  {
+    return $this->belongsTo(University::class, 'university_id');
+  }
+  
+  public function major(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+  {
+    return $this->belongsTo(UniversityMajor::class, 'major_id');
+  }
 }

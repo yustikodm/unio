@@ -60,4 +60,19 @@ class State extends Model
     {
         return $this->belongsTo(Country::class, 'country_id');
     }
+
+    public function districts()
+    {
+        return $this->hasMany(District::class);
+    }
+
+    public function boarding_house()
+    {
+        return $this->hasMany(BoardingHouse::class);
+    }
+    
+    public function university()
+    {
+        return $this->hasMany(University::class);
+    }
 }

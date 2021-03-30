@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class StudentResource extends JsonResource
@@ -31,9 +32,9 @@ class StudentResource extends JsonResource
             'religion_id' => $this->religion_id,
             'address' => $this->address,
             'phone' => $this->phone,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
-            'deleted_at' => $this->deleted_at
+            'created_at' => Carbon::parse($this->created_at)->format('d/m/Y H:i:s'),
+            'updated_at' => Carbon::parse($this->updated_at)->format('d/m/Y H:i:s'),
+            'deleted_at' => Carbon::parse($this->deleted_at)->format('d/m/Y H:i:s')
         ];
     }
 }

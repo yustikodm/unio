@@ -64,4 +64,9 @@ class Currency extends Model
     {
         return $this->belongsTo(Country::class, 'country_id');
     }
+
+    public function boarding_house()
+    {
+        return $this->hasMany(BoardingHouse::class);
+    }
 }

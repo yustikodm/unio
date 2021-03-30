@@ -19,66 +19,72 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class UniversityMajor extends Model
 {
-    use SoftDeletes;
+  use SoftDeletes;
 
-    public $table = 'university_majors';
+  public $table = 'university_majors';
 
-    const CREATED_AT = 'created_at';
-    const UPDATED_AT = 'updated_at';
+  const CREATED_AT = 'created_at';
+  const UPDATED_AT = 'updated_at';
 
+  protected $dates = ['deleted_at'];
 
-    protected $dates = ['deleted_at'];
+  public $fillable = [
+    'university_id',
+    'faculty_id',
+    'name',
+    'description',
+    'accreditation',
+    'temp'
+  ];
 
+  /**
+   * The attributes that should be casted to native types.
+   *
+   * @var array
+   */
+  protected $casts = [
+    'id' => 'integer',
+    'university_id' => 'integer',
+    'faculty_id' => 'integer',
+    'name' => 'string',
+    'description' => 'string',
+    'accreditation' => 'string',
+    'temp' => 'string'
+  ];
 
+  /**
+   * Validation rules
+   *
+   * @var array
+   */
+  public static $rules = [
+    'university_id' => 'required|integer',
+    'faculty_id' => 'required|integer',
+    'name' => 'required|string|max:255',
+    'description' => 'nullable|string|max:255',
+    'accreditation' => 'nullable|string|max:255',
+    'created_at' => 'nullable',
+    'updated_at' => 'nullable',
+    'deleted_at' => 'nullable'
+  ];
 
-    public $fillable = [
-        'university_id',
-        'faculty_id',
-        'name',
-        'description',
-        'accreditation',
-        'temp'
-    ];
+  public function university(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+  {
+    return $this->belongsTo(University::class, 'university_id');
+  }
 
-    /**
-     * The attributes that should be casted to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'id' => 'integer',
-        'university_id' => 'integer',
-        'faculty_id' => 'integer',
-        'name' => 'string',
-        'description' => 'string',
-        'accreditation' => 'string',
-        'temp' => 'string'
-    ];
+  public function faculty(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+  {
+    return $this->belongsTo(UniversityFaculties::class, 'faculty_id');
+  }
 
-    /**
-     * Validation rules
-     *
-     * @var array
-     */
-    public static $rules = [
-        'university_id' => 'required|integer',
-        'faculty_id' => 'required|integer',
-        'name' => 'required|string|max:255',
-        'description' => 'nullable|string|max:255',
-        'accreditation' => 'nullable|string|max:255',
-        'created_at' => 'nullable',
-        'updated_at' => 'nullable',
-        'deleted_at' => 'nullable'
-    ];
+  public function requirement()
+  {
+    return $this->hasMany(UniversityRequirement::class);
+  }
 
-    public function university(): \Illuminate\Database\Eloquent\Relations\BelongsTo
-    {
-        return $this->belongsTo(University::class, 'university_id');
-    }
-
-    public function faculty(): \Illuminate\Database\Eloquent\Relations\BelongsTo
-    {
-        return $this->belongsTo(UniversityFaculties::class, 'faculty_id');
-    }
-
+  public function wishlist()
+  {
+    return $this->hasMany(Wishlist::class);
+  }
 }

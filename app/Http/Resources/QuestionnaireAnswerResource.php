@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class QuestionnaireAnswerResource extends JsonResource
@@ -16,12 +17,11 @@ class QuestionnaireAnswerResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'questionairre_id' => $this->questionairre_id,
-            'user_id' => $this->user_id,
             'answer' => $this->answer,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
-            'deleted_at' => $this->deleted_at
+            'user' => new UserResource($this->user),
+            'questionairre' => new QuestionnaireResource($this->questionairre_id),
+            'created_at' => Carbon::parse($this->created_at)->format('d/m/Y H:i:s'),
+            'updated_at' => Carbon::parse($this->updated_at)->format('d/m/Y H:i:s')
         ];
     }
 }

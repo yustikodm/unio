@@ -2,32 +2,32 @@
 
 namespace App\Http\Resources;
 
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class UniversityResource extends JsonResource
 {
-    /**
-     * Transform the resource into an array.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
-     */
-    public function toArray($request)
-    {
-        return [
-            'id' => $this->id,
-            'country_id' => $this->country_id,
-            'state_id' => $this->state_id,
-            'district_id' => $this->district_id,
-            'name' => $this->name,
-            'description' => $this->description,
-            'logo_src' => $this->logo_src,
-            'type' => $this->type,
-            'accreditation' => $this->accreditation,
-            'address' => $this->address,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
-            'deleted_at' => $this->deleted_at
-        ];
-    }
+  /**
+   * Transform the resource into an array.
+   *
+   * @param  \Illuminate\Http\Request  $request
+   * @return array
+   */
+  public function toArray($request)
+  {
+    return [
+      'id' => $this->id,
+      'name' => $this->name,
+      'address' => $this->address,
+      'logo_src' => $this->logo_src,
+      'type' => $this->type,
+      'accreditation' => $this->accreditation,
+      'description' => $this->description,
+      'country' => new CountryResource($this->country),
+      'state' => new StateResource($this->state),
+      'district' => new DistrictResource($this->district),
+      'created_at' => Carbon::parse($this->created_at)->format('d/m/Y H:i:s'),
+      'updated_at' => Carbon::parse($this->updated_at)->format('d/m/Y H:i:s')
+    ];
+  }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -18,53 +19,55 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Article extends Model
 {
-    use SoftDeletes;
+  use SoftDeletes;
 
-    public $table = 'articles';
+  public $table = 'articles';
 
-    const CREATED_AT = 'created_at';
-    const UPDATED_AT = 'updated_at';
+  const CREATED_AT = 'created_at';
+  const UPDATED_AT = 'updated_at';
 
+  protected $dates = ['deleted_at'];
 
-    protected $dates = ['deleted_at'];
+  public $fillable = [
+    'title',
+    'slug',
+    'description',
+    'user_id',
+    'picture'
+  ];
 
+  /**
+   * The attributes that should be casted to native types.
+   *
+   * @var array
+   */
+  protected $casts = [
+    'id' => 'integer',
+    'title' => 'string',
+    'slug' => 'string',
+    'description' => 'string',
+    'user_id' => 'integer',
+    'picture' => 'string'
+  ];
 
+  /**
+   * Validation rules
+   *
+   * @var array
+   */
+  public static $rules = [
+    'title' => 'required|string|max:255',
+    'slug' => 'required|string|max:255',
+    'description' => 'required|string',
+    'user_id' => 'required|nullable|integer',
+    'picture' => 'nullable|string|max:255',
+    'created_at' => 'nullable',
+    'updated_at' => 'nullable',
+    'deleted_at' => 'nullable'
+  ];
 
-    public $fillable = [
-        'title',
-        'slug',
-        'description',
-        'user_id',
-        'picture'
-    ];
-
-    /**
-     * The attributes that should be casted to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'id' => 'integer',
-        'title' => 'string',
-        'slug' => 'string',
-        'description' => 'string',
-        'user_id' => 'integer',
-        'picture' => 'string'
-    ];
-
-    /**
-     * Validation rules
-     *
-     * @var array
-     */
-    public static $rules = [
-        'title' => 'required|string|max:255',
-        'slug' => 'required|string|max:255',
-        'description' => 'required|string',
-        'user_id' => 'nullable|integer',
-        'picture' => 'nullable|string|max:255',
-        'created_at' => 'required',
-        'updated_at' => 'nullable',
-        'deleted_at' => 'nullable'
-    ];
+  public function user()
+  {
+    return $this->belongsTo(User::class);
+  }
 }

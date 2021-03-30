@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return redirect('dashboard');
+  return redirect('dashboard');
 });
 
 Auth::routes(['verify' => true]);
@@ -22,64 +22,64 @@ Route::post('/cobaPrinter', 'HomeController@cobaPrinter')->name('cobaPrinter');
 Route::get('/dashboard', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => ['auth']], function () {
-    Route::resource('countries', 'CountryController');
-    Route::resource('users', 'UserController');
-    Route::get('profile', 'UserController@editProfile');
-    Route::post('update-profile', 'UserController@updateProfile');
-    Route::resource('roles', 'RoleController');
-    Route::resource('permissions', 'PermissionController');
+  Route::resource('countries', 'CountryController');
+  Route::resource('users', 'UserController');
+  Route::get('profile', 'UserController@editProfile');
+  Route::post('update-profile', 'UserController@updateProfile');
+  Route::resource('roles', 'RoleController');
+  Route::resource('permissions', 'PermissionController');
 
-    Route::get('permissions/role-has-permission', 'PermissionController@roleHasPermission');
-    Route::get('permissions/refresh-permissions', 'PermissionController@refreshPermissions');
-    Route::post('permissions/give-permission-to-role', 'PermissionController@givePermissionToRole');
-    Route::post('permissions/revoke-permission-to-role', 'PermissionController@revokePermissionToRole');
-
-
+  Route::get('permissions/role-has-permission', 'PermissionController@roleHasPermission');
+  Route::get('permissions/refresh-permissions', 'PermissionController@refreshPermissions');
+  Route::post('permissions/give-permission-to-role', 'PermissionController@givePermissionToRole');
+  Route::post('permissions/revoke-permission-to-role', 'PermissionController@revokePermissionToRole');
 
 
-    Route::resource('states', 'StateController');
 
-    Route::resource('districts', 'DistrictController');
 
-    Route::resource('currencies', 'CurrencyController');
+  Route::resource('states', 'StateController');
 
-    Route::resource('religions', 'ReligionController');
+  Route::resource('districts', 'DistrictController');
 
-    Route::resource('questionnaires', 'QuestionnaireController');
+  Route::resource('currencies', 'CurrencyController');
 
-    Route::resource('questionnaireAnswers', 'QuestionnaireAnswerController');
+  Route::resource('religions', 'ReligionController');
 
-    Route::resource('universities', 'UniversityController');
+  Route::resource('questionnaires', 'QuestionnaireController');
 
-    Route::resource('universityFees', 'UniversityFeeController');
+  Route::resource('questionnaireAnswers', 'QuestionnaireAnswerController');
 
-    Route::resource('universityMajors', 'UniversityMajorController');
+  Route::resource('universities', 'UniversityController');
 
-    Route::resource('universityRequirements', 'UniversityRequirementController');
+  Route::resource('universityFees', 'UniversityFeeController');
 
-    Route::resource('universityScholarships', 'UniversityScholarshipController');
+  Route::resource('universityMajors', 'UniversityMajorController');
 
-    Route::resource('universityFaculties', 'UniversityFacultiesController');
+  Route::resource('universityRequirements', 'UniversityRequirementController');
 
-    Route::resource('vendors', 'VendorController');
+  Route::resource('universityScholarships', 'UniversityScholarshipController');
 
-    Route::resource('vendorServices', 'VendorServiceController');
+  Route::resource('universityFaculties', 'UniversityFacultiesController');
 
-    Route::resource('vendorEmployees', 'VendorEmployeeController');
+  Route::resource('vendors', 'VendorController');
 
-    Route::resource('vendorCategories', 'VendorCategoryController');
+  Route::resource('vendorServices', 'VendorServiceController');
 
-    Route::resource('students', 'StudentController');
+  Route::resource('vendorEmployees', 'VendorEmployeeController');
 
-    Route::resource('guardians', 'GuardianController');
+  Route::resource('vendorCategories', 'VendorCategoryController');
 
-    Route::resource('wishlists', 'WishlistController');
+  Route::resource('students', 'StudentController');
 
-    Route::resource('carts', 'CartController');
+  Route::resource('guardians', 'GuardianController');
 
-    Route::resource('articles', 'ArticleController');
+  Route::resource('wishlists', 'WishlistController');
 
-    /*Route::resource('pelanggan', 'PelangganController');
+  Route::resource('carts', 'CartController');
+
+  Route::resource('articles', 'ArticleController');
+
+  /*Route::resource('pelanggan', 'PelangganController');
 
     Route::resource('barang', 'BarangController');
 

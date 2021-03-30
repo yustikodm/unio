@@ -2,28 +2,28 @@
 
 namespace App\Http\Resources;
 
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class WishlistResource extends JsonResource
 {
-    /**
-     * Transform the resource into an array.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
-     */
-    public function toArray($request)
-    {
-        return [
-            'id' => $this->id,
-            'university_id' => $this->university_id,
-            'major_id' => $this->major_id,
-            'service_id' => $this->service_id,
-            'user_id' => $this->user_id,
-            'description' => $this->description,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
-            'deleted_at' => $this->deleted_at
-        ];
-    }
+  /**
+   * Transform the resource into an array.
+   *
+   * @param  \Illuminate\Http\Request  $request
+   * @return array
+   */
+  public function toArray($request)
+  {
+    return [
+      'id' => $this->id,
+      'description' => $this->description,
+      'service' => new VendorServiceResource($this->service_id),
+      'major' => new UniversityMajorResource($this->major),
+      'university' => new UniversityResource($this->university),
+      'user' => new UserResource($this->user),
+      'created_at' => Carbon::parse($this->created_at)->format('d/m/Y H:i:s'),
+      'updated_at' => Carbon::parse($this->updated_at)->format('d/m/Y H:i:s')
+    ];
+  }
 }

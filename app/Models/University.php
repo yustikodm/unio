@@ -22,81 +22,107 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class University extends Model
 {
-    use SoftDeletes;
+  use SoftDeletes;
 
-    public $table = 'universities';
+  public $table = 'universities';
 
-    const CREATED_AT = 'created_at';
-    const UPDATED_AT = 'updated_at';
+  const CREATED_AT = 'created_at';
+  const UPDATED_AT = 'updated_at';
 
+  protected $dates = ['deleted_at'];
 
-    protected $dates = ['deleted_at'];
+  public $fillable = [
+    'country_id',
+    'state_id',
+    'district_id',
+    'name',
+    'description',
+    'logo_src',
+    'type',
+    'accreditation',
+    'address'
+  ];
 
+  /**
+   * The attributes that should be casted to native types.
+   *
+   * @var array
+   */
+  protected $casts = [
+    'id' => 'integer',
+    'country_id' => 'integer',
+    'state_id' => 'integer',
+    'district_id' => 'integer',
+    'name' => 'string',
+    'description' => 'string',
+    'logo_src' => 'string',
+    'type' => 'string',
+    'accreditation' => 'string',
+    'address' => 'string'
+  ];
 
+  /**
+   * Validation rules
+   *
+   * @var array
+   */
+  public static $rules = [
+    'country_id' => 'nullable|integer',
+    'state_id' => 'nullable|integer',
+    'district_id' => 'nullable|integer',
+    'name' => 'required|string|max:255',
+    'description' => 'nullable|string',
+    'logo_src' => 'nullable|string|max:200',
+    'type' => 'required|string|max:255',
+    'accreditation' => 'required|string|max:255',
+    'address' => 'nullable|string',
+    'created_at' => 'nullable',
+    'updated_at' => 'nullable',
+    'deleted_at' => 'nullable'
+  ];
 
-    public $fillable = [
-        'country_id',
-        'state_id',
-        'district_id',
-        'name',
-        'description',
-        'logo_src',
-        'type',
-        'accreditation',
-        'address'
-    ];
+  public function country(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+  {
+    return $this->belongsTo(Country::class, 'country_id');
+  }
 
-    /**
-     * The attributes that should be casted to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'id' => 'integer',
-        'country_id' => 'integer',
-        'state_id' => 'integer',
-        'district_id' => 'integer',
-        'name' => 'string',
-        'description' => 'string',
-        'logo_src' => 'string',
-        'type' => 'string',
-        'accreditation' => 'string',
-        'address' => 'string'
-    ];
+  public function state(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+  {
+    return $this->belongsTo(State::class, 'state_id');
+  }
 
-    /**
-     * Validation rules
-     *
-     * @var array
-     */
-    public static $rules = [
-        'country_id' => 'nullable|integer',
-        'state_id' => 'nullable|integer',
-        'district_id' => 'nullable|integer',
-        'name' => 'required|string|max:255',
-        'description' => 'nullable|string',
-        'logo_src' => 'nullable|string|max:200',
-        'type' => 'required|string|max:255',
-        'accreditation' => 'required|string|max:255',
-        'address' => 'nullable|string',
-        'created_at' => 'nullable',
-        'updated_at' => 'nullable',
-        'deleted_at' => 'nullable'
-    ];
+  public function district(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+  {
+    return $this->belongsTo(District::class, 'district_id');
+  }
 
-    public function country(): \Illuminate\Database\Eloquent\Relations\BelongsTo
-    {
-        return $this->belongsTo(Country::class, 'country_id');
-    }
+  public function faculty()
+  {
+    return $this->hasMany(UniversityFaculties::class);
+  }
 
-    public function state(): \Illuminate\Database\Eloquent\Relations\BelongsTo
-    {
-        return $this->belongsTo(State::class, 'state_id');
-    }
+  public function fee()
+  {
+    return $this->hasMany(UniversityFee::class);
+  }
 
-    public function district(): \Illuminate\Database\Eloquent\Relations\BelongsTo
-    {
-        return $this->belongsTo(District::class, 'district_id');
-    }
+  public function major()
+  {
+    return $this->hasMany(UniversityMajor::class);
+  }
 
+  public function requirement()
+  {
+    return $this->hasMany(UniversityRequirement::class);
+  }
+
+  public function scholarship()
+  {
+    return $this->hasMany(UniversityScholarship::class);
+  }
+
+  public function wishlist()
+  {
+    return $this->hasMany(Wishlist::class);
+  }
 }

@@ -2,31 +2,31 @@
 
 namespace App\Http\Resources;
 
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class UniversityFeeResource extends JsonResource
 {
-    /**
-     * Transform the resource into an array.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
-     */
-    public function toArray($request)
-    {
-        return [
-            'id' => $this->id,
-            'university_id' => $this->university_id,
-            'faculty_id' => $this->faculty_id,
-            'major_id' => $this->major_id,
-            'currency_id' => $this->currency_id,
-            'type' => $this->type,
-            'admission_fee' => $this->admission_fee,
-            'semester_fee' => $this->semester_fee,
-            'description' => $this->description,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
-            'deleted_at' => $this->deleted_at
-        ];
-    }
+  /**
+   * Transform the resource into an array.
+   *
+   * @param  \Illuminate\Http\Request  $request
+   * @return array
+   */
+  public function toArray($request)
+  {
+    return [
+      'id' => $this->id,
+      'type' => $this->type,
+      'admission_fee' => $this->admission_fee,
+      'semester_fee' => $this->semester_fee,
+      'description' => $this->description,
+      'university' => new UniversityResource($this->university),
+      'faculty' => new UniversityFacultiesResource($this->faculty),
+      'major' => new UniversityMajorResource($this->major),
+      'currency' => new CurrencyResource($this->currency),
+      'created_at' => Carbon::parse($this->created_at)->format('d/m/Y H:i:s'),
+      'updated_at' => Carbon::parse($this->updated_at)->format('d/m/Y H:i:s')
+    ];
+  }
 }

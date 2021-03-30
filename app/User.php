@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Models\Article;
+use App\Models\QuestionnaireAnswer;
 use App\Traits\ImageTrait;
 use Barryvdh\LaravelIdeHelper\Eloquent;
 use Illuminate\Database\Eloquent\Builder;
@@ -117,6 +119,16 @@ class User extends Authenticatable
         'password'              => 'min:6|required_with:password_confirmation|same:password_confirmation',
         'password_confirmation' => 'min:6',
     ];
+
+    public function article()
+    {
+      return $this->hasMany(Article::class);
+    }
+
+    public function questionnaireAnswer()
+    {
+      return $this->hasMany(QuestionnaireAnswer::class);
+    }
 
     /**
      * @param $value

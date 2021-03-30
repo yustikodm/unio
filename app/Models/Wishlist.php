@@ -18,53 +18,62 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Wishlist extends Model
 {
-    use SoftDeletes;
+  use SoftDeletes;
 
-    public $table = 'wishlists';
+  public $table = 'wishlists';
 
-    const CREATED_AT = 'created_at';
-    const UPDATED_AT = 'updated_at';
+  const CREATED_AT = 'created_at';
+  const UPDATED_AT = 'updated_at';
 
+  protected $dates = ['deleted_at'];
 
-    protected $dates = ['deleted_at'];
+  public $fillable = [
+    'major_id',
+    'service_id',
+    'user_id',
+    'description'
+  ];
 
+  /**
+   * The attributes that should be casted to native types.
+   *
+   * @var array
+   */
+  protected $casts = [
+    'id' => 'integer',
+    'major_id' => 'integer',
+    'service_id' => 'integer',
+    'user_id' => 'integer',
+    'description' => 'string'
+  ];
 
+  /**
+   * Validation rules
+   *
+   * @var array
+   */
+  public static $rules = [
+    'major_id' => 'nullable|integer',
+    'service_id' => 'nullable|integer',
+    'user_id' => 'required|integer',
+    'description' => 'nullable|string',
+    'created_at' => 'nullable',
+    'updated_at' => 'nullable',
+    'deleted_at' => 'nullable'
+  ];
 
-    public $fillable = [
-        'university_id',
-        'major_id',
-        'service_id',
-        'user_id',
-        'description'
-    ];
+  public function user()
+  {
+    return $this->belongsTo(User::class);
+  }
 
-    /**
-     * The attributes that should be casted to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'id' => 'integer',
-        'university_id' => 'integer',
-        'major_id' => 'integer',
-        'service_id' => 'integer',
-        'user_id' => 'integer',
-        'description' => 'string'
-    ];
+  public function service()
+  {
+    return $this->belongsTo(VendorService::class);
+  }
 
-    /**
-     * Validation rules
-     *
-     * @var array
-     */
-    public static $rules = [
-        'university_id' => 'nullable|integer',
-        'major_id' => 'nullable|integer',
-        'service_id' => 'nullable|integer',
-        'user_id' => 'required|integer',
-        'description' => 'nullable|string',
-        'created_at' => 'nullable',
-        'updated_at' => 'nullable',
-        'deleted_at' => 'nullable'
-    ];
+  public function university_major()
+  {
+    return $this->belongsTo(University::class);
+  }
 }

@@ -59,4 +59,9 @@ class Questionnaire extends Model
         'updated_at' => 'nullable',
         'deleted_at' => 'nullable'
     ];
+
+    public function questionnare_answer()
+    {
+        return $this->hasMany(QuestionnaireAnswer::class);
+    }
 }

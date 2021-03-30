@@ -2,32 +2,32 @@
 
 namespace App\Http\Resources;
 
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class VendorResource extends JsonResource
 {
-    /**
-     * Transform the resource into an array.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
-     */
-    public function toArray($request)
-    {
-        return [
-            'id' => $this->id,
-            'vendor_category_id' => $this->vendor_category_id,
-            'name' => $this->name,
-            'description' => $this->description,
-            'picture' => $this->picture,
-            'email' => $this->email,
-            'back_account_number' => $this->back_account_number,
-            'website' => $this->website,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
-            'deleted_at' => $this->deleted_at,
-            'address' => $this->address,
-            'phone' => $this->phone
-        ];
-    }
+  /**
+   * Transform the resource into an array.
+   *
+   * @param  \Illuminate\Http\Request  $request
+   * @return array
+   */
+  public function toArray($request)
+  {
+    return [
+      'id' => $this->id,
+      'name' => $this->name,
+      'description' => $this->description,
+      'picture' => $this->picture,
+      'email' => $this->email,
+      'back_account_number' => $this->back_account_number,
+      'website' => $this->website,
+      'address' => $this->address,
+      'phone' => $this->phone,
+      'vendor_category' => new VendorCategoryResource($this->vendor_category),
+      'created_at' => Carbon::parse($this->created_at)->format('d/m/Y H:i:s'),
+      'updated_at' => Carbon::parse($this->updated_at)->format('d/m/Y H:i:s')
+    ];
+  }
 }

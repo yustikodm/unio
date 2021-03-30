@@ -13,7 +13,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property integer $country_id
  * @property integer $state_id
  * @property integer $district_id
- * @property integer $currency_id
  * @property string $name
  * @property string $description
  * @property integer $price
@@ -23,84 +22,74 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class BoardingHouse extends Model
 {
-    use SoftDeletes;
+  use SoftDeletes;
 
-    public $table = 'boarding_houses';
-
-
-    protected $dates = ['deleted_at'];
+  public $table = 'boarding_houses';
 
 
-
-    public $fillable = [
-        'country_id',
-        'state_id',
-        'district_id',
-        'currency_id',
-        'name',
-        'description',
-        'price',
-        'address',
-        'phone',
-        'picture'
-    ];
-
-    /**
-     * The attributes that should be casted to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'id' => 'integer',
-        'country_id' => 'integer',
-        'state_id' => 'integer',
-        'district_id' => 'integer',
-        'currency_id' => 'integer',
-        'name' => 'string',
-        'description' => 'string',
-        'price' => 'integer',
-        'address' => 'string',
-        'phone' => 'string',
-        'picture' => 'string'
-    ];
-
-    /**
-     * Validation rules
-     *
-     * @var array
-     */
-    public static $rules = [
-        'country_id' => 'nullable',
-        'state_id' => 'nullable',
-        'district_id' => 'nullable',
-        'currency_id' => 'nullable',
-        'name' => 'required',
-        'description' => 'nullable',
-        'price' => 'nullable',
-        'address' => 'required',
-        'phone' => 'nullable',
-        'picture' => 'nullable'
-    ];
-
-    public function country(): \Illuminate\Database\Eloquent\Relations\BelongsTo
-    {
-        return $this->belongsTo(Country::class, 'country_id');
-    }
-
-    public function state(): \Illuminate\Database\Eloquent\Relations\BelongsTo
-    {
-        return $this->belongsTo(State::class, 'state_id');
-    }
-
-    public function district(): \Illuminate\Database\Eloquent\Relations\BelongsTo
-    {
-        return $this->belongsTo(District::class, 'district_id');
-    }
-
-    public function currency(): \Illuminate\Database\Eloquent\Relations\BelongsTo
-    {
-        return $this->belongsTo(Currency::class, 'currency_id');
-    }
+  protected $dates = ['deleted_at'];
 
 
+
+  public $fillable = [
+    'country_id',
+    'state_id',
+    'district_id',
+    'name',
+    'description',
+    'price',
+    'address',
+    'phone',
+    'picture'
+  ];
+
+  /**
+   * The attributes that should be casted to native types.
+   *
+   * @var array
+   */
+  protected $casts = [
+    'id' => 'integer',
+    'country_id' => 'integer',
+    'state_id' => 'integer',
+    'district_id' => 'integer',
+    'name' => 'string',
+    'description' => 'string',
+    'price' => 'integer',
+    'address' => 'string',
+    'phone' => 'string',
+    'picture' => 'string'
+  ];
+
+  /**
+   * Validation rules
+   *
+   * @var array
+   */
+  public static $rules = [
+    'country_id' => 'nullable',
+    'state_id' => 'nullable',
+    'district_id' => 'nullable',
+    'name' => 'required',
+    'description' => 'nullable',
+    'price' => 'nullable',
+    'address' => 'required',
+    'phone' => 'nullable',
+    'picture' => 'nullable'
+  ];
+
+  public function country(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+  {
+    return $this->belongsTo(Country::class, 'country_id');
+  }
+
+  public function state(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+  {
+    return $this->belongsTo(State::class, 'state_id');
+  }
+
+  public function district(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+  {
+    return $this->belongsTo(District::class, 'district_id');
+  }
 }
