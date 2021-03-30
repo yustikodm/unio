@@ -9,9 +9,8 @@
 @can('master')
 <li class="treeview {{
     Request::is('countries*') || Request::is('states*') ||
-    Request::is('districts*')|| Request::is('religions*') ||
-    Request::is('questionnaires*')|| Request::is('questionnaireAnswer*') ||
-    Request::is('currencies') ? 'active menu-open' : '' }}">
+    Request::is('districts*')|| Request::is('religions*') || 
+    Request::is('questionnaires*')|| Request::is('questionnaireAnswer*') ? 'active menu-open' : '' }}">
     <a href="#">
         <i class="fa fa-database"></i><span>Master</span>
         <span class="pull-right-container">
@@ -59,13 +58,6 @@
         @can('questionnaireAnswers.index')
             <li class="{{ Request::is('questionnaireAnswers*') ? 'active' : '' }}">
                 <a href="{{ route('questionnaireAnswers.index') }}"><i class="fa fa-circle-thin"></i><span>Questionnaire Answers</span></a>
-            </li>
-        @endcan
-
-        {{-- Currencies  --}}
-        @can('currencies.index')
-            <li class="{{ Request::is('currencies*') ? 'active' : '' }}">
-                <a href="{{ route('currencies.index') }}"><i class="fa fa-circle-thin"></i><span>Currencies</span></a>
             </li>
         @endcan
     </ul>
@@ -167,7 +159,7 @@
 {{-- Module --}}
 @can('module')
     <li class="treeview {{
-    Request::is('module*') || Request::is('students*') ? 'active menu-open' : '' }}">
+    Request::is('module*') || Request::is('wishlists*') ? 'active menu-open' : '' }}">
         <a href="#">
             <i class="fa fa-list"></i><span>Modules</span>
             <span class="pull-right-container">
@@ -176,18 +168,6 @@
         </a>
 
         <ul class="treeview-menu">
-            {{-- Students --}}
-            @can('students.index')
-                <li class="{{ Request::is('students*') ? 'active' : '' }}">
-                    <a href="{{ route('students.index') }}"><i class="fa fa-circle-thin"></i><span>Students</span></a>
-                </li>
-            @endcan
-            {{-- Parents --}}
-            @can('guardians.index')
-                <li class="{{ Request::is('guardians*') ? 'active' : '' }}">
-                    <a href="{{ route('guardians.index') }}"><i class="fa fa-circle-thin"></i><span>Parents</span></a>
-                </li>
-            @endcan
             {{-- Wishlists --}}
             @can('wishlists.index')
                 <li class="{{ Request::is('wishlists*') ? 'active' : '' }}">
