@@ -22,186 +22,194 @@ use Response;
 
 class UserController extends AppBaseController
 {
-    /** @var  UserRepository */
-    private $userRepository;
-    private $permissionRepository;
+  /** @var  UserRepository */
+  private $userRepository;
+  private $permissionRepository;
 
-    public function __construct(UserRepository $userRepo, PermissionRepository $permissionRepo)
-    {
-        $this->userRepository = $userRepo;
-        $this->permissionRepository = $permissionRepo;
+  public function __construct(UserRepository $userRepo, PermissionRepository $permissionRepo)
+  {
+    $this->userRepository = $userRepo;
+    $this->permissionRepository = $permissionRepo;
+  }
+
+  /**
+   * Display a listing of the Post.
+   *
+   * @param  UserDataTable  $userDataTable
+   * @return JsonResponse|View
+   */
+  public function index(UserDataTable $userDataTable)
+  {
+    return $userDataTable->render('users.index');
+  }
+
+
+  /**
+   * Show the form for creating a new User.
+   *
+   * @return Response
+   */
+  public function create()
+  {
+    return view('users.create');
+  }
+
+  /**
+   * Store a newly created User in storage.
+   *
+   * @param  CreateUserRequest  $request
+   *
+   * @throws Exception
+   *
+   * @return RedirectResponse|Redirector
+   */
+  public function store(CreateUserRequest $request)
+  {
+    try {
+      $input = $request->only([
+        'username',
+        'email',
+        'password',
+        'phone',
+        'email_verified_at',
+        'image_path',
+        'api_token'
+      ]);
+
+      $input['roles'] = isset($input['roles']) ? $input['roles'] : [];
+
+      $user = $this->userRepository->store($input);
+      $user->syncRoles($input['roles']);
+
+      Flash::success('User saved successfully.');
+
+      return redirect(route('users.index'));
+    } catch (Exception $e) {
+      return Redirect::back()->withInput()->withErrors($e->getMessage());
+    }
+  }
+
+  /**
+   * Display the specified User.
+   *
+   * @param  int  $id
+   *
+   * @return Response
+   */
+  public function show($id)
+  {
+    $user = $this->userRepository->find($id);
+
+    if (empty($user)) {
+      Flash::error('User not found');
+
+      return redirect(route('users.index'));
     }
 
-    /**
-     * Display a listing of the Post.
-     *
-     * @param  UserDataTable  $userDataTable
-     * @return JsonResponse|View
-     */
-    public function index(UserDataTable $userDataTable)
-    {
-        return $userDataTable->render('users.index');
+    return view('users.show')->with('user', $user);
+  }
+
+  /**
+   * Show the form for editing the specified Video.
+   *
+   * @param  int  $id
+   *
+   * @param  Request  $request
+   * @return JsonResponse
+   */
+  public function edit($id, Request $request)
+  {
+    $user = User::find($id);
+
+    if ($request->ajax()) {
+      return $this->sendResponse($user, 'User retrieved successfully.');
     }
 
+    if (empty($user)) {
+      Flash::error('User not found');
 
-    /**
-     * Show the form for creating a new User.
-     *
-     * @return Response
-     */
-    public function create()
-    {
-        return view('users.create');
+      return redirect(route('users.index'));
     }
 
-    /**
-     * Store a newly created User in storage.
-     *
-     * @param  CreateUserRequest  $request
-     *
-     * @throws Exception
-     *
-     * @return RedirectResponse|Redirector
-     */
-    public function store(CreateUserRequest $request)
-    {
-        try {
-            $input = $request->all();
+    return view('users.edit', compact('user'));
+  }
 
-            $input['roles'] = isset($input['roles']) ? $input['roles'] : [];
+  /**
+   * @param  User  $user
+   * @param  UpdateUserRequest  $request
+   *
+   * @return RedirectResponse|Redirector
+   */
+  public function update(User $user, UpdateUserRequest $request)
+  {
+    try {
+      $input = $request->all();
 
-            $user = $this->userRepository->store($input);
-            $user->syncRoles($input['roles']);
+      $user = $this->userRepository->update($user->id, $input);
+      $user->syncRoles($input['roles']);
+      Flash::success('User updated successfully.');
 
-            Flash::success('User saved successfully.');
-
-            return redirect(route('users.index'));
-        } catch (Exception $e) {
-            return Redirect::back()->withInput()->withErrors($e->getMessage());
-        }
+      if (Auth::user()->hasRole('mitra')) {
+        return redirect(route('mitraProfile'));
+      } else if (Auth::user()->hasRole('admin')) {
+        return redirect(route('users.index'));
+      }
+    } catch (Exception $e) {
+      return Redirect::back()->withInput()->withErrors($e->getMessage());
     }
+  }
 
-    /**
-     * Display the specified User.
-     *
-     * @param  int  $id
-     *
-     * @return Response
-     */
-    public function show($id)
-    {
-        $user = $this->userRepository->find($id);
+  /**
+   * Remove the specified User from storage.
+   *
+   * @param  User  $user
+   *
+   * @throws Exception
+   *
+   * @return JsonResponse
+   */
+  public function destroy(User $user)
+  {
+    $user->delete();
 
-        if (empty($user)) {
-            Flash::error('User not found');
+    return $this->sendSuccess('User deleted successfully.');
+  }
 
-            return redirect(route('users.index'));
-        }
+  /**
+   * @return mixed
+   */
+  public function editProfile()
+  {
+    try {
+      $user = $this->userRepository->findWithoutFail(Auth::id());
 
-        return view('users.show')->with('user', $user);
+      return view('profile.edit', compact('user'));
+    } catch (Exception $e) {
+      return Redirect::back()->withErrors([$e->getMessage()]);
     }
+  }
 
-    /**
-     * Show the form for editing the specified Video.
-     *
-     * @param  int  $id
-     *
-     * @param  Request  $request
-     * @return JsonResponse
-     */
-    public function edit($id, Request $request)
-    {
-        $user = User::find($id);
+  /**
+   * @param  UpdateUserProfileRequest  $request
+   *
+   * @return RedirectResponse|Redirect
+   */
+  public function updateProfile(UpdateUserProfileRequest $request)
+  {
+    try {
+      $user = $this->userRepository->findWithoutFail(Auth::id());
+      if (empty($user)) {
+        Flash::error('User not found');
 
-        if ($request->ajax()) {
-            return $this->sendResponse($user, 'User retrieved successfully.');
-        }
+        return redirect(route('users.index'));
+      }
+      $input = $request->all();
+      $this->userRepository->updateProfile($input);
+      Flash::success('Profile updated successfully.');
 
-        if (empty($user)) {
-            Flash::error('User not found');
-
-            return redirect(route('users.index'));
-        }
-
-        return view('users.edit', compact('user'));
+      return redirect('users');
+    } catch (Exception $e) {
+      return Redirect::back()->withErrors([$e->getMessage()])->withInput($request->all());
     }
-
-    /**
-     * @param  User  $user
-     * @param  UpdateUserRequest  $request
-     *
-     * @return RedirectResponse|Redirector
-     */
-    public function update(User $user, UpdateUserRequest $request)
-    {
-        try {
-            $input = $request->all();
-
-            $user = $this->userRepository->update($user->id, $input);
-            $user->syncRoles($input['roles']);
-            Flash::success('User updated successfully.');
-
-            if(Auth::user()->hasRole('mitra')){
-                return redirect(route('mitraProfile'));
-            }else if(Auth::user()->hasRole('admin')){
-                return redirect(route('users.index'));
-            }
-        } catch (Exception $e) {
-            return Redirect::back()->withInput()->withErrors($e->getMessage());
-        }
-    }
-
-    /**
-     * Remove the specified User from storage.
-     *
-     * @param  User  $user
-     *
-     * @throws Exception
-     *
-     * @return JsonResponse
-     */
-    public function destroy(User $user)
-    {
-        $user->delete();
-
-        return $this->sendSuccess('User deleted successfully.');
-    }
-
-    /**
-     * @return mixed
-     */
-    public function editProfile()
-    {
-        try {
-            $user = $this->userRepository->findWithoutFail(Auth::id());
-
-            return view('profile.edit', compact('user'));
-        } catch (Exception $e) {
-            return Redirect::back()->withErrors([$e->getMessage()]);
-        }
-    }
-
-    /**
-     * @param  UpdateUserProfileRequest  $request
-     *
-     * @return RedirectResponse|Redirect
-     */
-    public function updateProfile(UpdateUserProfileRequest $request)
-    {
-        try {
-            $user = $this->userRepository->findWithoutFail(Auth::id());
-            if (empty($user)) {
-                Flash::error('User not found');
-
-                return redirect(route('users.index'));
-            }
-            $input = $request->all();
-            $this->userRepository->updateProfile($input);
-            Flash::success('Profile updated successfully.');
-
-            return redirect('users');
-        } catch (Exception $e) {
-            return Redirect::back()->withErrors([$e->getMessage()])->withInput($request->all());
-        }
-    }
+  }
 }

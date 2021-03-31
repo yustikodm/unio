@@ -21,7 +21,7 @@ class AuthResource extends JsonResource
       'email' => $this->email,
       'image_path' => $this->image_path,
       'joined' => Carbon::parse($this->created_at)->format('d/m/Y H:i:s'),
-      'api_token' => $this->api_tokenw
+      'api_token' => $this->api_token
     ];
   }
 }

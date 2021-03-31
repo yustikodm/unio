@@ -74,4 +74,11 @@ class VendorService extends Model
   {
     return $this->hasMany(Wishlist::class);
   }
+
+  public function scopeApiSearch($query, $param)
+  {
+    return $query->when($param, function ($query) use ($param) {
+      return $query->where('name', 'LIKE', "%$param%");
+    })->get();
+  }
 }

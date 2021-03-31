@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class Role
@@ -64,5 +65,10 @@ class Role extends Model
   public function permissions()
   {
     return $this->belongsToMany(\App\Models\Permission::class, 'role_has_permissions');
+  }
+
+  public static function insertRoleHasPermission($data)
+  {
+    return DB::table('role_has_permissions')->insert($data);
   }
 }

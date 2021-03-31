@@ -17,7 +17,7 @@
     <div class="col-md-3">
         <div class="small-box bg-yellow">
         <div class="inner">
-          <h3>{{ $student }}</h3>
+          <h3>NaN</h3>
 
           <p>Student</p>
         </div>
@@ -29,7 +29,7 @@
     <div class="col-md-3">
         <div class="small-box bg-red">
         <div class="inner">
-          <h3>{{ $parent }}</h3>
+          <h3>NaN</h3>
 
           <p>Parent</p>
         </div>

@@ -65,11 +65,7 @@ class ArticleDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'title',
-            'slug',
-            'description',
-            'user_id',
-            'picture'
+            
         ];
     }
 

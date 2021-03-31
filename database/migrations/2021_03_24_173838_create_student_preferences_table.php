@@ -15,11 +15,13 @@ class CreateStudentPreferencesTable extends Migration
     {
         Schema::create('student_preferences', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('student_id')->unsigned();
-            $table->string('major_name', 255);
+            $table->bigInteger('user_id')->unsigned();
+            $table->bigInteger('major_id_first')->nullable();
+            $table->bigInteger('major_id_second')->nullable();
+            $table->bigInteger('major_id_third')->nullable();
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('student_id')->references('id')->on('students');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

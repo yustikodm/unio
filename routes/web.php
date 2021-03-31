@@ -17,25 +17,28 @@ Route::get('/', function () {
 
 Auth::routes(['verify' => true]);
 
-Route::post('/cobaPrinter', 'HomeController@cobaPrinter')->name('cobaPrinter');
-
 Route::get('/dashboard', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => ['auth']], function () {
   Route::resource('countries', 'CountryController');
+
   Route::resource('users', 'UserController');
+
   Route::get('profile', 'UserController@editProfile');
+
   Route::post('update-profile', 'UserController@updateProfile');
+
   Route::resource('roles', 'RoleController');
+
   Route::resource('permissions', 'PermissionController');
 
   Route::get('permissions/role-has-permission', 'PermissionController@roleHasPermission');
+
   Route::get('permissions/refresh-permissions', 'PermissionController@refreshPermissions');
+
   Route::post('permissions/give-permission-to-role', 'PermissionController@givePermissionToRole');
+
   Route::post('permissions/revoke-permission-to-role', 'PermissionController@revokePermissionToRole');
-
-
-
 
   Route::resource('states', 'StateController');
 
@@ -45,27 +48,27 @@ Route::group(['middleware' => ['auth']], function () {
 
   Route::resource('questionnaires', 'QuestionnaireController');
 
-  Route::resource('questionnaireAnswers', 'QuestionnaireAnswerController');
+  Route::resource('questionnaire-answers', 'QuestionnaireAnswerController');
 
   Route::resource('universities', 'UniversityController');
 
-  Route::resource('universityFees', 'UniversityFeeController');
+  Route::resource('university-fees', 'UniversityFeeController');
 
-  Route::resource('universityMajors', 'UniversityMajorController');
+  Route::resource('university-faculties', 'UniversityFacultiesController');
 
-  Route::resource('universityRequirements', 'UniversityRequirementController');
+  Route::resource('university-majors', 'UniversityMajorController');
 
-  Route::resource('universityScholarships', 'UniversityScholarshipController');
+  Route::resource('university-requirements', 'UniversityRequirementController');
 
-  Route::resource('universityFaculties', 'UniversityFacultiesController');
+  Route::resource('university-scholarships', 'UniversityScholarshipController');
 
   Route::resource('vendors', 'VendorController');
 
-  Route::resource('vendorServices', 'VendorServiceController');
+  Route::resource('vendor-services', 'VendorServiceController');
 
-  Route::resource('vendorEmployees', 'VendorEmployeeController');
+  Route::resource('vendor-employees', 'VendorEmployeeController');
 
-  Route::resource('vendorCategories', 'VendorCategoryController');
+  Route::resource('vendor-categories', 'VendorCategoryController');
 
   Route::resource('students', 'StudentController');
 
@@ -74,7 +77,22 @@ Route::group(['middleware' => ['auth']], function () {
   Route::resource('carts', 'CartController');
 
   Route::resource('articles', 'ArticleController');
-  
-  Route::resource('boardingHouses', 'BoardingHouseController');
+
+  Route::resource('boarding-houses', 'BoardingHouseController');
+
+  Route::resource('families', 'FamilyController');
+
+  Route::resource('biodatas', 'BiodataController');
+
+  Route::resource('pricing-points', 'PricingPointController');
+
+  Route::resource('point-transactions', 'PointTransactionController');
+
+  Route::resource('point-topups', 'PointTopupController');
+
+  Route::resource('point-logs', 'PointLogController');
+
+  Route::resource('place-to-live', 'PlaceToLiveController');
 });
 
+Route::get('coba', 'TestController@index');

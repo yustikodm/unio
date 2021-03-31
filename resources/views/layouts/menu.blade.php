@@ -10,7 +10,7 @@
 <li class="treeview {{
     Request::is('countries*') || Request::is('states*') ||
     Request::is('districts*')|| Request::is('religions*') || 
-    Request::is('questionnaires*')|| Request::is('questionnaireAnswer*') ? 'active menu-open' : '' }}">
+    Request::is('questionnaires*')|| Request::is('questionnaire-answer*') ? 'active menu-open' : '' }}">
     <a href="#">
         <i class="fa fa-database"></i><span>Master</span>
         <span class="pull-right-container">
@@ -55,9 +55,9 @@
         @endcan
 
         {{-- Questionnaire Answer --}}
-        @can('questionnaireAnswers.index')
-            <li class="{{ Request::is('questionnaireAnswers*') ? 'active' : '' }}">
-                <a href="{{ route('questionnaireAnswers.index') }}"><i class="fa fa-circle-thin"></i><span>Questionnaire Answers</span></a>
+        @can('questionnaire-answers.index')
+            <li class="{{ Request::is('questionnaire-answers*') ? 'active' : '' }}">
+                <a href="{{ route('questionnaire-answers.index') }}"><i class="fa fa-circle-thin"></i><span>Questionnaire Answers</span></a>
             </li>
         @endcan
     </ul>
@@ -83,33 +83,33 @@
                 </li>
             @endcan
             {{-- University Faculties --}}
-            @can('universityFaculties.index')
-                <li class="{{ Request::is('universityFaculties*') ? 'active' : '' }}">
-                    <a href="{{ route('universityFaculties.index') }}"><i class="fa fa-circle-thin"></i><span>University Faculties</span></a>
+            @can('university-faculties.index')
+                <li class="{{ Request::is('university-faculties*') ? 'active' : '' }}">
+                    <a href="{{ route('university-faculties.index') }}"><i class="fa fa-circle-thin"></i><span>University Faculties</span></a>
                 </li>
             @endcan
             {{-- University Majors --}}
-            @can('universityMajors.index')
-                <li class="{{ Request::is('universityMajors*') ? 'active' : '' }}">
-                    <a href="{{ route('universityMajors.index') }}"><i class="fa fa-circle-thin"></i><span>University Majors</span></a>
+            @can('university-majors.index')
+                <li class="{{ Request::is('university-majors*') ? 'active' : '' }}">
+                    <a href="{{ route('university-majors.index') }}"><i class="fa fa-circle-thin"></i><span>University Majors</span></a>
                 </li>
             @endcan
             {{-- University Fees --}}
-            @can('universityFees.index')
-                <li class="{{ Request::is('universityFees*') ? 'active' : '' }}">
-                    <a href="{{ route('universityFees.index') }}"><i class="fa fa-circle-thin"></i><span>University Fees</span></a>
+            @can('university-fees.index')
+                <li class="{{ Request::is('university-fees*') ? 'active' : '' }}">
+                    <a href="{{ route('university-fees.index') }}"><i class="fa fa-circle-thin"></i><span>University Fees</span></a>
                 </li>
             @endcan
             {{-- University Requirements --}}
-            @can('universityRequirements.index')
-                <li class="{{ Request::is('universityRequirements*') ? 'active' : '' }}">
-                    <a href="{{ route('universityRequirements.index') }}"><i class="fa fa-circle-thin"></i><span>University Requirements</span></a>
+            @can('university-requirements.index')
+                <li class="{{ Request::is('university-requirements*') ? 'active' : '' }}">
+                    <a href="{{ route('university-requirements.index') }}"><i class="fa fa-circle-thin"></i><span>University Requirements</span></a>
                 </li>
             @endcan
             {{-- University Scholarships --}}
-            @can('universityScholarships.index')
-                <li class="{{ Request::is('universityScholarships*') ? 'active' : '' }}">
-                    <a href="{{ route('universityScholarships.index') }}"><i class="fa fa-circle-thin"></i><span>University Scholarships</span></a>
+            @can('university-scholarships.index')
+                <li class="{{ Request::is('university-scholarships*') ? 'active' : '' }}">
+                    <a href="{{ route('university-scholarships.index') }}"><i class="fa fa-circle-thin"></i><span>University Scholarships</span></a>
                 </li>
             @endcan
         </ul>
@@ -135,21 +135,21 @@
                 </li>
             @endcan
             {{-- Vendor Service --}}
-            @can('vendorServices.index')
-                <li class="{{ Request::is('vendorServices*') ? 'active' : '' }}">
-                    <a href="{{ route('vendorServices.index') }}"><i class="fa fa-circle-thin"></i><span>Vendor Services</span></a>
+            @can('vendor-services.index')
+                <li class="{{ Request::is('vendor-services*') ? 'active' : '' }}">
+                    <a href="{{ route('vendor-services.index') }}"><i class="fa fa-circle-thin"></i><span>Vendor Services</span></a>
                 </li>
             @endcan
             {{-- Vendor Employee --}}
-            @can('vendorEmployees.index')
-                <li class="{{ Request::is('vendorEmployees*') ? 'active' : '' }}">
-                    <a href="{{ route('vendorEmployees.index') }}"><i class="fa fa-circle-thin"></i><span>Vendor Employees</span></a>
+            @can('vendor-employees.index')
+                <li class="{{ Request::is('vendor-employees*') ? 'active' : '' }}">
+                    <a href="{{ route('vendor-employees.index') }}"><i class="fa fa-circle-thin"></i><span>Vendor Employees</span></a>
                 </li>
             @endcan
             {{-- Vendor Category --}}
-            @can('vendorCategories.index')
-                <li class="{{ Request::is('vendorCategories*') ? 'active' : '' }}">
-                    <a href="{{ route('vendorCategories.index') }}"><i class="fa fa-circle-thin"></i><span>Vendor Categories</span></a>
+            @can('vendor-categories.index')
+                <li class="{{ Request::is('vendor-categories*') ? 'active' : '' }}">
+                    <a href="{{ route('vendor-categories.index') }}"><i class="fa fa-circle-thin"></i><span>Vendor Categories</span></a>
                 </li>
             @endcan
         </ul>
@@ -191,9 +191,9 @@
     </li>
 @endcan
 
-@can('boardingHouses.index')
-    <li class="{{ Request::is('boardingHouses*') ? 'active' : '' }}">
-        <a href="{{ route('boardingHouses.index') }}"><i class="fa fa-home"></i><span>Boarding Houses</span></a>
+@can('place-to-live.index')
+    <li class="{{ Request::is('place-to-live*') ? 'active' : '' }}">
+        <a href="{{ route('place-to-live.index') }}"><i class="fa fa-home"></i><span>Place to Live</span></a>
     </li>
 @endcan
 
@@ -259,3 +259,38 @@
     <a href="{{ route('detailPurchaseOder.index') }}"><i class="fa fa-circle-thin"></i><span>Detail Purchase Oder</span></a>
 </li>
  --> --}}
+@can('families.index')
+<li class="{{ Request::is('families*') ? 'active' : '' }}">
+    <a href="{{ route('families.index') }}"><i class="fa fa-edit"></i><span>Families</span></a>
+</li>
+@endcan
+@can('biodatas.index')
+<li class="{{ Request::is('biodatas*') ? 'active' : '' }}">
+    <a href="{{ route('biodatas.index') }}"><i class="fa fa-edit"></i><span>Biodatas</span></a>
+</li>
+@endcan
+@can('pricingPoints.index')
+<li class="{{ Request::is('pricingPoints*') ? 'active' : '' }}">
+    <a href="{{ route('pricingPoints.index') }}"><i class="fa fa-edit"></i><span>Pricing Points</span></a>
+</li>
+@endcan
+@can('pointTransactions.index')
+<li class="{{ Request::is('pointTransactions*') ? 'active' : '' }}">
+    <a href="{{ route('pointTransactions.index') }}"><i class="fa fa-edit"></i><span>Point Transactions</span></a>
+</li>
+@endcan
+@can('pointTopups.index')
+<li class="{{ Request::is('pointTopups*') ? 'active' : '' }}">
+    <a href="{{ route('pointTopups.index') }}"><i class="fa fa-edit"></i><span>Point Topups</span></a>
+</li>
+@endcan
+@can('pointLogs.index')
+<li class="{{ Request::is('pointLogs*') ? 'active' : '' }}">
+    <a href="{{ route('pointLogs.index') }}"><i class="fa fa-edit"></i><span>Point Logs</span></a>
+</li>
+@endcan
+@can('placeToLives.index')
+<li class="{{ Request::is('placeToLives*') ? 'active' : '' }}">
+    <a href="{{ route('placeToLives.index') }}"><i class="fa fa-edit"></i><span>Place To Lives</span></a>
+</li>
+@endcan

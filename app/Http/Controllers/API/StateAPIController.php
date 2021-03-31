@@ -18,115 +18,115 @@ use Response;
 
 class StateAPIController extends AppBaseController
 {
-    /** @var  StateRepository */
-    private $stateRepository;
+  /** @var  StateRepository */
+  private $stateRepository;
 
-    public function __construct(StateRepository $stateRepo)
-    {
-        $this->stateRepository = $stateRepo;
+  public function __construct(StateRepository $stateRepo)
+  {
+    $this->stateRepository = $stateRepo;
+  }
+
+  /**
+   * Display a listing of the State.
+   * GET|HEAD /states
+   *
+   * @param Request $request
+   * @return Response
+   */
+  public function index(Request $request)
+  {
+    $states = $this->stateRepository->all(
+      $request->except(['skip', 'limit']),
+      $request->get('skip'),
+      $request->get('limit')
+    );
+
+    return $this->sendResponse(StateResource::collection($states), 'States retrieved successfully');
+  }
+
+  /**
+   * Store a newly created State in storage.
+   * POST /states
+   *
+   * @param CreateStateAPIRequest $request
+   *
+   * @return Response
+   */
+  public function store(CreateStateAPIRequest $request)
+  {
+    $input = $request->only(['country_id', 'name']);
+
+    $state = $this->stateRepository->create($input);
+
+    return $this->sendResponse(new StateResource($state), 'State saved successfully');
+  }
+
+  /**
+   * Display the specified State.
+   * GET|HEAD /states/{id}
+   *
+   * @param int $id
+   *
+   * @return Response
+   */
+  public function show($id)
+  {
+    /** @var State $state */
+    $state = $this->stateRepository->find($id);
+
+    if (empty($state)) {
+      return $this->sendError('State not found');
     }
 
-    /**
-     * Display a listing of the State.
-     * GET|HEAD /states
-     *
-     * @param Request $request
-     * @return Response
-     */
-    public function index(Request $request)
-    {
-        $states = $this->stateRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
-        );
+    return $this->sendResponse(new StateResource($state), 'State retrieved successfully');
+  }
 
-        return $this->sendResponse(StateResource::collection($states), 'States retrieved successfully');
+  /**
+   * Update the specified State in storage.
+   * PUT/PATCH /states/{id}
+   *
+   * @param int $id
+   * @param UpdateStateAPIRequest $request
+   *
+   * @return Response
+   */
+  public function update($id, UpdateStateAPIRequest $request)
+  {
+    $input = $request->only(['country_id', 'name']);
+
+    /** @var State $state */
+    $state = $this->stateRepository->find($id);
+
+    if (empty($state)) {
+      return $this->sendError('State not found');
     }
 
-    /**
-     * Store a newly created State in storage.
-     * POST /states
-     *
-     * @param CreateStateAPIRequest $request
-     *
-     * @return Response
-     */
-    public function store(CreateStateAPIRequest $request)
-    {
-        $input = $request->only(['country_id', 'name']);
+    $state = $this->stateRepository->update($input, $id);
 
-        $state = $this->stateRepository->create($input);
+    return $this->sendResponse(new StateResource($state), 'State updated successfully');
+  }
 
-        return $this->sendResponse(new StateResource($state), 'State saved successfully');
+  /**
+   * Remove the specified State from storage.
+   * DELETE /states/{id}
+   *
+   * @param int $id
+   *
+   * @throws \Exception
+   *
+   * @return Response
+   */
+  public function destroy($id)
+  {
+    /** @var State $state */
+    $state = $this->stateRepository->find($id);
+
+    if (empty($state)) {
+      return $this->sendError('State not found');
     }
 
-    /**
-     * Display the specified State.
-     * GET|HEAD /states/{id}
-     *
-     * @param int $id
-     *
-     * @return Response
-     */
-    public function show($id)
-    {
-        /** @var State $state */
-        $state = $this->stateRepository->find($id);
+    $state->delete();
 
-        if (empty($state)) {
-            return $this->sendError('State not found');
-        }
-
-        return $this->sendResponse(new StateResource($state), 'State retrieved successfully');
-    }
-
-    /**
-     * Update the specified State in storage.
-     * PUT/PATCH /states/{id}
-     *
-     * @param int $id
-     * @param UpdateStateAPIRequest $request
-     *
-     * @return Response
-     */
-    public function update($id, UpdateStateAPIRequest $request)
-    {
-        $input = $request->only(['country_id', 'name']);
-
-        /** @var State $state */
-        $state = $this->stateRepository->find($id);
-
-        if (empty($state)) {
-            return $this->sendError('State not found');
-        }
-
-        $state = $this->stateRepository->update($input, $id);
-
-        return $this->sendResponse(new StateResource($state), 'State updated successfully');
-    }
-
-    /**
-     * Remove the specified State from storage.
-     * DELETE /states/{id}
-     *
-     * @param int $id
-     *
-     * @throws \Exception
-     *
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        /** @var State $state */
-        $state = $this->stateRepository->find($id);
-
-        if (empty($state)) {
-            return $this->sendError('State not found');
-        }
-
-        $state->delete();
-
-        return $this->sendSuccess('State deleted successfully');
-    }
+    return $this->sendSuccess('State deleted successfully');
+  }
 }

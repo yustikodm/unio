@@ -62,4 +62,11 @@ class UniversityFaculties extends Model
   {
     return $this->hasMany(UniversityMajor::class);
   }
+
+  public function scopeApiSearch($query, $param)
+  {
+    return $query->when($param, function ($query) use ($param) {
+      return $query->where('name', 'LIKE', "%$param%");
+    })->get();
+  }
 }

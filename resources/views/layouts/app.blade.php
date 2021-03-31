@@ -95,7 +95,7 @@
 </head>
 
 <body class="skin-blue sidebar-mini">
-@if (!Auth::guest())
+@if (!auth()->guest())
     <div class="wrapper">
         <!-- Main Header -->
         <header class="main-header">
@@ -123,22 +123,22 @@
                             <!-- Menu Toggle Button -->
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <!-- The user image in the navbar-->
-                                <img src="{{ Auth::user()->image_path }}" alt="" class="user-image">
-                                <span class="pr-3 align-middle">{!! Auth::user()->name !!}</span>
+                                <img src="{{ auth()->user()->image_path }}" alt="" class="user-image">
+                                <span class="pr-3 align-middle">{!! auth()->user()->username !!}</span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- The user image in the menu -->
                                 <li class="user-header">
-                                    <img src="{{ Auth::user()->image_path }}" class="img-circle" alt="User Image">
+                                    <img src="{{ auth()->user()->image_path }}" class="img-circle" alt="User Image">
                                     <p>
-                                        {!! Auth::user()->name !!}
-                                        <small>Member since {!! Auth::user()->created_at->format('M. Y') !!}</small>
+                                        {!! auth()->user()->username !!}
+                                        <small>Member since {!! auth()->user()->created_at->format('M. Y') !!}</small>
                                     </p>
                                 </li>
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
                                     <div class="pull-left">
-                                        @if(Auth::user()->hasRole('mitra'))
+                                        @if(auth()->user()->hasRole('mitra'))
                                             <a href="{!! url('mitraProfile') !!}"
                                            class="btn btn-default btn-flat" style="border-radius: 5px !important;">Profile</a>
                                         @else

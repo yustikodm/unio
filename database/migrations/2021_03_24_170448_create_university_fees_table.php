@@ -18,7 +18,6 @@ class CreateUniversityFeesTable extends Migration
             $table->bigInteger('university_id')->unsigned();
             $table->bigInteger('faculty_id')->unsigned();
             $table->bigInteger('major_id')->unsigned();
-            $table->bigInteger('currency_id')->unsigned();
             $table->string('type', 255);
             $table->bigInteger('admission_fee');
             $table->bigInteger('semester_fee');
@@ -28,7 +27,6 @@ class CreateUniversityFeesTable extends Migration
             $table->foreign('university_id')->references('id')->on('universities');
             $table->foreign('faculty_id')->references('id')->on('university_faculties');
             $table->foreign('major_id')->references('id')->on('university_majors');
-            $table->foreign('currency_id')->references('id')->on('currencies');
         });
     }
 

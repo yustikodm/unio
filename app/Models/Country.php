@@ -42,9 +42,6 @@ class Country extends Model
    */
   public static $rules = [
     'name' => 'required|string|max:255',
-    'created_at' => 'nullable',
-    'updated_at' => 'nullable',
-    'deleted_at' => 'nullable'
   ];
 
   public function state()
@@ -60,5 +57,17 @@ class Country extends Model
   public function university()
   {
     return $this->hasMany(University::class);
+  }
+
+  public function topup()
+  {
+    return $this->hasMany(PointTopup::class);
+  }
+
+  public function scopeApiSearch($query, $param)
+  {
+    return $query->when($param, function ($query) use ($param) {
+      return $query->where('name', 'LIKE', "%$param%");
+    })->get();
   }
 }

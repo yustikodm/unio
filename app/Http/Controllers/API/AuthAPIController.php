@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\AppBaseController;
 use App\Http\Resources\AuthResource;
+use App\Repositories\UserRepository;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -11,30 +12,21 @@ use Illuminate\Support\Str;
 
 class AuthAPIController extends AppBaseController
 {
+  /** @var  UserRepository */
+  private $userRepository;
+
+  public function __construct(UserRepository $userRepo)
+  {
+    $this->userRepository = $userRepo;
+  }
 
   public function register(Request $request)
   {
-    $this->validate($request, [
-      'name' => 'required:min:2',
-      'email' => 'required|email|unique:users,email,id',
-      'password' => 'required|min:4'
-    ]);
+    $input = $request->only(['username', 'email', 'password', 'api_token']);
 
-    try {
-      $user = User::create([
-        'name' => $request->name,
-        'email' => $request->email,
-        'password' => Hash::make($request->password),
-        'api_token' => Str::random(100),
-      ]);
-    } catch (\Exception $error) {
-      return response()->json([
-        'success' => false,
-        'message' => $error->getMessage()
-      ]);
-    }
+    $user = $this->userRepository->store($input);
 
-    return $this->sendResponse(new AuthResource($user), 'Registered successfully');
+    return $this->sendResponse(new AuthResource($user), 'Account registered successfully');
   }
 
   public function login(Request $request)

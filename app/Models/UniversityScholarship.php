@@ -65,4 +65,11 @@ class UniversityScholarship extends Model
   {
     return $this->belongsTo(University::class, 'university_id');
   }
+
+  public function scopeApiSearch($query, $param)
+  {
+    return $query->when($param, function ($query) use ($param) {
+      return $query->where('description', 'LIKE', "%$param%");
+    })->get();
+  }
 }

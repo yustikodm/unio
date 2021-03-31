@@ -19,7 +19,6 @@ class CreateWishlistsTable extends Migration
             $table->bigInteger('major_id')->unsigned();
             $table->bigInteger('service_id')->unsigned();
             $table->bigInteger('user_id')->unsigned();
-            $table->longText('description');
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('university_id')->references('id')->on('universities');

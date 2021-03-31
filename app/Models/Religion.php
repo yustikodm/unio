@@ -46,4 +46,9 @@ class Religion extends Model
     'updated_at' => 'nullable',
     'deleted_at' => 'nullable'
   ];
+
+  public function biodata()
+  {
+    return $this->hasMany(Biodata::class);
+  }
 }

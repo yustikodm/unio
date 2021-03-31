@@ -17,6 +17,8 @@ Route::post('register', 'AuthAPIController@register');
 
 Route::post('login', 'AuthAPIController@login');
 
+Route::get('search', 'GlobalSearchAPIController@search');
+
 Route::group(['middleware' => ['auth:api']], function () {
   Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
