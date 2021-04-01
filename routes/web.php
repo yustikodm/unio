@@ -90,9 +90,9 @@ Route::group(['middleware' => ['auth']], function () {
 
   Route::resource('point-topups', 'PointTopupController');
 
-  Route::resource('point-logs', 'PointLogController');
-
   Route::resource('place-to-live', 'PlaceToLiveController');
+
+  Route::resource('point-logs', 'PointLogController')->only('index', 'store');
 });
 
 Route::get('coba', 'TestController@index');
