@@ -17,8 +17,8 @@ class CreateVendorsTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('vendor_category_id')->unsigned();
             $table->string('name', 50);
-            $table->longText('description');
-            $table->longText('picture');
+            $table->longText('description')->nullable();
+            $table->string('picture', 255)->nullable();
             $table->string('email', 255)->nullable();
             $table->string('back_account_number', 255)->nullable();
             $table->string('website', 255)->nullable();

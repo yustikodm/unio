@@ -16,12 +16,12 @@ class CreateUniversityScholarshipsTable extends Migration
         Schema::create('university_scholarships', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('university_id')->unsigned();
-            $table->bigInteger('major_id')->unsigned();
-            $table->string('name', 255);
-            $table->integer('value');
             $table->longText('description');
+            $table->string('picture')->nullable();
+            $table->year('year')->nullable();
+            $table->timestamps();
+            $table->softDeletes();
             $table->foreign('university_id')->references('id')->on('universities');
-            $table->foreign('major_id')->references('id')->on('university_majors');
         });
     }
 

@@ -20,6 +20,8 @@ class CreateUniversityRequirementsTable extends Migration
             $table->string('name', 255);
             $table->integer('value');
             $table->longText('description');
+            $table->timestamps();
+            $table->softDeletes();
             $table->foreign('university_id')->references('id')->on('universities');
             $table->foreign('major_id')->references('id')->on('university_majors');
         });

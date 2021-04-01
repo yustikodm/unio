@@ -18,8 +18,8 @@ class CreateUniversityMajorsTable extends Migration
             $table->bigInteger('university_id')->unsigned();
             $table->bigInteger('faculty_id')->unsigned();
             $table->string('name', 255);
-            $table->string('description', 255)->nullable();
-            $table->string('accreditation', 255)->nullable();
+            $table->longText('description')->nullable();
+            $table->char('accreditation')->nullable();
             $table->string('temp', 255)->nullable();
             $table->timestamps();
             $table->softDeletes();

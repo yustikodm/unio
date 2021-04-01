@@ -2,16 +2,14 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Models\VendorService;
+use App\Models\UniversityScholarship;
 use Faker\Generator as Faker;
 
-$factory->define(VendorService::class, function (Faker $faker) {
-
+$factory->define(UniversityScholarship::class, function (Faker $faker) {
     return [
-        'vendor_id' => $faker->numberBetween(1, 50),
-        'name' => $faker->word(5),
+        'university_id' => $faker->numberBetween(1, 30),
+        'year' => $faker->year,
         'description' => $faker->paragraph,
-        'price' => $faker->randomDigit,
         'created_at' => date('Y-m-d H:i:s'),
         'updated_at' => date('Y-m-d H:i:s')
     ];

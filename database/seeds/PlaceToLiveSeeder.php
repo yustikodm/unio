@@ -1,9 +1,9 @@
 <?php
 
-use App\Models\State;
+use App\Models\PlaceToLive;
 use Illuminate\Database\Seeder;
 
-class StatesSeeder extends Seeder
+class PlaceToLiveSeeder extends Seeder
 {
   /**
    * Run the database seeds.
@@ -12,6 +12,6 @@ class StatesSeeder extends Seeder
    */
   public function run()
   {
-      factory(State::class, 100)->create();
+    factory(PlaceToLive::class, 30)->create();
   }
 }

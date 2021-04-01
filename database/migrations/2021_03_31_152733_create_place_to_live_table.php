@@ -20,11 +20,11 @@ class CreatePlaceToLiveTable extends Migration
       $table->bigInteger('state_id')->unsigned();
       $table->bigInteger('district_id')->unsigned();
       $table->string('name');
-      $table->text('description');
-      $table->integer('price');
-      $table->string('address');
-      $table->string('phone');
-      $table->string('picture');
+      $table->longText('description')->nullable();
+      $table->decimal('price', 10, 2);
+      $table->longText('address')->nullable();
+      $table->string('phone',100)->nullable();
+      $table->string('picture')->nullable();
       $table->timestamps();
       $table->softDeletes();
       $table->foreign('country_id')->references('id')->on('countries');

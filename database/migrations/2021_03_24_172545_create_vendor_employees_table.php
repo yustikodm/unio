@@ -25,6 +25,7 @@ class CreateVendorEmployeesTable extends Migration
             $table->string('picture', 255)->nullable();
             $table->string('description', 255)->nullable();
             $table->timestamps();
+            $table->softDeletes();
             $table->foreign('vendor_id')->references('id')->on('vendors');
         });
     }
