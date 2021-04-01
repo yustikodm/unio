@@ -20,13 +20,10 @@ class VendorDataTable extends DataTable
         $dataTable = new EloquentDataTable($query);
 
         return $dataTable->addColumn('action', 'vendors.datatables_actions')
-            ->editColumn('category.name', function ($query) {
-                return '<a href="' . route('vendorCategories.show', $query->category->id) . '">' . $query->category->name . '</a>';
+            ->editColumn('vendor_category.name', function ($query) {
+                return '<a href="' . route('vendor-categories.show', $query->vendor_category->id) . '">' . $query->vendor_category->name . '</a>';
             })
-            ->editColumn('picture', function ($query) {
-                return '<img src="' . url($query->picture) . '" width="90">';
-            })
-            ->rawColumns(['action', 'category.name', 'picture']);
+            ->rawColumns(['action', 'vendor_category.name']);
     }
 
     /**
@@ -37,7 +34,7 @@ class VendorDataTable extends DataTable
      */
     public function query(Vendor $model)
     {
-        return $model->newQuery()->with(['category']);
+        return $model->newQuery()->with(['vendor_category']);
     }
 
     /**
@@ -74,10 +71,10 @@ class VendorDataTable extends DataTable
     {
         return [
             Column::make('name')->title('Vendor Name'),
-            Column::make('picture')->title('Logo'),
             Column::make('phone')->title('Phone'),
+            Column::make('email')->title('Email'),
             Column::make('back_account_number')->title('Bank Account'),
-            Column::make('category.name')->title('Category'),
+            Column::make('vendor_category.name')->title('Category'),
         ];
     }
 

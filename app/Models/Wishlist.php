@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -28,6 +29,7 @@ class Wishlist extends Model
   protected $dates = ['deleted_at'];
 
   public $fillable = [
+    'university_id',
     'major_id',
     'service_id',
     'user_id',
@@ -41,6 +43,7 @@ class Wishlist extends Model
    */
   protected $casts = [
     'id' => 'integer',
+    'university_id' => 'integer',
     'major_id' => 'integer',
     'service_id' => 'integer',
     'user_id' => 'integer',
@@ -53,6 +56,7 @@ class Wishlist extends Model
    * @var array
    */
   public static $rules = [
+    'university_id' => 'nullable|integer',
     'major_id' => 'nullable|integer',
     'service_id' => 'nullable|integer',
     'user_id' => 'required|integer',
@@ -72,7 +76,12 @@ class Wishlist extends Model
     return $this->belongsTo(VendorService::class);
   }
 
-  public function university_major()
+  public function major()
+  {
+    return $this->belongsTo(UniversityMajor::class);
+  }
+  
+  public function university() 
   {
     return $this->belongsTo(University::class);
   }

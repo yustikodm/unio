@@ -5,6 +5,7 @@ namespace App\DataTables;
 use App\Models\Wishlist;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
+use Yajra\DataTables\Html\Column;
 
 class WishlistDataTable extends DataTable
 {
@@ -18,7 +19,20 @@ class WishlistDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'wishlists.datatables_actions');
+        return $dataTable->addColumn('action', 'wishlists.datatables_actions')
+        ->editColumn('university.name', function ($query) {
+            return '<a href="' . route('universities.show', $query->university->id) . '">' . $query->university->name . '</a>';
+        })
+        ->editColumn('major.name', function ($query) {
+            return '<a href="' . route('university-majors.show', $query->major->id) . '">' . $query->major->name . '</a>';
+        })
+        ->editColumn('service.name', function ($query) {
+            return '<a href="' . route('vendor-services.show', $query->service->id) . '">' . $query->service->name . '</a>';
+        })
+        ->editColumn('user.username', function ($query) {
+            return '<a href="' . route('users.show', $query->user->id) . '">' . $query->user->username . '</a>';
+        })
+        ->rawColumns(['action', 'university.name', 'major.name', 'service.name', 'user.username']);
     }
 
     /**
@@ -29,7 +43,7 @@ class WishlistDataTable extends DataTable
      */
     public function query(Wishlist $model)
     {
-        return $model->newQuery();
+        return $model->newQuery()->with(['university', 'major', 'service', 'user']);
     }
 
     /**
@@ -65,11 +79,10 @@ class WishlistDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'university_id',
-            'major_id',
-            'service_id',
-            'user_id',
-            'description'
+            Column::make('university.name')->title('University'),
+            Column::make('major.name')->title('Major'),
+            Column::make('service.name')->title('Service'),
+            Column::make('user.username')->title('Author'),
         ];
     }
 

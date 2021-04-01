@@ -8,6 +8,7 @@ use App\Models\Family;
 use App\Models\PointTopup;
 use App\Models\PointTransactions;
 use App\Models\QuestionnaireAnswer;
+use App\Models\Wishlist;
 use App\Traits\ImageTrait;
 use Barryvdh\LaravelIdeHelper\Eloquent;
 use Illuminate\Database\Eloquent\Builder;
@@ -157,6 +158,11 @@ class User extends Authenticatable
   public function topup()
   {
     return $this->hasMany(PointTopup::class);
+  }
+
+  public function wishlist()
+  {
+    return $this->hasMany(Wishlist::class);
   }
 
   /**

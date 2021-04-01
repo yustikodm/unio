@@ -11,7 +11,7 @@
             <div class="box-body">
                 <div class="row" style="padding-left: 20px">
                     @include('vendor_categories.show_fields')
-                    <a href="{{ route('vendorCategories.index') }}" class="btn btn-default">Back</a>
+                    <a href="{{ route('vendor-categories.index') }}" class="btn btn-default">Back</a>
                 </div>
             </div>
         </div>

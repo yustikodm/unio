@@ -49,9 +49,9 @@ class Country extends Model
     return $this->hasMany(State::class);
   }
 
-  public function boarding_house()
+  public function live()
   {
-    return $this->hasMany(BoardingHouse::class);
+    return $this->hasMany(PlaceToLive::class);
   }
 
   public function university()

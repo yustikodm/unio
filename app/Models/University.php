@@ -126,9 +126,14 @@ class University extends Model
     return $this->hasMany(Wishlist::class);
   }
 
+  public function university()
+  {
+    return $this->hasMany(UniversityMajor::class, 'universities.id');
+  }
+
   public function scopeApiSearch($query, $param)
   {
-    print($param);
+    // print($param);
     return $query->when($param, function ($query) use ($param) {
       return $query->where('name', 'LIKE', "%$param%");
     })->get();

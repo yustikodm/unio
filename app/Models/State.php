@@ -75,4 +75,9 @@ class State extends Model
     {
         return $this->hasMany(University::class);
     }
+
+    public function place_to_live()
+  {
+    return $this->hasMany(PlaceToLive::class);
+  }
 }

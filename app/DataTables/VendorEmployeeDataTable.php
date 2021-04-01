@@ -5,6 +5,7 @@ namespace App\DataTables;
 use App\Models\VendorEmployee;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
+use Yajra\DataTables\Html\Column;
 
 class VendorEmployeeDataTable extends DataTable
 {
@@ -18,7 +19,14 @@ class VendorEmployeeDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'vendor_employees.datatables_actions');
+        return $dataTable->addColumn('action', 'vendor_employees.datatables_actions')
+        ->editColumn('vendor.name', function ($query) {
+          return '<a href="' . route('vendors.show', $query->vendor->id) . '">' . $query->vendor->name . '</a>';
+        })
+        ->editColumn('email', function ($query) {
+          return '<a href="mailto:' .$query->email . '">' . $query->email . '</a>';
+        })
+        ->rawColumns(['action', 'vendor.name', 'email']);
     }
 
     /**
@@ -65,15 +73,11 @@ class VendorEmployeeDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'vendor.name',
-            'name',
-            'birthdate',
-            'position',
-            'phone',
-            'email',
-            'address',
-            'picture',
-            'description'
+            Column::make('vendor.name')->title('Vendor'),
+            Column::make('name')->title('Name'),
+            Column::make('position')->title('Position'),
+            Column::make('phone')->title('Phone'),
+            Column::make('email')->title('Email'),
         ];
     }
 

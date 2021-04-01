@@ -17,10 +17,7 @@ class PlaceToLive extends Model
 
   public $table = 'place_to_live';
 
-
   protected $dates = ['deleted_at'];
-
-
 
   public $fillable = [
     'country_id',
@@ -69,7 +66,7 @@ class PlaceToLive extends Model
     'picture' => 'nullable'
   ];
 
-  public function country(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+  public function country()
   {
     return $this->belongsTo(Country::class, 'country_id');
   }

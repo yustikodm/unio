@@ -61,9 +61,9 @@ class UniversityScholarship extends Model
     'deleted_at' => 'nullable'
   ];
 
-  public function university(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+  public function university()
   {
-    return $this->belongsTo(University::class, 'university_id');
+    return $this->belongsTo(University::class);
   }
 
   public function scopeApiSearch($query, $param)

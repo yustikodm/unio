@@ -83,9 +83,19 @@ class UniversityMajor extends Model
     return $this->hasMany(UniversityRequirement::class);
   }
 
+  public function fee()
+  {
+    return $this->hasMany(UniversityFee::class);
+  }
+
   public function wishlist()
   {
     return $this->hasMany(Wishlist::class);
+  }
+
+  public function major()
+  {
+    return $this->belongsTo(University::class, 'universities.id');
   }
 
   public function scopeApiSearch($query, $param)

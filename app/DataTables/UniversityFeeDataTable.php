@@ -5,6 +5,7 @@ namespace App\DataTables;
 use App\Models\UniversityFee;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
+use Yajra\DataTables\Html\Column;
 
 class UniversityFeeDataTable extends DataTable
 {
@@ -18,7 +19,17 @@ class UniversityFeeDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'university_fees.datatables_actions');
+        return $dataTable->addColumn('action', 'university_fees.datatables_actions')
+          ->editColumn('university.name', function ($query) {
+              return '<a href="' . route('universities.show', $query->university->id) . '">' . $query->university->name . '</a>';
+          })
+          ->editColumn('major.name', function ($query) {
+              return '<a href="' . route('university-majors.show', $query->major->id) . '">' . $query->major->name . '</a>';
+          })
+          ->editColumn('faculty.name', function ($query) {
+              return '<a href="' . route('university-faculties.show', $query->faculty->id) . '">' . $query->faculty->name . '</a>';
+          })
+          ->rawColumns(['action', 'university.name', 'faculty.name', 'major.name']);
     }
 
     /**
@@ -65,14 +76,11 @@ class UniversityFeeDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'university.name',
-            'faculty.name',
-            'major.name',
-            'currency.name',
-            'type',
-            'admission_fee',
-            'semester_fee',
-            'description'
+            Column::make('university.name')->title('University'),
+            Column::make('faculty.name')->title('Faculty'),
+            Column::make('major.name')->title('Major'),
+            Column::make('type')->title('Type'),
+            Column::make('description')->title('Description'),
         ];
     }
 

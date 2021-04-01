@@ -11,7 +11,7 @@
        <div class="box box-primary">
            <div class="box-body">
                <div class="row">
-                   {!! Form::model($vendorCategory, ['route' => ['vendorCategories.update', $vendorCategory->id], 'method' => 'patch']) !!}
+                   {!! Form::model($vendorCategory, ['route' => ['vendor-categories.update', $vendorCategory->id], 'method' => 'patch']) !!}
 
                         @include('vendor_categories.fields')
 

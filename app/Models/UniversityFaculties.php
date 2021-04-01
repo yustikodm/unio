@@ -63,6 +63,11 @@ class UniversityFaculties extends Model
     return $this->hasMany(UniversityMajor::class);
   }
 
+  public function fee()
+  {
+    return $this->hasMany(UniversityFee::class);
+  }
+
   public function scopeApiSearch($query, $param)
   {
     return $query->when($param, function ($query) use ($param) {

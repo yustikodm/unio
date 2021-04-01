@@ -5,6 +5,7 @@ namespace App\DataTables;
 use App\Models\VendorService;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
+use Yajra\DataTables\Html\Column;
 
 class VendorServiceDataTable extends DataTable
 {
@@ -18,7 +19,11 @@ class VendorServiceDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'vendor_services.datatables_actions');
+        return $dataTable->addColumn('action', 'vendor_services.datatables_actions')
+        ->editColumn('vendor.name', function ($query) {
+          return '<a href="' . route('vendors.show', $query->vendor->id) . '">' . $query->vendor->name . '</a>';
+        })
+        ->rawColumns(['action', 'vendor.name']);
     }
 
     /**
@@ -65,11 +70,10 @@ class VendorServiceDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'name',
-            'description',
-            'picture',
-            'price',
-            'vendor.name',
+          Column::make('name')->title('Name'),
+          Column::make('description')->title('Description'),
+          Column::make('price')->title('Price'),
+          Column::make('vendor.name')->title('Vendor'),
         ];
     }
 

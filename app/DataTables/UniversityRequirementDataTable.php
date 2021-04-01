@@ -5,6 +5,7 @@ namespace App\DataTables;
 use App\Models\UniversityRequirement;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
+use Yajra\DataTables\Html\Column;
 
 class UniversityRequirementDataTable extends DataTable
 {
@@ -18,7 +19,14 @@ class UniversityRequirementDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'university_requirements.datatables_actions');
+        return $dataTable->addColumn('action', 'university_requirements.datatables_actions')
+        ->editColumn('university.name', function ($query) {
+            return '<a href="' . route('universities.show', $query->university->id) . '">' . $query->university->name . '</a>';
+        })
+        ->editColumn('major.name', function ($query) {
+          return '<a href="' . route('university-majors.show', $query->major->id) . '">' . $query->major->name . '</a>';
+      })
+        ->rawColumns(['action', 'university.name', 'major.name']);
     }
 
     /**
@@ -65,11 +73,10 @@ class UniversityRequirementDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'university.name',
-            'major.name',
-            'name',
-            'value',
-            'description'
+          Column::make('name')->title('Name'),
+          Column::make('value')->title('Value'),
+          Column::make('major.name')->title('Major'),
+          Column::make('university.name')->title('University'),
         ];
     }
 

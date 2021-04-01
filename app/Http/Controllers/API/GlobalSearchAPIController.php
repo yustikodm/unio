@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\AppBaseController;
-use App\Http\Resources\CountryResource;
+use App\Http\Resources\SearchUniversitiesResource;
+use App\Http\Resources\UniversityMajorResource;
+use App\Http\Resources\UniversityResource;
 use App\Models\Country;
 use App\Models\PlaceToLive;
 use App\Models\University;
@@ -12,7 +14,6 @@ use App\Models\UniversityMajor;
 use App\Models\UniversityScholarship;
 use App\Models\Vendor;
 use App\Models\VendorService;
-use App\Repositories\CountryRepository;
 use Illuminate\Http\Request;
 
 class GlobalSearchAPIController extends AppBaseController
@@ -54,8 +55,20 @@ class GlobalSearchAPIController extends AppBaseController
 
       case 'universities':
         $university = University::apiSearch($request->name);
-
-        return $this->sendResponse($university, 'University retrieved successfully');
+        // dd($university);
+        // return $university;
+        return $this->sendResponse(SearchUniversitiesResource::collection($university), 'Universities retrieved successfully');
+        // return response()->json([
+          // 'major' => [
+          //   'name'=> $university->name,
+          //   'description' => $university->description,
+          //   'accreditation' => $university->accreditation,
+          //   'temp' => $university->temp
+          // ],
+          // 'country' => new UniversityResource($this->country)'
+        // ]);
+        // return $this->sendResponse($university, 'University retrieved successfully');
+        // return response()->json($this->univesities($university));
         break;
 
       case 'faculties':
@@ -94,5 +107,7 @@ class GlobalSearchAPIController extends AppBaseController
         return $this->sendResponse($universityMajor, 'University Major retrieved successfully');
         break;
     }
+
   }
+
 }

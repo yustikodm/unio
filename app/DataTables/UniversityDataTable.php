@@ -24,7 +24,14 @@ class UniversityDataTable extends DataTable
                 return '<a href="' . route('countries.show', $query->country->id) . '">' . $query->country->name . '</a>';
             })
             ->editColumn('logo_src', function ($query) {
-                return '<img src="' . url($query->logo_src) . '" width="90">';
+                if (empty($query->logo_src)) {
+                  return '<img src="#" width="90">';
+                }
+
+                return '<img src="' . $query->logo_src . '" width="90">';
+            })
+            ->editColumn('accreditation', function ($query) {
+                return strtoupper($query->accreditation);
             })
             ->rawColumns(['action', 'country.name', 'logo_src']);
     }
@@ -37,7 +44,7 @@ class UniversityDataTable extends DataTable
      */
     public function query(University $model)
     {
-        return $model->newQuery()->with(['country', 'state', 'district']);
+        return $model->newQuery()->with(['country']);
     }
 
     /**
@@ -76,7 +83,7 @@ class UniversityDataTable extends DataTable
             Column::make('name')->title('University'),
             Column::make('logo_src')->title('Logo'),
             Column::make('type')->title('Type'),
-            Column::make('accreditation')->title('Accreditation'),
+            Column::make('accreditation')->title('Accreditation')->addClass('text-centerw'),
             Column::make('country.name')->title('Country'),
         ];
     }

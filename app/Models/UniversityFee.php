@@ -82,4 +82,14 @@ class UniversityFee extends Model
     return $this->belongsTo(UniversityMajor::class, 'major_id');
   }
 
+  public function university()
+  {
+    return $this->belongsTo(University::class);
+  }
+
+  public function faculty()
+  {
+    return $this->belongsTo(UniversityFaculties::class);
+  }
+
 }
