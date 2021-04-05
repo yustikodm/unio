@@ -1,4 +1,5 @@
 <!-- Vendor Id Field -->
+{{-- {{ dd($vendorItems) }} --}}
 <div class="form-group col-sm-6">
     {!! Form::label('vendor_id', 'Vendor:') !!}
     {!! Form::select('vendor_id', $vendorItems, null, ['class' => 'form-control']) !!}
@@ -19,7 +20,7 @@
 <!-- Picture Field -->
 <div class="form-group col-sm-12 col-lg-12">
     {!! Form::label('picture', 'Picture:') !!}
-    {!! Form::select('picture', null, ['class' => 'form-control']) !!}
+    {!! Form::file('picture', null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Price Field -->

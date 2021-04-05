@@ -35,6 +35,14 @@ Route::group(['middleware' => ['auth:api']], function () {
   Route::resource('roles', 'RoleAPIController');
 
   Route::resource('permissions', 'PermissionAPIController');
+  
+  Route::resource('wishlists', 'WishlistAPIController');
+
+  Route::resource('carts', 'CartAPIController');
+
+  Route::get('users/profile', 'UserAPIConctroller@profile')->middleware('auth:api');
+
+  Route::get('users/show/{id}', 'UserAPIConctroller@show')->middleware('auth:api');
 });
 
 Route::resource('articles', 'ArticleAPIController');
@@ -72,14 +80,5 @@ Route::resource('vendor-services', 'VendorServiceAPIController');
 Route::resource('vendor-employees', 'VendorEmployeeAPIController');
 
 Route::resource('vendor-categories', 'VendorCategoryAPIController');
-
-Route::resource('wishlists', 'WishlistAPIController');
-
-Route::resource('carts', 'CartAPIController');
-
-Route::get('users/profile', 'UserAPIConctroller@profile')->middleware('auth:api');
-
-Route::get('users/show/{id}', 'UserAPIConctroller@show')->middleware('auth:api');
-
 
 Route::resource('place-to-lives', 'PlaceToLiveAPIController');

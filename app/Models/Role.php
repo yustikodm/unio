@@ -71,4 +71,10 @@ class Role extends Model
   {
     return DB::table('role_has_permissions')->insert($data);
   }
+  
+  public static function insertModelHasRoles($data)
+  {
+    return DB::table('model_has_roles')->insert($data);
+  }
+
 }
