@@ -34,12 +34,12 @@ class DatabaseSeeder extends Seeder
       // CountriesSeeder::class,
       // StatesSeeder::class,
       // DistrictSeeder::class,
-      // ArticleTableSeeder::class
+      ArticleSeeder::class,
       // VendorCategoriesSeeder::class,
       // VendorsSeeder::class,
       // VendorServiceSeeder::class,
       // VendorEmployeeSeeder::class,
-      // PlaceToLiveSeeder::class
+      // PlaceToLiveSeeder::class,
       // StatesSeeder::class,
       // DistrictSeeder::class,
       // UniversitiesSeeder::class,
@@ -47,7 +47,7 @@ class DatabaseSeeder extends Seeder
       // UniversityMajorSeeder::class,
       // UniversityRequirementSeeder::class,
       // UniversityFeeSeeder::class,
-      UniversityScholarshipSeeder::class,
+      // UniversityScholarshipSeeder::class,
       // WishlistSeeder::class
     ]);
   }

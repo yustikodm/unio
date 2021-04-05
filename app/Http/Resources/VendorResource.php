@@ -26,6 +26,9 @@ class VendorResource extends JsonResource
       'address' => $this->address,
       'phone' => $this->phone,
       'vendor_category' => new VendorCategoryResource($this->vendor_category),
+      'country' => new CountryResource($this->country),
+      'state' => new StateResource($this->state),
+      'district' => new DistrictResource($this->district),
       'created_at' => Carbon::parse($this->created_at)->format('d/m/Y H:i:s'),
       'updated_at' => Carbon::parse($this->updated_at)->format('d/m/Y H:i:s')
     ];

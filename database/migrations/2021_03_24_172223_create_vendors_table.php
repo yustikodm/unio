@@ -15,6 +15,9 @@ class CreateVendorsTable extends Migration
     {
         Schema::create('vendors', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->bigInteger('country_id')->unsigned();
+            $table->bigInteger('state_id')->unsigned();
+            $table->bigInteger('district_id')->unsigned();
             $table->bigInteger('vendor_category_id')->unsigned();
             $table->string('name', 50);
             $table->longText('description')->nullable();
@@ -26,6 +29,9 @@ class CreateVendorsTable extends Migration
             $table->string('phone', 20)->nullable();
             $table->timestamps();
             $table->softDeletes();
+            $table->foreign('country_id')->references('id')->on('countries');
+            $table->foreign('state_id')->references('id')->on('states');
+            $table->foreign('district_id')->references('id')->on('districts');
             $table->foreign('vendor_category_id')->references('id')->on('vendor_categories');
         });
     }

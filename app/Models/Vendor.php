@@ -96,6 +96,21 @@ class Vendor extends Model
     return $this->hasMany(VendorService::class);
   }
 
+  public function country()
+  {
+    return $this->belongsTo(Country::class, 'country_id');
+  }
+
+  public function state(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+  {
+    return $this->belongsTo(State::class, 'state_id');
+  }
+
+  public function district(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+  {
+    return $this->belongsTo(District::class, 'district_id');
+  }
+
   public function scopeApiSearch($query, $param)
   {
     return $query->when($param, function ($query) use ($param) {

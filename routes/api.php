@@ -73,10 +73,6 @@ Route::resource('vendor-employees', 'VendorEmployeeAPIController');
 
 Route::resource('vendor-categories', 'VendorCategoryAPIController');
 
-Route::resource('students', 'StudentAPIController');
-
-Route::resource('guardians', 'GuardianAPIController');
-
 Route::resource('wishlists', 'WishlistAPIController');
 
 Route::resource('carts', 'CartAPIController');
@@ -84,3 +80,6 @@ Route::resource('carts', 'CartAPIController');
 Route::get('users/profile', 'UserAPIConctroller@profile')->middleware('auth:api');
 
 Route::get('users/show/{id}', 'UserAPIConctroller@show')->middleware('auth:api');
+
+
+Route::resource('place-to-lives', 'PlaceToLiveAPIController');

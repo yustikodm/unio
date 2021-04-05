@@ -63,6 +63,11 @@ class Country extends Model
   {
     return $this->hasMany(PointTopup::class);
   }
+  
+  public function vendor()
+  {
+    return $this->hasMany(Vendor::class);
+  }
 
   public function scopeApiSearch($query, $param)
   {

@@ -8,7 +8,7 @@ use App\Repositories\BaseRepository;
 /**
  * Class PlaceToLiveRepository
  * @package App\Repositories
- * @version March 31, 2021, 3:27 pm WIB
+ * @version April 5, 2021, 9:59 am WIB
 */
 
 class PlaceToLiveRepository extends BaseRepository

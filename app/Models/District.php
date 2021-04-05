@@ -65,4 +65,9 @@ class District extends Model
   {
     return $this->hasMany(University::class);
   }
+
+  public function vendor()
+  {
+    return $this->hasMany(Vendor::class);
+  }
 }

@@ -7,7 +7,7 @@ use Faker\Generator as Faker;
 use Illuminate\Support\Str;
 
 $factory->define(Article::class, function (Faker $faker) {
-  $title = $faker->sentences;
+  $title = $faker->sentence(6);
   return [
     'title' => $title,
     'slug' => Str::slug($title),

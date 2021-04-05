@@ -104,4 +104,14 @@ class UniversityMajor extends Model
       return $query->where('name', 'LIKE', "%$param%");
     })->get();
   }
+
+  public function scopeApiSearchByUniversities($query, $university_id)
+  {
+    return $query->where('university_id', $university_id)->get();
+  }
+
+  public function scopeApiSearchByFaculties($query, $faculty_id)
+  {
+    return $query->where('faculty_id', $faculty_id)->get();
+  }
 }

@@ -77,7 +77,12 @@ class State extends Model
     }
 
     public function place_to_live()
-  {
-    return $this->hasMany(PlaceToLive::class);
-  }
+    {
+        return $this->hasMany(PlaceToLive::class);
+    }
+
+    public function vendor()
+    {
+        return $this->hasMany(Vendor::class);
+    }
 }

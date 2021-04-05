@@ -4,8 +4,9 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateVendorCategoriesTable extends Migration
+class CreatePlaceToLivesTable extends Migration
 {
+
     /**
      * Run the migrations.
      *
@@ -13,10 +14,8 @@ class CreateVendorCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('vendor_categories', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('name', 255);
-            $table->longText('description')->nullable();
+        Schema::create('place_to_lives', function (Blueprint $table) {
+            $table->increments('id');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -29,6 +28,6 @@ class CreateVendorCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('vendor_categories');
+        Schema::drop('place_to_lives');
     }
 }

@@ -133,7 +133,6 @@ class University extends Model
 
   public function scopeApiSearch($query, $param)
   {
-    // print($param);
     return $query->when($param, function ($query) use ($param) {
       return $query->where('name', 'LIKE', "%$param%");
     })->get();
