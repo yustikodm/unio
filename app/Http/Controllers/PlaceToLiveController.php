@@ -9,6 +9,7 @@ use App\Http\Requests\UpdatePlaceToLiveRequest;
 use App\Repositories\PlaceToLiveRepository;
 use Flash;
 use App\Http\Controllers\AppBaseController;
+use App\Repositories\PricingPointRepository;
 use Response;
 
 class PlaceToLiveController extends AppBaseController
@@ -16,9 +17,14 @@ class PlaceToLiveController extends AppBaseController
     /** @var  PlaceToLiveRepository */
     private $placeToLiveRepository;
 
-    public function __construct(PlaceToLiveRepository $placeToLiveRepo)
+    /** @var  PricingPointRepository */
+    private $pricingPointRepository;
+
+    public function __construct(PlaceToLiveRepository $placeToLiveRepo, PricingPointRepository $pricingPointRepo)
     {
         $this->placeToLiveRepository = $placeToLiveRepo;
+        
+        $this->pricingPointRepository = $pricingPointRepo;
     }
 
     /**
@@ -51,13 +57,29 @@ class PlaceToLiveController extends AppBaseController
      */
     public function store(CreatePlaceToLiveRequest $request)
     {
-        $input = $request->all();
+        $input = $request->only([
+            'country_id',
+            'state_id',
+            'district_id',
+            'name',
+            'description',
+            'price',
+            'address',
+            'phone',
+            'picture'
+        ]);
 
         $placeToLive = $this->placeToLiveRepository->create($input);
 
+        $this->pricingPointRepository->create([
+            'entity_id' => $placeToLive->id,
+            'entity_type' => 'placetolive',
+            'amount' => $request->price,
+        ]);
+
         Flash::success('Place To Live saved successfully.');
 
-        return redirect(route('placeToLives.index'));
+        return redirect(route('place-to-live.index'));
     }
 
     /**

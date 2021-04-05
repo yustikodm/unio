@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @version March 31, 2021, 10:52 am WIB
  *
  */
-class PricingPoint extends Model;
+class PricingPoint extends Model
 {
     use SoftDeletes;
 

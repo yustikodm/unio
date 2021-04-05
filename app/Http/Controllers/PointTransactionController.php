@@ -57,7 +57,7 @@ class PointTransactionController extends AppBaseController
 
         Flash::success('Point Transaction saved successfully.');
 
-        return redirect(route('pointTransactions.index'));
+        return redirect(route('point-transactions.index'));
     }
 
     /**
@@ -74,7 +74,7 @@ class PointTransactionController extends AppBaseController
         if (empty($pointTransaction)) {
             Flash::error('Point Transaction not found');
 
-            return redirect(route('pointTransactions.index'));
+            return redirect(route('point-transactions.index'));
         }
 
         return view('point_transactions.show')->with('pointTransaction', $pointTransaction);
@@ -94,7 +94,7 @@ class PointTransactionController extends AppBaseController
         if (empty($pointTransaction)) {
             Flash::error('Point Transaction not found');
 
-            return redirect(route('pointTransactions.index'));
+            return redirect(route('point-transactions.index'));
         }
 
         return view('point_transactions.edit')->with('pointTransaction', $pointTransaction);
@@ -115,14 +115,14 @@ class PointTransactionController extends AppBaseController
         if (empty($pointTransaction)) {
             Flash::error('Point Transaction not found');
 
-            return redirect(route('pointTransactions.index'));
+            return redirect(route('point-transactions.index'));
         }
 
         $pointTransaction = $this->pointTransactionRepository->update($request->all(), $id);
 
         Flash::success('Point Transaction updated successfully.');
 
-        return redirect(route('pointTransactions.index'));
+        return redirect(route('point-transactions.index'));
     }
 
     /**
@@ -139,13 +139,13 @@ class PointTransactionController extends AppBaseController
         if (empty($pointTransaction)) {
             Flash::error('Point Transaction not found');
 
-            return redirect(route('pointTransactions.index'));
+            return redirect(route('point-transactions.index'));
         }
 
         $this->pointTransactionRepository->delete($id);
 
         Flash::success('Point Transaction deleted successfully.');
 
-        return redirect(route('pointTransactions.index'));
+        return redirect(route('point-transactions.index'));
     }
 }

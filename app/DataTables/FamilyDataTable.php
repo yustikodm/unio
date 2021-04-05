@@ -5,6 +5,7 @@ namespace App\DataTables;
 use App\Models\Family;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
+use Yajra\DataTables\Html\Column;
 
 class FamilyDataTable extends DataTable
 {
@@ -18,7 +19,14 @@ class FamilyDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'families.datatables_actions');
+        return $dataTable->addColumn('action', 'families.datatables_actions')
+        ->editColumn('child.username', function ($query) {
+          return '<a href="' . route('users.show', $query->child->id) . '">' . $query->child->username . '</a>';
+        })
+        ->editColumn('parent.username', function ($query) {
+          return '<a href="' . route('users.show', $query->parent->id) . '">' . $query->parent->username . '</a>';
+        })
+        ->rawColumns(['action', 'child.username', 'parent.username']);
     }
 
     /**
@@ -29,7 +37,7 @@ class FamilyDataTable extends DataTable
      */
     public function query(Family $model)
     {
-        return $model->newQuery();
+        return $model->newQuery()->with('parent', 'child');
     }
 
     /**
@@ -65,7 +73,10 @@ class FamilyDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            
+          Column::make('parent.username')->title('Parent User'),
+          Column::make('child.username')->title('Child User'),
+          Column::make('family_as')->title('As'),
+          Column::make('family_verified_at')->title('Verify At'),            
         ];
     }
 

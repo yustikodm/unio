@@ -57,7 +57,7 @@ class UniversityScholarshipController extends AppBaseController
 
         Flash::success('University Scholarship saved successfully.');
 
-        return redirect(route('universityScholarships.index'));
+        return redirect(route('university-scholarships.index'));
     }
 
     /**
@@ -74,7 +74,7 @@ class UniversityScholarshipController extends AppBaseController
         if (empty($universityScholarship)) {
             Flash::error('University Scholarship not found');
 
-            return redirect(route('universityScholarships.index'));
+            return redirect(route('university-scholarships.index'));
         }
 
         return view('university_scholarships.show')->with('universityScholarship', $universityScholarship);
@@ -94,7 +94,7 @@ class UniversityScholarshipController extends AppBaseController
         if (empty($universityScholarship)) {
             Flash::error('University Scholarship not found');
 
-            return redirect(route('universityScholarships.index'));
+            return redirect(route('university-scholarships.index'));
         }
 
         return view('university_scholarships.edit')->with('universityScholarship', $universityScholarship);
@@ -115,14 +115,14 @@ class UniversityScholarshipController extends AppBaseController
         if (empty($universityScholarship)) {
             Flash::error('University Scholarship not found');
 
-            return redirect(route('universityScholarships.index'));
+            return redirect(route('university-scholarships.index'));
         }
 
         $universityScholarship = $this->universityScholarshipRepository->update($request->all(), $id);
 
         Flash::success('University Scholarship updated successfully.');
 
-        return redirect(route('universityScholarships.index'));
+        return redirect(route('university-scholarships.index'));
     }
 
     /**
@@ -139,13 +139,13 @@ class UniversityScholarshipController extends AppBaseController
         if (empty($universityScholarship)) {
             Flash::error('University Scholarship not found');
 
-            return redirect(route('universityScholarships.index'));
+            return redirect(route('university-scholarships.index'));
         }
 
         $this->universityScholarshipRepository->delete($id);
 
         Flash::success('University Scholarship deleted successfully.');
 
-        return redirect(route('universityScholarships.index'));
+        return redirect(route('university-scholarships.index'));
     }
 }

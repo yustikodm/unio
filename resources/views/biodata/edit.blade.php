@@ -3,7 +3,7 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Boarding House
+            Biodata
         </h1>
    </section>
    <div class="content">
@@ -11,9 +11,9 @@
        <div class="box box-primary">
            <div class="box-body">
                <div class="row">
-                   {!! Form::model($boardingHouse, ['route' => ['boardingHouses.update', $boardingHouse->id], 'method' => 'patch', 'files' => true]) !!}
+                   {!! Form::model($biodata, ['route' => ['biodata.update', $biodata->id], 'method' => 'patch']) !!}
 
-                        @include('boarding_houses.fields')
+                        @include('biodata.fields')
 
                    {!! Form::close() !!}
                </div>

@@ -28,10 +28,10 @@
     {!! Form::email('email', null, ['class' => 'form-control','maxlength' => 255,'maxlength' => 255,'maxlength' => 255]) !!}
 </div>
 
-<!-- Back Account Number Field -->
+<!-- Bank Account Number Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('back_account_number', 'Back Account Number:') !!}
-    {!! Form::text('back_account_number', null, ['class' => 'form-control','maxlength' => 255,'maxlength' => 255,'maxlength' => 255]) !!}
+    {!! Form::label('bank_account_number', 'Bank Account Number:') !!}
+    {!! Form::text('bank_account_number', null, ['class' => 'form-control','maxlength' => 255,'maxlength' => 255,'maxlength' => 255]) !!}
 </div>
 
 <!-- Website Field -->

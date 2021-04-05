@@ -82,9 +82,9 @@ Route::group(['middleware' => ['auth']], function () {
 
   Route::resource('families', 'FamilyController');
 
-  Route::resource('biodatas', 'BiodataController');
+  Route::resource('biodata', 'BiodataController');
 
-  Route::resource('pricing-points', 'PricingPointController');
+  Route::resource('pricing-points', 'PricingPointController')->only(['store', 'edit', 'update', 'index']);
 
   Route::resource('point-transactions', 'PointTransactionController');
 

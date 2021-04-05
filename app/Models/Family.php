@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -24,7 +25,6 @@ class Family extends Model
     'child_user',
     'family_as',
     'family_verified_at',
-    'status'
   ];
 
   /**
@@ -38,7 +38,6 @@ class Family extends Model
     'child_user' => 'integer',
     'family_as' => 'string',
     'family_verified_at' => 'datetime',
-    'status' => 'integer'
   ];
 
   /**
@@ -51,7 +50,6 @@ class Family extends Model
     'child_user' => 'required|integer',
     'family_as' => 'required|string',
     'family_verified_at' => 'nullable|datetime',
-    'status' => 'required|integer',
     'created_at' => 'nullable',
     'updated_at' => 'nullable',
     'deleted_at' => 'nullable',
@@ -59,12 +57,12 @@ class Family extends Model
 
   public function parent()
   {
-    return $this->belongsTo(User::class);
+    return $this->belongsTo(User::class, 'parent_user');
   }
 
   public function child()
   {
-    return $this->belongsTo(User::class);
+    return $this->belongsTo(User::class, 'child_user');
   }
 
   public function point_log()

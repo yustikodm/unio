@@ -9,6 +9,7 @@ use App\Http\Requests\UpdateVendorServiceRequest;
 use App\Repositories\VendorServiceRepository;
 use Flash;
 use App\Http\Controllers\AppBaseController;
+use App\Repositories\PricingPointRepository;
 use Response;
 
 class VendorServiceController extends AppBaseController
@@ -16,9 +17,14 @@ class VendorServiceController extends AppBaseController
     /** @var  VendorServiceRepository */
     private $vendorServiceRepository;
 
-    public function __construct(VendorServiceRepository $vendorServiceRepo)
+    /** @var  PricingPointRepository */
+    private $pricingPointRepository;
+
+    public function __construct(VendorServiceRepository $vendorServiceRepo, PricingPointRepository $pricingPointRepo)
     {
         $this->vendorServiceRepository = $vendorServiceRepo;
+
+        $this->pricingPointRepository = $pricingPointRepo;
     }
 
     /**
@@ -51,13 +57,25 @@ class VendorServiceController extends AppBaseController
      */
     public function store(CreateVendorServiceRequest $request)
     {
-        $input = $request->all();
+        $input = $request->only([
+            'vendor_id',
+            'name',
+            'description',
+            'picture',
+            'price'
+        ]);
 
         $vendorService = $this->vendorServiceRepository->create($input);
 
+        $this->pricingPointRepository->create([
+            'entity_id' => $vendorService->id,
+            'entity_type' => 'vendorservice',
+            'amount' => $request->price,
+        ]);
+
         Flash::success('Vendor Service saved successfully.');
 
-        return redirect(route('vendorServices.index'));
+        return redirect(route('vendor-services.index'));
     }
 
     /**
@@ -74,7 +92,7 @@ class VendorServiceController extends AppBaseController
         if (empty($vendorService)) {
             Flash::error('Vendor Service not found');
 
-            return redirect(route('vendorServices.index'));
+            return redirect(route('vendor-services.index'));
         }
 
         return view('vendor_services.show')->with('vendorService', $vendorService);
@@ -94,7 +112,7 @@ class VendorServiceController extends AppBaseController
         if (empty($vendorService)) {
             Flash::error('Vendor Service not found');
 
-            return redirect(route('vendorServices.index'));
+            return redirect(route('vendor-services.index'));
         }
 
         return view('vendor_services.edit')->with('vendorService', $vendorService);
@@ -115,14 +133,14 @@ class VendorServiceController extends AppBaseController
         if (empty($vendorService)) {
             Flash::error('Vendor Service not found');
 
-            return redirect(route('vendorServices.index'));
+            return redirect(route('vendor-services.index'));
         }
 
         $vendorService = $this->vendorServiceRepository->update($request->all(), $id);
 
         Flash::success('Vendor Service updated successfully.');
 
-        return redirect(route('vendorServices.index'));
+        return redirect(route('vendor-services.index'));
     }
 
     /**
@@ -139,13 +157,13 @@ class VendorServiceController extends AppBaseController
         if (empty($vendorService)) {
             Flash::error('Vendor Service not found');
 
-            return redirect(route('vendorServices.index'));
+            return redirect(route('vendor-services.index'));
         }
 
         $this->vendorServiceRepository->delete($id);
 
         Flash::success('Vendor Service deleted successfully.');
 
-        return redirect(route('vendorServices.index'));
+        return redirect(route('vendor-services.index'));
     }
 }

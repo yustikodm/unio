@@ -57,7 +57,7 @@ class UniversityFeeController extends AppBaseController
 
         Flash::success('University Fee saved successfully.');
 
-        return redirect(route('universityFees.index'));
+        return redirect(route('university-fees.index'));
     }
 
     /**
@@ -74,7 +74,7 @@ class UniversityFeeController extends AppBaseController
         if (empty($universityFee)) {
             Flash::error('University Fee not found');
 
-            return redirect(route('universityFees.index'));
+            return redirect(route('university-fees.index'));
         }
 
         return view('university_fees.show')->with('universityFee', $universityFee);
@@ -94,7 +94,7 @@ class UniversityFeeController extends AppBaseController
         if (empty($universityFee)) {
             Flash::error('University Fee not found');
 
-            return redirect(route('universityFees.index'));
+            return redirect(route('university-fees.index'));
         }
 
         return view('university_fees.edit')->with('universityFee', $universityFee);
@@ -115,14 +115,14 @@ class UniversityFeeController extends AppBaseController
         if (empty($universityFee)) {
             Flash::error('University Fee not found');
 
-            return redirect(route('universityFees.index'));
+            return redirect(route('university-fees.index'));
         }
 
         $universityFee = $this->universityFeeRepository->update($request->all(), $id);
 
         Flash::success('University Fee updated successfully.');
 
-        return redirect(route('universityFees.index'));
+        return redirect(route('university-fees.index'));
     }
 
     /**
@@ -139,13 +139,13 @@ class UniversityFeeController extends AppBaseController
         if (empty($universityFee)) {
             Flash::error('University Fee not found');
 
-            return redirect(route('universityFees.index'));
+            return redirect(route('university-fees.index'));
         }
 
         $this->universityFeeRepository->delete($id);
 
         Flash::success('University Fee deleted successfully.');
 
-        return redirect(route('universityFees.index'));
+        return redirect(route('university-fees.index'));
     }
 }

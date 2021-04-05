@@ -6,11 +6,9 @@ use App\Models\Article;
 use App\Models\Biodata;
 use App\Models\Family;
 use App\Models\PointTopup;
-use App\Models\PointTransactions;
 use App\Models\QuestionnaireAnswer;
 use App\Models\Wishlist;
 use App\Traits\ImageTrait;
-use Barryvdh\LaravelIdeHelper\Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -137,17 +135,17 @@ class User extends Authenticatable
 
   public function biodata()
   {
-    return $this->hasMany(Biodata::class);
+    return $this->hasOne(Biodata::class);
   }
 
   public function parent()
   {
-    return $this->hasMany(Family::class);
+    return $this->hasMany(Family::class, 'parent_user');
   }
 
   public function child()
   {
-    return $this->hasMany(Family::class);
+    return $this->hasMany(Family::class, 'child_user');
   }
 
   public function transaction()

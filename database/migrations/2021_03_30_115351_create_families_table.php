@@ -19,7 +19,6 @@ class CreateFamiliesTable extends Migration
       $table->bigInteger('child_user')->unsigned();
       $table->string('family_as', 100);
       $table->dateTime('family_verified_at')->nullable();
-      $table->char('status')->nullable();
       $table->timestamps();
       $table->softDeletes();
       $table->foreign('parent_user')->references('id')->on('users');

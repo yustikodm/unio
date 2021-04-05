@@ -11,7 +11,7 @@
   <div class="box box-primary">
     <div class="box-body">
       <div class="row">
-        {!! Form::open(['route' => 'place-to-live.store']) !!}
+        {!! Form::open(['route' => 'place-to-live.store', 'enctype' => 'multipart/form-data']) !!}
 
         @include('place_to_lives.fields')
 

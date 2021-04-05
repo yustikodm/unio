@@ -10,6 +10,7 @@ use App\Repositories\ArticleRepository;
 use Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
+use Illuminate\Support\Str;
 
 class ArticleController extends AppBaseController
 {
@@ -52,6 +53,8 @@ class ArticleController extends AppBaseController
     public function store(CreateArticleRequest $request)
     {
         $input = $request->all();
+
+        $input['slug'] = Str::slug($request->title);
 
         $article = $this->articleRepository->create($input);
 

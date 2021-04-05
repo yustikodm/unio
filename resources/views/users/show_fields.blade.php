@@ -1,7 +1,7 @@
 <!-- Name Field -->
 <div class="form-group">
-    {!! Form::label('name', 'Name:') !!}
-    <p>{{ $user->name }}</p>
+    {!! Form::label('username', 'Username:') !!}
+    <p>{{ $user->username }}</p>
 </div>
 
 <!-- Email Field -->

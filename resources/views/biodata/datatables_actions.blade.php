@@ -1,9 +1,9 @@
-{!! Form::open(['route' => ['supplier.destroy', $id], 'method' => 'delete']) !!}
+{!! Form::open(['route' => ['biodata.destroy', $id], 'method' => 'delete']) !!}
 <div class='btn-group'>
-    <a href="{{ route('supplier.show', $id) }}" class='btn btn-default btn-xs'>
+    <a href="{{ route('biodata.show', $id) }}" class='btn btn-default btn-xs'>
         <i class="glyphicon glyphicon-eye-open"></i>
     </a>
-    <a href="{{ route('supplier.edit', $id) }}" class='btn btn-default btn-xs'>
+    <a href="{{ route('biodata.edit', $id) }}" class='btn btn-default btn-xs'>
         <i class="glyphicon glyphicon-edit"></i>
     </a>
     {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', [

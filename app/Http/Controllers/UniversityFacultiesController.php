@@ -57,7 +57,7 @@ class UniversityFacultiesController extends AppBaseController
 
         Flash::success('University Faculties saved successfully.');
 
-        return redirect(route('universityFaculties.index'));
+        return redirect(route('university-faculties.index'));
     }
 
     /**
@@ -74,7 +74,7 @@ class UniversityFacultiesController extends AppBaseController
         if (empty($universityFaculties)) {
             Flash::error('University Faculties not found');
 
-            return redirect(route('universityFaculties.index'));
+            return redirect(route('university-faculties.index'));
         }
 
         return view('university_faculties.show')->with('universityFaculties', $universityFaculties);
@@ -94,7 +94,7 @@ class UniversityFacultiesController extends AppBaseController
         if (empty($universityFaculties)) {
             Flash::error('University Faculties not found');
 
-            return redirect(route('universityFaculties.index'));
+            return redirect(route('university-faculties.index'));
         }
 
         return view('university_faculties.edit')->with('universityFaculties', $universityFaculties);
@@ -115,14 +115,14 @@ class UniversityFacultiesController extends AppBaseController
         if (empty($universityFaculties)) {
             Flash::error('University Faculties not found');
 
-            return redirect(route('universityFaculties.index'));
+            return redirect(route('university-faculties.index'));
         }
 
         $universityFaculties = $this->universityFacultiesRepository->update($request->all(), $id);
 
         Flash::success('University Faculties updated successfully.');
 
-        return redirect(route('universityFaculties.index'));
+        return redirect(route('university-faculties.index'));
     }
 
     /**
@@ -139,13 +139,13 @@ class UniversityFacultiesController extends AppBaseController
         if (empty($universityFaculties)) {
             Flash::error('University Faculties not found');
 
-            return redirect(route('universityFaculties.index'));
+            return redirect(route('university-faculties.index'));
         }
 
         $this->universityFacultiesRepository->delete($id);
 
         Flash::success('University Faculties deleted successfully.');
 
-        return redirect(route('universityFaculties.index'));
+        return redirect(route('university-faculties.index'));
     }
 }

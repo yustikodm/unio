@@ -57,7 +57,7 @@ class VendorEmployeeController extends AppBaseController
 
         Flash::success('Vendor Employee saved successfully.');
 
-        return redirect(route('vendorEmployees.index'));
+        return redirect(route('vendor-employees.index'));
     }
 
     /**
@@ -74,7 +74,7 @@ class VendorEmployeeController extends AppBaseController
         if (empty($vendorEmployee)) {
             Flash::error('Vendor Employee not found');
 
-            return redirect(route('vendorEmployees.index'));
+            return redirect(route('vendor-employees.index'));
         }
 
         return view('vendor_employees.show')->with('vendorEmployee', $vendorEmployee);
@@ -94,7 +94,7 @@ class VendorEmployeeController extends AppBaseController
         if (empty($vendorEmployee)) {
             Flash::error('Vendor Employee not found');
 
-            return redirect(route('vendorEmployees.index'));
+            return redirect(route('vendor-employees.index'));
         }
 
         return view('vendor_employees.edit')->with('vendorEmployee', $vendorEmployee);
@@ -115,14 +115,14 @@ class VendorEmployeeController extends AppBaseController
         if (empty($vendorEmployee)) {
             Flash::error('Vendor Employee not found');
 
-            return redirect(route('vendorEmployees.index'));
+            return redirect(route('vendor-employees.index'));
         }
 
         $vendorEmployee = $this->vendorEmployeeRepository->update($request->all(), $id);
 
         Flash::success('Vendor Employee updated successfully.');
 
-        return redirect(route('vendorEmployees.index'));
+        return redirect(route('vendor-employees.index'));
     }
 
     /**
@@ -139,13 +139,13 @@ class VendorEmployeeController extends AppBaseController
         if (empty($vendorEmployee)) {
             Flash::error('Vendor Employee not found');
 
-            return redirect(route('vendorEmployees.index'));
+            return redirect(route('vendor-employees.index'));
         }
 
         $this->vendorEmployeeRepository->delete($id);
 
         Flash::success('Vendor Employee deleted successfully.');
 
-        return redirect(route('vendorEmployees.index'));
+        return redirect(route('vendor-employees.index'));
     }
 }

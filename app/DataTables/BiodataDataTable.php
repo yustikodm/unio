@@ -5,6 +5,7 @@ namespace App\DataTables;
 use App\Models\Biodata;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
+use Yajra\DataTables\Html\Column;
 
 class BiodataDataTable extends DataTable
 {
@@ -18,7 +19,11 @@ class BiodataDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'biodatas.datatables_actions');
+        return $dataTable->addColumn('action', 'biodata.datatables_actions')
+        ->editColumn('user.username', function ($query) {
+          return '<a href="' . route('users.show', $query->user->id) . '">' . $query->user->username . '</a>';
+        })
+        ->rawColumns(['action', 'user.username']);
     }
 
     /**
@@ -29,7 +34,7 @@ class BiodataDataTable extends DataTable
      */
     public function query(Biodata $model)
     {
-        return $model->newQuery();
+        return $model->newQuery()->with('user');
     }
 
     /**
@@ -65,7 +70,10 @@ class BiodataDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            
+            Column::make('fullname')->title('Full Name'),
+            Column::make('address')->title('Address'),
+            Column::make('birth_date')->title('Birth Data'),
+            Column::make('user.username')->title('User ID'),
         ];
     }
 
@@ -76,6 +84,6 @@ class BiodataDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'biodatas_datatable_' . time();
+        return 'biodata_datatable_' . time();
     }
 }

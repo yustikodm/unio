@@ -57,7 +57,7 @@ class PointLogController extends AppBaseController
 
         Flash::success('Point Log saved successfully.');
 
-        return redirect(route('pointLogs.index'));
+        return redirect(route('point-logs.index'));
     }
 
     /**
@@ -74,7 +74,7 @@ class PointLogController extends AppBaseController
         if (empty($pointLog)) {
             Flash::error('Point Log not found');
 
-            return redirect(route('pointLogs.index'));
+            return redirect(route('point-logs.index'));
         }
 
         return view('point_logs.show')->with('pointLog', $pointLog);
@@ -94,7 +94,7 @@ class PointLogController extends AppBaseController
         if (empty($pointLog)) {
             Flash::error('Point Log not found');
 
-            return redirect(route('pointLogs.index'));
+            return redirect(route('point-logs.index'));
         }
 
         return view('point_logs.edit')->with('pointLog', $pointLog);
@@ -115,14 +115,14 @@ class PointLogController extends AppBaseController
         if (empty($pointLog)) {
             Flash::error('Point Log not found');
 
-            return redirect(route('pointLogs.index'));
+            return redirect(route('point-logs.index'));
         }
 
         $pointLog = $this->pointLogRepository->update($request->all(), $id);
 
         Flash::success('Point Log updated successfully.');
 
-        return redirect(route('pointLogs.index'));
+        return redirect(route('point-logs.index'));
     }
 
     /**
@@ -139,13 +139,13 @@ class PointLogController extends AppBaseController
         if (empty($pointLog)) {
             Flash::error('Point Log not found');
 
-            return redirect(route('pointLogs.index'));
+            return redirect(route('point-logs.index'));
         }
 
         $this->pointLogRepository->delete($id);
 
         Flash::success('Point Log deleted successfully.');
 
-        return redirect(route('pointLogs.index'));
+        return redirect(route('point-logs.index'));
     }
 }

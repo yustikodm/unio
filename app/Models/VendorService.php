@@ -58,7 +58,7 @@ class VendorService extends Model
     'vendor_id' => 'required|integer',
     'name' => 'required|string|max:255',
     'description' => 'nullable|string',
-    'picture' => 'required|string',
+    'picture' => 'string',
     'price' => 'required',
     'created_at' => 'nullable',
     'updated_at' => 'nullable',

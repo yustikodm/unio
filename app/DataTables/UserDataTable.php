@@ -4,6 +4,7 @@ namespace App\DataTables;
 
 use App\User;
 use Yajra\DataTables\EloquentDataTable;
+use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
 
 class UserDataTable extends DataTable
@@ -18,10 +19,11 @@ class UserDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'users.datatables_actions')
-                         ->editColumn('roles', function ($permission) {
-                                return strtoupper($permission->roles->pluck('name')->toArray()[0]);
-                            });
+        return $dataTable->addColumn('action', 'users.datatables_actions');
+                        //  ->editColumn('roles', function ($permission) {
+                        //         return strtoupper($permission->roles->pluck('name')->toArray()[0]);
+                        //     })
+                        //  ->rawColumns(['action', 'roles']);;
     }
 
     /**
@@ -68,15 +70,20 @@ class UserDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'name',
-            'email',
-            'phone',
-            [
-                'data' => 'roles',
-                'title' => 'Roles',
-                'name' => 'roles.name',
-                'orderable' => false
-            ],
+            Column::make('username')->title('Username'),
+            Column::make('email')->title('Email'),
+            Column::make('phone')->title('Phone'),
+            Column::make('roles.name')->title('Roles'),
+            // 'username',
+            // 'email',
+            // 'phone',
+            // 'roles.name'
+            // [
+            //     'data' => 'roles',
+            //     'title' => 'Roles',
+            //     'name' => 'roles.name',
+            //     'orderable' => false
+            // ],
         ];
     }
 

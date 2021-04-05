@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -58,8 +59,8 @@ class Biodata extends Model
    */
   public static $rules = [
     'user_id' => 'required|integer',
-    'fullname' => 'required|string',
-    'address' => 'nullable|text',
+    'fullname' => 'required',
+    'address' => 'nullable|string',
     'picture' => 'nullable|file',
     'school_origin' => 'nullable|string',
     'graduation_year' => 'nullable|date',

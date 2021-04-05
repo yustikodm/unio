@@ -33,16 +33,6 @@ class PricingPointController extends AppBaseController
     }
 
     /**
-     * Show the form for creating a new PricingPoint.
-     *
-     * @return Response
-     */
-    public function create()
-    {
-        return view('pricing_points.create');
-    }
-
-    /**
      * Store a newly created PricingPoint in storage.
      *
      * @param CreatePricingPointRequest $request
@@ -51,13 +41,17 @@ class PricingPointController extends AppBaseController
      */
     public function store(CreatePricingPointRequest $request)
     {
-        $input = $request->all();
+        $input = $request->only([
+            'entity_id',
+            'entity_type',
+            'amount',
+        ]);
 
-        $pricingPoint = $this->pricingPointRepository->create($input);
+        $this->pricingPointRepository->create($input);
 
-        Flash::success('Pricing Point saved successfully.');
+        // Flash::success('Pricing Point saved successfully.');
 
-        return redirect(route('pricingPoints.index'));
+        // return redirect(route('pricing-points'));
     }
 
     /**
@@ -74,7 +68,7 @@ class PricingPointController extends AppBaseController
         if (empty($pricingPoint)) {
             Flash::error('Pricing Point not found');
 
-            return redirect(route('pricingPoints.index'));
+            return redirect(route('pricing-points'));
         }
 
         return view('pricing_points.show')->with('pricingPoint', $pricingPoint);
@@ -94,7 +88,7 @@ class PricingPointController extends AppBaseController
         if (empty($pricingPoint)) {
             Flash::error('Pricing Point not found');
 
-            return redirect(route('pricingPoints.index'));
+            return redirect(route('pricing-points'));
         }
 
         return view('pricing_points.edit')->with('pricingPoint', $pricingPoint);
@@ -115,14 +109,14 @@ class PricingPointController extends AppBaseController
         if (empty($pricingPoint)) {
             Flash::error('Pricing Point not found');
 
-            return redirect(route('pricingPoints.index'));
+            return redirect(route('pricing-points'));
         }
 
         $pricingPoint = $this->pricingPointRepository->update($request->all(), $id);
 
         Flash::success('Pricing Point updated successfully.');
 
-        return redirect(route('pricingPoints.index'));
+        return redirect(route('pricing-points'));
     }
 
     /**
@@ -139,13 +133,13 @@ class PricingPointController extends AppBaseController
         if (empty($pricingPoint)) {
             Flash::error('Pricing Point not found');
 
-            return redirect(route('pricingPoints.index'));
+            return redirect(route('pricing-points'));
         }
 
         $this->pricingPointRepository->delete($id);
 
         Flash::success('Pricing Point deleted successfully.');
 
-        return redirect(route('pricingPoints.index'));
+        return redirect(route('pricing-points'));
     }
 }

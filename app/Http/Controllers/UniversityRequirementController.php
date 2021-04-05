@@ -57,7 +57,7 @@ class UniversityRequirementController extends AppBaseController
 
         Flash::success('University Requirement saved successfully.');
 
-        return redirect(route('universityRequirements.index'));
+        return redirect(route('university-requirements.index'));
     }
 
     /**
@@ -74,7 +74,7 @@ class UniversityRequirementController extends AppBaseController
         if (empty($universityRequirement)) {
             Flash::error('University Requirement not found');
 
-            return redirect(route('universityRequirements.index'));
+            return redirect(route('university-requirements.index'));
         }
 
         return view('university_requirements.show')->with('universityRequirement', $universityRequirement);
@@ -94,7 +94,7 @@ class UniversityRequirementController extends AppBaseController
         if (empty($universityRequirement)) {
             Flash::error('University Requirement not found');
 
-            return redirect(route('universityRequirements.index'));
+            return redirect(route('university-requirements.index'));
         }
 
         return view('university_requirements.edit')->with('universityRequirement', $universityRequirement);
@@ -115,14 +115,14 @@ class UniversityRequirementController extends AppBaseController
         if (empty($universityRequirement)) {
             Flash::error('University Requirement not found');
 
-            return redirect(route('universityRequirements.index'));
+            return redirect(route('university-requirements.index'));
         }
 
         $universityRequirement = $this->universityRequirementRepository->update($request->all(), $id);
 
         Flash::success('University Requirement updated successfully.');
 
-        return redirect(route('universityRequirements.index'));
+        return redirect(route('university-requirements.index'));
     }
 
     /**
@@ -139,13 +139,13 @@ class UniversityRequirementController extends AppBaseController
         if (empty($universityRequirement)) {
             Flash::error('University Requirement not found');
 
-            return redirect(route('universityRequirements.index'));
+            return redirect(route('university-requirements.index'));
         }
 
         $this->universityRequirementRepository->delete($id);
 
         Flash::success('University Requirement deleted successfully.');
 
-        return redirect(route('universityRequirements.index'));
+        return redirect(route('university-requirements.index'));
     }
 }

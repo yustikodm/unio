@@ -57,7 +57,7 @@ class Article extends Model
    */
   public static $rules = [
     'title' => 'required|string|max:255',
-    'slug' => 'required|string|max:255',
+    'slug' => 'string',
     'description' => 'required|string',
     'user_id' => 'required|nullable|integer',
     'picture' => 'nullable|string|max:255',

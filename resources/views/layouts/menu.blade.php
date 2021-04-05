@@ -207,9 +207,9 @@
         <a href="{{ route('families.index') }}"><i class="fa fa-edit"></i><span>Families</span></a>
     </li>
 @endcan
-@can('biodatas.index')
-    <li class="{{ Request::is('biodatas*') ? 'active' : '' }}">
-        <a href="{{ route('biodatas.index') }}"><i class="fa fa-edit"></i><span>Biodatas</span></a>
+@can('biodata.index')
+    <li class="{{ Request::is('biodata*') ? 'active' : '' }}">
+        <a href="{{ route('biodata.index') }}"><i class="fa fa-edit"></i><span>Biodata</span></a>
     </li>
 @endcan
 @can('pricing-points.index')

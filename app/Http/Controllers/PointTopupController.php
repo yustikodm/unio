@@ -57,7 +57,7 @@ class PointTopupController extends AppBaseController
 
         Flash::success('Point Topup saved successfully.');
 
-        return redirect(route('pointTopups.index'));
+        return redirect(route('point-topups.index'));
     }
 
     /**
@@ -74,7 +74,7 @@ class PointTopupController extends AppBaseController
         if (empty($pointTopup)) {
             Flash::error('Point Topup not found');
 
-            return redirect(route('pointTopups.index'));
+            return redirect(route('point-topups.index'));
         }
 
         return view('point_topups.show')->with('pointTopup', $pointTopup);
@@ -94,7 +94,7 @@ class PointTopupController extends AppBaseController
         if (empty($pointTopup)) {
             Flash::error('Point Topup not found');
 
-            return redirect(route('pointTopups.index'));
+            return redirect(route('point-topups.index'));
         }
 
         return view('point_topups.edit')->with('pointTopup', $pointTopup);
@@ -115,14 +115,14 @@ class PointTopupController extends AppBaseController
         if (empty($pointTopup)) {
             Flash::error('Point Topup not found');
 
-            return redirect(route('pointTopups.index'));
+            return redirect(route('point-topups.index'));
         }
 
         $pointTopup = $this->pointTopupRepository->update($request->all(), $id);
 
         Flash::success('Point Topup updated successfully.');
 
-        return redirect(route('pointTopups.index'));
+        return redirect(route('point-topups.index'));
     }
 
     /**
@@ -139,13 +139,13 @@ class PointTopupController extends AppBaseController
         if (empty($pointTopup)) {
             Flash::error('Point Topup not found');
 
-            return redirect(route('pointTopups.index'));
+            return redirect(route('point-topups.index'));
         }
 
         $this->pointTopupRepository->delete($id);
 
         Flash::success('Point Topup deleted successfully.');
 
-        return redirect(route('pointTopups.index'));
+        return redirect(route('point-topups.index'));
     }
 }

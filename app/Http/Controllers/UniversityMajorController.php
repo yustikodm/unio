@@ -57,7 +57,7 @@ class UniversityMajorController extends AppBaseController
 
         Flash::success('University Major saved successfully.');
 
-        return redirect(route('universityMajors.index'));
+        return redirect(route('university-majors.index'));
     }
 
     /**
@@ -74,7 +74,7 @@ class UniversityMajorController extends AppBaseController
         if (empty($universityMajor)) {
             Flash::error('University Major not found');
 
-            return redirect(route('universityMajors.index'));
+            return redirect(route('university-majors.index'));
         }
 
         return view('university_majors.show')->with('universityMajor', $universityMajor);
@@ -94,7 +94,7 @@ class UniversityMajorController extends AppBaseController
         if (empty($universityMajor)) {
             Flash::error('University Major not found');
 
-            return redirect(route('universityMajors.index'));
+            return redirect(route('university-majors.index'));
         }
 
         return view('university_majors.edit')->with('universityMajor', $universityMajor);
@@ -115,14 +115,14 @@ class UniversityMajorController extends AppBaseController
         if (empty($universityMajor)) {
             Flash::error('University Major not found');
 
-            return redirect(route('universityMajors.index'));
+            return redirect(route('university-majors.index'));
         }
 
         $universityMajor = $this->universityMajorRepository->update($request->all(), $id);
 
         Flash::success('University Major updated successfully.');
 
-        return redirect(route('universityMajors.index'));
+        return redirect(route('university-majors.index'));
     }
 
     /**
@@ -139,13 +139,13 @@ class UniversityMajorController extends AppBaseController
         if (empty($universityMajor)) {
             Flash::error('University Major not found');
 
-            return redirect(route('universityMajors.index'));
+            return redirect(route('university-majors.index'));
         }
 
         $this->universityMajorRepository->delete($id);
 
         Flash::success('University Major deleted successfully.');
 
-        return redirect(route('universityMajors.index'));
+        return redirect(route('university-majors.index'));
     }
 }
