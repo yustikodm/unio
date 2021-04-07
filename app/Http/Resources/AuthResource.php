@@ -16,7 +16,7 @@ class AuthResource extends JsonResource
    */
   public function toArray($request)
   {
-    $fullname = '<Unknown>';
+    $fullname = "";
     $biodata = Biodata::where('user_id', $this->id)->first();
     
     if ($biodata){
