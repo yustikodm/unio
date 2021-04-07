@@ -82,3 +82,5 @@ Route::resource('vendor-employees', 'VendorEmployeeAPIController');
 Route::resource('vendor-categories', 'VendorCategoryAPIController');
 
 Route::resource('place-to-lives', 'PlaceToLiveAPIController');
+
+Route::resource('biodata', 'BiodataAPIController');
