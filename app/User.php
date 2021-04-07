@@ -108,8 +108,7 @@ class User extends Authenticatable
     'email'                 => 'required|email|unique:users,email|regex:/^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/',
     'phone'                 => 'nullable|numeric|min:5',
     'password'              => 'nullable|min:6|required_with:password_confirmation|same:password_confirmation',
-    'password_confirmation' => 'nullable|min:6',
-    'roles'                 => 'required|min:1'
+    'password_confirmation' => 'nullable|min:6'
   ];
 
   public static $messages = [
@@ -136,7 +135,7 @@ class User extends Authenticatable
 
   public function biodata()
   {
-    return $this->hasOne(Biodata::class);
+    return $this->hasOne(Biodata::class, 'id');
   }
 
   public function parent()

@@ -111,10 +111,68 @@ class Vendor extends Model
     return $this->belongsTo(District::class, 'district_id');
   }
 
-  public function scopeApiSearch($query, $param)
+  public function scopeApiSearch($query, $name, $category="", $country="", $state="", $district="")
   {
-    return $query->when($param, function ($query) use ($param) {
-      return $query->where('name', 'LIKE', "%$param%");
-    })->get();
+    $search = $query->when($name, function ($query) use ($name) {
+      return $query->where('vendors.name', 'LIKE', "%$name%");
+    })
+      ->when($category, function ($query) use ($category) {
+        return $query->join('vendor_categories', 'vendor_categories.id', 'vendors.vendor_category_id')
+          ->where('vendor_categories.name', 'LIKE', "%$category%")
+          ->orWhere('vendor_categories.id', $category);
+      })
+      ->when($country, function ($query) use ($country) {
+        return $query->join('countries', 'countries.id', 'vendors.country_id')
+          ->where('countries.id', $country);
+      })
+      ->when($state, function ($query) use ($state) {
+        return $query->join('states', 'states.id', 'vendors.state_id')
+          ->where('states.id', $state);
+      })
+      ->when($district, function ($query) use ($district) {
+        return $query->join('districts', 'districts.id', 'vendors.district_id')
+          ->where('districts.id', $district);
+      });
+
+      $select_list = ['vendors.*'];
+
+      if (!empty($category)) {
+        $select_list = array_merge($select_list, [
+          'vendor_categories.id as vc_id', 
+          'vendor_categories.name as vc_name', 
+          'vendor_categories.description as vc_description',
+          'vendor_categories.created_at as vc_created_at',
+          'vendor_categories.updated_at as vc_updated_at'
+        ]);
+      }
+
+      if (!empty($country)) {
+        $select_list = array_merge($select_list, [
+          'countries.id as c_id', 
+          'countries.name as c_name', 
+          'countries.created_at as c_created_at',
+          'countries.updated_at as c_updated_at'
+        ]);
+      }
+
+      if (!empty($state)) {
+        $select_list = array_merge($select_list, [
+          'states.id as s_id', 
+          'states.name as s_name', 
+          'states.created_at as s_created_at',
+          'states.updated_at as s_updated_at'
+        ]);
+      }
+
+      if (!empty($district)) {
+        $select_list = array_merge($select_list, [
+          'districts.id as d_id', 
+          'districts.name as d_name', 
+          'districts.created_at as d_created_at',
+          'districts.updated_at as d_updated_at'
+        ]);
+      }
+
+    return $search->select($select_list)->get();
   }
 }

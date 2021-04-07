@@ -56,8 +56,9 @@ class GlobalSearchAPIController extends AppBaseController
         break;
 
       case 'vendors':
-        $vendor = Vendor::apiSearch($request->name);
+        $vendor = Vendor::apiSearch($request->name, $request->category, $request->country, $request->state, $request->district);
 
+        // return $this->sendResponse($vendor, 'Vendor retrieved successfully');
         return $this->sendResponse(VendorResource::collection($vendor), 'Vendor retrieved successfully');
         break;
 

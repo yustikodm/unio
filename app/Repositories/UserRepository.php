@@ -69,10 +69,11 @@ class UserRepository extends BaseRepository
 
       $user = User::create($input);
       
+      // if empty roles
+      $input['roles'] = isset($input['roles']) ? $input['roles'] : [];
+      
       // Spatie [Sync Role User]
-      if (!empty($input['roles'])) {
-          $user->assignRole($input['roles']);
-      }
+      $user->assignRole($input['roles']);
 
     } catch (Exception $e) {
       throw new BadRequestHttpException($e->getMessage());
@@ -108,11 +109,12 @@ class UserRepository extends BaseRepository
 
       $user->update($input);
 
+      // if empty roles
+      $input['roles'] = isset($input['roles']) ? $input['roles'] : [];
+
       // Spatie [Sync Role User]
-      if (!empty($input['roles'])){
-          DB::table('model_has_roles')->where('model_id',$user->id)->delete();
-          $user->assignRole($input['roles']);
-      }
+      DB::table('model_has_roles')->where('model_id',$user->id)->delete();
+      $user->assignRole($input['roles']);
 
       DB::commit();
 
