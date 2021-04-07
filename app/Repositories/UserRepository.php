@@ -70,7 +70,9 @@ class UserRepository extends BaseRepository
       $user = User::create($input);
       
       // Spatie [Sync Role User]
-      $user->assignRole($input['roles']);
+      if (!empty($input['roles'])) {
+          $user->assignRole($input['roles']);
+      }
 
     } catch (Exception $e) {
       throw new BadRequestHttpException($e->getMessage());
@@ -107,8 +109,10 @@ class UserRepository extends BaseRepository
       $user->update($input);
 
       // Spatie [Sync Role User]
-      DB::table('model_has_roles')->where('model_id',$user->id)->delete();
-      $user->assignRole($input['roles']);
+      if (!empty($input['roles'])){
+          DB::table('model_has_roles')->where('model_id',$user->id)->delete();
+          $user->assignRole($input['roles']);
+      }
 
       DB::commit();
 
@@ -168,4 +172,5 @@ class UserRepository extends BaseRepository
       return new ApiOperationFailedException('Unable to Update Profile' . $e->getMessage(), $e->getCode());
     }
   }
+
 }
