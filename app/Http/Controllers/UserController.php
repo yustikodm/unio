@@ -16,6 +16,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 use Redirect;
 use Response;
@@ -73,13 +74,10 @@ class UserController extends AppBaseController
         'phone',
         'email_verified_at',
         'image_path',
-        'api_token'
+        'roles'
       ]);
 
-      $input['roles'] = isset($input['roles']) ? $input['roles'] : [];
-
-      $user = $this->userRepository->store($input);
-      $user->syncRoles($input['roles']);
+      $this->userRepository->store($input);
 
       Flash::success('User saved successfully.');
 
@@ -143,10 +141,18 @@ class UserController extends AppBaseController
   public function update(User $user, UpdateUserRequest $request)
   {
     try {
-      $input = $request->all();
+      $input = $request->only([
+        'username',
+        'email',
+        'password',
+        'phone',
+        'email_verified_at',
+        'image_path',
+        'roles'
+      ]);
 
       $user = $this->userRepository->update($user->id, $input);
-      $user->syncRoles($input['roles']);
+
       Flash::success('User updated successfully.');
 
       if (Auth::user()->hasRole('mitra')) {

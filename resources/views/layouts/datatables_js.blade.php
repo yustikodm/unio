@@ -31,9 +31,9 @@
             var roleId = $(this).data('role-id');
             var permission = $(this).data('permission');
             if ($(this).parent('[class*="icheckbox"]').hasClass("checked")) {
-                url = "{{url('api/permissions/revoke-permission-to-role')}}";
+                url = "{{url('permissions/revoke-permission-to-role')}}";
             } else {
-                url = "{{url('api/permissions/give-permission-to-role')}}";
+                url = "{{url('permissions/give-permission-to-role')}}";
             }
             $.ajax({
                 method: "POST",

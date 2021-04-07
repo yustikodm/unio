@@ -68,6 +68,10 @@ class UserRepository extends BaseRepository
       $input['api_token'] = Str::random(100);
 
       $user = User::create($input);
+      
+      // Spatie [Sync Role User]
+      $user->assignRole($input['roles']);
+
     } catch (Exception $e) {
       throw new BadRequestHttpException($e->getMessage());
     }
@@ -101,6 +105,10 @@ class UserRepository extends BaseRepository
       }
 
       $user->update($input);
+
+      // Spatie [Sync Role User]
+      DB::table('model_has_roles')->where('model_id',$user->id)->delete();
+      $user->assignRole($input['roles']);
 
       DB::commit();
 

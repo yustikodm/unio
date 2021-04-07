@@ -1,11 +1,9 @@
 @extends('layouts.app')
-@section('title')
-    Users
-@endsection
+@section('title', 'Users')
 
 @section('content')
     <section class="content-header">
-        <h1>Pengguna</h1>
+        <h1>Users</h1>
     </section>
     <div class="content">
         <div class="clearfix"></div>

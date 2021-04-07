@@ -113,6 +113,7 @@ class PermissionDataTable extends DataTable
             $newColumn['exportable'] = 'false';
             $newColumn['printable'] = 'false';
             $newColumn['render'] = 'function(){return "<div class=\'checkbox icheck\'><label><input  type=\'checkbox\' name=\'namehere\' class=\'permission\' data-role-name=\'' . $role->name . '\' data-role-id=\'' . $role->id . '\' data-permission=\'"+data+"\'></label></div>"}';
+            // $newColumn['render'] = $this->syncPermission($role);
             $columns[] = $newColumn;
         }
         return $columns;
@@ -126,5 +127,14 @@ class PermissionDataTable extends DataTable
     protected function filename()
     {
         return 'permissions_datatable_' . time();
+    }
+
+    private function syncPermission($role)
+    {
+      return "<div class=\'checkbox icheck\'>
+                <label>
+                  <input type=\'checkbox\' name=\'namehere\' class=\'permission\' data-role-name=\'' . $role->name . '\' data-role-id=\'' . $role->id . '\' data-permission=\'+data+\'>
+                </label></div>
+              ";
     }
 }

@@ -53,8 +53,8 @@ use Spatie\Permission\Traits\HasRoles;
  */
 class User extends Authenticatable
 {
-  use HasRoles;
-  use Notifiable, ImageTrait;
+  use HasRoles, Notifiable, ImageTrait;
+  
   use ImageTrait {
     deleteImage as traitDeleteImage;
   }
@@ -106,13 +106,14 @@ class User extends Authenticatable
   public static $rules = [
     'username'              => 'required|unique:users,username',
     'email'                 => 'required|email|unique:users,email|regex:/^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/',
-    'phone'                 => 'nullable|numeric|digits:10',
+    'phone'                 => 'nullable|numeric|min:5',
     'password'              => 'nullable|min:6|required_with:password_confirmation|same:password_confirmation',
     'password_confirmation' => 'nullable|min:6',
+    'roles'                 => 'required|min:1'
   ];
 
   public static $messages = [
-    'phone.digits'     => 'The phone number must be 10 digits long.',
+    // 'phone.digits'     => 'The phone number must be 10 digits long.',
     'email.regex'      => 'Please enter valid email.',
     'photo.mimes'      => 'The profile image must be a file of type: jpeg, jpg, png.',
   ];

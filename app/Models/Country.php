@@ -68,11 +68,4 @@ class Country extends Model
   {
     return $this->hasMany(Vendor::class);
   }
-
-  public function scopeApiSearch($query, $param)
-  {
-    return $query->when($param, function ($query) use ($param) {
-      return $query->where('name', 'LIKE', "%$param%");
-    })->get();
-  }
 }

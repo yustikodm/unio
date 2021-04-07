@@ -9,6 +9,7 @@ use App\Http\Requests\UpdatePermissionRequest;
 use App\Repositories\PermissionRepository;
 use Flash;
 use App\Http\Controllers\AppBaseController;
+use Illuminate\Http\Request;
 use Response;
 
 class PermissionController extends AppBaseController
@@ -192,12 +193,12 @@ class PermissionController extends AppBaseController
     }
 
     public function revokePermissionToRole(Request $request){
-        $input = Request::all();
+        $input = $request->all();
         $this->permissionRepository->revokePermissionToRole($input);
     }
 
     public function roleHasPermission(Request $request){
-        $input = Request::all();
+        $input = $request->all();
         //dd($input);
         $result = $this->permissionRepository->roleHasPermission($input);
         return json_encode($result);

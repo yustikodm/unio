@@ -25,8 +25,8 @@ class CreateVendorsTable extends Migration
             $table->string('email', 255)->nullable();
             $table->string('back_account_number', 255)->nullable();
             $table->string('website', 255)->nullable();
-            $table->string('address', 255)->nullable();
-            $table->string('phone', 20)->nullable();
+            $table->longText('address', 255)->nullable();
+            $table->string('phone', 100)->nullable();
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('country_id')->references('id')->on('countries');

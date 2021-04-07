@@ -88,7 +88,7 @@ Route::group(['middleware' => ['auth']], function () {
 
   Route::resource('point-transactions', 'PointTransactionController');
 
-  Route::resource('point-topups', 'PointTopupController');
+  Route::resource('point-topup', 'PointTopupController');
 
   Route::resource('place-to-live', 'PlaceToLiveController');
 

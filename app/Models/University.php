@@ -131,10 +131,43 @@ class University extends Model
     return $this->hasMany(UniversityMajor::class, 'universities.id');
   }
 
-  public function scopeApiSearch($query, $param)
+  public function scopeApiSearch($query, $param, $major = "", $country = "", $state = "", $district = "")
   {
     return $query->when($param, function ($query) use ($param) {
-      return $query->where('name', 'LIKE', "%$param%");
-    })->get();
+      return $query->where('universities.name', 'LIKE', "%$param%");
+    })
+      ->when($country, function ($query) use ($country) {
+        return $query->where('universities.country_id', $country);
+      })
+      ->when($state, function ($query) use ($state) {
+        return $query->where('universities.state_id', $state);
+      })
+      ->when($district, function ($query) use ($district) {
+        return $query->where('universities.district_id', $district);
+      })
+      ->when($major, function ($query) use ($major) {
+        $query->join('university_majors', 'university_majors.university_id', 'universities.id')
+          ->where('university_majors.name', 'LIKE', "%$major%")
+          ->selectRaw('
+              universities.id as u_id,
+              universities.name as u_name,
+              universities.description as u_description,
+              universities.logo_src as u_logo_src,
+              universities.type as u_type,
+              universities.accreditation as u_accreditation,
+              universities.address as u_address,
+              universities.country_id,
+              universities.state_id,
+              universities.district_id,
+              university_majors.id as um_id,
+              university_majors.university_id as um_university_id,
+              university_majors.faculty_id as um_faculty_id,
+              university_majors.name as um_name,
+              university_majors.description as um_description,
+              university_majors.accreditation as um_accreditation,
+              university_majors.temp as um_temp
+          ');
+      })
+      ->get();
   }
 }

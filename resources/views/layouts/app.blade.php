@@ -95,7 +95,7 @@
 </head>
 
 <body class="skin-blue sidebar-mini">
-@if (!auth()->guest())
+@auth
     <div class="wrapper">
         <!-- Main Header -->
         <header class="main-header">
@@ -131,20 +131,15 @@
                                 <li class="user-header">
                                     <img src="{{ auth()->user()->image_path }}" class="img-circle" alt="User Image">
                                     <p>
-                                        {!! auth()->user()->username !!}
+                                        {{ auth()->user()->username }}
                                         <small>Member since {!! auth()->user()->created_at->format('M. Y') !!}</small>
                                     </p>
                                 </li>
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
                                     <div class="pull-left">
-                                        @if(auth()->user()->hasRole('mitra'))
-                                            <a href="{!! url('mitraProfile') !!}"
-                                           class="btn btn-default btn-flat" style="border-radius: 5px !important;">Profile</a>
-                                        @else
-                                            <a href="{!! url('profile') !!}"
-                                            class="btn btn-default btn-flat" style="border-radius: 5px !important;">Profile</a>
-                                        @endif
+                                        <a href="{!! url('profile') !!}"
+                                        class="btn btn-default btn-flat" style="border-radius: 5px !important;">Profile</a>
                                     </div>
                                     <div class="pull-right">
                                         <a href="{!! url('/logout') !!}" class="btn btn-default btn-flat"

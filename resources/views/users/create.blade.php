@@ -1,7 +1,6 @@
 @extends('layouts.app')
-@section('title')
-    Pengguna
-@endsection
+@section('title', 'Users')
+
 @section('content')
     <section class="content-header">
         <h1>

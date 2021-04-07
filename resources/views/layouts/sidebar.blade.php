@@ -6,36 +6,18 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel" style="height: 60px;">
             <div class="pull-left image">
-                <img src="{{ Auth::user()->image_path }}" class="img-responsive"
-                     alt="User Image" style="margin-top: 10px;" />
+                <img src="{{ auth()->user()->image_path }}" class="img-responsive" alt="User Image" style="margin-top: 10px;" />
             </div>
             <div class="pull-left info">
-                @if (Auth::guest())
-                <p>InfyOm</p>
-                @else
-                    <p>{{ Auth::user()->name}}</p>
-                @endif
+                <p>{{ auth()->user()->username}}</p>
                 <!-- Status -->
                 <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
         </div>
 
-        {{-- <!-- search form (Optional) -->
-        <form action="#" method="get" class="sidebar-form">
-            <div class="input-group">
-                <input type="text" name="q" class="form-control" placeholder="Search..."/>
-          <span class="input-group-btn">
-            <button type='submit' name='search' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i>
-            </button>
-          </span>
-            </div>
-        </form> --}}
-        <!-- Sidebar Menu -->
-
         <ul class="sidebar-menu" data-widget="tree">
             @include('layouts.menu')
-        </ul>
-        
+        </ul>        
         <!-- /.sidebar-menu -->
     </section>
     <!-- /.sidebar -->

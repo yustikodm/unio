@@ -16,14 +16,14 @@ class CreateVendorEmployeesTable extends Migration
         Schema::create('vendor_employees', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('vendor_id')->unsigned();
-            $table->string('name', 255)->nullable();
+            $table->string('name', 255);
             $table->date('birthdate')->nullable();
             $table->string('position', 255)->nullable();
             $table->string('phone', 255)->nullable();
             $table->string('email', 255)->nullable();
             $table->string('address', 255)->nullable();
             $table->string('picture', 255)->nullable();
-            $table->string('description', 255)->nullable();
+            $table->longText('description', 255)->nullable();
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('vendor_id')->references('id')->on('vendors');

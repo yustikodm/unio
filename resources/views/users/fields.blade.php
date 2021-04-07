@@ -13,15 +13,12 @@
 <!-- Password Field -->
 <div class="form-group col-sm-3">
     {!! Form::label('password', 'New Password:') !!}<span class="required confirm-pwd">*</span>
-    <input class="form-control input-group__addon" id="pfNewPassword" type="password"
-           name="password" required>
+    <input class="form-control input-group__addon" id="pfNewPassword" type="password" name="password" required>
 </div>
 
 <div class="form-group col-sm-3">
-    {!! Form::label('password_confirmation', 'Confirm Password:') !!}<span
-            class="required confirm-pwd">*</span>
-    <input class="form-control input-group__addon" id="pfNewConfirmPassword" type="password"
-           name="password_confirmation" required>
+    {!! Form::label('password_confirmation', 'Confirm Password:') !!}<span class="required confirm-pwd">*</span>
+    <input class="form-control input-group__addon" id="pfNewConfirmPassword" type="password" name="password_confirmation" required>
 </div>
 
 <!-- Phone Field -->
@@ -41,15 +38,14 @@
         </div>
     </div>
     <div class="text-right" style="margin-top: -55px; margin-right: 170px;">
-        <img id='edit_preview' class="img-thumbnail" width="100px;"
-             src="{{asset('images/user-avatar.png')}}"/>
+        <img id='edit_preview' class="img-thumbnail" width="100px;" src="{{asset('images/user-avatar.png')}}"/>
     </div>
 </div>
 
-<!-- Peran Field -->
+<!-- Roles Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('roles', 'Peran:') !!}
-    {!! Form::select('roles', $roleItems, null, ['class' => 'select2 form-control']) !!}
+    {!! Form::label('roles', 'Roles:') !!}
+    {!! Form::select('roles[]', $roleItems, [], ['class' => 'select2 form-control', 'multiple']) !!}
 </div>
 
 <!-- Submit Field -->

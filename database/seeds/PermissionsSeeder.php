@@ -13,13 +13,8 @@ class PermissionsSeeder extends Seeder
    */
   public function run()
   {
+    /*
     $data = [
-      [
-        'name' => 'master',
-        'guard_name' => 'web',
-        'created_at' => Carbon::now(),
-        'updated_at' => Carbon::now(),
-      ],
       [
         'name' => 'home',
         'guard_name' => 'web',
@@ -27,47 +22,18 @@ class PermissionsSeeder extends Seeder
         'updated_at' => Carbon::now(),
       ],
       [
-        'name' => 'pengaturan',
+        'name' => 'master',
         'guard_name' => 'web',
         'created_at' => Carbon::now(),
         'updated_at' => Carbon::now(),
       ],
       [
-        'name' => 'pengguna.index',
+        'name' => 'module',
         'guard_name' => 'web',
         'created_at' => Carbon::now(),
         'updated_at' => Carbon::now(),
       ],
-      [
-        'name' => 'pengguna.create',
-        'guard_name' => 'web',
-        'created_at' => Carbon::now(),
-        'updated_at' => Carbon::now(),
-      ],
-      [
-        'name' => 'pengguna.store',
-        'guard_name' => 'web',
-        'created_at' => Carbon::now(),
-        'updated_at' => Carbon::now(),
-      ],
-      [
-        'name' => 'pengguna.edit',
-        'guard_name' => 'web',
-        'created_at' => Carbon::now(),
-        'updated_at' => Carbon::now(),
-      ],
-      [
-        'name' => 'pengguna.update',
-        'guard_name' => 'web',
-        'created_at' => Carbon::now(),
-        'updated_at' => Carbon::now(),
-      ],
-      [
-        'name' => 'pengguna.destroy',
-        'guard_name' => 'web',
-        'created_at' => Carbon::now(),
-        'updated_at' => Carbon::now(),
-      ],
+
       [
         'name' => 'roles.index',
         'guard_name' => 'web',
@@ -105,6 +71,12 @@ class PermissionsSeeder extends Seeder
         'updated_at' => Carbon::now(),
       ],
       [
+        'name' => 'roles.show',
+        'guard_name' => 'web',
+        'created_at' => Carbon::now(),
+        'updated_at' => Carbon::now(),
+      ],
+      [
         'name' => 'permissions.index',
         'guard_name' => 'web',
         'created_at' => Carbon::now(),
@@ -136,6 +108,12 @@ class PermissionsSeeder extends Seeder
       ],
       [
         'name' => 'permissions.destroy',
+        'guard_name' => 'web',
+        'created_at' => Carbon::now(),
+        'updated_at' => Carbon::now(),
+      ],
+      [
+        'name' => 'permissions.show',
         'guard_name' => 'web',
         'created_at' => Carbon::now(),
         'updated_at' => Carbon::now(),
@@ -178,18 +156,6 @@ class PermissionsSeeder extends Seeder
       ],
       [
         'name' => 'users.show',
-        'guard_name' => 'web',
-        'created_at' => Carbon::now(),
-        'updated_at' => Carbon::now(),
-      ],
-      [
-        'name' => 'roles.show',
-        'guard_name' => 'web',
-        'created_at' => Carbon::now(),
-        'updated_at' => Carbon::now(),
-      ],
-      [
-        'name' => 'permissions.show',
         'guard_name' => 'web',
         'created_at' => Carbon::now(),
         'updated_at' => Carbon::now(),
@@ -879,12 +845,6 @@ class PermissionsSeeder extends Seeder
         'updated_at' => Carbon::now(),
       ],
       [
-        'name' => 'module',
-        'guard_name' => 'web',
-        'created_at' => Carbon::now(),
-        'updated_at' => Carbon::now(),
-      ],
-      [
         'name' => 'carts.index',
         'guard_name' => 'web',
         'created_at' => Carbon::now(),
@@ -1269,7 +1229,11 @@ class PermissionsSeeder extends Seeder
         'updated_at' => Carbon::now(),
       ]
     ];
+    */
+    $permissions = Permission::defaultPermissions();
 
-    Permission::insert($data);
+    foreach ($permissions as $perms) {
+        Permission::firstOrCreate(['name' => $perms]);
+    }
   }
 }

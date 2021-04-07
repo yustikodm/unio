@@ -18,10 +18,7 @@ class PermissionRepository extends BaseRepository
     /**
      * @var array
      */
-    protected $fieldSearchable = [
-        'name',
-        'guard_name'
-    ];
+    protected $fieldSearchable = ['name',];
 
     /**
      * Return searchable fields

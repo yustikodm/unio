@@ -7,7 +7,6 @@ use App\Models\Questionnaire;
 use App\Models\State;
 use App\Models\Country;
 
-use App\Models\Mitra;
 use App\Models\University;
 use App\Models\UniversityFaculties;
 use App\Models\UniversityMajor;
@@ -16,10 +15,11 @@ use App\Models\VendorCategory;
 use App\User;
 use App\Models\Religion;
 use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 use Illuminate\Support\ServiceProvider;
-
-use View;
+use Illuminate\Support\Facades\View;
+// use View;
 
 class ViewServiceProvider extends ServiceProvider
 {
@@ -58,46 +58,49 @@ class ViewServiceProvider extends ServiceProvider
       $view->with('categoryItems', $categoryItems);
     });
 
-    // University Scholarship
+    // University Scholarship - List Universities
     View::composer(['university_scholarships.fields'], function ($view) {
       $universityItems = University::pluck('name', 'id')->toArray();
       $view->with('universityItems', $universityItems);
     });
 
-    // University Scholarship
+    // University Scholarship - List Universities
     View::composer(['university_scholarships.fields'], function ($view) {
       $universityItems = University::pluck('name', 'id')->toArray();
       $view->with('universityItems', $universityItems);
     });
 
-    // University Requirement
+    // University Requirement - List Universities
     View::composer(['university_requirements.fields'], function ($view) {
       $universityItems = University::pluck('name', 'id')->toArray();
       $view->with('universityItems', $universityItems);
     });
+
+    // University Requirement - List University Major
     View::composer(['university_requirements.fields'], function ($view) {
       $majorItems = UniversityMajor::pluck('name', 'id')->toArray();
       $view->with('majorItems', $majorItems);
     });
 
-    // University Majors
+    // University Majors - List Universities
     View::composer(['university_majors.fields'], function ($view) {
       $universityItems = University::pluck('name', 'id')->toArray();
       $view->with('universityItems', $universityItems);
     });
 
+    // University Major - List University Faculty
     View::composer(['university_majors.fields'], function ($view) {
       $facultyItems = UniversityFaculties::pluck('name', 'id')->toArray();
       $view->with('facultyItems', $facultyItems);
     });
 
-    // University Faculty
+    // University Faculty - List Universities
     View::composer(['university_faculties.fields'], function ($view) {
       $universityItems = University::pluck('name', 'id')->toArray();
       $view->with('universityItems', $universityItems);
     });
 
-    // University
+    // University - List District, State, Country
     View::composer(['universities.fields'], function ($view) {
       $districtItems = District::pluck('name', 'id')->toArray();
       $view->with('districtItems', $districtItems);
@@ -111,67 +114,61 @@ class ViewServiceProvider extends ServiceProvider
       $view->with('countryItems', $countryItems);
     });
 
-    // questionnaireAnswer
+    // Questionnaire Answer - List Questionnaire
     View::composer(['questionnaire_answers.fields'], function ($view) {
       $questionnaireItems = Questionnaire::pluck('question', 'id')->toArray();
       $view->with('questionnaireItems', $questionnaireItems);
     });
 
-    // questionnaireAnswer - user
+    // Questionnaire Answer - List User
     View::composer(['questionnaire_answers.fields'], function ($view) {
       $userItems = User::pluck('username', 'id')->toArray();
       $view->with('userItems', $userItems);
     });
 
-    // State
+    // District - State List
     View::composer(['districts.fields'], function ($view) {
       $districtItems = State::pluck('name', 'id')->toArray();
       $view->with('districtItems', $districtItems);
     });
 
-    // State
+    // State - Country List
     View::composer(['states.fields'], function ($view) {
       $countryItems = Country::pluck('name', 'id')->toArray();
       $view->with('countryItems', $countryItems);
     });
 
-    // Users
+    // Users - Create (Select Role User)
     View::composer(['users.fields'], function ($view) {
       $roleItems = Role::pluck('name', 'name')->toArray();
       $view->with('roleItems', $roleItems);
     });
 
+    // Users - Edit (Select & Update Role User)
     View::composer(['users.edit_fields'], function ($view) {
       $roleItems = Role::pluck('name', 'name')->toArray();
       $view->with('roleItems', $roleItems);
     });
 
-    // Poin
-    View::composer(['poin.fields'], function ($view) {
-      $mitraItems = Mitra::leftJoin('pelanggan', 'mitra.pelanggan_id', '=', 'pelanggan.id')
-        ->select('mitra.*', 'pelanggan.nama')->pluck('nama', 'id')->toArray();
-      $view->with('mitraItems', $mitraItems);
-    });
-
-    // families - user (parent & child)
+    // families - List User (parent & child)
     View::composer(['families.fields'], function ($view) {
       $userItems = User::pluck('username', 'id')->toArray();
       $view->with('userItems', $userItems);
     });
 
-    // biodata - user id
+    // Biodata - User List
     View::composer(['biodata.fields'], function ($view) {
       $userItems = User::pluck('username', 'id')->toArray();
       $view->with('userItems', $userItems);
     });
 
-    // biodata religion list
+    // Biodata - List Religion
     View::composer(['biodata.fields'], function ($view) {
       $religionItems = Religion::pluck('name', 'id')->toArray();
       $view->with('religionItems', $religionItems);
     });
 
-    // place to live
+    // Place to live - List District, State, Country
     View::composer(['place_to_lives.fields'], function ($view) {
       $districtItems = District::pluck('name', 'id')->toArray();
       $view->with('districtItems', $districtItems);

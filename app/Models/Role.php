@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Role as SpatieRole;
 
 /**
  * Class Role
@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\DB;
  * @property string $name
  * @property string $guard_name
  */
-class Role extends Model
+class Role extends SpatieRole
 {
 
   public $table = 'roles';
@@ -50,31 +50,5 @@ class Role extends Model
     'created_at' => 'nullable',
     'updated_at' => 'nullable'
   ];
-
-  /**
-   * @return \Illuminate\Database\Eloquent\Relations\HasOne
-   **/
-  public function modelHasRole()
-  {
-    return $this->hasOne(\App\Models\ModelHasRole::class);
-  }
-
-  /**
-   * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-   **/
-  public function permissions()
-  {
-    return $this->belongsToMany(\App\Models\Permission::class, 'role_has_permissions');
-  }
-
-  public static function insertRoleHasPermission($data)
-  {
-    return DB::table('role_has_permissions')->insert($data);
-  }
-  
-  public static function insertModelHasRoles($data)
-  {
-    return DB::table('model_has_roles')->insert($data);
-  }
 
 }

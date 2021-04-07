@@ -1,4 +1,3 @@
-{{ dd($user->roles->first()->name) }}
 <!-- Name Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('username', 'Name:') !!}<span class="required">*</span>
@@ -40,15 +39,14 @@
         </div>
     </div>
     <div class="text-right" style="margin-top: -55px; margin-right: 170px;">
-        <img id='edit_preview_photos' class="img-thumbnail" width="100px;"
-             src="{{asset($user->image_path)}}"/>
+        <img id='edit_preview_photos' class="img-thumbnail" width="100px;" src="{{asset($user->image_path)}}"/>
     </div>
 </div>
 
-<!-- Peran Field -->
+<!-- Roles Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('roles', 'Peran:') !!}
-    {!! Form::select('roles', $roleItems, $user->roles->first()->name, ['class' => 'select2 form-control']) !!}
+    {!! Form::label('roles', 'Roles:') !!}
+    {!! Form::select('roles[]', $roleItems, $user->roles->pluck('name', 'name')->toArray(), ['class' => 'select2 form-control', 'multiple']) !!}
 </div>
 
 <!-- Submit Field -->

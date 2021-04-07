@@ -10,7 +10,7 @@ $factory->define(Wishlist::class, function (Faker $faker) {
         'university_id' => $faker->numberBetween(1, 30),
         'major_id' => $faker->numberBetween(1, 50),
         'service_id' => $faker->numberBetween(1, 30),
-        'user_id' => $faker->numberBetween(1, 3),
+        'user_id' => $faker->numberBetween(1, 2),
         'created_at' => date('Y-m-d H:i:s'),
         'updated_at' => date('Y-m-d H:i:s')
     ];
