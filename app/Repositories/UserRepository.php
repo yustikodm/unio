@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 
 use App\Exceptions\ApiOperationFailedException;
+use App\Models\Biodata;
 use App\Traits\ImageTrait;
 
 use App\User;
@@ -74,6 +75,11 @@ class UserRepository extends BaseRepository
       
       // Spatie [Sync Role User]
       $user->assignRole($input['roles']);
+
+      Biodata::create([
+        'user_id' => $user->id,
+        'fullname' => $input['name'],
+      ]);
 
     } catch (Exception $e) {
       throw new BadRequestHttpException($e->getMessage());

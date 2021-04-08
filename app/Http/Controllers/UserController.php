@@ -16,7 +16,6 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
-use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 use Redirect;
 use Response;
@@ -25,12 +24,10 @@ class UserController extends AppBaseController
 {
   /** @var  UserRepository */
   private $userRepository;
-  private $permissionRepository;
 
-  public function __construct(UserRepository $userRepo, PermissionRepository $permissionRepo)
+  public function __construct(UserRepository $userRepo)
   {
     $this->userRepository = $userRepo;
-    $this->permissionRepository = $permissionRepo;
   }
 
   /**
@@ -43,7 +40,6 @@ class UserController extends AppBaseController
   {
     return $userDataTable->render('users.index');
   }
-
 
   /**
    * Show the form for creating a new User.
@@ -68,6 +64,7 @@ class UserController extends AppBaseController
   {
     try {
       $input = $request->only([
+        'name', // field fullname in biodata table
         'username',
         'email',
         'password',
@@ -78,13 +75,13 @@ class UserController extends AppBaseController
       ]);
 
       $this->userRepository->store($input);
-
-      Flash::success('User saved successfully.');
-
-      return redirect(route('users.index'));
     } catch (Exception $e) {
       return Redirect::back()->withInput()->withErrors($e->getMessage());
     }
+
+    $this->Flash::success('User saved successfully.');
+    
+    return redirect(route('users.index'));
   }
 
   /**
@@ -154,15 +151,13 @@ class UserController extends AppBaseController
       $user = $this->userRepository->update($user->id, $input);
 
       Flash::success('User updated successfully.');
-
-      if (Auth::user()->hasRole('mitra')) {
-        return redirect(route('mitraProfile'));
-      } else if (Auth::user()->hasRole('admin')) {
-        return redirect(route('users.index'));
-      }
     } catch (Exception $e) {
       return Redirect::back()->withInput()->withErrors($e->getMessage());
     }
+
+    Flash::success('User updated successfully.');
+    
+    return redirect(route('users.show', $user->id));
   }
 
   /**
@@ -225,7 +220,7 @@ class UserController extends AppBaseController
    * @param [type] $id
    * @return void
    */
-  public function profile($id="")
+  public function profile()
   {
     $user = $this->userRepository->find(auth()->id());
 

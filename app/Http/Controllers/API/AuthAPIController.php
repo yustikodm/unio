@@ -22,7 +22,13 @@ class AuthAPIController extends AppBaseController
 
   public function register(Request $request)
   {
-    $input = $request->only(['username', 'email', 'password', 'api_token', 'roles']);
+    $input = $request->only([
+      'name', 
+      'username', 
+      'email', 
+      'password', 
+      'roles'
+    ]);
 
     $user = $this->userRepository->store($input);
 

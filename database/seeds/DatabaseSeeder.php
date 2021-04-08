@@ -34,18 +34,18 @@ class DatabaseSeeder extends Seeder
       StatesSeeder::class,
       DistrictSeeder::class,
       UniversitiesSeeder::class,
-      UniversityFacultySeeder::class,
-      UniversityMajorSeeder::class,
-      UniversityRequirementSeeder::class,
-      UniversityFeeSeeder::class,
-      UniversityScholarshipSeeder::class,
-      VendorCategoriesSeeder::class,
-      VendorsSeeder::class,
-      VendorServiceSeeder::class,
-      VendorEmployeeSeeder::class,
-      PlaceToLiveSeeder::class,
-      WishlistSeeder::class,
-      ArticleSeeder::class
+      // UniversityFacultySeeder::class,
+      // UniversityMajorSeeder::class,
+      // UniversityRequirementSeeder::class,
+      // UniversityFeeSeeder::class,
+      // UniversityScholarshipSeeder::class,
+      // VendorCategoriesSeeder::class,
+      // VendorsSeeder::class,
+      // VendorServiceSeeder::class,
+      // VendorEmployeeSeeder::class,
+      // PlaceToLiveSeeder::class,
+      // WishlistSeeder::class,
+      // ArticleSeeder::class
     ]);
   }
 }

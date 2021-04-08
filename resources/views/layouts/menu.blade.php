@@ -162,8 +162,8 @@ f{{-- Dashboard --}}
     </li>
 @endcan
 
-@can(['users.show', 'wishlists.index', 'carts.index'])
-  <li class="treeview {{ Request::is('users*') || Request::is('wishlists*') ? 'active menu-open' : '' }}">
+@can(['users.profile', 'wishlists.index', 'carts.index'])
+  <li class="treeview {{ Request::is('users/profile') || Request::is('wishlists*') ? 'active menu-open' : '' }}">
     <a href="#">
         <i class="fa fa-user"></i><span>User Profile</span>
         <span class="pull-right-container">
@@ -172,8 +172,8 @@ f{{-- Dashboard --}}
     </a>
     <ul class="treeview-menu">
       {{-- User Profile --}}
-      @can('users.show')
-          <li class="{{ Request::is('users*') ? 'active' : '' }}">
+      @can('users.profile')
+          <li class="{{ Request::is('users/profile') ? 'active' : '' }}">
               <a href="{{ route('users.profile') }}"><i class="fa fa-circle-thin"></i><span>Profile</span></a>
           </li>
       @endcan

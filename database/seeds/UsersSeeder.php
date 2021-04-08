@@ -25,24 +25,14 @@ class UsersSeeder extends Seeder
 
     $admin->assignRole('admin');
 
-    $moderator = User::create([
-      'username' => 'moderator',
-      'email' => 'moderator@demo.com',
+    $student = User::create([
+      'username' => 'student',
+      'email' => 'student@demo.com',
       'password' => Hash::make('password'),
       'created_at' => Carbon::now(),
       'updated_at' => Carbon::now(),
     ]);
 
-    $moderator->assignRole('moderator');
-
-    $user = User::create([
-      'username' => 'user',
-      'email' => 'user@demo.com',
-      'password' => Hash::make('password'),
-      'created_at' => Carbon::now(),
-      'updated_at' => Carbon::now(),
-    ]);
-
-    $user->assignRole('user');
+    $student->assignRole('student');
   }
 }

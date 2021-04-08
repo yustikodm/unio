@@ -14,7 +14,7 @@ class RolesSeeder extends Seeder
    */
   public function run()
   {
-    $defaultRoles = ['admin', 'moderator', 'user'];
+    $defaultRoles = ['admin', 'parent', 'student', 'vendor', 'owner_living_place'];
 
     foreach ($defaultRoles as $role) {
       $roles = Role::firstOrCreate([
@@ -28,8 +28,6 @@ class RolesSeeder extends Seeder
         $roles->syncPermissions(Permission::all());
       } else {
         $permission = Permission::where('name', 'LIKE', '%.index')
-          ->orWhere('name', 'LIKE', '%.create')
-          ->orWhere('name', 'LIKE', '%.store')
           ->orWhere('name', 'LIKE', '%.show')
           ->get();
 

@@ -19,11 +19,10 @@ class UserDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'users.datatables_actions');
-                        //  ->editColumn('roles', function ($permission) {
-                        //         return strtoupper($permission->roles->pluck('name')->toArray()[0]);
-                        //     })
-                        //  ->rawColumns(['action', 'roles']);;
+        return $dataTable->addColumn('action', 'users.datatables_actions')
+                        ->editColumn('roles', function ($permission) {
+                          return implode(', ', $permission->roles->pluck('name')->toArray());
+                        });
     }
 
     /**
@@ -73,17 +72,17 @@ class UserDataTable extends DataTable
             Column::make('username')->title('Username'),
             Column::make('email')->title('Email'),
             Column::make('phone')->title('Phone'),
-            Column::make('roles.name')->title('Roles'),
+            // Column::make('roles.name')->title('Roles'),
             // 'username',
             // 'email',
             // 'phone',
             // 'roles.name'
-            // [
-            //     'data' => 'roles',
-            //     'title' => 'Roles',
-            //     'name' => 'roles.name',
-            //     'orderable' => false
-            // ],
+            [
+                'data' => 'roles',
+                'title' => 'Roles',
+                'name' => 'roles.name',
+                'orderable' => false
+            ],
         ];
     }
 

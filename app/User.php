@@ -104,7 +104,7 @@ class User extends Authenticatable
    * @var array
    */
   public static $rules = [
-    'username'              => 'required|unique:users,username',
+    'username'              => 'nullable|unique:users,username',
     'email'                 => 'required|email|unique:users,email|regex:/^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/',
     'phone'                 => 'nullable|numeric|min:5',
     'password'              => 'nullable|min:6|required_with:password_confirmation|same:password_confirmation',
