@@ -186,7 +186,7 @@ return [
         /**
          * Laravel Socialite
          */
-        Laravel\Socialite\SocialiteServiceProvider::class,
+        // Laravel\Socialite\SocialiteServiceProvider::class,
     ],
 
     /*
