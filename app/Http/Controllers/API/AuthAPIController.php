@@ -27,7 +27,8 @@ class AuthAPIController extends AppBaseController
       'username', 
       'email', 
       'password', 
-      'roles'
+      'roles',
+      'phone'
     ]);
 
     $user = $this->userRepository->store($input);

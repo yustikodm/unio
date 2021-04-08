@@ -79,6 +79,7 @@ class UserRepository extends BaseRepository
       Biodata::create([
         'user_id' => $user->id,
         'fullname' => $input['name'],
+        'phone' => $input['phone']
       ]);
 
     } catch (Exception $e) {
