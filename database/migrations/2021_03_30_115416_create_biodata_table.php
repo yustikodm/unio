@@ -18,6 +18,7 @@ class CreateBiodataTable extends Migration
       $table->bigInteger('user_id')->unsigned();
       $table->string('fullname', 255);
       $table->longText('address')->nullable();
+      $table->enum('gender', ['Male', 'Female', 'Other']);
       $table->string('picture', 255)->nullable();
       $table->string('school_origin', 255)->nullable();
       $table->date('graduation_year')->nullable();

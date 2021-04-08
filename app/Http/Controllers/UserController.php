@@ -218,4 +218,17 @@ class UserController extends AppBaseController
       return Redirect::back()->withErrors([$e->getMessage()])->withInput($request->all());
     }
   }
+
+  /**
+   * Show current user profile (data based from login)
+   *
+   * @param [type] $id
+   * @return void
+   */
+  public function profile($id="")
+  {
+    $user = $this->userRepository->find(auth()->id());
+
+    return view('users.show')->with('user', $user);
+  }
 }

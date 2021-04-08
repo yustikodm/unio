@@ -16,12 +16,7 @@ class AuthResource extends JsonResource
    */
   public function toArray($request)
   {
-    $fullname = "";
     $biodata = Biodata::where('user_id', $this->id)->first();
-    
-    if ($biodata){
-      $fullname = $biodata->fullname;
-    }
 
     return [
       'id' => $this->id,
@@ -31,7 +26,10 @@ class AuthResource extends JsonResource
       'phone' => $this->phone,
       'image_path' => $this->image_path,
       'api_token' => $this->api_token,
-      'fullname' => $fullname,
+      'fullname' => $biodata->fullname ?? "",
+      'gender' => $biodata->gender ?? "",
+      'address' => $biodata->address ?? "",
+      'date_of_birth' => $biodata->date_of_birth ?? "",
       'created_at' => Carbon::parse($this->created_at)->format('d/m/Y H:i:s'),
       'updated_at' => Carbon::parse($this->updated_at)->format('d/m/Y H:i:s')
     ];

@@ -16,7 +16,7 @@ class CreateUniversityMajorsTable extends Migration
         Schema::create('university_majors', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('university_id')->unsigned();
-            $table->bigInteger('faculty_id')->unsigned();
+            $table->bigInteger('faculty_id')->unsigned()->nullable();
             $table->string('name', 255);
             $table->longText('description')->nullable();
             $table->char('accreditation')->nullable();

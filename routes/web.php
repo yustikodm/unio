@@ -22,6 +22,8 @@ Route::get('/dashboard', 'HomeController@index')->name('home');
 Route::group(['middleware' => ['auth']], function () {
   Route::resource('countries', 'CountryController');
 
+  Route::get('users/profile', 'UserController@profile')->name('users.profile');
+  
   Route::resource('users', 'UserController');
 
   Route::get('profile', 'UserController@editProfile');

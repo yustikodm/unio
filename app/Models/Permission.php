@@ -76,6 +76,7 @@ class Permission extends SpatiePermission
       'users.update',
       'users.destroy',
       'users.show',
+      'users.profile',
 
       'families.index',
       'families.show',

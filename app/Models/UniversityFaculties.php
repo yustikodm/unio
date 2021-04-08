@@ -74,12 +74,11 @@ class UniversityFaculties extends Model
       return $query->where('university_faculties.name', "$param");
     })
       ->when($country, function ($query) use ($country) {
-        return $query;
         return $query->join('universities', 'universities.id', 'university_faculties.university_id')
           ->where('universities.country_id', $country)
           ->select($this->selectCustom());
       })
-      ->when($district, function ($query) use ($state) {
+      ->when($state, function ($query) use ($state) {
         return $query->join('universities', 'universities.id', 'university_faculties.university_id')
           ->where('universities.state_id', $state)
           ->select($this->selectCustom());

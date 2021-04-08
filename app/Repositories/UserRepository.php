@@ -70,7 +70,7 @@ class UserRepository extends BaseRepository
       $user = User::create($input);
       
       // if empty roles
-      $input['roles'] = isset($input['roles']) ? $input['roles'] : [];
+      $input['roles'] = isset($input['roles']) ? $input['roles'] : ['student'];
       
       // Spatie [Sync Role User]
       $user->assignRole($input['roles']);
@@ -110,7 +110,7 @@ class UserRepository extends BaseRepository
       $user->update($input);
 
       // if empty roles
-      $input['roles'] = isset($input['roles']) ? $input['roles'] : [];
+      $input['roles'] = isset($input['roles']) ? $input['roles'] : ['student'];
 
       // Spatie [Sync Role User]
       DB::table('model_has_roles')->where('model_id',$user->id)->delete();

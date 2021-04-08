@@ -10,6 +10,16 @@
     {!! Form::text('fullname', null, ['class' => 'form-control','maxlength' => 255]) !!}
 </div>
 
+<!-- Gender Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('gender', 'Gender:') !!}
+    <div class="radio">
+      <label>{!! Form::radio('gender', 'Male'); !!} Male</label>
+      <label style="margin: 0 2em;">{!! Form::radio('gender', 'Female'); !!} Female</label>
+      <label>{!! Form::radio('gender', 'Other'); !!} Other</label>
+    </div>
+</div>
+
 <!-- Address Field -->
 <div class="form-group col-sm-12 col-lg-12">
     {!! Form::label('address', 'Address:') !!}

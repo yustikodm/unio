@@ -1,6 +1,6 @@
 <!-- questionnaire Id Field -->
 <div class="form-group col-sm-6">
-  {!! Form::label('questionnaire_id', 'questionnaire:') !!}
+  {!! Form::label('questionnaire_id', 'Questionnaire:') !!}
   {!! Form::select('questionnaire_id',$questionnaireItems, null, ['class' => 'form-control']) !!}
 </div>
 
@@ -13,7 +13,7 @@
 <!-- Answer Field -->
 <div class="form-group col-sm-6">
   {!! Form::label('answer', 'Answer:') !!}
-  {!! Form::text('answer', null, ['class' => 'form-control','maxlength' => 255,'maxlength' => 255,'maxlength' => 255]) !!}
+  {!! Form::text('answer', null, ['class' => 'form-control','maxlength' => 255]) !!}
 </div>
 
 <!-- Submit Field -->
