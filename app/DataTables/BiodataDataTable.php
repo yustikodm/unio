@@ -72,7 +72,7 @@ class BiodataDataTable extends DataTable
         return [
             Column::make('fullname')->title('Full Name'),
             Column::make('address')->title('Address'),
-            Column::make('birth_date')->title('Birth Data'),
+            Column::make('birth_date')->title('Birth Date'),
             Column::make('user.username')->title('User ID'),
         ];
     }

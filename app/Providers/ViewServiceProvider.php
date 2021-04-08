@@ -158,12 +158,18 @@ class ViewServiceProvider extends ServiceProvider
 
     // Biodata - User List
     View::composer(['biodata.fields'], function ($view) {
-      $userItems = User::pluck('username', 'id')->toArray();
+      $userItems = User::getNotExistBiodata()->pluck('username', 'id')->toArray();
       $view->with('userItems', $userItems);
     });
 
     // Biodata - List Religion
     View::composer(['biodata.fields'], function ($view) {
+      $religionItems = Religion::pluck('name', 'id')->toArray();
+      $view->with('religionItems', $religionItems);
+    });
+
+    // Biodata - List Religion
+    View::composer(['biodata.edit_fields'], function ($view) {
       $religionItems = Religion::pluck('name', 'id')->toArray();
       $view->with('religionItems', $religionItems);
     });

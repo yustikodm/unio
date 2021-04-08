@@ -265,14 +265,14 @@ f{{-- Dashboard --}}
           {{-- Families --}}
           @can('families.index')
               <li class="{{ Request::is('families*') ? 'active' : '' }}">
-                  <a href="{{ route('families.index') }}"><i class="fa fa-edit"></i><span>Families</span></a>
+                  <a href="{{ route('families.index') }}"><i class="fa fa-circle-thin"></i><span>Families</span></a>
               </li>
           @endcan
 
           {{-- Biodata --}}
           @can('biodata.index')
               <li class="{{ Request::is('biodata*') ? 'active' : '' }}">
-                  <a href="{{ route('biodata.index') }}"><i class="fa fa-edit"></i><span>Biodata</span></a>
+                  <a href="{{ route('biodata.index') }}"><i class="fa fa-circle-thin"></i><span>Biodata</span></a>
               </li>
           @endcan
         </ul>

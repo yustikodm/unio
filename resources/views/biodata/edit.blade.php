@@ -13,7 +13,7 @@
                <div class="row">
                    {!! Form::model($biodata, ['route' => ['biodata.update', $biodata->id], 'method' => 'patch']) !!}
 
-                        @include('biodata.fields')
+                        @include('biodata.edit_fields')
 
                    {!! Form::close() !!}
                </div>

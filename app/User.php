@@ -54,7 +54,7 @@ use Spatie\Permission\Traits\HasRoles;
 class User extends Authenticatable
 {
   use HasRoles, Notifiable, ImageTrait;
-  
+
   use ImageTrait {
     deleteImage as traitDeleteImage;
   }
@@ -188,5 +188,19 @@ class User extends Authenticatable
     }
 
     return $this->traitDeleteImage(self::IMAGE_PATH . DIRECTORY_SEPARATOR . $image);
+  }
+
+  /**
+   * Get User Not Exist in Biodata table
+   *
+   * @param $query
+   * @return collection
+   */
+  public function scopeGetNotExistBiodata($query)
+  {
+    return $query->select('username', 'id')
+      ->whereNotIn('id', function ($query) {
+        return $query->from('biodata')->select('user_id');
+      })->get();
   }
 }
