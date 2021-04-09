@@ -1,8 +1,7 @@
 <!-- User ID Field -->
 <div class="form-group col-sm-6">
-  {!! Form::label('username', 'User ID:') !!}
-  {!! Form::text('username', $biodata->user->username, ['class' => 'form-control', 'disabled']) !!}
-  {!! Form::hidden('user_id', $biodata->user->id) !!}
+  {!! Form::label('user_id', 'User ID:') !!}
+  {!! Form::select('user_id', $userItems, null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Full Name Field -->
@@ -17,7 +16,7 @@
     <div class="radio">
       <label>{!! Form::radio('gender', 'Male'); !!} Male</label>
       <label style="margin: 0 2em;">{!! Form::radio('gender', 'Female'); !!} Female</label>
-      <label>{!! Form::radio('gender', 'Other'); !!} Other</label>
+      <label>{!! Form::radio('gender', 'Other', ['selected']); !!} Other</label>
     </div>
 </div>
 

@@ -84,7 +84,7 @@ Route::group(['middleware' => ['auth']], function () {
 
   Route::resource('families', 'FamilyController');
 
-  Route::resource('biodata', 'BiodataController')->except(['create']);
+  Route::resource('biodata', 'BiodataController');
 
   Route::resource('pricing-points', 'PricingPointController')->only(['store', 'edit', 'update', 'index']);
 
