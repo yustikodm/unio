@@ -11,14 +11,16 @@ class TestController extends Controller
 {
   public function index()
   {
-    $data = Permission::where('name', 'LIKE', '%.index')
-    ->orWhere('name', 'LIKE', '%.create')
-    ->orWhere('name', 'LIKE', '%.store')
-    ->orWhere('name', 'LIKE', '%.show')
-    ->get();
+    dd(User::where('email', 'admin@demo.com2')->first());
+    // return redirect()->route('home');
+    // $data = Permission::where('name', 'LIKE', '%.index')
+    // ->orWhere('name', 'LIKE', '%.create')
+    // ->orWhere('name', 'LIKE', '%.store')
+    // ->orWhere('name', 'LIKE', '%.show')
+    // ->get();
 
-    $data1 = Permission::all();
-    echo json_encode($data1);
+    // $data1 = Permission::all();
+    // echo json_encode($data1);
     // echo json_encode(Permission::where('name', 'LIKE', '%.index')
     // ->orWhere('name', 'LIKE', '%.create')
     // ->orWhere('name', 'LIKE', '%.store')

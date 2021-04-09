@@ -15,6 +15,10 @@ Route::get('/', function () {
   return redirect('dashboard');
 });
 
+Route::get('auth/{provider}', 'Auth\LoginController@redirectToProvider')->name('auth.provider');
+
+Route::get('auth/{provider}/callback', 'Auth\LoginController@responseProviderCallback')->name('auth.callback');
+
 Auth::routes(['verify' => true]);
 
 Route::get('/dashboard', 'HomeController@index')->name('home');
@@ -84,7 +88,7 @@ Route::group(['middleware' => ['auth']], function () {
 
   Route::resource('families', 'FamilyController');
 
-  Route::resource('biodata', 'BiodataController')->except(['create']);
+  Route::resource('biodata', 'BiodataController');
 
   Route::resource('pricing-points', 'PricingPointController')->only(['store', 'edit', 'update', 'index']);
 

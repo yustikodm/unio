@@ -7,6 +7,7 @@ use App\Models\Biodata;
 use App\Models\Family;
 use App\Models\PointTopup;
 use App\Models\QuestionnaireAnswer;
+use App\Models\SocialAccount;
 use App\Models\Wishlist;
 use App\Traits\ImageTrait;
 use Illuminate\Database\Eloquent\Builder;
@@ -163,6 +164,11 @@ class User extends Authenticatable
     return $this->hasMany(Wishlist::class);
   }
 
+  public function socialAccount()
+  {
+    return $this->hasMany(SocialAccount::class);
+  }
+
   /**
    * @param $value
    *
@@ -202,5 +208,10 @@ class User extends Authenticatable
       ->whereNotIn('id', function ($query) {
         return $query->from('biodata')->select('user_id');
       })->get();
+  }
+
+  public static function getExistUser($email)
+  {
+    return static::where('email', $email)->first();
   }
 }

@@ -88,6 +88,7 @@ class Permission extends SpatiePermission
       
       'biodata.index',
       'biodata.show',
+      'biodata.create',
       'biodata.store',
       'biodata.edit',
       'biodata.update',
