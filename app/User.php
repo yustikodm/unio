@@ -7,6 +7,7 @@ use App\Models\Biodata;
 use App\Models\Family;
 use App\Models\PointTopup;
 use App\Models\QuestionnaireAnswer;
+use App\Models\SocialAccount;
 use App\Models\Wishlist;
 use App\Traits\ImageTrait;
 use Illuminate\Database\Eloquent\Builder;
@@ -161,6 +162,11 @@ class User extends Authenticatable
   public function wishlist()
   {
     return $this->hasMany(Wishlist::class);
+  }
+
+  public function socialAccount()
+  {
+    return $this->hasMany(SocialAccount::class);
   }
 
   /**
