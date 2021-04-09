@@ -69,19 +69,20 @@ class UserRepository extends BaseRepository
       $input['api_token'] = Str::random(100);
 
       $user = User::create($input);
-      
+
       // if empty roles
       $input['roles'] = isset($input['roles']) ? $input['roles'] : ['student'];
-      
+
       // Spatie [Sync Role User]
       $user->assignRole($input['roles']);
 
-      Biodata::create([
-        'user_id' => $user->id,
-        'fullname' => $input['name'],
-        'phone' => $input['phone']
-      ]);
-
+      if (!empty($input['name'])) {
+        Biodata::create([
+          'user_id' => $user->id,
+          'fullname' => $input['name']
+        ]);
+      }
+      
     } catch (Exception $e) {
       throw new BadRequestHttpException($e->getMessage());
     }
@@ -120,7 +121,7 @@ class UserRepository extends BaseRepository
       $input['roles'] = isset($input['roles']) ? $input['roles'] : ['student'];
 
       // Spatie [Sync Role User]
-      DB::table('model_has_roles')->where('model_id',$user->id)->delete();
+      DB::table('model_has_roles')->where('model_id', $user->id)->delete();
       $user->assignRole($input['roles']);
 
       DB::commit();
@@ -181,5 +182,4 @@ class UserRepository extends BaseRepository
       return new ApiOperationFailedException('Unable to Update Profile' . $e->getMessage(), $e->getCode());
     }
   }
-
 }

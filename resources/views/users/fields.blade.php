@@ -1,7 +1,13 @@
-<!-- Name Field -->
+<!-- Username Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('username', 'Name:') !!}<span class="required">*</span>
+    {!! Form::label('username', 'Username:') !!}<span class="required">*</span>
     {!! Form::text('username', null, ['id'=>'username', 'class' => 'form-control', 'required']) !!}
+</div>
+
+<!-- Full Name Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('name', 'Full Name:') !!}<span class="required">*</span>
+    {!! Form::text('name', null, ['id'=>'name', 'class' => 'form-control', 'required']) !!}
 </div>
 
 <!-- Email Field -->

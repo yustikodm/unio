@@ -7,17 +7,16 @@ use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserProfileRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Repositories\UserRepository;
-use App\Repositories\PermissionRepository;
 use App\User;
-use Auth;
 use Exception;
-use Flash;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
-use Redirect;
+use Laracasts\Flash\Flash;
 use Response;
 
 class UserController extends AppBaseController
@@ -79,7 +78,7 @@ class UserController extends AppBaseController
       return Redirect::back()->withInput()->withErrors($e->getMessage());
     }
 
-    $this->Flash::success('User saved successfully.');
+    Flash::success('User saved successfully.');
     
     return redirect(route('users.index'));
   }
