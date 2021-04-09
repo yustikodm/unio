@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Biodata;
 use App\Models\SocialAccount;
 use App\User;
 use Exception;
@@ -86,6 +87,25 @@ class LoginController extends Controller
           return $socialAccount->user;
         } else {
           $user = User::where('email', $socialUser->getEmail()->first());
+
+          if (!$user) {
+            $user = User::create([
+              'username' => explode('@', $socialUser->getName())[0],
+              'email' => $socialUser->getEmail()
+            ]);
+
+            Biodata::create([
+              'fullname' => $socialUser->getName()
+            ]);
+          }
+
+          $user->socialAccount()->create([
+            'provider_id' => $socialUser->getId(),
+            'provider_name' => $provider,
+            'user_id' => $user->id
+          ]);
+
+          return $user;
         }
     }
 }
