@@ -39,13 +39,13 @@ class DatabaseSeeder extends Seeder
       UniversityRequirementSeeder::class,
       UniversityFeeSeeder::class,
       UniversityScholarshipSeeder::class,
+      PlaceToLiveSeeder::class,
+      ArticleSeeder::class,
       VendorCategoriesSeeder::class,
       VendorsSeeder::class,
       VendorServiceSeeder::class,
       VendorEmployeeSeeder::class,
-      PlaceToLiveSeeder::class,
       WishlistSeeder::class,
-      ArticleSeeder::class
     ]);
   }
 }

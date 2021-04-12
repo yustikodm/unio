@@ -17,7 +17,7 @@ $factory->define(Vendor::class, function (Faker $faker) {
         'back_account_number' => $faker->bankAccountNumber,
         'website' => $faker->domainName,
         'country_id' => $faker->numberBetween(1,100),
-        'state_id' => $faker->numberBetween(1,100),
+        'state_id' => $faker->numberBetween(1,34),
         'district_id' => $faker->numberBetween(1,100),
         'created_at' => date('Y-m-d H:i:s'),
         'updated_at' => date('Y-m-d H:i:s')
