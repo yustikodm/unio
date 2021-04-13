@@ -12,6 +12,7 @@
         "appointer/swaggervel": "dev-master",
         "doctrine/dbal": "~2.3",
         "fideloper/proxy": "^4.0",
+        "fruitcake/laravel-cors": "^2.0",
         "infyomlabs/adminlte-templates": "6.0.x-dev",
         "infyomlabs/laravel-generator": "6.0.x-dev",
         "infyomlabs/swagger-generator": "dev-master",

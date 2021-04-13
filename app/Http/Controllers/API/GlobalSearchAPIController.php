@@ -50,20 +50,19 @@ class GlobalSearchAPIController extends AppBaseController
         break;
 
       case 'placetolive':
-        $placeToLive = PlaceToLive::apiSearch($request->name);
+        $placeToLive = PlaceToLive::apiSearch($request->name, $request->country, $request->state, $request->district);
 
         return $this->sendResponse(PlaceToLiveResource::collection($placeToLive), 'Place To Live retrieved successfully');
         break;
 
-      case 'vendors':
+      case 'vendors': // DONE
         $vendor = Vendor::apiSearch($request->name, $request->category, $request->country, $request->state, $request->district);
 
-        // return $this->sendResponse($vendor, 'Vendor retrieved successfully');
         return $this->sendResponse(VendorResource::collection($vendor), 'Vendor retrieved successfully');
         break;
 
       case 'vendorservices':
-        $vendorService = VendorService::apiSearch($request->name);
+        $vendorService = VendorService::apiSearch($request->name, $request->vendor, $request->country, $request->state, $request->district);
 
         return $this->sendResponse(VendorServiceResource::collection($vendorService), 'Vendor Service retrieved successfully');
         break;

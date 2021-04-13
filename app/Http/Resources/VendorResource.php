@@ -47,7 +47,7 @@ class VendorResource extends JsonResource
 
     if (!empty($this->c_id)) {
       $output = array_merge($output,[
-        'countries' => [
+        'country' => [
           'id' => $this->c_id,
           'name' => $this->c_name,
           'created_at' => Carbon::parse($this->c_created_at)->format('d/m/Y H:i:s'),
@@ -62,7 +62,7 @@ class VendorResource extends JsonResource
 
     if (!empty($this->s_id)) {
       $output = array_merge($output,[
-        'states' => [
+        'state' => [
           'id' => $this->s_id,
           'name' => $this->s_name,
           'created_at' => Carbon::parse($this->s_created_at)->format('d/m/Y H:i:s'),

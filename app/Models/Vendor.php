@@ -32,6 +32,9 @@ class Vendor extends Model
   protected $dates = ['deleted_at'];
 
   public $fillable = [
+    'country_id',
+    'state_id',
+    'district_id',
     'vendor_category_id',
     'name',
     'description',
