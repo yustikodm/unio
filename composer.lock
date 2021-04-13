@@ -4,7 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
+<<<<<<< HEAD
     "content-hash": "3823cce58595fc5596e64495be113251",
+=======
+    "content-hash": "a892c09ee7c167572335b05548e1b425",
+>>>>>>> bd2d15c8225611c0f7bb01f710ab8ce97ef348f2
     "packages": [
         {
             "name": "appointer/swaggervel",
@@ -993,6 +997,7 @@
             "time": "2020-10-22T13:48:01+00:00"
         },
         {
+<<<<<<< HEAD
             "name": "fruitcake/laravel-cors",
             "version": "v2.0.3",
             "source": {
@@ -1070,6 +1075,8 @@
             "time": "2020-10-22T13:57:20+00:00"
         },
         {
+=======
+>>>>>>> bd2d15c8225611c0f7bb01f710ab8ce97ef348f2
             "name": "guzzlehttp/guzzle",
             "version": "7.3.0",
             "source": {
