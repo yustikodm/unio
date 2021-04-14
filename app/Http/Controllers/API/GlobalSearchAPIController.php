@@ -4,8 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\AppBaseController;
 use App\Http\Resources\PlaceToLiveResource;
-use App\Http\Resources\SearchFacutltiesResource;
-use App\Http\Resources\SearchUniversitiesResource;
+use App\Http\Resources\UniversityFacultiesResource;
 use App\Http\Resources\UniversityMajorResource;
 use App\Http\Resources\UniversityResource;
 use App\Http\Resources\UniversityScholarshipResource;
@@ -47,7 +46,7 @@ class GlobalSearchAPIController extends AppBaseController
       case 'faculties': // DONE
         $universityFaculties = UniversityFaculties::apiSearch($request->name, $request->major, $request->university, $request->country, $request->state, $request->district);
 
-        return SearchFacutltiesResource::collection($universityFaculties->paginate(15))->toResponse(15);
+        return UniversityFacultiesResource::collection($universityFaculties->paginate(15))->toResponse(15);
         break;
 
       case 'placetolive': // DONE
