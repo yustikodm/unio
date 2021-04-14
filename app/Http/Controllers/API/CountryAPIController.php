@@ -30,18 +30,13 @@ class CountryAPIController extends AppBaseController
      * Display a listing of the Country.
      * GET|HEAD /countries
      *
-     * @param Request $request
      * @return Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $countries = $this->countryRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
-        );
+        $countries = $this->countryRepository->paginate(15);
 
-        return $this->sendResponse(CountryResource::collection($countries), 'Countries retrieved successfully');
+        return $this->sendResponse($countries, 'Countries retrieved successfully');
     }
 
     /**

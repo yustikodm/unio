@@ -30,18 +30,13 @@ class VendorCategoryAPIController extends AppBaseController
      * Display a listing of the VendorCategory.
      * GET|HEAD /vendorCategories
      *
-     * @param Request $request
      * @return Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $vendorCategories = $this->vendorCategoryRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
-        );
+        $vendorCategories = $this->vendorCategoryRepository->paginate(15);
 
-        return $this->sendResponse(VendorCategoryResource::collection($vendorCategories), 'Vendor Categories retrieved successfully');
+        return $this->sendResponse($vendorCategories, 'Vendor Categories retrieved successfully');
     }
 
     /**

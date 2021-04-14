@@ -30,18 +30,13 @@ class VendorAPIController extends AppBaseController
      * Display a listing of the Vendor.
      * GET|HEAD /vendors
      *
-     * @param Request $request
      * @return Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $vendors = $this->vendorRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
-        );
+        $vendors = $this->vendorRepository->paginate(15);
 
-        return $this->sendResponse(VendorResource::collection($vendors), 'Vendors retrieved successfully');
+        return $this->sendResponse($vendors, 'Vendors retrieved successfully');
     }
 
     /**

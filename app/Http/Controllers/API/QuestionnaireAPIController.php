@@ -30,18 +30,13 @@ class QuestionnaireAPIController extends AppBaseController
      * Display a listing of the Questionnaire.
      * GET|HEAD /questionnaires
      *
-     * @param Request $request
      * @return Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $questionnaires = $this->questionnaireRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
-        );
+        $questionnaires = $this->questionnaireRepository->paginate(15);
 
-        return $this->sendResponse(QuestionnaireResource::collection($questionnaires), 'Questionnaires retrieved successfully');
+        return $this->sendResponse($questionnaires, 'Questionnaires retrieved successfully');
     }
 
     /**

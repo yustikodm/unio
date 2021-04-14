@@ -24,7 +24,6 @@ class UniversityFeeResource extends JsonResource
       'university' => new UniversityResource($this->university),
       'faculty' => new UniversityFacultiesResource($this->faculty),
       'major' => new UniversityMajorResource($this->major),
-      'currency' => new CurrencyResource($this->currency),
       'created_at' => Carbon::parse($this->created_at)->format('d/m/Y H:i:s'),
       'updated_at' => Carbon::parse($this->updated_at)->format('d/m/Y H:i:s')
     ];

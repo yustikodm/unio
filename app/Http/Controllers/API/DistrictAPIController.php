@@ -30,18 +30,13 @@ class DistrictAPIController extends AppBaseController
      * Display a listing of the District.
      * GET|HEAD /districts
      *
-     * @param Request $request
      * @return Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $districts = $this->districtRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
-        );
+        $districts = $this->districtRepository->paginate(15);
 
-        return $this->sendResponse(DistrictResource::collection($districts), 'Districts retrieved successfully');
+        return $this->sendResponse($districts, 'Districts retrieved successfully');
     }
 
     /**

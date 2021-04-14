@@ -30,18 +30,13 @@ class UniversityFeeAPIController extends AppBaseController
      * Display a listing of the UniversityFee.
      * GET|HEAD /universityFees
      *
-     * @param Request $request
      * @return Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $universityFees = $this->universityFeeRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
-        );
+        $universityFees = $this->universityFeeRepository->paginate(15);
 
-        return $this->sendResponse(UniversityFeeResource::collection($universityFees), 'University Fees retrieved successfully');
+        return $this->sendResponse($universityFees, 'University Fees retrieved successfully');
     }
 
     /**

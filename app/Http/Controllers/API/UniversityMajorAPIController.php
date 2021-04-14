@@ -30,18 +30,13 @@ class UniversityMajorAPIController extends AppBaseController
      * Display a listing of the UniversityMajor.
      * GET|HEAD /universityMajors
      *
-     * @param Request $request
      * @return Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $universityMajors = $this->universityMajorRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
-        );
+        $universityMajors = $this->universityMajorRepository->paginate(15);
 
-        return $this->sendResponse(UniversityMajorResource::collection($universityMajors), 'University Majors retrieved successfully');
+        return $this->sendResponse($universityMajors, 'University Majors retrieved successfully');
     }
 
     /**

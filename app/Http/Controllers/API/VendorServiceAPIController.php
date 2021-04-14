@@ -30,18 +30,13 @@ class VendorServiceAPIController extends AppBaseController
      * Display a listing of the VendorService.
      * GET|HEAD /vendorServices
      *
-     * @param Request $request
      * @return Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $vendorServices = $this->vendorServiceRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
-        );
+        $vendorServices = $this->vendorServiceRepository->paginate(15);
 
-        return $this->sendResponse(VendorServiceResource::collection($vendorServices), 'Vendor Services retrieved successfully');
+        return $this->sendResponse($vendorServices, 'Vendor Services retrieved successfully');
     }
 
     /**

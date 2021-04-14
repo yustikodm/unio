@@ -98,16 +98,77 @@ class UniversityMajor extends Model
     return $this->belongsTo(University::class, 'universities.id');
   }
 
-  public function scopeApiSearch($query, $param)
+  public function scopeApiSearch($query, $param, $university, $country, $state, $district)
   {
-    return $query->when($param, function ($query) use ($param) {
-      return $query->where('name', 'LIKE', "%$param%");
-    })->get();
-  }
+    $search = $query->when($param, function ($query) use ($param) {
+      return $query->where('university_majors.name', 'LIKE', "%$param%");
+    })
+      ->when($university or $country or $state or $district, function ($query) use ($university, $country, $state, $district) {
+        $univ = $query->join('universities', 'universities.id', 'university_majors.university_id')
+          ->where('universities.name', 'LIKE', "%$university%")
+          ->orWhere('universities.id', $university);
 
-  public function scopeApiSearchByUniversities($query, $university_id)
-  {
-    return $query->where('university_id', $university_id)->get();
+        return $univ->when($country, function ($query) use ($country) {
+          return $query->join('countries', 'countries.id', 'universities.country_id')
+            ->where('countries.id', $country);
+        })
+          ->when($state, function ($query) use ($state) {
+            return $query->join('states', 'states.id', 'universities.state_id')
+              ->where('states.id', $state);
+          })
+          ->when($district, function ($query) use ($district) {
+            return $query->join('districts', 'districts.id', 'universities.district_id')
+              ->where('districts.id', $district);
+          });
+      });
+
+    $select_list = ['university_majors.*'];
+
+    if (!empty($university)) {
+      $select_list = array_merge($select_list, [
+        'universities.id as u_id',
+        'universities.name as u_name',
+        'universities.description as u_description',
+        'universities.logo_src as u_logo_src',
+        'universities.type as u_type',
+        'universities.accreditation as u_accreditation',
+        'universities.address as u_address',
+        'universities.country_id',
+        'universities.state_id',
+        'universities.district_id',
+        'universities.created_at as u_created_at',
+        'universities.updated_at as u_updated_at'
+      ]);
+
+      if (!empty($country)) {
+        $select_list = array_merge($select_list, [
+          'countries.id as c_id',
+          'countries.name as c_name',
+          'countries.created_at as c_created_at',
+          'countries.updated_at as c_updated_at'
+        ]);
+      }
+
+      if (!empty($state)) {
+        $select_list = array_merge($select_list, [
+          'states.id as s_id',
+          'states.name as s_name',
+          'states.created_at as s_created_at',
+          'states.updated_at as s_updated_at'
+        ]);
+      }
+
+      if (!empty($district)) {
+        $select_list = array_merge($select_list, [
+          'districts.id as d_id',
+          'districts.name as d_name',
+          'districts.created_at as d_created_at',
+          'districts.updated_at as d_updated_at'
+        ]);
+      }
+    }
+
+    return $search->select($select_list);
   }
 
   public function scopeApiSearchByFaculties($query, $faculty_id)

@@ -30,18 +30,13 @@ class ReligionAPIController extends AppBaseController
      * Display a listing of the Religion.
      * GET|HEAD /religions
      *
-     * @param Request $request
      * @return Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $religions = $this->religionRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
-        );
+        $religions = $this->religionRepository->paginate(15);
 
-        return $this->sendResponse(ReligionResource::collection($religions), 'Religions retrieved successfully');
+        return $this->sendResponse($religions, 'Religions retrieved successfully');
     }
 
     /**

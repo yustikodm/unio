@@ -30,18 +30,13 @@ class UniversityFacultiesAPIController extends AppBaseController
      * Display a listing of the UniversityFaculties.
      * GET|HEAD /universityFaculties
      *
-     * @param Request $request
      * @return Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $universityFaculties = $this->universityFacultiesRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
-        );
+        $universityFaculties = $this->universityFacultiesRepository->paginate(15);
 
-        return $this->sendResponse(UniversityFacultiesResource::collection($universityFaculties), 'University Faculties retrieved successfully');
+        return $this->sendResponse($universityFaculties, 'University Faculties retrieved successfully');
     }
 
     /**

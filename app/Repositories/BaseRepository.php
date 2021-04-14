@@ -73,17 +73,6 @@ abstract class BaseRepository
     return $query->paginate($perPage, $columns);
   }
 
-  // public function apiSearch($param)
-  // {
-  //   // print($param); die;
-  //   $query = $this->allQuery($param);
-
-  //   // return $query->when($param, function ($query) use ($param) {
-  //   //   return $query->where('name', 'LIKE', "%$param%");
-  //   // })->get();
-  //   return $query->get();
-  // }
-
   /**
    * Build a query for retrieving all records.
    *

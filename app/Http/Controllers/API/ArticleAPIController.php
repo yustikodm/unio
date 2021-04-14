@@ -30,18 +30,13 @@ class ArticleAPIController extends AppBaseController
    * Display a listing of the Article.
    * GET|HEAD /articles
    *
-   * @param Request $request
    * @return Response
    */
-  public function index(Request $request)
+  public function index()
   {
-    $articles = $this->articleRepository->all(
-      $request->except(['skip', 'limit']),
-      $request->get('skip'),
-      $request->get('limit')
-    );
+    $articles = $this->articleRepository->paginate(15);
 
-    return $this->sendResponse(ArticleResource::collection($articles), 'Articles retrieved successfully');
+    return $this->sendResponse($articles, 'Articles retrieved successfully');
   }
 
   /**

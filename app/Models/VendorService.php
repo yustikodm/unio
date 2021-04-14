@@ -146,6 +146,6 @@ class VendorService extends Model
       ]);
     }
 
-    return $search->select($select_list)->get();
+    return $search->select($select_list);
   }
 }

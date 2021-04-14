@@ -30,14 +30,11 @@ class UniversityAPIController extends AppBaseController
      * Display a listing of the University.
      * GET|HEAD /universities
      *
-     * @param Request $request
      * @return Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $universities = $this->universityRepository->paginate(
-            15
-        );
+        $universities = $this->universityRepository->paginate(15);
 
         return $this->sendResponse($universities, 'Universities retrieved successfully');
     }

@@ -30,18 +30,13 @@ class PlaceToLiveAPIController extends AppBaseController
    * Display a listing of the PlaceToLive.
    * GET|HEAD /placeToLives
    *
-   * @param Request $request
    * @return Response
    */
-  public function index(Request $request)
+  public function index()
   {
-    $placeToLives = $this->placeToLiveRepository->all(
-      $request->except(['skip', 'limit']),
-      $request->get('skip'),
-      $request->get('limit')
-    );
+    $placeToLives = $this->placeToLiveRepository->paginate(15);
 
-    return $this->sendResponse(PlaceToLiveResource::collection($placeToLives), 'Place To Lives retrieved successfully');
+    return $this->sendResponse($placeToLives, 'Place To Lives retrieved successfully');
   }
 
   /**

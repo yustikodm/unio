@@ -7,6 +7,7 @@ use App\Http\Resources\PlaceToLiveResource;
 use App\Http\Resources\SearchFacutltiesResource;
 use App\Http\Resources\SearchUniversitiesResource;
 use App\Http\Resources\UniversityMajorResource;
+use App\Http\Resources\UniversityResource;
 use App\Http\Resources\UniversityScholarshipResource;
 use App\Http\Resources\VendorResource;
 use App\Http\Resources\VendorServiceResource;
@@ -37,46 +38,46 @@ class GlobalSearchAPIController extends AppBaseController
      */
 
     switch ($request->keyword) {
-      case 'universities':
+      case 'universities': // DONE
         $university = University::apiSearch($request->name, $request->major, $request->country, $request->state, $request->district);
 
-        return $this->sendResponse(SearchUniversitiesResource::collection($university), 'Universities retrieved successfully');
+        return UniversityResource::collection($university->paginate(15))->toResponse(15);
         break;
 
-      case 'faculties':
+      case 'faculties': // DONE
         $universityFaculties = UniversityFaculties::apiSearch($request->name, $request->major, $request->university, $request->country, $request->state, $request->district);
-        // return $universityFaculties;
-        return $this->sendResponse(SearchFacutltiesResource::collection($universityFaculties), 'University Faculties retrieved successfully');
+
+        return SearchFacutltiesResource::collection($universityFaculties->paginate(15))->toResponse(15);
         break;
 
-      case 'placetolive':
+      case 'placetolive': // DONE
         $placeToLive = PlaceToLive::apiSearch($request->name, $request->country, $request->state, $request->district);
 
-        return $this->sendResponse(PlaceToLiveResource::collection($placeToLive), 'Place To Live retrieved successfully');
+        return PlaceToLiveResource::collection($placeToLive->paginate(15))->toResponse(15);
         break;
 
       case 'vendors': // DONE
         $vendor = Vendor::apiSearch($request->name, $request->category, $request->country, $request->state, $request->district);
 
-        return $this->sendResponse(VendorResource::collection($vendor), 'Vendor retrieved successfully');
+        return VendorResource::collection($vendor->paginate(15))->toResponse(15);
         break;
 
-      case 'vendorservices':
+      case 'vendorservices': // DONE
         $vendorService = VendorService::apiSearch($request->name, $request->vendor, $request->country, $request->state, $request->district);
 
-        return $this->sendResponse(VendorServiceResource::collection($vendorService), 'Vendor Service retrieved successfully');
+        return VendorServiceResource::collection($vendorService->paginate(15))->toResponse(15);
         break;
 
       case 'scholarship':
-        $universityScholarship = UniversityScholarship::apiSearch($request->name);
+        $universityScholarship = UniversityScholarship::apiSearch($request->name, $request->university, $request->country, $request->state, $request->district);
 
-        return $this->sendResponse(UniversityScholarshipResource::collection($universityScholarship), 'University Scholarship retrieved successfully');
+        return UniversityScholarshipResource::collection($universityScholarship->paginate(15))->toResponse(15);
         break;
 
-      default: // major
-        $universityMajors = UniversityMajor::apiSearch($request->name);
+      default: // University Major // DONE
+        $universityMajors = UniversityMajor::apiSearch($request->name, $request->university, $request->country, $request->state, $request->district);
 
-        return $this->sendResponse(UniversityMajorResource::collection($universityMajors), 'University Majors retrieved successfully');
+        return UniversityMajorResource::collection($universityMajors->paginate(15))->toResponse(15);
         break;
     }
   }

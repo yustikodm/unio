@@ -133,41 +133,70 @@ class University extends Model
 
   public function scopeApiSearch($query, $param, $major = "", $country = "", $state = "", $district = "")
   {
-    return $query->when($param, function ($query) use ($param) {
+    $search = $query->when($param, function ($query) use ($param) {
       return $query->where('universities.name', 'LIKE', "%$param%");
     })
       ->when($country, function ($query) use ($country) {
-        return $query->where('universities.country_id', $country);
+        return $query->join('countries', 'countries.id', 'universities.country_id')
+          ->where('countries.id', $country);
       })
       ->when($state, function ($query) use ($state) {
-        return $query->where('universities.state_id', $state);
+        return $query->join('states', 'states.id', 'universities.state_id')
+          ->where('states.id', $state);
       })
       ->when($district, function ($query) use ($district) {
-        return $query->where('universities.district_id', $district);
+        return $query->join('districts', 'districts.id', 'universities.district_id')
+          ->where('districts.id', $district);
       })
       ->when($major, function ($query) use ($major) {
         $query->join('university_majors', 'university_majors.university_id', 'universities.id')
           ->where('university_majors.name', 'LIKE', "%$major%")
-          ->selectRaw('
-              universities.id as u_id,
-              universities.name as u_name,
-              universities.description as u_description,
-              universities.logo_src as u_logo_src,
-              universities.type as u_type,
-              universities.accreditation as u_accreditation,
-              universities.address as u_address,
-              universities.country_id,
-              universities.state_id,
-              universities.district_id,
-              university_majors.id as um_id,
-              university_majors.university_id as um_university_id,
-              university_majors.faculty_id as um_faculty_id,
-              university_majors.name as um_name,
-              university_majors.description as um_description,
-              university_majors.accreditation as um_accreditation,
-              university_majors.temp as um_temp
-          ');
-      })
-      ->get();
+          ->orWhere('university_majors.id', "$major");
+      });
+
+    $select_list = ['universities.*'];
+
+    if (!empty($major)) {
+      $select_list = array_merge($select_list, [
+        'university_majors.id as um_id',
+        'university_majors.university_id as um_university_id',
+        'university_majors.faculty_id as um_faculty_id',
+        'university_majors.name as um_name',
+        'university_majors.description as um_description',
+        'university_majors.accreditation as um_accreditation',
+        'university_majors.temp as um_temp',
+        'university_majors.created_at as um_created_at',
+        'university_majors.updated_at as um_updated_at',
+      ]);
+    }
+
+    if (!empty($country)) {
+      $select_list = array_merge($select_list, [
+        'countries.id as c_id',
+        'countries.name as c_name',
+        'countries.created_at as c_created_at',
+        'countries.updated_at as c_updated_at'
+      ]);
+    }
+
+    if (!empty($state)) {
+      $select_list = array_merge($select_list, [
+        'states.id as s_id',
+        'states.name as s_name',
+        'states.created_at as s_created_at',
+        'states.updated_at as s_updated_at'
+      ]);
+    }
+
+    if (!empty($district)) {
+      $select_list = array_merge($select_list, [
+        'districts.id as d_id',
+        'districts.name as d_name',
+        'districts.created_at as d_created_at',
+        'districts.updated_at as d_updated_at'
+      ]);
+    }
+
+    return $search->select($select_list);
   }
 }

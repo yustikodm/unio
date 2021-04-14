@@ -30,18 +30,13 @@ class UniversityScholarshipAPIController extends AppBaseController
      * Display a listing of the UniversityScholarship.
      * GET|HEAD /universityScholarships
      *
-     * @param Request $request
      * @return Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $universityScholarships = $this->universityScholarshipRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
-        );
+        $universityScholarships = $this->universityScholarshipRepository->paginate(15);
 
-        return $this->sendResponse(UniversityScholarshipResource::collection($universityScholarships), 'University Scholarships retrieved successfully');
+        return $this->sendResponse($universityScholarships, 'University Scholarships retrieved successfully');
     }
 
     /**

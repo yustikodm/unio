@@ -30,18 +30,13 @@ class UniversityRequirementAPIController extends AppBaseController
      * Display a listing of the UniversityRequirement.
      * GET|HEAD /universityRequirements
      *
-     * @param Request $request
      * @return Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $universityRequirements = $this->universityRequirementRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
-        );
+        $universityRequirements = $this->universityRequirementRepository->paginate(15);
 
-        return $this->sendResponse(UniversityRequirementResource::collection($universityRequirements), 'University Requirements retrieved successfully');
+        return $this->sendResponse($universityRequirements, 'University Requirements retrieved successfully');
     }
 
     /**

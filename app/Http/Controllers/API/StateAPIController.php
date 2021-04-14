@@ -30,18 +30,13 @@ class StateAPIController extends AppBaseController
    * Display a listing of the State.
    * GET|HEAD /states
    *
-   * @param Request $request
    * @return Response
    */
-  public function index(Request $request)
+  public function index()
   {
-    $states = $this->stateRepository->all(
-      $request->except(['skip', 'limit']),
-      $request->get('skip'),
-      $request->get('limit')
-    );
+    $states = $this->stateRepository->paginate(15);
 
-    return $this->sendResponse(StateResource::collection($states), 'States retrieved successfully');
+    return $this->sendResponse($states, 'States retrieved successfully');
   }
 
   /**

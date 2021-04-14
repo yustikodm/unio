@@ -30,18 +30,13 @@ class VendorEmployeeAPIController extends AppBaseController
      * Display a listing of the VendorEmployee.
      * GET|HEAD /vendorEmployees
      *
-     * @param Request $request
      * @return Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $vendorEmployees = $this->vendorEmployeeRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
-        );
+        $vendorEmployees = $this->vendorEmployeeRepository->paginate(15);
 
-        return $this->sendResponse(VendorEmployeeResource::collection($vendorEmployees), 'Vendor Employees retrieved successfully');
+        return $this->sendResponse($vendorEmployees, 'Vendor Employees retrieved successfully');
     }
 
     /**
