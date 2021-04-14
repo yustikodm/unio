@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Resources\UniversityResource;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -126,9 +127,9 @@ class University extends Model
     return $this->hasMany(Wishlist::class);
   }
 
-  public function university()
+  public function facility()
   {
-    return $this->hasMany(UniversityMajor::class, 'universities.id');
+    return $this->hasMany(UniversityFacility::class);
   }
 
   public function scopeApiSearch($query, $param, $major = "", $country = "", $state = "", $district = "")

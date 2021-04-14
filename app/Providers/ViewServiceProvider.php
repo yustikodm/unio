@@ -58,8 +58,22 @@ class ViewServiceProvider extends ServiceProvider
       $view->with('categoryItems', $categoryItems);
     });
 
+    // Vendor - List District, State, Country
+    View::composer(['vendors.fields'], function ($view) {
+      $districtItems = District::pluck('name', 'id')->toArray();
+      $view->with('districtItems', $districtItems);
+    });
+    View::composer(['vendors.fields'], function ($view) {
+      $stateItems = State::pluck('name', 'id')->toArray();
+      $view->with('stateItems', $stateItems);
+    });
+    View::composer(['vendors.fields'], function ($view) {
+      $countryItems = Country::pluck('name', 'id')->toArray();
+      $view->with('countryItems', $countryItems);
+    });
+
     // University Scholarship - List Universities
-    View::composer(['university_scholarships.fields'], function ($view) {
+    View::composer(['university_facilities.fields'], function ($view) {
       $universityItems = University::pluck('name', 'id')->toArray();
       $view->with('universityItems', $universityItems);
     });

@@ -47,16 +47,14 @@ f{{-- Dashboard --}}
             {{-- Questionnaires --}}
             @can('questionnaires.index')
                 <li class="{{ Request::is('questionnaires*') ? 'active' : '' }}">
-                    <a href="{{ route('questionnaires.index') }}"><i
-                            class="fa fa-circle-thin"></i><span>Questionnaires</span></a>
+                    <a href="{{ route('questionnaires.index') }}"><i class="fa fa-circle-thin"></i><span>Questionnaires</span></a>
                 </li>
             @endcan
 
             {{-- Questionnaire Answer --}}
             @can('questionnaire-answers.index')
                 <li class="{{ Request::is('questionnaire-answers*') ? 'active' : '' }}">
-                    <a href="{{ route('questionnaire-answers.index') }}"><i class="fa fa-circle-thin"></i><span>Questionnaire
-                            Answers</span></a>
+                    <a href="{{ route('questionnaire-answers.index') }}"><i class="fa fa-circle-thin"></i><span>Questionnaire Answers</span></a>
                 </li>
             @endcan
         </ul>
@@ -77,44 +75,44 @@ f{{-- Dashboard --}}
             {{-- Universities --}}
             @can('universities.index')
                 <li class="{{ Request::is('universities*') ? 'active' : '' }}">
-                    <a href="{{ route('universities.index') }}"><i
-                            class="fa fa-circle-thin"></i><span>Universities</span></a>
+                    <a href="{{ route('universities.index') }}"><i class="fa fa-circle-thin"></i><span>Universities</span></a>
                 </li>
             @endcan
             {{-- University Faculties --}}
             @can('university-faculties.index')
                 <li class="{{ Request::is('university-faculties*') ? 'active' : '' }}">
-                    <a href="{{ route('university-faculties.index') }}"><i class="fa fa-circle-thin"></i><span>University
-                            Faculties</span></a>
+                    <a href="{{ route('university-faculties.index') }}"><i class="fa fa-circle-thin"></i><span>University Faculties</span></a>
                 </li>
             @endcan
             {{-- University Majors --}}
             @can('university-majors.index')
                 <li class="{{ Request::is('university-majors*') ? 'active' : '' }}">
-                    <a href="{{ route('university-majors.index') }}"><i class="fa fa-circle-thin"></i><span>University
-                            Majors</span></a>
+                    <a href="{{ route('university-majors.index') }}"><i class="fa fa-circle-thin"></i><span>University Majors</span></a>
                 </li>
             @endcan
             {{-- University Fees --}}
             @can('university-fees.index')
                 <li class="{{ Request::is('university-fees*') ? 'active' : '' }}">
-                    <a href="{{ route('university-fees.index') }}"><i class="fa fa-circle-thin"></i><span>University
-                            Fees</span></a>
+                    <a href="{{ route('university-fees.index') }}"><i class="fa fa-circle-thin"></i><span>University Fees</span></a>
                 </li>
             @endcan
             {{-- University Requirements --}}
             @can('university-requirements.index')
                 <li class="{{ Request::is('university-requirements*') ? 'active' : '' }}">
-                    <a href="{{ route('university-requirements.index') }}"><i class="fa fa-circle-thin"></i><span>University
-                            Requirements</span></a>
+                    <a href="{{ route('university-requirements.index') }}"><i class="fa fa-circle-thin"></i><span>University Requirements</span></a>
                 </li>
             @endcan
             {{-- University Scholarships --}}
             @can('university-scholarships.index')
                 <li class="{{ Request::is('university-scholarships*') ? 'active' : '' }}">
-                    <a href="{{ route('university-scholarships.index') }}"><i class="fa fa-circle-thin"></i><span>University
-                            Scholarships</span></a>
+                    <a href="{{ route('university-scholarships.index') }}"><i class="fa fa-circle-thin"></i><span>University Scholarships</span></a>
                 </li>
+            @endcan
+            {{-- University Facility --}}
+            @can('university-facilities.index')
+              <li class="{{ Request::is('university-facilities*') ? 'active' : '' }}">
+                  <a href="{{ route('university-facilities.index') }}"><i class="fa fa-circle-thin"></i><span>University Facilities</span></a>
+              </li>
             @endcan
         </ul>
     </li>
@@ -140,22 +138,19 @@ f{{-- Dashboard --}}
             {{-- Vendor Service --}}
             @can('vendor-services.index')
                 <li class="{{ Request::is('vendor-services*') ? 'active' : '' }}">
-                    <a href="{{ route('vendor-services.index') }}"><i class="fa fa-circle-thin"></i><span>Vendor
-                            Services</span></a>
+                    <a href="{{ route('vendor-services.index') }}"><i class="fa fa-circle-thin"></i><span>Vendor Services</span></a>
                 </li>
             @endcan
             {{-- Vendor Employee --}}
             @can('vendor-employees.index')
                 <li class="{{ Request::is('vendor-employees*') ? 'active' : '' }}">
-                    <a href="{{ route('vendor-employees.index') }}"><i class="fa fa-circle-thin"></i><span>Vendor
-                            Employees</span></a>
+                    <a href="{{ route('vendor-employees.index') }}"><i class="fa fa-circle-thin"></i><span>Vendor Employees</span></a>
                 </li>
             @endcan
             {{-- Vendor Category --}}
             @can('vendor-categories.index')
                 <li class="{{ Request::is('vendor-categories*') ? 'active' : '' }}">
-                    <a href="{{ route('vendor-categories.index') }}"><i class="fa fa-circle-thin"></i><span>Vendor
-                            Categories</span></a>
+                    <a href="{{ route('vendor-categories.index') }}"><i class="fa fa-circle-thin"></i><span>Vendor Categories</span></a>
                 </li>
             @endcan
         </ul>

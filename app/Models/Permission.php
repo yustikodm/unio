@@ -198,6 +198,14 @@ class Permission extends SpatiePermission
       'university-scholarships.update',
       'university-scholarships.destroy',
       
+      'university-facilities.index',
+      'university-facilities.show',
+      'university-facilities.create',
+      'university-facilities.store',
+      'university-facilities.edit',
+      'university-facilities.update',
+      'university-facilities.destroy',
+      
       'vendors.index',
       'vendors.show',
       'vendors.create',

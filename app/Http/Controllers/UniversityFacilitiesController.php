@@ -2,32 +2,32 @@
 
 namespace App\Http\Controllers;
 
-use App\DataTables\UniversityDataTable;
+use App\DataTables\UniversityFacilityDataTable;
+use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\CreateUniversityRequest;
 use App\Http\Requests\UpdateUniversityRequest;
-use App\Repositories\UniversityRepository;
+use App\Repositories\UniversityFacilityRepository;
 use Laracasts\Flash\Flash;
-use App\Http\Controllers\AppBaseController;
 
-class UniversityController extends AppBaseController
+class UniversityFacilitiesController extends AppBaseController
 {
-    /** @var  UniversityRepository */
-    private $universityRepository;
+    /** @var  UniversityFacilityRepository */
+    private $universityFacilityRepository;
 
-    public function __construct(UniversityRepository $universityRepo)
+    public function __construct(UniversityFacilityRepository $universityFacilityRepo)
     {
-        $this->universityRepository = $universityRepo;
+        $this->universityFacilityRepository = $universityFacilityRepo;
     }
 
     /**
      * Display a listing of the University.
      *
-     * @param UniversityDataTable $universityDataTable
+     * @param UniversityFacilityDataTable $universityFacilityDataTable
     
      */
-    public function index(UniversityDataTable $universityDataTable)
+    public function index(UniversityFacilityDataTable $universityFacilityDataTable)
     {
-        return $universityDataTable->render('universities.index');
+        return $universityFacilityDataTable->render('university_facilities.index');
     }
 
     /**
@@ -37,7 +37,7 @@ class UniversityController extends AppBaseController
      */
     public function create()
     {
-        return view('universities.create');
+        return view('university_facilities.create');
     }
 
     /**
@@ -51,11 +51,11 @@ class UniversityController extends AppBaseController
     {
         $input = $request->all();
 
-        $university = $this->universityRepository->create($input);
+        $university = $this->universityFacilityRepository->create($input);
 
         Flash::success('University saved successfully.');
 
-        return redirect(route('universities.index'));
+        return redirect(route('university_facilities.index'));
     }
 
     /**
@@ -67,15 +67,15 @@ class UniversityController extends AppBaseController
      */
     public function show($id)
     {
-        $university = $this->universityRepository->find($id);
+        $university = $this->universityFacilityRepository->find($id);
 
         if (empty($university)) {
             Flash::error('University not found');
 
-            return redirect(route('universities.index'));
+            return redirect(route('university_facilities.index'));
         }
 
-        return view('universities.show')->with('university', $university);
+        return view('university_facilities.show')->with('universityFacility', $university);
     }
 
     /**
@@ -87,7 +87,7 @@ class UniversityController extends AppBaseController
      */
     public function edit($id)
     {
-        $university = $this->universityRepository->find($id);
+        $university = $this->universityFacilityRepository->find($id);
 
         if (empty($university)) {
             Flash::error('University not found');
@@ -108,7 +108,7 @@ class UniversityController extends AppBaseController
      */
     public function update($id, UpdateUniversityRequest $request)
     {
-        $university = $this->universityRepository->find($id);
+        $university = $this->universityFacilityRepository->find($id);
 
         if (empty($university)) {
             Flash::error('University not found');
@@ -116,7 +116,7 @@ class UniversityController extends AppBaseController
             return redirect(route('universities.index'));
         }
 
-        $university = $this->universityRepository->update($request->all(), $id);
+        $university = $this->universityFacilityRepository->update($request->all(), $id);
 
         Flash::success('University updated successfully.');
 
@@ -132,7 +132,7 @@ class UniversityController extends AppBaseController
      */
     public function destroy($id)
     {
-        $university = $this->universityRepository->find($id);
+        $university = $this->universityFacilityRepository->find($id);
 
         if (empty($university)) {
             Flash::error('University not found');
@@ -140,7 +140,7 @@ class UniversityController extends AppBaseController
             return redirect(route('universities.index'));
         }
 
-        $this->universityRepository->delete($id);
+        $this->universityFacilityRepository->delete($id);
 
         Flash::success('University deleted successfully.');
 

@@ -24,6 +24,7 @@ Auth::routes(['verify' => true]);
 Route::get('/dashboard', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => ['auth']], function () {
+  
   Route::resource('countries', 'CountryController');
 
   Route::get('users/profile', 'UserController@profile')->name('users.profile');
@@ -61,6 +62,8 @@ Route::group(['middleware' => ['auth']], function () {
   Route::resource('university-fees', 'UniversityFeeController');
 
   Route::resource('university-faculties', 'UniversityFacultiesController');
+  
+  Route::resource('university-facilities', 'UniversityFacilitiesController');
 
   Route::resource('university-majors', 'UniversityMajorController');
 
@@ -76,15 +79,11 @@ Route::group(['middleware' => ['auth']], function () {
 
   Route::resource('vendor-categories', 'VendorCategoryController');
 
-  Route::resource('students', 'StudentController');
-
   Route::resource('wishlists', 'WishlistController');
 
   Route::resource('carts', 'CartController');
 
   Route::resource('articles', 'ArticleController');
-
-  Route::resource('boarding-houses', 'BoardingHouseController');
 
   Route::resource('families', 'FamilyController');
 
@@ -102,3 +101,6 @@ Route::group(['middleware' => ['auth']], function () {
 });
 
 Route::get('coba', 'TestController@index');
+
+
+Route::resource('universityFacilities', 'UniversityFacilityController');

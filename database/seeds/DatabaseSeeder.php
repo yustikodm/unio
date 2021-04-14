@@ -25,27 +25,28 @@ class DatabaseSeeder extends Seeder
    */
   public function run()
   {
-    $this->call([
-      PermissionsSeeder::class,
-      RolesSeeder::class,
-      UsersSeeder::class,
-      ReligionsSeeder::class,
-      CountriesSeeder::class,
-      StatesSeeder::class,
-      DistrictSeeder::class,
-      UniversitiesSeeder::class,
-      UniversityFacultySeeder::class,
-      UniversityMajorSeeder::class,
-      UniversityRequirementSeeder::class,
-      UniversityFeeSeeder::class,
-      UniversityScholarshipSeeder::class,
-      PlaceToLiveSeeder::class,
-      ArticleSeeder::class,
-      VendorCategoriesSeeder::class,
-      VendorsSeeder::class,
-      VendorServiceSeeder::class,
-      VendorEmployeeSeeder::class,
-      WishlistSeeder::class,
-    ]);
+      $this->call([
+          // PermissionsSeeder::class,
+          // RolesSeeder::class,
+          // UsersSeeder::class,
+          // ReligionsSeeder::class,
+          // CountriesSeeder::class,
+          // StatesSeeder::class,
+          // DistrictSeeder::class,
+          // UniversitiesSeeder::class,
+          // UniversityFacultySeeder::class,
+          // UniversityMajorSeeder::class,
+          // UniversityRequirementSeeder::class,
+          // UniversityFeeSeeder::class,
+          // UniversityScholarshipSeeder::class,
+          UniversityFacilitiesSeeder::class,
+          PlaceToLiveSeeder::class,
+          ArticleSeeder::class,
+          VendorCategoriesSeeder::class,
+          VendorsSeeder::class,
+          VendorServiceSeeder::class,
+          VendorEmployeeSeeder::class,
+          WishlistSeeder::class,
+      ]);
   }
 }
