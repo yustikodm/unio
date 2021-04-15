@@ -80,11 +80,11 @@ class UniversityDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('name')->title('University'),
-            Column::make('logo_src')->title('Logo'),
-            Column::make('type')->title('Type'),
-            Column::make('accreditation')->title('Accreditation')->addClass('text-centerw'),
-            Column::make('country.name')->title('Country'),
+            Column::make('name')->title('University')->width('35%'),
+            Column::make('logo_src')->title('Logo')->width('15%'),
+            Column::make('type')->title('Type')->width('10%'),
+            Column::make('accreditation')->title('Accreditation')->addClass('text-center')->width('10%'),
+            Column::make('country.name')->title('Country')->width('15%'),
         ];
     }
 

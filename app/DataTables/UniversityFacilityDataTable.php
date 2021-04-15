@@ -70,10 +70,10 @@ class UniversityFacilityDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('name')->title('Name'),
-            Column::make('amount')->title('Amount'),
-            Column::make('description')->title('Description'),
-            Column::make('university.name')->title('University'),
+            Column::make('name')->title('Name')->width('20%'),
+            Column::make('amount')->title('Amount')->width('10%'),
+            Column::make('description')->title('Description')->width('35%'),
+            Column::make('university.name')->title('University')->width('25%'),
         ];
     }
 

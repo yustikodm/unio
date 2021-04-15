@@ -73,10 +73,10 @@ class UniversityRequirementDataTable extends DataTable
     protected function getColumns()
     {
         return [
-          Column::make('name')->title('Name'),
-          Column::make('value')->title('Value'),
-          Column::make('major.name')->title('Major'),
-          Column::make('university.name')->title('University'),
+          Column::make('name')->title('Name')->width('25%'),
+          Column::make('value')->title('Value')->width('10%'),
+          Column::make('major.name')->title('Major')->width('25%'),
+          Column::make('university.name')->title('University')->width('30%'),
         ];
     }
 

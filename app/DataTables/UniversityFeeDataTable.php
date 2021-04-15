@@ -76,11 +76,11 @@ class UniversityFeeDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('university.name')->title('University'),
-            Column::make('faculty.name')->title('Faculty'),
-            Column::make('major.name')->title('Major'),
-            Column::make('type')->title('Type'),
-            Column::make('description')->title('Description'),
+            Column::make('university.name')->title('University')->width('20%'),
+            Column::make('faculty.name')->title('Faculty')->width('17.5%'),
+            Column::make('major.name')->title('Major')->width('17.5%'),
+            Column::make('type')->title('Type')->width('10%'),
+            Column::make('description')->title('Description')->width('25%'),
         ];
     }
 

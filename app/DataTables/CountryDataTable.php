@@ -5,6 +5,7 @@ namespace App\DataTables;
 use App\Models\Country;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
+use Yajra\DataTables\Html\Column;
 
 class CountryDataTable extends DataTable
 {
@@ -29,7 +30,7 @@ class CountryDataTable extends DataTable
    */
   public function query(Country $model)
   {
-    return $model->newQuery();
+    return $model->newQuery()->orderBy('name', 'asc');
   }
 
   /**
@@ -64,7 +65,11 @@ class CountryDataTable extends DataTable
    */
   protected function getColumns()
   {
-    return ['name'];
+    return [
+      Column::make('name')->title('Name')->width('35%'),
+      Column::make('currency_code')->title('Currency')->width('20%'),
+      Column::make('currency_name')->title('Currency Name')->width('35%'),
+    ];
   }
 
   /**
