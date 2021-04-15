@@ -2,39 +2,57 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
+use App\Models\Country;
+use App\Models\University;
+use App\Models\UniversityMajor;
 use Illuminate\Http\Request;
-use Spatie\Permission\Models\Permission;
-use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\DB;
 
 class TestController extends Controller
 {
   public function index()
   {
-    dd(User::where('email', 'admin@demo.com2')->first());
-    // return redirect()->route('home');
-    // $data = Permission::where('name', 'LIKE', '%.index')
-    // ->orWhere('name', 'LIKE', '%.create')
-    // ->orWhere('name', 'LIKE', '%.store')
-    // ->orWhere('name', 'LIKE', '%.show')
-    // ->get();
+    // print_r(University::limit(5000)->get());
+    // print_r(DB::select('call getuniv()'));
 
-    // $data1 = Permission::all();
-    // echo json_encode($data1);
-    // echo json_encode(Permission::where('name', 'LIKE', '%.index')
-    // ->orWhere('name', 'LIKE', '%.create')
-    // ->orWhere('name', 'LIKE', '%.store')
-    // ->orWhere('name', 'LIKE', '%.show')
-    // ->get());
-    # http://localhost:8000/coba/apa?input=cek
-    // $role = ModelsRole::find(2);
-    // // $role->revokePermissionTo(['users.index', 'users.create', 'users.store']);
-    // $role->revokePermissionTo(['point-logs.index']);
-    // dd('ok');
-    // $role->revokePermissionTo(['users.index', 'users.create']);
-    // $user = User::find(2);
-    // $user->syncRoles(['user']);
-    // dd($user);
-    // echo $request->input . ' - ' . $param;
+    // $array = [
+    //   ['name' => '123'],
+    //   ['name' => '456'],
+    //   ['name' => '123'],
+    //   ['name' => '343'],
+    //   ['name' => '789'],
+    //   ['name' => '789'],
+    // ];
+    // $data = [];
+    // foreach ($array as $value) {
+    //   // echo array_unique($value).'<br>';
+    //   $data[$value['name']] = $value;
+    // }
+    // $new['new_name'] = array_values($data);
+    // print_r($new);
+
+    // $array = array_unique($array);
+    // print_r($array);
+    // $majors = UniversityMajor::get()->toArray();
+    // $master = [];
+    // foreach ($majors as $major) {
+    //   $master[$major['name']] = $major;
+    // }
+    // echo 'unique:' . count(array_values($master)).'<br>';
+    // echo 'ori: ' . count($majors);
+
+    // COUNTRY API
+    // $data = file_get_contents('countries.json');
+    // $data = json_decode($data, true);
+    // // echo count($data);
+    // echo "<table>";
+    // foreach (array_unique($data) as $v) {
+    //   echo "<tr>";
+    //   echo "<td>".$v['name']."</td>";
+    //   echo "<td>".$v['region']."</td>";
+    //   // echo "<td>".array_values($v['currencies'])['code']."</td>";
+    //   echo "</tr>";
+    // }
+    // echo "</table>";
   }
 }

@@ -5,6 +5,7 @@ namespace App\DataTables;
 use App\Models\PointTransaction;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
+use Yajra\DataTables\Html\Column;
 
 class PointTransactionDataTable extends DataTable
 {
@@ -65,7 +66,12 @@ class PointTransactionDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            
+            Column::make('amount')->title('Amount')->width('20%'),
+            // 'user_id',
+            // 'transaction_id',
+            // 'entity_type',
+            // 'amount',
+            // 'point_conversion'
         ];
     }
 

@@ -7,24 +7,23 @@ use App\Http\Requests;
 use App\Http\Requests\CreatePlaceToLiveRequest;
 use App\Http\Requests\UpdatePlaceToLiveRequest;
 use App\Repositories\PlaceToLiveRepository;
-use Flash;
+use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
-use App\Repositories\PricingPointRepository;
-use Response;
+use App\Repositories\PointPricingsRepository;
 
 class PlaceToLiveController extends AppBaseController
 {
     /** @var  PlaceToLiveRepository */
     private $placeToLiveRepository;
 
-    /** @var  PricingPointRepository */
-    private $pricingPointRepository;
+    /** @var  pointPricingRepository */
+    private $pointPricingRepository;
 
-    public function __construct(PlaceToLiveRepository $placeToLiveRepo, PricingPointRepository $pricingPointRepo)
+    public function __construct(PlaceToLiveRepository $placeToLiveRepo, PointPricingsRepository $pointPricingRepo)
     {
         $this->placeToLiveRepository = $placeToLiveRepo;
         
-        $this->pricingPointRepository = $pricingPointRepo;
+        $this->pointPricingRepository = $pointPricingRepo;
     }
 
     /**
@@ -71,7 +70,7 @@ class PlaceToLiveController extends AppBaseController
 
         $placeToLive = $this->placeToLiveRepository->create($input);
 
-        $this->pricingPointRepository->create([
+        $this->pointPricingRepository->create([
             'entity_id' => $placeToLive->id,
             'entity_type' => 'placetolive',
             'amount' => $request->price,

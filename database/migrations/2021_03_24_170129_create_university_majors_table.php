@@ -21,10 +21,12 @@ class CreateUniversityMajorsTable extends Migration
             $table->longText('description')->nullable();
             $table->char('accreditation')->nullable();
             $table->string('temp', 255)->nullable();
+            $table->bigIncrements('master_id')->unsigned();
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('university_id')->references('id')->on('universities');
             $table->foreign('faculty_id')->references('id')->on('university_faculties');
+            $table->foreign('master_majors')->references('id')->on('master_majors');
         });
     }
 

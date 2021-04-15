@@ -1,7 +1,7 @@
 <!-- Vendor Id Field -->
 <div class="form-group">
     {!! Form::label('vendor_id', 'Vendor:') !!}
-    <p>{{ $vendorService->vendor->name }}</p>
+    <p><a href="{{ route('vendors.show', $vendorService->vendor->id) }}">{{ $vendorService->vendor->name }}</a></p>
 </div>
 
 <!-- Name Field -->

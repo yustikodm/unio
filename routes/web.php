@@ -89,7 +89,7 @@ Route::group(['middleware' => ['auth']], function () {
 
   Route::resource('biodata', 'BiodataController');
 
-  Route::resource('pricing-points', 'PricingPointController')->only(['store', 'edit', 'update', 'index']);
+  Route::resource('point-pricings', 'PointPricingsController')->only('index', 'store');
 
   Route::resource('point-transactions', 'PointTransactionController');
 
@@ -98,9 +98,7 @@ Route::group(['middleware' => ['auth']], function () {
   Route::resource('place-to-live', 'PlaceToLiveController');
 
   Route::resource('point-logs', 'PointLogController')->only('index', 'store');
+  
 });
 
 Route::get('coba', 'TestController@index');
-
-
-Route::resource('universityFacilities', 'UniversityFacilityController');

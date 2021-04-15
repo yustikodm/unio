@@ -205,7 +205,7 @@ f{{-- Dashboard --}}
 @endcan
 
 {{-- Points --}}
-@can(['pricing-points.index', 'point-transactions.index', 'point-topup.index', 'point-logs.index'])
+@can(['point-pricings.index', 'point-transactions.index', 'point-topup.index', 'point-logs.index'])
     <li class="treeview {{ Request::is('point*') || Request::is('pricing*') ? 'active menu-open' : '' }}">
         <a href="#">
             <i class="fa fa-money"></i><span>Points</span>
@@ -215,10 +215,10 @@ f{{-- Dashboard --}}
         </a>
 
         <ul class="treeview-menu">
-        @can('pricing-points.index')
-            <li class="{{ Request::is('pricing-points*') ? 'active' : '' }}">
-                <a href="{{ route('pricing-points.index') }}"><i class="fa fa-circle-thin"></i><span>Pricing Points</span></a>
-            </li>
+        @can('point-pricings.index')
+        <li class="{{ Request::is('point-pricings*') ? 'active' : '' }}">
+            <a href="{{ route('point-pricings.index') }}"><i class="fa fa-circle-thin"></i><span>Point Pricings</span></a>
+        </li>
         @endcan
         @can('point-transactions.index')
             <li class="{{ Request::is('point-transactions*') ? 'active' : '' }}">

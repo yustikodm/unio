@@ -1,14 +1,16 @@
 <!-- University Id Field -->
 <div class="form-group">
     {!! Form::label('university_id', 'University:') !!}
-    <p>{{ $universityMajor->university->name }}</p>
+    <p><a href="{{ route('universities.show', $universityMajor->university->id) }}">{{ $universityMajor->university->name }}</a></p>
 </div>
 
+@if (!empty($universityMajor->faculty->id))
 <!-- Faculty Id Field -->
 <div class="form-group">
     {!! Form::label('faculty_id', 'Faculty:') !!}
-    <p>{{ $universityMajor->faculty->name }}</p>
+    <p><a href="{{ route('university-faculties.show', $universityMajor->faculty->id) }}">{{ $universityMajor->faculty->name }}</a></p>
 </div>
+@endif
 
 <!-- Name Field -->
 <div class="form-group">

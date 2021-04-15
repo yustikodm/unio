@@ -2,22 +2,24 @@
 
 namespace App\Repositories;
 
-use App\Models\PricingPoint;
+use App\Models\PointPricings;
 use App\Repositories\BaseRepository;
 
 /**
- * Class PricingPointRepository
+ * Class PointPricingsRepository
  * @package App\Repositories
- * @version March 31, 2021, 10:52 am WIB
+ * @version April 15, 2021, 2:02 pm WIB
 */
 
-class PricingPointRepository extends BaseRepository
+class PointPricingsRepository extends BaseRepository
 {
     /**
      * @var array
      */
     protected $fieldSearchable = [
-        
+        'entity_id',
+        'entity_type',
+        'amount'
     ];
 
     /**
@@ -35,6 +37,6 @@ class PricingPointRepository extends BaseRepository
      **/
     public function model()
     {
-        return PricingPoint::class;
+        return PointPricings::class;
     }
 }

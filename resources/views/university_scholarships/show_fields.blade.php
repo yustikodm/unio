@@ -1,7 +1,7 @@
 <!-- University Id Field -->
 <div class="form-group">
     {!! Form::label('university_id', 'University Id:') !!}
-    <p>{{ $universityScholarship->university->name }}</p>
+    <p><a href="{{ route('universities.show', $universityScholarship->university->id) }}">{{ $universityScholarship->university->name }}</a></p>
 </div>
 
 <!-- Description Field -->

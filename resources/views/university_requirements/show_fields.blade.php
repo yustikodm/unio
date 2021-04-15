@@ -1,13 +1,13 @@
 <!-- University Id Field -->
 <div class="form-group">
     {!! Form::label('university_id', 'University:') !!}
-    <p>{{ $universityRequirement->university->name }}</p>
+    <p><a href="{{ route('universities.show', $universityRequirement->university->id) }}">{{ $universityRequirement->university->name }}</a></p>
 </div>
 
 <!-- Major Id Field -->
 <div class="form-group">
     {!! Form::label('major_id', 'Major:') !!}
-    <p>{{ $universityRequirement->major->name }}</p>
+    <p><a href="{{ route('university-majors.show', $universityRequirement->major->id) }}">{{ $universityRequirement->major->name }}</a></p>
 </div>
 
 <!-- Name Field -->

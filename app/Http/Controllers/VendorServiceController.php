@@ -7,24 +7,23 @@ use App\Http\Requests;
 use App\Http\Requests\CreateVendorServiceRequest;
 use App\Http\Requests\UpdateVendorServiceRequest;
 use App\Repositories\VendorServiceRepository;
-use Flash;
+use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
-use App\Repositories\PricingPointRepository;
-use Response;
+use App\Repositories\PointPricingsRepository;
 
 class VendorServiceController extends AppBaseController
 {
     /** @var  VendorServiceRepository */
     private $vendorServiceRepository;
 
-    /** @var  PricingPointRepository */
-    private $pricingPointRepository;
+    /** @var  pointPricingRepository */
+    private $pointPricingRepository;
 
-    public function __construct(VendorServiceRepository $vendorServiceRepo, PricingPointRepository $pricingPointRepo)
+    public function __construct(VendorServiceRepository $vendorServiceRepo, PointPricingsRepository $pointPricingRepo)
     {
         $this->vendorServiceRepository = $vendorServiceRepo;
 
-        $this->pricingPointRepository = $pricingPointRepo;
+        $this->pointPricingRepository = $pointPricingRepo;
     }
 
     /**
@@ -67,7 +66,7 @@ class VendorServiceController extends AppBaseController
 
         $vendorService = $this->vendorServiceRepository->create($input);
 
-        $this->pricingPointRepository->create([
+        $this->pointPricingRepository->create([
             'entity_id' => $vendorService->id,
             'entity_type' => 'vendorservice',
             'amount' => $request->price,

@@ -1,20 +1,24 @@
 <!-- Country Id Field -->
 <div class="form-group">
     {!! Form::label('country_id', 'Country:') !!}
-    <p>{{ $university->country->name }}</p>
+    <p><a href="{{ route('countries.show', $university->country->id) }}">{{ $university->country->name }}</a></p>
 </div>
 
+@if (!empty($university->state->name))
 <!-- State Id Field -->
 <div class="form-group">
     {!! Form::label('state_id', 'State:') !!}
-    <p>{{ $university->state->name }}</p>
+    <p><a href="{{ route('states.show', $university->state->id) }}">{{ $university->state->name }}</a></p>
 </div>
+@endif
 
+@if (!empty($university->district->name))
 <!-- District Id Field -->
 <div class="form-group">
     {!! Form::label('district_id', 'District:') !!}
-    <p>{{ $university->district->name }}</p>
+    <p><a href="{{ route('districts.show', $university->district->id) }}">{{ $university->district->name }}</a></p>
 </div>
+@endif
 
 <!-- Name Field -->
 <div class="form-group">
@@ -31,7 +35,7 @@
 <!-- Logo Src Field -->
 <div class="form-group">
     {!! Form::label('logo_src', 'Logo Src:') !!}
-    <p>{{ $university->logo_src }}</p>
+    <p><img src="{{ $university->logo_src }}"></p>
 </div>
 
 <!-- Type Field -->

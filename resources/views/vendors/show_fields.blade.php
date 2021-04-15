@@ -5,10 +5,32 @@
     <img style="width: 25%" src="{{ asset('storage/vendors/'.$vendor->picture) }}" alt="">
 </div>
 
+<!-- Country Id Field -->
+<div class="form-group">
+    {!! Form::label('country_id', 'Country:') !!}
+    <p><a href="{{ route('countries.show', $vendor->country->id) }}">{{ $vendor->country->name }}</a></p>
+</div>
+
+@if (!empty($vendor->state->name))
+<!-- State Id Field -->
+<div class="form-group">
+    {!! Form::label('state_id', 'State:') !!}
+    <p><a href="{{ route('states.show', $vendor->state->id) }}">{{ $vendor->state->name }}</a></p>
+</div>
+@endif
+
+@if (!empty($vendor->district->name))
+<!-- District Id Field -->
+<div class="form-group">
+    {!! Form::label('district_id', 'District:') !!}
+    <p><a href="{{ route('districts.show', $vendor->district->id) }}">{{ $vendor->district->name }}</a></p>
+</div>
+@endif
+
 <!-- Vendor Category Id Field -->
 <div class="form-group">
-    {!! Form::label('vendor_category_id', 'Vendor Category Id:') !!}
-    <p>{{ $vendor->category->name }}</p>
+    {!! Form::label('vendor_category_id', 'Vendor Category:') !!}
+    <p><a href="{{ route('vendor-categories.show', $vendor->vendor_category->id) }}">{{ $vendor->vendor_category->name }}</a></p>
 </div>
 
 <!-- Name Field -->

@@ -36,7 +36,8 @@ class UniversityMajor extends Model
     'name',
     'description',
     'accreditation',
-    'temp'
+    'temp',
+    'master_id'
   ];
 
   /**
@@ -51,7 +52,8 @@ class UniversityMajor extends Model
     'name' => 'string',
     'description' => 'string',
     'accreditation' => 'string',
-    'temp' => 'string'
+    'temp' => 'string',
+    'master_id' => 'integer'
   ];
 
   /**
@@ -65,6 +67,8 @@ class UniversityMajor extends Model
     'name' => 'required|string|max:255',
     'description' => 'nullable|string|max:255',
     'accreditation' => 'nullable|string|max:255',
+    'temp' => 'nullable|string',
+    'master_id' => 'integer',
     'created_at' => 'nullable',
     'updated_at' => 'nullable',
     'deleted_at' => 'nullable'

@@ -2,11 +2,14 @@
 
 namespace App\DataTables;
 
-use App\Models\PricingPoint;
+use App\Models\PlaceToLive;
+use App\Models\PointPricings;
+use App\Models\VendorService;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
+use Yajra\DataTables\Html\Column;
 
-class PricingPointDataTable extends DataTable
+class PointPricingsDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -18,16 +21,30 @@ class PricingPointDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'pricing_points.datatables_actions');
+        return $dataTable->editColumn('entity_type', function ($query) {
+                if ($query->entity_type == 'placetolive') {
+                  return '<span class="label label-info"><strong>Place to Live</strong></span>';
+                }
+
+                return '<span class="label label-success"><strong>Vendor Service</strong></span>';
+            })
+            ->editColumn('name', function($query){
+                if ($query->entity_type == 'placetolive') {
+                    return '<a href="'.route('place-to-live.show', $query->entity_id).'">'.PlaceToLive::find($query->entity_id)->name.'</a>';
+                }
+                
+                return '<a href="'.route('vendor-services.show', $query->entity_id).'">'.VendorService::find($query->entity_id)->name.'</a>';
+            })
+            ->rawColumns(['entity_type', 'name']);
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\PricingPoint $model
+     * @param \App\Models\PointPricings $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(PricingPoint $model)
+    public function query(PointPricings $model)
     {
         return $model->newQuery();
     }
@@ -42,7 +59,6 @@ class PricingPointDataTable extends DataTable
         return $this->builder()
             ->columns($this->getColumns())
             ->minifiedAjax()
-            ->addAction(['width' => '120px', 'printable' => false])
             ->parameters([
                 'dom'       => 'Bfrtip',
                 'stateSave' => true,
@@ -64,7 +80,10 @@ class PricingPointDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            
+            Column::make('entity_id')->title('Entity ID')->width('15%'),
+            Column::make('entity_type')->title('Entity Type')->width('20%'),
+            Column::make('name')->title('Name')->width('35%'),
+            Column::make('amount')->title('Amount')->width('20%'),
         ];
     }
 
@@ -75,6 +94,6 @@ class PricingPointDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'pricing_points_datatable_' . time();
+        return 'point_pricings_datatable_' . time();
     }
 }

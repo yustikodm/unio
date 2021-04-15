@@ -11,7 +11,7 @@
         <div class="box box-primary">
             <div class="box-body">
                 <div class="row">
-                    {!! Form::open(['route' => 'pointTransactions.store']) !!}
+                    {!! Form::open(['route' => 'point-transactions.store']) !!}
 
                         @include('point_transactions.fields')
 

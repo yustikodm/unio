@@ -262,13 +262,11 @@ class Permission extends SpatiePermission
       'place-to-live.update',
       'place-to-live.destroy',
       
-      'pricing-points.index',
-      'pricing-points.show',
-      'pricing-points.create',
-      'pricing-points.store',
-      'pricing-points.edit',
-      'pricing-points.update',
-      'pricing-points.destroy',
+      'point-pricings.index',
+      'point-pricings.show',
+      'point-pricings.store',
+      'point-pricings.update',
+      'point-pricings.destroy',
       
       'point-transactions.index',
       'point-transactions.show',

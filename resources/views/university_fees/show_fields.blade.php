@@ -1,25 +1,19 @@
 <!-- University Id Field -->
 <div class="form-group">
-    {!! Form::label('university_id', 'University Id:') !!}
-    <p>{{ $universityFee->university_id }}</p>
+    {!! Form::label('university_id', 'University:') !!}
+    <p><a href="{{ route('universities.show', $universityFee->university->id) }}">{{ $universityFee->university->name }}</a></p>
 </div>
 
 <!-- Faculty Id Field -->
 <div class="form-group">
-    {!! Form::label('faculty_id', 'Faculty Id:') !!}
-    <p>{{ $universityFee->faculty_id }}</p>
+    {!! Form::label('faculty_id', 'Faculty:') !!}
+    <p><a href="{{ route('university-faculties.show', $universityFee->faculty->id) }}">{{ $universityFee->faculty->name }}</a></p>
 </div>
 
 <!-- Major Id Field -->
 <div class="form-group">
-    {!! Form::label('major_id', 'Major Id:') !!}
-    <p>{{ $universityFee->major_id }}</p>
-</div>
-
-<!-- Currency Id Field -->
-<div class="form-group">
-    {!! Form::label('currency_id', 'Currency Id:') !!}
-    <p>{{ $universityFee->currency_id }}</p>
+    {!! Form::label('major_id', 'Major:') !!}
+    <p><a href="{{ route('university-majors.show', $universityFee->major->id) }}">{{ $universityFee->major->name }}</a></p>
 </div>
 
 <!-- Type Field -->

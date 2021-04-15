@@ -44,7 +44,7 @@ class UniversityDataTable extends DataTable
      */
     public function query(University $model)
     {
-        return $model->newQuery()->with(['country']);
+        return $model->newQuery();
     }
 
     /**
