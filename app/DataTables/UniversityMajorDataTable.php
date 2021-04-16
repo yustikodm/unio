@@ -24,7 +24,10 @@ class UniversityMajorDataTable extends DataTable
                 return '<a href="' . route('universities.show', $query->university->id) . '">' . $query->university->name . '</a>';
             })
             ->editColumn('faculty.name', function ($query) {
+              if (!empty($query->faculty->id)) {
                 return '<a href="' . route('university-faculties.show', $query->faculty->id) . '">' . $query->faculty->name . '</a>';
+              }
+              return '<span class="text-muted"><em>Faculty not available.</em></span>';
             })
             ->rawColumns(['action', 'university.name', 'faculty.name']);
     }
@@ -73,10 +76,10 @@ class UniversityMajorDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('name')->title('Major'),
-            Column::make('accreditation')->title('Accreditation'),
-            Column::make('faculty.name')->title('Faculty'),
-            Column::make('university.name')->title('University'),
+            Column::make('name')->title('Major')->width('23%'),
+            Column::make('accreditation')->title('Accreditation')->width('10%'),
+            Column::make('faculty.name')->title('Faculty')->width('24%'),
+            Column::make('university.name')->title('University')->width('30%'),
         ];
     }
 

@@ -1,7 +1,7 @@
 <!-- questionnaire Id Field -->
 <div class="form-group col-sm-6">
-  {!! Form::label('questionnaire_id', 'Questionnaire:') !!}
-  {!! Form::select('questionnaire_id',$questionnaireItems, null, ['class' => 'form-control']) !!}
+  {!! Form::label('questionairre_id', 'Questionnaire:') !!}
+  {!! Form::select('questionairre_id',$questionnaireItems, null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- User Id Field -->

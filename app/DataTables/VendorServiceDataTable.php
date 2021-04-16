@@ -70,10 +70,10 @@ class VendorServiceDataTable extends DataTable
     protected function getColumns()
     {
         return [
-          Column::make('name')->title('Name'),
-          Column::make('description')->title('Description'),
-          Column::make('price')->title('Price'),
-          Column::make('vendor.name')->title('Vendor'),
+            Column::make('name')->title('Name')->width('20%'),
+            Column::make('description')->title('Description')->width('40%'),
+            Column::make('price')->title('Price')->width('10%'),
+            Column::make('vendor.name')->title('Vendor')->width('20%'),
         ];
     }
 

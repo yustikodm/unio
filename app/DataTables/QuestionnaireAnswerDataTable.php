@@ -19,11 +19,14 @@ class QuestionnaireAnswerDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'questionnaire_answers.datatables_actions');
-        // ->editColumn('country.name', function ($query) {
-        //      return '<a href="' . route('countries.show', $query->country->id) . '">' . $query->country->name . '</a>';
-        // })
-        // ->rawColumns(['action', 'country.name']);
+        return $dataTable->addColumn('action', 'questionnaire_answers.datatables_actions')
+            ->editColumn('questionnaire.question', function ($query) {
+                  return '<a href="' . route('questionnaires.show', $query->questionnaire->id) . '">' . $query->questionnaire->question . '</a>';
+            })
+            ->editColumn('user.username', function ($query) {
+              return '<a href="' . route('users.show', $query->user->id) . '">' . $query->user->username . '</a>';
+            })
+            ->rawColumns(['action', 'questionnaire.question', 'user.username']);
     }
 
     /**
@@ -70,9 +73,9 @@ class QuestionnaireAnswerDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('questionnaire.question')->title('Question'),
-            Column::make('user.name')->title('User'),
-            Column::make('answer')->title('Answer'),
+            Column::make('questionnaire.question')->title('Question')->width('45%'),
+            Column::make('answer')->title('Answer')->width('30%'),
+            Column::make('user.username')->title('User')->width('15%'),
         ];
     }
 

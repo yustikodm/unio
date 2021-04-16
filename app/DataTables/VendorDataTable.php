@@ -70,11 +70,11 @@ class VendorDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('name')->title('Vendor Name'),
-            Column::make('phone')->title('Phone'),
-            Column::make('email')->title('Email'),
-            Column::make('back_account_number')->title('Bank Account'),
-            Column::make('vendor_category.name')->title('Category'),
+            Column::make('name')->title('Vendor Name')->width('20%'),
+            Column::make('phone')->title('Phone')->width('15%'),
+            Column::make('email')->title('Email')->width('15%'),
+            Column::make('back_account_number')->title('Bank Account')->width('20%'),
+            Column::make('vendor_category.name')->title('Category')->width('20%'),
         ];
     }
 

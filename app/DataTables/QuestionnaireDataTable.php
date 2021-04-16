@@ -5,6 +5,7 @@ namespace App\DataTables;
 use App\Models\Questionnaire;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
+use Yajra\DataTables\Html\Column;
 
 class QuestionnaireDataTable extends DataTable
 {
@@ -65,9 +66,9 @@ class QuestionnaireDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'question',
-            'type',
-            'answer_choice'
+            Column::make('question')->title('Question')->width('45%'),
+            Column::make('answer_choice')->title('Type')->width('30%'),
+            Column::make('type')->title('Type')->width('15%'),
         ];
     }
 

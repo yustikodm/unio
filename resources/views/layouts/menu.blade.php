@@ -206,7 +206,7 @@ f{{-- Dashboard --}}
 
 {{-- Points --}}
 @can(['point-pricings.index', 'point-transactions.index', 'point-topup.index', 'point-logs.index'])
-    <li class="treeview {{ Request::is('point*') || Request::is('pricing*') ? 'active menu-open' : '' }}">
+    <li class="treeview {{ Request::is('point*') ? 'active menu-open' : '' }}">
         <a href="#">
             <i class="fa fa-money"></i><span>Points</span>
             <span class="pull-right-container">

@@ -73,11 +73,11 @@ class VendorEmployeeDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('name')->title('Name'),
-            Column::make('position')->title('Position'),
-            Column::make('phone')->title('Phone'),
-            Column::make('email')->title('Email'),
-            Column::make('vendor.name')->title('Vendor'),
+            Column::make('name')->title('Name')->width('20%'),
+            Column::make('position')->title('Position')->width('10%'),
+            Column::make('phone')->title('Phone')->width('20%'),
+            Column::make('email')->title('Email')->width('20%'),
+            Column::make('vendor.name')->title('Vendor')->width('20%'),
         ];
     }
 

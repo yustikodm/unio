@@ -7,9 +7,8 @@ use App\Http\Requests;
 use App\Http\Requests\CreateQuestionnaireAnswerRequest;
 use App\Http\Requests\UpdateQuestionnaireAnswerRequest;
 use App\Repositories\QuestionnaireAnswerRepository;
-use Flash;
+use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
-use Response;
 
 class QuestionnaireAnswerController extends AppBaseController
 {
@@ -57,7 +56,7 @@ class QuestionnaireAnswerController extends AppBaseController
 
         Flash::success('Questionnaire Answer saved successfully.');
 
-        return redirect(route('questionnaireAnswers.index'));
+        return redirect(route('questionnaire-answers.index'));
     }
 
     /**
@@ -74,7 +73,7 @@ class QuestionnaireAnswerController extends AppBaseController
         if (empty($questionnaireAnswer)) {
             Flash::error('Questionnaire Answer not found');
 
-            return redirect(route('questionnaireAnswers.index'));
+            return redirect(route('questionnaire-answers.index'));
         }
 
         return view('questionnaire_answers.show')->with('questionnaireAnswer', $questionnaireAnswer);
@@ -94,7 +93,7 @@ class QuestionnaireAnswerController extends AppBaseController
         if (empty($questionnaireAnswer)) {
             Flash::error('Questionnaire Answer not found');
 
-            return redirect(route('questionnaireAnswers.index'));
+            return redirect(route('questionnaire-answers.index'));
         }
 
         return view('questionnaire_answers.edit')->with('questionnaireAnswer', $questionnaireAnswer);
@@ -115,14 +114,14 @@ class QuestionnaireAnswerController extends AppBaseController
         if (empty($questionnaireAnswer)) {
             Flash::error('Questionnaire Answer not found');
 
-            return redirect(route('questionnaireAnswers.index'));
+            return redirect(route('questionnaire-answers.index'));
         }
 
         $questionnaireAnswer = $this->questionnaireAnswerRepository->update($request->all(), $id);
 
         Flash::success('Questionnaire Answer updated successfully.');
 
-        return redirect(route('questionnaireAnswers.index'));
+        return redirect(route('questionnaire-answers.index'));
     }
 
     /**
@@ -139,13 +138,13 @@ class QuestionnaireAnswerController extends AppBaseController
         if (empty($questionnaireAnswer)) {
             Flash::error('Questionnaire Answer not found');
 
-            return redirect(route('questionnaireAnswers.index'));
+            return redirect(route('questionnaire-answers.index'));
         }
 
         $this->questionnaireAnswerRepository->delete($id);
 
         Flash::success('Questionnaire Answer deleted successfully.');
 
-        return redirect(route('questionnaireAnswers.index'));
+        return redirect(route('questionnaire-answers.index'));
     }
 }

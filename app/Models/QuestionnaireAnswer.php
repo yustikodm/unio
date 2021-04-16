@@ -24,10 +24,7 @@ class QuestionnaireAnswer extends Model
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
-
     protected $dates = ['deleted_at'];
-
-
 
     public $fillable = [
         'questionairre_id',
@@ -61,12 +58,12 @@ class QuestionnaireAnswer extends Model
         'deleted_at' => 'nullable'
     ];
 
-    public function questionnaire(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function questionnaire()
     {
-        return $this->belongsTo(Questionnaire::class, 'questionnaire_id');
+        return $this->belongsTo(Questionnaire::class, 'questionairre_id');
     }
 
-    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
     }

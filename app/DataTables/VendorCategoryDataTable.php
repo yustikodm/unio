@@ -5,6 +5,7 @@ namespace App\DataTables;
 use App\Models\VendorCategory;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
+use Yajra\DataTables\Html\Column;
 
 class VendorCategoryDataTable extends DataTable
 {
@@ -65,8 +66,8 @@ class VendorCategoryDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'name',
-            'description'
+            Column::make('name')->title('Name')->width('25%'),
+            Column::make('description')->title('Description')->width('63%'),
         ];
     }
 
