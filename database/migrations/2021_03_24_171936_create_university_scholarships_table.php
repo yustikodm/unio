@@ -16,7 +16,8 @@ class CreateUniversityScholarshipsTable extends Migration
         Schema::create('university_scholarships', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('university_id')->unsigned();
-            $table->longText('description');
+            $table->string('name');
+            $table->longText('description')->nullable();
             $table->string('picture')->nullable();
             $table->year('year')->nullable();
             $table->timestamps();

@@ -33,6 +33,8 @@ class UniversityScholarship extends Model
     'year'
   ];
 
+  protected $with = ['university'];
+
   /**
    * The attributes that should be casted to native types.
    *

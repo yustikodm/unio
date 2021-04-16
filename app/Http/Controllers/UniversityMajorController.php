@@ -7,7 +7,7 @@ use App\Http\Requests;
 use App\Http\Requests\CreateUniversityMajorRequest;
 use App\Http\Requests\UpdateUniversityMajorRequest;
 use App\Repositories\UniversityMajorRepository;
-use Flash;
+use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
 
@@ -51,9 +51,16 @@ class UniversityMajorController extends AppBaseController
      */
     public function store(CreateUniversityMajorRequest $request)
     {
-        $input = $request->all();
+        $input = $request->only([
+          'university_id',
+          'faculty_id',
+          'name',
+          'level',
+          'accreditation',
+          'description'
+        ]);
 
-        $universityMajor = $this->universityMajorRepository->create($input);
+        $this->universityMajorRepository->store($input);
 
         Flash::success('University Major saved successfully.');
 
@@ -118,7 +125,16 @@ class UniversityMajorController extends AppBaseController
             return redirect(route('university-majors.index'));
         }
 
-        $universityMajor = $this->universityMajorRepository->update($request->all(), $id);
+        $input = $request->only([
+          'university_id',
+          'faculty_id',
+          'name',
+          'level',
+          'accreditation',
+          'description'
+        ]);
+
+        $universityMajor = $this->universityMajorRepository->update($id, $input);
 
         Flash::success('University Major updated successfully.');
 

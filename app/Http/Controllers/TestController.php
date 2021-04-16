@@ -12,34 +12,25 @@ class TestController extends Controller
 {
   public function index()
   {
-    // print_r(University::limit(5000)->get());
-    // print_r(DB::select('call getuniv()'));
-
     // $array = [
-    //   ['name' => '123'],
-    //   ['name' => '456'],
-    //   ['name' => '123'],
-    //   ['name' => '343'],
-    //   ['name' => '789'],
-    //   ['name' => '789'],
+    //   ['name' => '123', 'desc' => 'asdf'],
+    //   ['name' => '456', 'desc' => 'shji'],
+    //   ['name' => '123', 'desc' => 'a3pdj'],
+    //   ['name' => '343', 'desc' => 'acmso'],
+    //   ['name' => '789', 'desc' => 'tskwo'],
+    //   ['name' => '789', 'desc' => 'pqskjk'],
+    //   ['name' => '456', 'desc' => 'ssdkls'],
     // ];
+
     // $data = [];
     // foreach ($array as $value) {
-    //   // echo array_unique($value).'<br>';
+    // // echo array_unique($value).'<br>';
     //   $data[$value['name']] = $value;
     // }
-    // $new['new_name'] = array_values($data);
+    // $new = array_values($data);
     // print_r($new);
-
-    // $array = array_unique($array);
-    // print_r($array);
-    // $majors = UniversityMajor::get()->toArray();
-    // $master = [];
-    // foreach ($majors as $major) {
-    //   $master[$major['name']] = $major;
-    // }
-    // echo 'unique:' . count(array_values($master)).'<br>';
-    // echo 'ori: ' . count($majors);
+    $major = UniversityMajor::countMajors(23);
+    print_r($major->count());
 
     // COUNTRY API
     // $data = file_get_contents('countries.json');

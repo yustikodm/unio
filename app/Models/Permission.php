@@ -174,6 +174,14 @@ class Permission extends SpatiePermission
       'university-faculties.update',
       'university-faculties.destroy',
       
+      'master-majors.index',
+      'master-majors.show',
+      'master-majors.create',
+      'master-majors.store',
+      'master-majors.edit',
+      'master-majors.update',
+      'master-majors.destroy',
+
       'university-majors.index',
       'university-majors.show',
       'university-majors.create',

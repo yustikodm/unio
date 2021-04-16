@@ -20,22 +20,16 @@
 </div>
 @endif
 
-<!-- Name Field -->
-<div class="form-group">
-    {!! Form::label('name', 'Name:') !!}
-    <p>{{ $university->name }}</p>
-</div>
-
-<!-- Description Field -->
-<div class="form-group">
-    {!! Form::label('description', 'Description:') !!}
-    <p>{{ $university->description }}</p>
-</div>
-
 <!-- Logo Src Field -->
 <div class="form-group">
     {!! Form::label('logo_src', 'Logo Src:') !!}
     <p><img src="{{ $university->logo_src }}"></p>
+</div>
+
+<!-- Name Field -->
+<div class="form-group">
+    {!! Form::label('name', 'Name:') !!}
+    <p>{{ $university->name }}</p>
 </div>
 
 <!-- Type Field -->
@@ -56,3 +50,20 @@
     <p>{{ $university->address }}</p>
 </div>
 
+<!-- Description Field -->
+<div class="form-group">
+    {!! Form::label('description', 'Description:') !!}
+    <p>{{ $university->description }}</p>
+</div>
+
+<!-- Created At Field -->
+<div class="form-group">
+    {!! Form::label('created_at', 'Created At:') !!}
+    <p>{{ $university->created_at }}</p>
+</div>
+
+<!-- Updated At Field -->
+<div class="form-group">
+    {!! Form::label('updated_at', 'Updated At:') !!}
+    <p>{{ $university->updated_at }}</p>
+</div>

@@ -16,16 +16,22 @@
   {!! Form::text('name', null, ['class' => 'form-control','maxlength' => 255]) !!}
 </div>
 
-<!-- Description Field -->
+<!-- Level Field -->
 <div class="form-group col-sm-6">
-  {!! Form::label('description', 'Description:') !!}
-  {!! Form::text('description', null, ['class' => 'form-control','maxlength' => 255]) !!}
+  {!! Form::label('level', 'Level:') !!}
+  {!! Form::text('level', null, ['class' => 'form-control','maxlength' => 255]) !!}
 </div>
 
 <!-- Accreditation Field -->
 <div class="form-group col-sm-6">
   {!! Form::label('accreditation', 'Accreditation:') !!}
   {!! Form::text('accreditation', null, ['class' => 'form-control','maxlength' => 255]) !!}
+</div>
+
+<!-- Description Field -->
+<div class="form-group col-sm-12 col-lg-12">
+  {!! Form::label('description', 'Description:') !!}
+  {!! Form::textarea('description', null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Submit Field -->

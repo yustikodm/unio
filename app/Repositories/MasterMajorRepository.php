@@ -2,26 +2,22 @@
 
 namespace App\Repositories;
 
-use App\Models\PointTransaction;
+use App\Models\MasterMajor;
 use App\Repositories\BaseRepository;
 
 /**
- * Class PointTransactionRepository
+ * Class MasterMajorRepository
  * @package App\Repositories
- * @version March 31, 2021, 10:59 am WIB
+ * @version April 16, 2021, 11:13 am WIB
 */
 
-class PointTransactionRepository extends BaseRepository
+class MasterMajorRepository extends BaseRepository
 {
     /**
      * @var array
      */
     protected $fieldSearchable = [
-        'user_id',
-        'entity_id',
-        'entity_type',
-        'amount',
-        'point_conversion',
+        'name'
     ];
 
     /**
@@ -39,6 +35,6 @@ class PointTransactionRepository extends BaseRepository
      **/
     public function model()
     {
-        return PointTransaction::class;
+        return MasterMajor::class;
     }
 }

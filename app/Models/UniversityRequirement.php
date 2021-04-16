@@ -27,6 +27,8 @@ class UniversityRequirement extends Model
 
   protected $dates = ['deleted_at'];
 
+  protected $with = ['university', 'major'];
+
   public $fillable = [
     'university_id',
     'major_id',

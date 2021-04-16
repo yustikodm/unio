@@ -12,6 +12,18 @@
         "inView": false
     },
     {
+        "name": "user_id",
+        "dbType": "integer",
+        "htmlType": null,
+        "validations": "nullable",
+        "searchable": true,
+        "fillable": true,
+        "primary": false,
+        "inForm": true,
+        "inIndex": true,
+        "inView": true
+    },
+    {
         "name": "created_at",
         "dbType": "timestamp",
         "htmlType": null,

@@ -10,16 +10,16 @@
     <p>{{ $universityFacility->name }}</p>
 </div>
 
-<!-- Description Field -->
-<div class="form-group">
-    {!! Form::label('description', 'Description:') !!}
-    <p>{{ $universityFacility->description }}</p>
-</div>
-
 <!-- Amount Field -->
 <div class="form-group">
     {!! Form::label('amount', 'Amount:') !!}
     <p>{{ $universityFacility->amount }}</p>
+</div>
+
+<!-- Description Field -->
+<div class="form-group">
+    {!! Form::label('description', 'Description:') !!}
+    <p>{{ $universityFacility->description }}</p>
 </div>
 
 <!-- Created At Field -->
@@ -33,4 +33,3 @@
     {!! Form::label('updated_at', 'Updated At:') !!}
     <p>{{ $universityFacility->updated_at }}</p>
 </div>
-

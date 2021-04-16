@@ -2,8 +2,12 @@
 
 namespace App\Repositories;
 
+use App\Models\MasterMajor;
 use App\Models\UniversityMajor;
 use App\Repositories\BaseRepository;
+use Carbon\Carbon;
+use Exception;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 /**
  * Class UniversityMajorRepository
@@ -20,9 +24,9 @@ class UniversityMajorRepository extends BaseRepository
         'university_id',
         'faculty_id',
         'name',
-        'description',
+        'level',
         'accreditation',
-        'temp'
+        'description'
     ];
 
     /**
@@ -41,5 +45,49 @@ class UniversityMajorRepository extends BaseRepository
     public function model()
     {
         return UniversityMajor::class;
+    }
+
+    public function store($input)
+    {
+        try {
+            $master = MasterMajor::where('name', $input['name'])->first();
+
+            if (!$master) {
+              $master = MasterMajor::create([
+                'name' => $input['name'],
+                ]);
+            }
+            
+            $major = UniversityMajor::create(array_merge($input,[
+              'master_id' => $master->id
+            ]));
+        } catch (Exception $e) {
+          throw new BadRequestHttpException($e->getMessage());
+        }
+
+        return $major;
+    }
+
+    public function update($id, $input)
+    {
+        $major = $this->findOrFail($id);
+
+        try {
+            $master = MasterMajor::where('name', $input['name'])->first();
+
+            if (!$master) {
+              $master = MasterMajor::create([
+                'name' => $input['name'],
+                ]);
+            }
+            
+            $major = $major->update(array_merge($input,[
+              'master_id' => $master->id
+            ]));
+        } catch (Exception $e) {
+          throw new BadRequestHttpException($e->getMessage());
+        }
+
+        return $major;
     }
 }

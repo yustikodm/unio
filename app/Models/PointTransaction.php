@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -38,7 +39,7 @@ class PointTransaction extends Model
     'entity_id' => 'integer',
     'entity_type' => 'string',
     'amount' => 'decimal',
-    'point_conversion' => 'decimal',
+    'point_conversion' => 'decimal:2',
   ];
 
   /**
@@ -47,11 +48,11 @@ class PointTransaction extends Model
    * @var array
    */
   public static $rules = [
-    'user_id' => 'required|integer',
-    'entity_id' => 'required|integer',
-    'entity_type' => 'required|string',
-    'amount' => 'required|decimal',
-    'point_conversion' => 'required|decimal',
+    'user_id' => 'required',
+    'entity_id' => 'required',
+    'entity_type' => 'required',
+    'amount' => 'required',
+    'point_conversion' => 'required',
   ];
 
   public function user()

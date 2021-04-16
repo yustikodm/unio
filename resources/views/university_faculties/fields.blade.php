@@ -1,6 +1,6 @@
 <!-- University Id Field -->
 <div class="form-group col-sm-6">
-  {!! Form::label('university_id', 'University Id:') !!}
+  {!! Form::label('university_id', 'University:') !!}
   {!! Form::select('university_id', $universityItems, null, ['class' => 'form-control']) !!}
 </div>
 
@@ -11,9 +11,9 @@
 </div>
 
 <!-- Description Field -->
-<div class="form-group col-sm-6">
+<div class="form-group col-sm-12 col-lg-12">
   {!! Form::label('description', 'Description:') !!}
-  {!! Form::text('description', null, ['class' => 'form-control','maxlength' => 255]) !!}
+  {!! Form::textarea('description', null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Submit Field -->

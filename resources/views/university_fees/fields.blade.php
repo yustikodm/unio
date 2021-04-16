@@ -1,25 +1,19 @@
 <!-- University Id Field -->
 <div class="form-group col-sm-6">
-  {!! Form::label('university_id', 'University Id:') !!}
+  {!! Form::label('university_id', 'University:') !!}
   {!! Form::number('university_id', null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Faculty Id Field -->
 <div class="form-group col-sm-6">
-  {!! Form::label('faculty_id', 'Faculty Id:') !!}
+  {!! Form::label('faculty_id', 'Faculty:') !!}
   {!! Form::number('faculty_id', null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Major Id Field -->
 <div class="form-group col-sm-6">
-  {!! Form::label('major_id', 'Major Id:') !!}
+  {!! Form::label('major_id', 'Major:') !!}
   {!! Form::number('major_id', null, ['class' => 'form-control']) !!}
-</div>
-
-<!-- Currency Id Field -->
-<div class="form-group col-sm-6">
-  {!! Form::label('currency_id', 'Currency Id:') !!}
-  {!! Form::number('currency_id', null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Type Field -->
@@ -41,9 +35,9 @@
 </div>
 
 <!-- Description Field -->
-<div class="form-group col-sm-6">
+<div class="form-group col-sm-12 col-lg-12">
   {!! Form::label('description', 'Description:') !!}
-  {!! Form::text('description', null, ['class' => 'form-control','maxlength' => 255]) !!}
+  {!! Form::textarea('description', null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Submit Field -->

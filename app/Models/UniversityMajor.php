@@ -34,9 +34,9 @@ class UniversityMajor extends Model
     'university_id',
     'faculty_id',
     'name',
-    'description',
+    'level',
     'accreditation',
-    'temp',
+    'description',
     'master_id'
   ];
 
@@ -99,9 +99,9 @@ class UniversityMajor extends Model
     return $this->hasMany(Wishlist::class);
   }
 
-  public function major()
+  public function master()
   {
-    return $this->belongsTo(University::class, 'universities.id');
+    return $this->belongsTo(MasterMajor::class);
   }
 
   public function scopeApiSearch($query, $param, $university, $country, $state, $district)
@@ -180,5 +180,10 @@ class UniversityMajor extends Model
   public function scopeApiSearchByFaculties($query, $faculty_id)
   {
     return $query->where('faculty_id', $faculty_id)->get();
+  }
+
+  public function scopeCountMajors($query, $major_id)
+  {
+      return $query->where('master_id', $major_id);
   }
 }

@@ -25,6 +25,8 @@ class UniversityFacility extends Model
 
     public $fillable = ['university_id', 'name', 'description', 'amount'];
 
+    protected $with = ['university'];
+    
     /**
      * The attributes that should be casted to native types.
      *

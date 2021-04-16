@@ -18,10 +18,10 @@
     <p>{{ $universityMajor->name }}</p>
 </div>
 
-<!-- Description Field -->
+<!-- Level Field -->
 <div class="form-group">
-    {!! Form::label('description', 'Description:') !!}
-    <p>{{ $universityMajor->description }}</p>
+    {!! Form::label('description', 'Level:') !!}
+    <p>{{ $universityMajor->level }}</p>
 </div>
 
 <!-- Accreditation Field -->
@@ -30,3 +30,20 @@
     <p>{{ $universityMajor->accreditation }}</p>
 </div>
 
+<!-- Description Field -->
+<div class="form-group">
+    {!! Form::label('description', 'Description:') !!}
+    <p>{{ $universityMajor->description }}</p>
+</div>
+
+<!-- Created At Field -->
+<div class="form-group">
+    {!! Form::label('created_at', 'Created At:') !!}
+    <p>{{ $universityMajor->created_at }}</p>
+</div>
+
+<!-- Updated At Field -->
+<div class="form-group">
+    {!! Form::label('updated_at', 'Updated At:') !!}
+    <p>{{ $universityMajor->updated_at }}</p>
+</div>

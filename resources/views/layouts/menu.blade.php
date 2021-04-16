@@ -62,8 +62,8 @@ f{{-- Dashboard --}}
 @endcan
 
 {{-- University --}}
-@can(['universities.index', 'university-faculties.index', 'university-majors.index', 'university-fees.index', 'university-requirements.index', 'university-scholarships.index'])
-    <li class="treeview {{ Request::is('university*') || Request::is('universities*') ? 'active menu-open' : '' }}">
+@can(['universities.index', 'university-faculties.index', 'university-majors.index', 'university-fees.index', 'university-requirements.index', 'university-scholarships.index', 'master-majors.index'])
+    <li class="treeview {{ Request::is('university*') || Request::is('universities*') || Request::is('master-majors*') ? 'active menu-open' : '' }}">
         <a href="#">
             <i class="fa fa-university"></i><span>University</span>
             <span class="pull-right-container">
@@ -113,6 +113,12 @@ f{{-- Dashboard --}}
               <li class="{{ Request::is('university-facilities*') ? 'active' : '' }}">
                   <a href="{{ route('university-facilities.index') }}"><i class="fa fa-circle-thin"></i><span>University Facilities</span></a>
               </li>
+            @endcan
+
+            @can('master-majors.index')
+            <li class="{{ Request::is('master-majors*') ? 'active' : '' }}">
+                <a href="{{ route('master-majors.index') }}"><i class="fa fa-circle-thin"></i><span>Master Majors</span></a>
+            </li>
             @endcan
         </ul>
     </li>

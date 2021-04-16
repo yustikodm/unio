@@ -65,6 +65,8 @@ Route::group(['middleware' => ['auth']], function () {
   
   Route::resource('university-facilities', 'UniversityFacilitiesController');
 
+  Route::resource('master-majors', 'MasterMajorController')->only(['index', 'store', 'update', 'show']);
+
   Route::resource('university-majors', 'UniversityMajorController');
 
   Route::resource('university-requirements', 'UniversityRequirementController');

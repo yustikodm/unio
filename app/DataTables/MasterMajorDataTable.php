@@ -2,11 +2,12 @@
 
 namespace App\DataTables;
 
-use App\Models\PointTransaction;
+use App\Models\MasterMajor;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
+use Yajra\DataTables\Html\Column;
 
-class PointTransactionDataTable extends DataTable
+class MasterMajorDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -18,18 +19,18 @@ class PointTransactionDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'point_transactions.datatables_actions');
+        return $dataTable->addColumn('action', 'master_majors.datatables_actions');
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\PointTransaction $model
+     * @param \App\Models\MasterMajor $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(PointTransaction $model)
+    public function query(MasterMajor $model)
     {
-        return $model->newQuery()->with(['user']);
+        return $model->newQuery();
     }
 
     /**
@@ -48,7 +49,6 @@ class PointTransactionDataTable extends DataTable
                 'stateSave' => true,
                 'order'     => [[0, 'desc']],
                 'buttons'   => [
-                    ['extend' => 'create', 'className' => 'btn btn-default btn-sm no-corner',],
                     ['extend' => 'export', 'className' => 'btn btn-default btn-sm no-corner',],
                     ['extend' => 'print', 'className' => 'btn btn-default btn-sm no-corner',],
                     ['extend' => 'reset', 'className' => 'btn btn-default btn-sm no-corner',],
@@ -65,7 +65,8 @@ class PointTransactionDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'user.username'
+            Column::make('name')->title('Name')->width('30%'),
+            Column::make('description')->title('Description')->width('50%'),
         ];
     }
 
@@ -76,6 +77,6 @@ class PointTransactionDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'point_transactions_datatable_' . time();
+        return 'master_majors_datatable_' . time();
     }
 }
