@@ -1,7 +1,20 @@
+
+<!-- Code Field -->
+<div class="form-group">
+    {!! Form::label('code', 'Code:') !!}
+    <p>{{ $country->code }}</p>
+</div>
+
 <!-- Name Field -->
 <div class="form-group">
     {!! Form::label('name', 'Name:') !!}
     <p>{{ $country->name }}</p>
+</div>
+
+<!-- Region Field -->
+<div class="form-group">
+    {!! Form::label('region', 'Region:') !!}
+    <p>{{ $country->region }}</p>
 </div>
 
 <!-- Currency Code Field -->

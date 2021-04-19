@@ -70,9 +70,9 @@ class UniversityScholarshipDataTable extends DataTable
     protected function getColumns()
     {
         return [
+            Column::make('name')->title('Name')->width('35%'),
             Column::make('year')->title('Year')->width('15%'),
-            Column::make('description')->title('Description')->width('50%'),
-            Column::make('university.name')->title('University')->width('25%'),
+            Column::make('university.name')->title('University')->width('40%'),
         ];
     }
 

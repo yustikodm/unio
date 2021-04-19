@@ -16,7 +16,7 @@ class CountryRepository extends BaseRepository
   /**
    * @var array
    */
-  protected $fieldSearchable = ['code', 'name', 'currency_code', 'currency_name'];
+  protected $fieldSearchable = ['code', 'name', 'region', 'currency_code', 'currency_name'];
 
   /**
    * Return searchable fields

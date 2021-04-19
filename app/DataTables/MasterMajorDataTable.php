@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\MasterMajor;
+use App\Models\UniversityMajor;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Column;
@@ -19,7 +20,11 @@ class MasterMajorDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'master_majors.datatables_actions');
+        return $dataTable->addColumn('action', 'master_majors.datatables_actions')
+                    ->editColumn('count', function($query){
+                        return UniversityMajor::countMajors($query->id);
+                    })
+                    ->rawColumns(['action','count']);
     }
 
     /**
@@ -30,7 +35,7 @@ class MasterMajorDataTable extends DataTable
      */
     public function query(MasterMajor $model)
     {
-        return $model->newQuery();
+        return $model->newQuery()->orderBy('name', 'asc');
     }
 
     /**
@@ -67,6 +72,7 @@ class MasterMajorDataTable extends DataTable
         return [
             Column::make('name')->title('Name')->width('30%'),
             Column::make('description')->title('Description')->width('50%'),
+            Column::make('count')->title('Count')->width('5%')->addClass('text-center'),
         ];
     }
 

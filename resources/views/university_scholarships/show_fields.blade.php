@@ -4,16 +4,22 @@
     <p><a href="{{ route('universities.show', $universityScholarship->university->id) }}">{{ $universityScholarship->university->name }}</a></p>
 </div>
 
-<!-- Year Field -->
+<!-- Name Field -->
 <div class="form-group">
-    {!! Form::label('year', 'Year:') !!}
-    <p>{{ $universityScholarship->year }}</p>
+    {!! Form::label('year', 'Name:') !!}
+    <p>{{ $universityScholarship->name }}</p>
 </div>
 
 <!-- Description Field -->
 <div class="form-group">
     {!! Form::label('description', 'Description:') !!}
     <p>{{ $universityScholarship->description }}</p>
+</div>
+
+<!-- Year Field -->
+<div class="form-group">
+    {!! Form::label('year', 'Year:') !!}
+    <p>{{ $universityScholarship->year }}</p>
 </div>
 
 <!-- Picture Field -->

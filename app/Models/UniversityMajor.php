@@ -184,6 +184,6 @@ class UniversityMajor extends Model
 
   public function scopeCountMajors($query, $major_id)
   {
-      return $query->where('master_id', $major_id);
+      return $query->where('master_id', $major_id)->count();
   }
 }

@@ -29,21 +29,22 @@ class TestController extends Controller
     // }
     // $new = array_values($data);
     // print_r($new);
-    $major = UniversityMajor::countMajors(23);
-    print_r($major->count());
 
     // COUNTRY API
-    // $data = file_get_contents('countries.json');
-    // $data = json_decode($data, true);
-    // // echo count($data);
-    // echo "<table>";
-    // foreach (array_unique($data) as $v) {
-    //   echo "<tr>";
-    //   echo "<td>".$v['name']."</td>";
-    //   echo "<td>".$v['region']."</td>";
-    //   // echo "<td>".array_values($v['currencies'])['code']."</td>";
-    //   echo "</tr>";
-    // }
-    // echo "</table>";
+    $data = file_get_contents('countries.json');
+    $data = json_decode($data, true);
+
+    // print_r($data); die;
+    
+    foreach ($data as $v) {
+      DB::table('countries-seeds')->insert([
+          'code' => $v['alpha3Code'],
+          'name' => $v['name'],
+          'region' => $v['region'],
+          'currency_code' => $v['currencies'][0]['code'],
+          'currency_name' => $v['currencies'][0]['name']
+      ]);
+    }
+    
   }
 }

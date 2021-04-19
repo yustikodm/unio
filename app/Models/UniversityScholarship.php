@@ -28,6 +28,7 @@ class UniversityScholarship extends Model
 
   public $fillable = [
     'university_id',
+    'name',
     'description',
     'picture',
     'year'
@@ -43,6 +44,7 @@ class UniversityScholarship extends Model
   protected $casts = [
     'id' => 'integer',
     'university_id' => 'integer',
+    'name' => 'string',
     'description' => 'string',
     'picture' => 'string',
     'year' => 'integer'
@@ -55,6 +57,7 @@ class UniversityScholarship extends Model
    */
   public static $rules = [
     'university_id' => 'required|integer',
+    'name' => 'required|string',
     'description' => 'nullable|string',
     'picture' => 'nullable|string',
     'year' => 'nullable|integer',

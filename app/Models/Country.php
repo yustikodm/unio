@@ -23,7 +23,7 @@ class Country extends Model
 
   protected $dates = ['deleted_at'];
 
-  public $fillable = ['name'];
+  public $fillable = ['code', 'name', 'region', 'currency_code', 'currency_name'];
 
   /**
    * The attributes that should be casted to native types.
@@ -32,7 +32,11 @@ class Country extends Model
    */
   protected $casts = [
     'id' => 'integer',
-    'name' => 'string'
+    'code' => 'string',
+    'name' => 'string',
+    'region' => 'string',
+    'currency_code' => 'string',
+    'currency_name' => 'string'
   ];
 
   /**
@@ -41,7 +45,11 @@ class Country extends Model
    * @var array
    */
   public static $rules = [
+    'code' => 'nullable|string',
     'name' => 'required|string|max:255',
+    'region' => 'nullable|string',
+    'currency_code' => 'nullable|string',
+    'currency_name' => 'nullable|string'
   ];
 
   public function state()
