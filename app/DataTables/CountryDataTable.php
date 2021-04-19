@@ -66,7 +66,7 @@ class CountryDataTable extends DataTable
   protected function getColumns()
   {
     return [
-      Column::make('code')->title('Code')->width('5%'),
+      Column::make('code')->title('Code')->width('7%')->orderable(false),
       Column::make('name')->title('Name')->width('25%'),
       Column::make('currency_code')->title('Currency')->width('15%'),
       Column::make('currency_name')->title('Currency Name')->width('25%'),

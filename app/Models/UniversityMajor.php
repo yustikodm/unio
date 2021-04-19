@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $name
  * @property string $description
  * @property string $accreditation
- * @property string $temp
+ * @property string $level
  */
 class UniversityMajor extends Model
 {
@@ -52,7 +52,7 @@ class UniversityMajor extends Model
     'name' => 'string',
     'description' => 'string',
     'accreditation' => 'string',
-    'temp' => 'string',
+    'level' => 'string',
     'master_id' => 'integer'
   ];
 
@@ -67,7 +67,7 @@ class UniversityMajor extends Model
     'name' => 'required|string|max:255',
     'description' => 'nullable|string|max:255',
     'accreditation' => 'nullable|string|max:255',
-    'temp' => 'nullable|string',
+    'level' => 'nullable|string',
     'master_id' => 'integer',
     'created_at' => 'nullable',
     'updated_at' => 'nullable',

@@ -35,16 +35,21 @@ class TestController extends Controller
     $data = json_decode($data, true);
 
     // print_r($data); die;
-    
-    foreach ($data as $v) {
-      DB::table('countries-seeds')->insert([
-          'code' => $v['alpha3Code'],
-          'name' => $v['name'],
-          'region' => $v['region'],
-          'currency_code' => $v['currencies'][0]['code'],
-          'currency_name' => $v['currencies'][0]['name']
-      ]);
+    $region = [];
+    foreach ($data as $value) {
+      $region[$value['region']] = $value;
     }
+    print_r(array_values($region));
+    
+    // foreach ($data as $v) {
+    //   DB::table('countries-seeds')->insert([
+    //       'code' => $v['alpha3Code'],
+    //       'name' => $v['name'],
+    //       'region' => $v['region'],
+    //       'currency_code' => $v['currencies'][0]['code'],
+    //       'currency_name' => $v['currencies'][0]['name']
+    //   ]);
+    // }
     
   }
 }

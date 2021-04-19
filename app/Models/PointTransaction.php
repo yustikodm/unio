@@ -38,7 +38,7 @@ class PointTransaction extends Model
     'user_id' => 'integer',
     'entity_id' => 'integer',
     'entity_type' => 'string',
-    'amount' => 'decimal',
+    'amount' => 'decimal:2',
     'point_conversion' => 'decimal:2',
   ];
 

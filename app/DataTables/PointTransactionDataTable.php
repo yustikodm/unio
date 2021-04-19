@@ -2,9 +2,12 @@
 
 namespace App\DataTables;
 
+use App\Models\PlaceToLive;
 use App\Models\PointTransaction;
+use App\Models\VendorService;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
+use Yajra\DataTables\Html\Column;
 
 class PointTransactionDataTable extends DataTable
 {
@@ -18,7 +21,22 @@ class PointTransactionDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'point_transactions.datatables_actions');
+        return $dataTable->addColumn('action', 'point_transactions.datatables_actions')
+          ->editColumn('entity_type', function ($query) {
+              if ($query->entity_type == 'placetolive') {
+                return '<span class="label label-info"><strong>Place to Live</strong></span>';
+              }
+
+              return '<span class="label label-success"><strong>Vendor Service</strong></span>';
+          })
+          ->editColumn('name', function($query){
+              if ($query->entity_type == 'placetolive') {
+                  return '<a href="'.route('place-to-live.show', $query->entity_id).'">'.PlaceToLive::find($query->entity_id)->name.'</a>';
+              }
+              
+              return '<a href="'.route('vendor-services.show', $query->entity_id).'">'.VendorService::find($query->entity_id)->name.'</a>';
+          })
+          ->rawColumns(['action', 'entity_type', 'name']);
     }
 
     /**
@@ -65,7 +83,12 @@ class PointTransactionDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'user.username'
+            Column::make('user.username')->title('Username'),
+            Column::make('entity_id')->title('Entity ID'),
+            Column::make('entity_type')->title('Entity Type'),
+            Column::make('name')->title('Name'),
+            Column::make('amount')->title('Amount'),
+            Column::make('point_conversion')->title('Point Conversion'),
         ];
     }
 
