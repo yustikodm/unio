@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -35,8 +36,8 @@ class PointTopup extends Model
     'id' => 'integer',
     'user_id' => 'integer',
     'country_id' => 'integer',
-    'amount' => 'decimal',
-    'point_conversion' => 'decimal'
+    'amount' => 'decimal:2',
+    'point_conversion' => 'decimal:2'
   ];
 
   /**

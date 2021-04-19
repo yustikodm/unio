@@ -37,8 +37,9 @@ class PointLog extends Model
     'parent_id' => 'integer',
     'transaction_id' => 'integer',
     'transaction_type' => 'string',
-    'point_before' => 'decimal',
-    'point_after' => 'decimal',
+    'point_before' => 'decimal:2',
+    'point_after' => 'decimal:2',
+    // 'created_at' => 'datetime'
   ];
 
   /**
@@ -57,10 +58,5 @@ class PointLog extends Model
   public function transaction()
   {
     return $this->belongsTo(PointTransaction::class);
-  }
-
-  public function parent()
-  {
-    return $this->belongsTo(Family::class, 'parent_user');
   }
 }

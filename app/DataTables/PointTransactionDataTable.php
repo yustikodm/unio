@@ -5,6 +5,7 @@ namespace App\DataTables;
 use App\Models\PlaceToLive;
 use App\Models\PointTransaction;
 use App\Models\VendorService;
+use Carbon\Carbon;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Column;
@@ -36,7 +37,10 @@ class PointTransactionDataTable extends DataTable
               
               return '<a href="'.route('vendor-services.show', $query->entity_id).'">'.VendorService::find($query->entity_id)->name.'</a>';
           })
-          ->rawColumns(['action', 'entity_type', 'name']);
+          ->editColumn('created_at', function ($query) {
+              return Carbon::parse($query->created_at)->format('d/m/Y H:i');
+          })
+          ->rawColumns(['action', 'entity_type', 'name', 'created_at']);
     }
 
     /**
@@ -83,12 +87,12 @@ class PointTransactionDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('user.username')->title('Username'),
-            Column::make('entity_id')->title('Entity ID'),
-            Column::make('entity_type')->title('Entity Type'),
-            Column::make('name')->title('Name'),
-            Column::make('amount')->title('Amount'),
-            Column::make('point_conversion')->title('Point Conversion'),
+            Column::make('user.username')->title('Username')->width('15%'),
+            Column::make('entity_type')->title('Entity Type')->width('13%'),
+            Column::make('name')->title('Name')->width('20%'),
+            Column::make('amount')->title('Amount')->width('17%'),
+            Column::make('point_conversion')->title('Conversion')->width('10%'),
+            Column::make('created_at')->title('Date')->width('15%'),
         ];
     }
 

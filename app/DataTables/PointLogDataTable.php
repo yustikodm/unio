@@ -3,8 +3,11 @@
 namespace App\DataTables;
 
 use App\Models\PointLog;
+use App\User;
+use Carbon\Carbon;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
+use Yajra\DataTables\Html\Column;
 
 class PointLogDataTable extends DataTable
 {
@@ -18,7 +21,17 @@ class PointLogDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'point_logs.datatables_actions');
+        return $dataTable->editColumn('parent_id', function ($query) {
+                      $user = User::find($query->parent_id);
+                      return '<a href="'.$user->id.'">'.$user->username.'</a>';
+                  })
+                  ->editColumn('created_at', function ($query) {
+                      return Carbon::parse($query->created_at)->format('d/m/Y H:i');
+                  })
+                  ->editColumn('transaction_name', function ($query) {
+                      return '<a href="#">Modul Name / '.$query->id.'</a>';
+                  })
+                  ->rawColumns(['parent_id', 'created_at', 'transaction_name']);
     }
 
     /**
@@ -42,7 +55,7 @@ class PointLogDataTable extends DataTable
         return $this->builder()
             ->columns($this->getColumns())
             ->minifiedAjax()
-            ->addAction(['width' => '120px', 'printable' => false])
+            // ->addAction(['width' => '120px', 'printable' => false])
             ->parameters([
                 'dom'       => 'Bfrtip',
                 'stateSave' => true,
@@ -65,7 +78,12 @@ class PointLogDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            
+            Column::make('created_at')->title('Trans. Date')->width('15%'),
+            Column::make('transaction_type')->title('Trans. Type')->width('10%'),
+            Column::make('transaction_name')->title('Trans. Name')->width('15%'),
+            Column::make('point_before')->title('Point Before')->width('10%'),
+            Column::make('point_after')->title('Point After')->width('10%'),
+            Column::make('parent_id')->title('Parent User')->width('10%'),
         ];
     }
 

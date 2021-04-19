@@ -5,6 +5,7 @@ namespace App\DataTables;
 use App\Models\PlaceToLive;
 use App\Models\PointPricings;
 use App\Models\VendorService;
+use Carbon\Carbon;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Column;
@@ -35,7 +36,10 @@ class PointPricingsDataTable extends DataTable
                 
                 return '<a href="'.route('vendor-services.show', $query->entity_id).'">'.VendorService::find($query->entity_id)->name.'</a>';
             })
-            ->rawColumns(['entity_type', 'name']);
+            ->editColumn('updated_at', function ($query) {
+                return Carbon::parse($query->updated_at)->format('d/m/Y H:i');
+            })
+            ->rawColumns(['entity_type', 'name', 'updated_at']);
     }
 
     /**
@@ -80,10 +84,10 @@ class PointPricingsDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('entity_id')->title('Entity ID')->width('15%'),
             Column::make('entity_type')->title('Entity Type')->width('20%'),
-            Column::make('name')->title('Name')->width('35%'),
-            Column::make('amount')->title('Amount')->width('20%'),
+            Column::make('name')->title('Name')->width('30%'),
+            Column::make('amount')->title('Amount')->width('25%'),
+            Column::make('updated_at')->title('Updated at')->width('15%'),
         ];
     }
 

@@ -64,9 +64,4 @@ class Family extends Model
   {
     return $this->belongsTo(User::class, 'child_user');
   }
-
-  public function point_log()
-  {
-    return $this->hasMany(PointLog::class);
-  }
 }
