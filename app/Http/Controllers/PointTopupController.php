@@ -7,9 +7,8 @@ use App\Http\Requests;
 use App\Http\Requests\CreatePointTopupRequest;
 use App\Http\Requests\UpdatePointTopupRequest;
 use App\Repositories\PointTopupRepository;
-use Flash;
+use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
-use Response;
 
 class PointTopupController extends AppBaseController
 {
@@ -51,7 +50,12 @@ class PointTopupController extends AppBaseController
    */
   public function store(CreatePointTopupRequest $request)
   {
-    $input = $request->all();
+    $input = $request->only([
+        'user_id',
+        'country_id',
+        'amount',
+        'point_conversion'
+    ]);
 
     $pointTopup = $this->pointTopupRepository->create($input);
 
@@ -118,7 +122,14 @@ class PointTopupController extends AppBaseController
       return redirect(route('point-topup.index'));
     }
 
-    $pointTopup = $this->pointTopupRepository->update($request->all(), $id);
+    $input = $request->only([
+        'user_id',
+        'country_id',
+        'amount',
+        'point_conversion'
+    ]);
+
+    $pointTopup = $this->pointTopupRepository->update($input, $id);
 
     Flash::success('Point Topup updated successfully.');
 

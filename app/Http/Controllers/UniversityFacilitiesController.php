@@ -49,7 +49,7 @@ class UniversityFacilitiesController extends AppBaseController
      */
     public function store(CreateUniversityRequest $request)
     {
-        $input = $request->all();
+        $input = $request->only(['university_id', 'name', 'description', 'amount']);
 
         $university = $this->universityFacilityRepository->create($input);
 
@@ -116,7 +116,9 @@ class UniversityFacilitiesController extends AppBaseController
             return redirect(route('universities.index'));
         }
 
-        $university = $this->universityFacilityRepository->update($request->all(), $id);
+        $input = $request->only(['university_id', 'name', 'description', 'amount']);
+
+        $university = $this->universityFacilityRepository->update($input, $id);
 
         Flash::success('University updated successfully.');
 

@@ -51,7 +51,13 @@ class PointTransactionController extends AppBaseController
      */
     public function store(CreatePointTransactionRequest $request)
     {
-        $input = $request->all();
+        $input = $request->only([
+            'user_id',
+            'entity_id',
+            'entity_type',
+            'amount',
+            'point_conversion',
+        ]);
 
         $pointTransaction = $this->pointTransactionRepository->create($input);
 
@@ -118,7 +124,15 @@ class PointTransactionController extends AppBaseController
             return redirect(route('pointTransactions.index'));
         }
 
-        $pointTransaction = $this->pointTransactionRepository->update($request->all(), $id);
+        $input = $request->only([
+            'user_id',
+            'entity_id',
+            'entity_type',
+            'amount',
+            'point_conversion',
+        ]);
+
+        $pointTransaction = $this->pointTransactionRepository->update($input, $id);
 
         Flash::success('Point Transaction updated successfully.');
 

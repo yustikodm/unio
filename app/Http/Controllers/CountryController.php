@@ -7,9 +7,8 @@ use App\Http\Requests;
 use App\Http\Requests\CreateCountryRequest;
 use App\Http\Requests\UpdateCountryRequest;
 use App\Repositories\CountryRepository;
-use Flash;
+use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
-use Response;
 
 class CountryController extends AppBaseController
 {
@@ -51,7 +50,14 @@ class CountryController extends AppBaseController
      */
     public function store(CreateCountryRequest $request)
     {
-        $input = $request->all();
+        $input = $request->only([
+            'code',
+            'name',
+            'region',
+            'currency_code',
+            'currency_name',
+            'calling_code'
+        ]);
 
         $country = $this->countryRepository->create($input);
 
@@ -118,7 +124,16 @@ class CountryController extends AppBaseController
             return redirect(route('countries.index'));
         }
 
-        $country = $this->countryRepository->update($request->all(), $id);
+        $input = $request->only([
+            'code',
+            'name',
+            'region',
+            'currency_code',
+            'currency_name',
+            'calling_code'
+        ]);
+
+        $country = $this->countryRepository->update($input, $id);
 
         Flash::success('Country updated successfully.');
 

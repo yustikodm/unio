@@ -33,7 +33,7 @@ class UniversityFacultiesResource extends JsonResource
           'name' => $this->um_name,
           'description' => $this->um_description,
           'accreditation' => $this->um_accreditation,
-          'temp' => $this->um_temp,
+          'level' => $this->um_level,
           'created_at' => Carbon::parse($this->um_created_at)->format('d/m/Y H:i:s'),
           'updated_at' => Carbon::parse($this->um_updated_at)->format('d/m/Y H:i:s')
         ]

@@ -54,7 +54,8 @@ class CountryAPIController extends AppBaseController
             'name',
             'region',
             'currency_code',
-            'currency_name'
+            'currency_name',
+            'calling_code'
         ]);
 
         $country = $this->countryRepository->create($input);
@@ -98,7 +99,8 @@ class CountryAPIController extends AppBaseController
             'name',
             'region',
             'currency_code',
-            'currency_name'
+            'currency_name',
+            'calling_code'
         ]);
 
         /** @var Country $country */

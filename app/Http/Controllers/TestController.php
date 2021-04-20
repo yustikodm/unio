@@ -33,21 +33,26 @@ class TestController extends Controller
     // COUNTRY API
     $data = file_get_contents('countries.json');
     $data = json_decode($data, true);
-
     // print_r($data); die;
-    $region = [];
-    foreach ($data as $value) {
-      $region[$value['region']] = $value;
-    }
-    print_r(array_values($region));
     
+    // $region = [];
+    // foreach ($data as $value) {
+      // echo $value['callingCodes'][0].' - ';
+      // echo $value['region'].' - ';
+      // echo $value['name'].'<br>';
+      // echo explode('/', $value['flag'])[4].'<br>';
+      // $region[$value['flag']] = $value;
+    // }
+    // print_r(array_values($region));
+    die;
     // foreach ($data as $v) {
     //   DB::table('countries-seeds')->insert([
     //       'code' => $v['alpha3Code'],
     //       'name' => $v['name'],
     //       'region' => $v['region'],
     //       'currency_code' => $v['currencies'][0]['code'],
-    //       'currency_name' => $v['currencies'][0]['name']
+    //       'currency_name' => $v['currencies'][0]['name'],
+    //       'calling_code' => $v['callingCodes'][0]
     //   ]);
     // }
     

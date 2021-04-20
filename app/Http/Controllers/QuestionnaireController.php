@@ -7,9 +7,8 @@ use App\Http\Requests;
 use App\Http\Requests\CreateQuestionnaireRequest;
 use App\Http\Requests\UpdateQuestionnaireRequest;
 use App\Repositories\QuestionnaireRepository;
-use Flash;
+use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
-use Response;
 
 class QuestionnaireController extends AppBaseController
 {
@@ -51,7 +50,11 @@ class QuestionnaireController extends AppBaseController
      */
     public function store(CreateQuestionnaireRequest $request)
     {
-        $input = $request->all();
+        $input = $request->only([
+            'question',
+            'type',
+            'answer_choice'
+        ]);
 
         $questionnaire = $this->questionnaireRepository->create($input);
 
@@ -118,7 +121,13 @@ class QuestionnaireController extends AppBaseController
             return redirect(route('questionnaires.index'));
         }
 
-        $questionnaire = $this->questionnaireRepository->update($request->all(), $id);
+        $input = $request->only([
+            'question',
+            'type',
+            'answer_choice'
+        ]);
+
+        $questionnaire = $this->questionnaireRepository->update($input, $id);
 
         Flash::success('Questionnaire updated successfully.');
 

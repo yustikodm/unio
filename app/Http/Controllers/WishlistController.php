@@ -7,9 +7,8 @@ use App\Http\Requests;
 use App\Http\Requests\CreateWishlistRequest;
 use App\Http\Requests\UpdateWishlistRequest;
 use App\Repositories\WishlistRepository;
-use Flash;
+use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
-use Response;
 
 class WishlistController extends AppBaseController
 {
@@ -51,7 +50,13 @@ class WishlistController extends AppBaseController
      */
     public function store(CreateWishlistRequest $request)
     {
-        $input = $request->all();
+        $input = $request->only([
+            'university_id',
+            'major_id',
+            'service_id',
+            'user_id',
+            'description'
+        ]);
 
         $wishlist = $this->wishlistRepository->create($input);
 
@@ -117,8 +122,16 @@ class WishlistController extends AppBaseController
 
             return redirect(route('wishlists.index'));
         }
+        
+        $input = $request->only([
+            'university_id',
+            'major_id',
+            'service_id',
+            'user_id',
+            'description'
+        ]);
 
-        $wishlist = $this->wishlistRepository->update($request->all(), $id);
+        $wishlist = $this->wishlistRepository->update($input, $id);
 
         Flash::success('Wishlist updated successfully.');
 

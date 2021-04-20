@@ -7,9 +7,8 @@ use App\Http\Requests;
 use App\Http\Requests\CreateReligionRequest;
 use App\Http\Requests\UpdateReligionRequest;
 use App\Repositories\ReligionRepository;
-use Flash;
+use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
-use Response;
 
 class ReligionController extends AppBaseController
 {
@@ -51,7 +50,7 @@ class ReligionController extends AppBaseController
      */
     public function store(CreateReligionRequest $request)
     {
-        $input = $request->all();
+        $input = $request->only(['name']);
 
         $religion = $this->religionRepository->create($input);
 

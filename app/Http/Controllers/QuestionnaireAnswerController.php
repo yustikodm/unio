@@ -50,7 +50,11 @@ class QuestionnaireAnswerController extends AppBaseController
      */
     public function store(CreateQuestionnaireAnswerRequest $request)
     {
-        $input = $request->all();
+        $input = $request->only([
+            'questionairre_id',
+            'user_id',
+            'answer'
+        ]);
 
         $questionnaireAnswer = $this->questionnaireAnswerRepository->create($input);
 
@@ -117,7 +121,13 @@ class QuestionnaireAnswerController extends AppBaseController
             return redirect(route('questionnaire-answers.index'));
         }
 
-        $questionnaireAnswer = $this->questionnaireAnswerRepository->update($request->all(), $id);
+        $input = $request->only([
+            'questionairre_id',
+            'user_id',
+            'answer'
+        ]);
+
+        $questionnaireAnswer = $this->questionnaireAnswerRepository->update($input, $id);
 
         Flash::success('Questionnaire Answer updated successfully.');
 

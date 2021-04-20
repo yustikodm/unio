@@ -50,7 +50,7 @@ class PointPricingsController extends AppBaseController
      */
     public function store(CreatePointPricingsRequest $request)
     {
-        $input = $request->all();
+        $input = $request->only(['entity_id', 'entity_type', 'amount']);
 
         $pointPricings = $this->pointPricingsRepository->create($input);
 
@@ -117,7 +117,9 @@ class PointPricingsController extends AppBaseController
             return redirect(route('point-pricings.index'));
         }
 
-        $pointPricings = $this->pointPricingsRepository->update($request->all(), $id);
+        $input = $request->only(['entity_id', 'entity_type', 'amount']);
+
+        $pointPricings = $this->pointPricingsRepository->update($input, $id);
 
         Flash::success('Point Pricings updated successfully.');
 

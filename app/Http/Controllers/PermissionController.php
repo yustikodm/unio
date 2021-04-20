@@ -7,10 +7,9 @@ use App\Http\Requests;
 use App\Http\Requests\CreatePermissionRequest;
 use App\Http\Requests\UpdatePermissionRequest;
 use App\Repositories\PermissionRepository;
-use Flash;
+use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
-use Response;
 
 class PermissionController extends AppBaseController
 {
@@ -52,7 +51,11 @@ class PermissionController extends AppBaseController
      */
     public function store(CreatePermissionRequest $request)
     {
-        $input = $request->all();
+        $input = $request->only([
+            'name',
+            'guard_name',
+            'resource'
+        ]);
 
         if ($input['resource'] == 1) {
             $permission = $this->permissionRepository->create([
@@ -156,7 +159,13 @@ class PermissionController extends AppBaseController
             return redirect(route('permissions.index'));
         }
 
-        $permission = $this->permissionRepository->update($request->all(), $id);
+        $input = $request->only([
+            'name',
+            'guard_name',
+            'resource'
+        ]);
+
+        $permission = $this->permissionRepository->update($input, $id);
 
         Flash::success('Permission updated successfully.');
 
@@ -188,17 +197,17 @@ class PermissionController extends AppBaseController
     }
 
     public function givePermissionToRole(Request $request){
-        $input = $request->all();
+        $input = $request->only(['roleId', 'permission']);
         $this->permissionRepository->givePermissionToRole($input);
     }
 
     public function revokePermissionToRole(Request $request){
-        $input = $request->all();
+        $input = $request->only(['roleId', 'permission']);
         $this->permissionRepository->revokePermissionToRole($input);
     }
 
     public function roleHasPermission(Request $request){
-        $input = $request->all();
+        $input = $request->only(['roleId', 'permission']);
         //dd($input);
         $result = $this->permissionRepository->roleHasPermission($input);
         return json_encode($result);

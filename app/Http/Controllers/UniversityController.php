@@ -49,7 +49,17 @@ class UniversityController extends AppBaseController
      */
     public function store(CreateUniversityRequest $request)
     {
-        $input = $request->all();
+        $input = $request->only([
+            'country_id',
+            'state_id',
+            'district_id',
+            'name',
+            'description',
+            'logo_src',
+            'type',
+            'accreditation',
+            'address'
+        ]);
 
         $university = $this->universityRepository->create($input);
 
@@ -116,7 +126,19 @@ class UniversityController extends AppBaseController
             return redirect(route('universities.index'));
         }
 
-        $university = $this->universityRepository->update($request->all(), $id);
+        $input = $request->only([
+            'country_id',
+            'state_id',
+            'district_id',
+            'name',
+            'description',
+            'logo_src',
+            'type',
+            'accreditation',
+            'address'
+        ]);
+
+        $university = $this->universityRepository->update($input, $id);
 
         Flash::success('University updated successfully.');
 

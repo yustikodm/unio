@@ -7,9 +7,8 @@ use App\Http\Requests;
 use App\Http\Requests\CreateMasterMajorRequest;
 use App\Http\Requests\UpdateMasterMajorRequest;
 use App\Repositories\MasterMajorRepository;
-use Flash;
+use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
-use Response;
 
 class MasterMajorController extends AppBaseController
 {
@@ -51,7 +50,7 @@ class MasterMajorController extends AppBaseController
      */
     public function store(CreateMasterMajorRequest $request)
     {
-        $input = $request->all();
+        $input = $request->only(['major_id', 'name', 'description']);
 
         $masterMajor = $this->masterMajorRepository->create($input);
 
@@ -118,7 +117,9 @@ class MasterMajorController extends AppBaseController
             return redirect(route('masterMajors.index'));
         }
 
-        $masterMajor = $this->masterMajorRepository->update($request->all(), $id);
+        $input = $request->only(['major_id', 'name', 'description']);
+
+        $masterMajor = $this->masterMajorRepository->update($input, $id);
 
         Flash::success('Master Major updated successfully.');
 

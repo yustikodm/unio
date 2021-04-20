@@ -139,7 +139,19 @@ class PlaceToLiveController extends AppBaseController
             return redirect(route('placeToLives.index'));
         }
 
-        $placeToLive = $this->placeToLiveRepository->update($request->all(), $id);
+        $input = $request->only([
+            'country_id',
+            'state_id',
+            'district_id',
+            'name',
+            'description',
+            'price',
+            'address',
+            'phone',
+            'picture'
+        ]);
+
+        $placeToLive = $this->placeToLiveRepository->update($input, $id);
 
         Flash::success('Place To Live updated successfully.');
 

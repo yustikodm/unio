@@ -20,7 +20,7 @@ class MasterMajor extends Model
     
     protected $dates = ['deleted_at'];
 
-    public $fillable = ['major_id', 'name'];
+    public $fillable = ['major_id', 'name', 'description'];
 
     /**
      * The attributes that should be casted to native types.

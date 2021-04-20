@@ -135,7 +135,15 @@ class VendorServiceController extends AppBaseController
             return redirect(route('vendor-services.index'));
         }
 
-        $vendorService = $this->vendorServiceRepository->update($request->all(), $id);
+        $input = $request->only([
+            'vendor_id',
+            'name',
+            'description',
+            'picture',
+            'price'
+        ]);
+
+        $vendorService = $this->vendorServiceRepository->update($input, $id);
 
         Flash::success('Vendor Service updated successfully.');
 

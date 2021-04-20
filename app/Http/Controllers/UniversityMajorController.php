@@ -52,12 +52,12 @@ class UniversityMajorController extends AppBaseController
     public function store(CreateUniversityMajorRequest $request)
     {
         $input = $request->only([
-          'university_id',
-          'faculty_id',
-          'name',
-          'level',
-          'accreditation',
-          'description'
+            'university_id',
+            'faculty_id',
+            'name',
+            'level',
+            'accreditation',
+            'description'
         ]);
 
         $this->universityMajorRepository->store($input);
@@ -126,12 +126,12 @@ class UniversityMajorController extends AppBaseController
         }
 
         $input = $request->only([
-          'university_id',
-          'faculty_id',
-          'name',
-          'level',
-          'accreditation',
-          'description'
+            'university_id',
+            'faculty_id',
+            'name',
+            'level',
+            'accreditation',
+            'description'
         ]);
 
         $universityMajor = $this->universityMajorRepository->update($id, $input);

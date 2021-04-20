@@ -7,9 +7,8 @@ use App\Http\Requests;
 use App\Http\Requests\CreateVendorCategoryRequest;
 use App\Http\Requests\UpdateVendorCategoryRequest;
 use App\Repositories\VendorCategoryRepository;
-use Flash;
+use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
-use Response;
 
 class VendorCategoryController extends AppBaseController
 {
@@ -51,7 +50,7 @@ class VendorCategoryController extends AppBaseController
      */
     public function store(CreateVendorCategoryRequest $request)
     {
-        $input = $request->all();
+        $input = $request->only(['name', 'description']);
 
         $vendorCategory = $this->vendorCategoryRepository->create($input);
 
@@ -118,7 +117,9 @@ class VendorCategoryController extends AppBaseController
             return redirect(route('vendorCategories.index'));
         }
 
-        $vendorCategory = $this->vendorCategoryRepository->update($request->all(), $id);
+        $input = $request->only(['name', 'description']);
+
+        $vendorCategory = $this->vendorCategoryRepository->update($input, $id);
 
         Flash::success('Vendor Category updated successfully.');
 

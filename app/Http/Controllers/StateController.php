@@ -7,9 +7,8 @@ use App\Http\Requests;
 use App\Http\Requests\CreateStateRequest;
 use App\Http\Requests\UpdateStateRequest;
 use App\Repositories\StateRepository;
-use Flash;
+use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
-use Response;
 
 class StateController extends AppBaseController
 {
@@ -51,7 +50,7 @@ class StateController extends AppBaseController
      */
     public function store(CreateStateRequest $request)
     {
-        $input = $request->all();
+        $input = $request->only(['name']);
 
         $state = $this->stateRepository->create($input);
 
@@ -118,7 +117,9 @@ class StateController extends AppBaseController
             return redirect(route('states.index'));
         }
 
-        $state = $this->stateRepository->update($request->all(), $id);
+        $input = $request->only(['name']);
+
+        $state = $this->stateRepository->update($input, $id);
 
         Flash::success('State updated successfully.');
 

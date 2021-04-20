@@ -7,9 +7,8 @@ use App\Http\Requests;
 use App\Http\Requests\CreateRoleRequest;
 use App\Http\Requests\UpdateRoleRequest;
 use App\Repositories\RoleRepository;
-use Flash;
+use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
-use Response;
 
 class RoleController extends AppBaseController
 {
@@ -51,7 +50,10 @@ class RoleController extends AppBaseController
      */
     public function store(CreateRoleRequest $request)
     {
-        $input = $request->all();
+        $input = $request->only([
+            'name',
+            'guard_name'
+        ]);
 
         $role = $this->roleRepository->create($input);
 
@@ -118,7 +120,12 @@ class RoleController extends AppBaseController
             return redirect(route('roles.index'));
         }
 
-        $role = $this->roleRepository->update($request->all(), $id);
+        $input = $request->only([
+            'name',
+            'guard_name'
+        ]);
+
+        $role = $this->roleRepository->update($input, $id);
 
         Flash::success('Role updated successfully.');
 

@@ -6,12 +6,10 @@ use App\DataTables\VendorDataTable;
 use App\Http\Requests;
 use App\Http\Requests\CreateVendorRequest;
 use App\Http\Requests\UpdateVendorRequest;
-use App\Models\Vendor;
 use App\Repositories\VendorRepository;
-use Flash;
+use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Support\Facades\Storage;
-use Response;
 
 class VendorController extends AppBaseController
 {
@@ -53,7 +51,20 @@ class VendorController extends AppBaseController
      */
     public function store(CreateVendorRequest $request)
     {
-        $input = $request->all();
+        $input = $request->only([
+            'country_id',
+            'state_id',
+            'district_id',
+            'vendor_category_id',
+            'name',
+            'description',
+            'picture',
+            'email',
+            'back_account_number',
+            'website',
+            'address',
+            'phone'
+        ]);
 
         $save = $this->vendorRepository->create($input);
         if ($save) {
@@ -127,7 +138,22 @@ class VendorController extends AppBaseController
             return redirect(route('vendors.index'));
         }
 
-        $vendor = $this->vendorRepository->update($request->all(), $id);
+        $input = $request->only([
+            'country_id',
+            'state_id',
+            'district_id',
+            'vendor_category_id',
+            'name',
+            'description',
+            'picture',
+            'email',
+            'back_account_number',
+            'website',
+            'address',
+            'phone'
+        ]);
+
+        $vendor = $this->vendorRepository->update($input, $id);
 
         Flash::success('Vendor updated successfully.');
 

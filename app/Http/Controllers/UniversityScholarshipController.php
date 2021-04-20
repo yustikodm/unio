@@ -7,9 +7,8 @@ use App\Http\Requests;
 use App\Http\Requests\CreateUniversityScholarshipRequest;
 use App\Http\Requests\UpdateUniversityScholarshipRequest;
 use App\Repositories\UniversityScholarshipRepository;
-use Flash;
+use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
-use Response;
 
 class UniversityScholarshipController extends AppBaseController
 {
@@ -51,7 +50,13 @@ class UniversityScholarshipController extends AppBaseController
      */
     public function store(CreateUniversityScholarshipRequest $request)
     {
-        $input = $request->all();
+        $input = $request->only([
+            'university_id',
+            'name',
+            'description',
+            'picture',
+            'year'
+        ]);
 
         $universityScholarship = $this->universityScholarshipRepository->create($input);
 
@@ -118,7 +123,15 @@ class UniversityScholarshipController extends AppBaseController
             return redirect(route('university-scholarships.index'));
         }
 
-        $universityScholarship = $this->universityScholarshipRepository->update($request->all(), $id);
+        $input = $request->only([
+            'university_id',
+            'name',
+            'description',
+            'picture',
+            'year'
+        ]);
+
+        $universityScholarship = $this->universityScholarshipRepository->update($input, $id);
 
         Flash::success('University Scholarship updated successfully.');
 

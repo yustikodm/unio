@@ -165,7 +165,7 @@ class University extends Model
         'university_majors.name as um_name',
         'university_majors.description as um_description',
         'university_majors.accreditation as um_accreditation',
-        'university_majors.temp as um_temp',
+        'university_majors.level as um_level',
         'university_majors.created_at as um_created_at',
         'university_majors.updated_at as um_updated_at',
       ]);

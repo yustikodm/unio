@@ -7,9 +7,8 @@ use App\Http\Requests;
 use App\Http\Requests\CreateBiodataRequest;
 use App\Http\Requests\UpdateBiodataRequest;
 use App\Repositories\BiodataRepository;
-use Flash;
+use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
-use Response;
 
 class BiodataController extends AppBaseController
 {
@@ -51,7 +50,19 @@ class BiodataController extends AppBaseController
    */
   public function store(CreateBiodataRequest $request)
   {
-    $input = $request->all();
+    $input = $request->only([
+        'user_id',
+        'fullname',
+        'address',
+        'gender',
+        'picture',
+        'school_origin',
+        'graduation_year',
+        'birth_place',
+        'birth_date',
+        'identity_number',
+        'religion_id',
+    ]);
 
     $biodata = $this->biodataRepository->create($input);
 
@@ -118,7 +129,21 @@ class BiodataController extends AppBaseController
       return redirect(route('biodata.index'));
     }
 
-    $biodata = $this->biodataRepository->update($request->all(), $id);
+    $input = $request->only([
+        'user_id',
+        'fullname',
+        'address',
+        'gender',
+        'picture',
+        'school_origin',
+        'graduation_year',
+        'birth_place',
+        'birth_date',
+        'identity_number',
+        'religion_id',
+    ]);
+
+    $biodata = $this->biodataRepository->update($input, $id);
 
     Flash::success('Biodata updated successfully.');
 

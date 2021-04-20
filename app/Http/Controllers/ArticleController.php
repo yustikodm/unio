@@ -7,9 +7,8 @@ use App\Http\Requests;
 use App\Http\Requests\CreateArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
 use App\Repositories\ArticleRepository;
-use Flash;
+use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
-use Response;
 use Illuminate\Support\Str;
 
 class ArticleController extends AppBaseController
@@ -52,7 +51,13 @@ class ArticleController extends AppBaseController
      */
     public function store(CreateArticleRequest $request)
     {
-        $input = $request->all();
+        $input = $request->only([
+            'title',
+            'slug',
+            'description',
+            'user_id',
+            'picture'
+        ]);
 
         $input['slug'] = Str::slug($request->title);
 
@@ -121,7 +126,15 @@ class ArticleController extends AppBaseController
             return redirect(route('articles.index'));
         }
 
-        $article = $this->articleRepository->update($request->all(), $id);
+        $input = $request->only([
+            'title',
+            'slug',
+            'description',
+            'user_id',
+            'picture'
+        ]);
+
+        $article = $this->articleRepository->update($input, $id);
 
         Flash::success('Article updated successfully.');
 

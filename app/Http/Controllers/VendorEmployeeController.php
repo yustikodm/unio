@@ -7,9 +7,8 @@ use App\Http\Requests;
 use App\Http\Requests\CreateVendorEmployeeRequest;
 use App\Http\Requests\UpdateVendorEmployeeRequest;
 use App\Repositories\VendorEmployeeRepository;
-use Flash;
+use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
-use Response;
 
 class VendorEmployeeController extends AppBaseController
 {
@@ -51,7 +50,17 @@ class VendorEmployeeController extends AppBaseController
      */
     public function store(CreateVendorEmployeeRequest $request)
     {
-        $input = $request->all();
+        $input = $request->only([
+            'vendor_id',
+            'name',
+            'birthdate',
+            'position',
+            'phone',
+            'email',
+            'address',
+            'picture',
+            'description'
+        ]);
 
         $vendorEmployee = $this->vendorEmployeeRepository->create($input);
 
@@ -118,7 +127,19 @@ class VendorEmployeeController extends AppBaseController
             return redirect(route('vendor-employees.index'));
         }
 
-        $vendorEmployee = $this->vendorEmployeeRepository->update($request->all(), $id);
+        $input = $request->only([
+            'vendor_id',
+            'name',
+            'birthdate',
+            'position',
+            'phone',
+            'email',
+            'address',
+            'picture',
+            'description'
+        ]);
+
+        $vendorEmployee = $this->vendorEmployeeRepository->update($input, $id);
 
         Flash::success('Vendor Employee updated successfully.');
 

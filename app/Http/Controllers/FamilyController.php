@@ -7,9 +7,8 @@ use App\Http\Requests;
 use App\Http\Requests\CreateFamilyRequest;
 use App\Http\Requests\UpdateFamilyRequest;
 use App\Repositories\FamilyRepository;
-use Flash;
+use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
-use Response;
 
 class FamilyController extends AppBaseController
 {
@@ -51,7 +50,12 @@ class FamilyController extends AppBaseController
      */
     public function store(CreateFamilyRequest $request)
     {
-        $input = $request->all();
+        $input = $request->only([
+            'parent_user',
+            'child_user',
+            'family_as',
+            'family_verified_at',
+        ]);
 
         $family = $this->familyRepository->create($input);
 
@@ -118,7 +122,14 @@ class FamilyController extends AppBaseController
             return redirect(route('families.index'));
         }
 
-        $family = $this->familyRepository->update($request->all(), $id);
+        $input = $request->only([
+            'parent_user',
+            'child_user',
+            'family_as',
+            'family_verified_at',
+        ]);
+
+        $family = $this->familyRepository->update($input, $id);
 
         Flash::success('Family updated successfully.');
 

@@ -7,9 +7,8 @@ use App\Http\Requests;
 use App\Http\Requests\CreateUniversityFacultiesRequest;
 use App\Http\Requests\UpdateUniversityFacultiesRequest;
 use App\Repositories\UniversityFacultiesRepository;
-use Flash;
+use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
-use Response;
 
 class UniversityFacultiesController extends AppBaseController
 {
@@ -51,7 +50,7 @@ class UniversityFacultiesController extends AppBaseController
      */
     public function store(CreateUniversityFacultiesRequest $request)
     {
-        $input = $request->all();
+        $input = $request->only(['university_id', 'name', 'description']);
 
         $universityFaculties = $this->universityFacultiesRepository->create($input);
 
@@ -118,7 +117,9 @@ class UniversityFacultiesController extends AppBaseController
             return redirect(route('university-faculties.index'));
         }
 
-        $universityFaculties = $this->universityFacultiesRepository->update($request->all(), $id);
+        $input = $request->only(['university_id', 'name', 'description']);
+
+        $universityFaculties = $this->universityFacultiesRepository->update($input, $id);
 
         Flash::success('University Faculties updated successfully.');
 

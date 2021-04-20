@@ -7,9 +7,8 @@ use App\Http\Requests;
 use App\Http\Requests\CreateDistrictRequest;
 use App\Http\Requests\UpdateDistrictRequest;
 use App\Repositories\DistrictRepository;
-use Flash;
+use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
-use Response;
 
 class DistrictController extends AppBaseController
 {
@@ -51,7 +50,7 @@ class DistrictController extends AppBaseController
      */
     public function store(CreateDistrictRequest $request)
     {
-        $input = $request->all();
+        $input = $request->only(['state_id', 'name']);
 
         $district = $this->districtRepository->create($input);
 
@@ -118,7 +117,9 @@ class DistrictController extends AppBaseController
             return redirect(route('districts.index'));
         }
 
-        $district = $this->districtRepository->update($request->all(), $id);
+        $input = $request->only(['state_id', 'name']);
+
+        $district = $this->districtRepository->update($input, $id);
 
         Flash::success('District updated successfully.');
 

@@ -7,9 +7,8 @@ use App\Http\Requests;
 use App\Http\Requests\CreateUniversityFeeRequest;
 use App\Http\Requests\UpdateUniversityFeeRequest;
 use App\Repositories\UniversityFeeRepository;
-use Flash;
+use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
-use Response;
 
 class UniversityFeeController extends AppBaseController
 {
@@ -51,7 +50,16 @@ class UniversityFeeController extends AppBaseController
      */
     public function store(CreateUniversityFeeRequest $request)
     {
-        $input = $request->all();
+        $input = $request->only([
+            'university_id',
+            'faculty_id',
+            'major_id',
+            'currency_id',
+            'type',
+            'admission_fee',
+            'semester_fee',
+            'description'
+        ]);
 
         $universityFee = $this->universityFeeRepository->create($input);
 
@@ -118,7 +126,18 @@ class UniversityFeeController extends AppBaseController
             return redirect(route('university-fees.index'));
         }
 
-        $universityFee = $this->universityFeeRepository->update($request->all(), $id);
+        $input = $request->only([
+            'university_id',
+            'faculty_id',
+            'major_id',
+            'currency_id',
+            'type',
+            'admission_fee',
+            'semester_fee',
+            'description'
+        ]);
+
+        $universityFee = $this->universityFeeRepository->update($input, $id);
 
         Flash::success('University Fee updated successfully.');
 

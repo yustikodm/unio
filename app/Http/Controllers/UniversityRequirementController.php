@@ -7,9 +7,8 @@ use App\Http\Requests;
 use App\Http\Requests\CreateUniversityRequirementRequest;
 use App\Http\Requests\UpdateUniversityRequirementRequest;
 use App\Repositories\UniversityRequirementRepository;
-use Flash;
+use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
-use Response;
 
 class UniversityRequirementController extends AppBaseController
 {
@@ -51,7 +50,13 @@ class UniversityRequirementController extends AppBaseController
      */
     public function store(CreateUniversityRequirementRequest $request)
     {
-        $input = $request->all();
+        $input = $request->only([
+            'university_id',
+            'major_id',
+            'name',
+            'value',
+            'description'
+        ]);
 
         $universityRequirement = $this->universityRequirementRepository->create($input);
 
@@ -117,8 +122,16 @@ class UniversityRequirementController extends AppBaseController
 
             return redirect(route('university-requirements.index'));
         }
+        
+        $input = $request->only([
+            'university_id',
+            'major_id',
+            'name',
+            'value',
+            'description'
+        ]);
 
-        $universityRequirement = $this->universityRequirementRepository->update($request->all(), $id);
+        $universityRequirement = $this->universityRequirementRepository->update($input, $id);
 
         Flash::success('University Requirement updated successfully.');
 

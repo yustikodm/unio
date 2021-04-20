@@ -7,9 +7,8 @@ use App\Http\Requests;
 use App\Http\Requests\CreatePointLogRequest;
 use App\Http\Requests\UpdatePointLogRequest;
 use App\Repositories\PointLogRepository;
-use Flash;
+use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
-use Response;
 
 class PointLogController extends AppBaseController
 {
@@ -51,7 +50,13 @@ class PointLogController extends AppBaseController
      */
     public function store(CreatePointLogRequest $request)
     {
-        $input = $request->all();
+        $input = $request->only([
+            'parent_id',
+            'transaction_id',
+            'transaction_type',
+            'point_before',
+            'point_after'
+        ]);
 
         $pointLog = $this->pointLogRepository->create($input);
 
@@ -118,7 +123,15 @@ class PointLogController extends AppBaseController
             return redirect(route('point-logs.index'));
         }
 
-        $pointLog = $this->pointLogRepository->update($request->all(), $id);
+        $input = $request->only([
+          'parent_id',
+          'transaction_id',
+          'transaction_type',
+          'point_before',
+          'point_after'
+        ]);
+
+        $pointLog = $this->pointLogRepository->update($input, $id);
 
         Flash::success('Point Log updated successfully.');
 
