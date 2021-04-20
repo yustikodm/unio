@@ -32,9 +32,9 @@ class UniversityScholarshipAPIController extends AppBaseController
      *
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $universityScholarships = $this->universityScholarshipRepository->paginate(15);
+        $universityScholarships = $this->universityScholarshipRepository->paginate(15, [], ['name' => $request->name]);
 
         return $this->sendResponse($universityScholarships, 'University Scholarships retrieved successfully');
     }
@@ -49,7 +49,13 @@ class UniversityScholarshipAPIController extends AppBaseController
      */
     public function store(CreateUniversityScholarshipAPIRequest $request)
     {
-        $input = $request->only([]);
+        $input = $request->only([
+            'university_id',
+            'name',
+            'description',
+            'picture',
+            'year'
+        ]);
 
         $universityScholarship = $this->universityScholarshipRepository->create($input);
 
@@ -87,8 +93,9 @@ class UniversityScholarshipAPIController extends AppBaseController
      */
     public function update($id, UpdateUniversityScholarshipAPIRequest $request)
     {
-        $input = $request->all([
+        $input = $request->only([
             'university_id',
+            'name',
             'description',
             'picture',
             'year'

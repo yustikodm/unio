@@ -32,9 +32,9 @@ class QuestionnaireAPIController extends AppBaseController
      *
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $questionnaires = $this->questionnaireRepository->paginate(15);
+        $questionnaires = $this->questionnaireRepository->paginate(15, [], ['name' => $request->name]);
 
         return $this->sendResponse($questionnaires, 'Questionnaires retrieved successfully');
     }
@@ -49,7 +49,11 @@ class QuestionnaireAPIController extends AppBaseController
      */
     public function store(CreateQuestionnaireAPIRequest $request)
     {
-        $input = $request->all();
+        $input = $request->only([
+            'question',
+            'type',
+            'answer_choice'
+        ]);
 
         $questionnaire = $this->questionnaireRepository->create($input);
 
@@ -87,7 +91,11 @@ class QuestionnaireAPIController extends AppBaseController
      */
     public function update($id, UpdateQuestionnaireAPIRequest $request)
     {
-        $input = $request->all();
+        $input = $request->only([
+            'question',
+            'type',
+            'answer_choice'
+        ]);
 
         /** @var Questionnaire $questionnaire */
         $questionnaire = $this->questionnaireRepository->find($id);

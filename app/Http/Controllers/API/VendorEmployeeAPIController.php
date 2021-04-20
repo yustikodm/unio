@@ -32,9 +32,9 @@ class VendorEmployeeAPIController extends AppBaseController
      *
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $vendorEmployees = $this->vendorEmployeeRepository->paginate(15);
+        $vendorEmployees = $this->vendorEmployeeRepository->paginate(15, [], ['name' => $request->name]);
 
         return $this->sendResponse($vendorEmployees, 'Vendor Employees retrieved successfully');
     }
@@ -97,7 +97,17 @@ class VendorEmployeeAPIController extends AppBaseController
      */
     public function update($id, UpdateVendorEmployeeAPIRequest $request)
     {
-        $input = $request->all();
+        $input = $request->only([
+            'vendor_id',
+            'name',
+            'birthdate',
+            'position',
+            'phone',
+            'email',
+            'address',
+            'picture',
+            'description'
+        ]);
 
         /** @var VendorEmployee $vendorEmployee */
         $vendorEmployee = $this->vendorEmployeeRepository->find($id);

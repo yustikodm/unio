@@ -32,9 +32,9 @@ class PlaceToLiveAPIController extends AppBaseController
    *
    * @return Response
    */
-  public function index()
+  public function index(Request $request)
   {
-    $placeToLives = $this->placeToLiveRepository->paginate(15);
+    $placeToLives = $this->placeToLiveRepository->paginate(15, [], ['name' => $request->name]);
 
     return $this->sendResponse($placeToLives, 'Place To Lives retrieved successfully');
   }

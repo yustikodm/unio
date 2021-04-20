@@ -40,9 +40,11 @@ Route::group(['middleware' => ['auth:api']], function () {
 
   Route::resource('carts', 'CartAPIController');
 
-  Route::get('users/profile', 'UserAPIConctroller@profile')->middleware('auth:api');
+  Route::get('users/profile', 'UserAPIConctroller@profile');
 
-  Route::get('users/show/{id}', 'UserAPIConctroller@show')->middleware('auth:api');
+  Route::get('users/show/{id}', 'UserAPIConctroller@show');
+
+  Route::resource('families', 'FamilyAPIController');
 });
 
 Route::resource('articles', 'ArticleAPIController');

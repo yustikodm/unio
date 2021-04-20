@@ -78,9 +78,9 @@ class PointLogDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('created_at')->title('Trans. Date')->width('15%'),
-            Column::make('transaction_type')->title('Trans. Type')->width('10%'),
-            Column::make('transaction_name')->title('Trans. Name')->width('15%'),
+            Column::make('created_at')->title('Trans. Date')->width('10%'),
+            Column::make('transaction_type')->title('Trans. Type')->width('15%'),
+            Column::make('transaction_name')->title('Trans. Name')->width('25%'),
             Column::make('point_before')->title('Point Before')->width('10%'),
             Column::make('point_after')->title('Point After')->width('10%'),
             Column::make('parent_id')->title('Parent User')->width('10%'),

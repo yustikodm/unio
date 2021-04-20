@@ -32,9 +32,9 @@ class ArticleAPIController extends AppBaseController
    *
    * @return Response
    */
-  public function index()
+  public function index(Request $request)
   {
-    $articles = $this->articleRepository->paginate(15);
+    $articles = $this->articleRepository->paginate(15, [], ['title' => $request->title]);
 
     return $this->sendResponse($articles, 'Articles retrieved successfully');
   }

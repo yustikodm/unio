@@ -32,9 +32,9 @@ class StateAPIController extends AppBaseController
    *
    * @return Response
    */
-  public function index()
+  public function index(Request $request)
   {
-    $states = $this->stateRepository->paginate(15);
+    $states = $this->stateRepository->paginate(15, [], ['name' => $request->name]);
 
     return $this->sendResponse($states, 'States retrieved successfully');
   }

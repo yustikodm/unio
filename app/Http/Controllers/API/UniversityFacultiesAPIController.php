@@ -32,9 +32,9 @@ class UniversityFacultiesAPIController extends AppBaseController
      *
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $universityFaculties = $this->universityFacultiesRepository->paginate(15);
+        $universityFaculties = $this->universityFacultiesRepository->paginate(15, [], ['name' => $request->name]);
 
         return $this->sendResponse($universityFaculties, 'University Faculties retrieved successfully');
     }

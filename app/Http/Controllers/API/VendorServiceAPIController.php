@@ -32,9 +32,9 @@ class VendorServiceAPIController extends AppBaseController
      *
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $vendorServices = $this->vendorServiceRepository->paginate(15);
+        $vendorServices = $this->vendorServiceRepository->paginate(15, [], ['name' => $request->name]);
 
         return $this->sendResponse($vendorServices, 'Vendor Services retrieved successfully');
     }
@@ -49,7 +49,13 @@ class VendorServiceAPIController extends AppBaseController
      */
     public function store(CreateVendorServiceAPIRequest $request)
     {
-        $input = $request->all();
+        $input = $request->only([
+            'vendor_id',
+            'name',
+            'description',
+            'picture',
+            'price'
+        ]);
 
         $vendorService = $this->vendorServiceRepository->create($input);
 
@@ -87,7 +93,13 @@ class VendorServiceAPIController extends AppBaseController
      */
     public function update($id, UpdateVendorServiceAPIRequest $request)
     {
-        $input = $request->all();
+        $input = $request->only([
+            'vendor_id',
+            'name',
+            'description',
+            'picture',
+            'price'
+        ]);
 
         /** @var VendorService $vendorService */
         $vendorService = $this->vendorServiceRepository->find($id);

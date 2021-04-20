@@ -49,7 +49,11 @@ class QuestionnaireAnswerAPIController extends AppBaseController
      */
     public function store(CreateQuestionnaireAnswerAPIRequest $request)
     {
-        $input = $request->all();
+        $input = $request->only([
+            'questionairre_id',
+            'user_id',
+            'answer'
+        ]);
 
         $questionnaireAnswer = $this->questionnaireAnswerRepository->create($input);
 
@@ -87,7 +91,11 @@ class QuestionnaireAnswerAPIController extends AppBaseController
      */
     public function update($id, UpdateQuestionnaireAnswerAPIRequest $request)
     {
-        $input = $request->all();
+        $input = $request->only([
+            'questionairre_id',
+            'user_id',
+            'answer'
+        ]);
 
         /** @var QuestionnaireAnswer $questionnaireAnswer */
         $questionnaireAnswer = $this->questionnaireAnswerRepository->find($id);

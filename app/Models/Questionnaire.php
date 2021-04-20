@@ -26,8 +26,6 @@ class Questionnaire extends Model
 
     protected $dates = ['deleted_at'];
 
-
-
     public $fillable = [
         'question',
         'type',

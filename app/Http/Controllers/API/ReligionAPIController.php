@@ -32,9 +32,9 @@ class ReligionAPIController extends AppBaseController
      *
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $religions = $this->religionRepository->paginate(15);
+        $religions = $this->religionRepository->paginate(15, [], ['name' => $request->name]);
 
         return $this->sendResponse($religions, 'Religions retrieved successfully');
     }

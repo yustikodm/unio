@@ -66,10 +66,14 @@ abstract class BaseRepository
    *
    * @return LengthAwarePaginator
    */
-  public function paginate($perPage, $columns = ['*'])
+  public function paginate($perPage, $columns = [], $search = [])
   {
-    $query = $this->allQuery();
+    $query = $this->allQuery($search);
 
+    if (count($columns) < 1) {
+        $columns = ['*'];
+    }
+    
     return $query->paginate($perPage, $columns);
   }
 
@@ -89,7 +93,8 @@ abstract class BaseRepository
     if (count($search)) {
       foreach ($search as $key => $value) {
         if (in_array($key, $this->getFieldsSearchable())) {
-          $query->where($key, $value);
+          $query->where($key, 'LIKE', "%$value%");
+          $query->orWhere($key, $value);
         }
       }
     }

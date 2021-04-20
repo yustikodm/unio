@@ -32,9 +32,9 @@ class VendorAPIController extends AppBaseController
      *
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $vendors = $this->vendorRepository->paginate(15);
+        $vendors = $this->vendorRepository->paginate(15, [], ['name' => $request->name]);
 
         return $this->sendResponse($vendors, 'Vendors retrieved successfully');
     }
@@ -50,6 +50,9 @@ class VendorAPIController extends AppBaseController
     public function store(CreateVendorAPIRequest $request)
     {
         $input = $request->only([
+            'country_id',
+            'state_id',
+            'district_id',
             'vendor_category_id',
             'name',
             'description',
@@ -98,6 +101,9 @@ class VendorAPIController extends AppBaseController
     public function update($id, UpdateVendorAPIRequest $request)
     {
         $input = $request->only([
+            'country_id',
+            'state_id',
+            'district_id',
             'vendor_category_id',
             'name',
             'description',

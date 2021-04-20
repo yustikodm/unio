@@ -32,9 +32,9 @@ class VendorCategoryAPIController extends AppBaseController
      *
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $vendorCategories = $this->vendorCategoryRepository->paginate(15);
+        $vendorCategories = $this->vendorCategoryRepository->paginate(15, [], ['name' => $request->name]);
 
         return $this->sendResponse($vendorCategories, 'Vendor Categories retrieved successfully');
     }

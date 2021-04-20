@@ -53,7 +53,10 @@ class PermissionAPIController extends AppBaseController
      */
     public function store(CreatePermissionAPIRequest $request)
     {
-        $input = $request->all();
+        $input = $request->only([
+            'name',
+            'guard_name'
+        ]);
 
         $permission = $this->permissionRepository->create($input);
 
@@ -91,7 +94,10 @@ class PermissionAPIController extends AppBaseController
      */
     public function update($id, UpdatePermissionAPIRequest $request)
     {
-        $input = $request->all();
+        $input = $request->only([
+            'name',
+            'guard_name'
+        ]);
 
         /** @var Permission $permission */
         $permission = $this->permissionRepository->find($id);

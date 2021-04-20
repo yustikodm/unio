@@ -32,9 +32,9 @@ class DistrictAPIController extends AppBaseController
      *
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $districts = $this->districtRepository->paginate(15);
+        $districts = $this->districtRepository->paginate(15, [], ['name' => $request->name]);
 
         return $this->sendResponse($districts, 'Districts retrieved successfully');
     }

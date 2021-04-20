@@ -32,9 +32,9 @@ class UniversityMajorAPIController extends AppBaseController
      *
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $universityMajors = $this->universityMajorRepository->paginate(15);
+        $universityMajors = $this->universityMajorRepository->paginate(15, [], ['name' => $request->name]);
 
         return $this->sendResponse($universityMajors, 'University Majors retrieved successfully');
     }
@@ -55,7 +55,7 @@ class UniversityMajorAPIController extends AppBaseController
             'name',
             'description',
             'accreditation',
-            'temp'
+            'level'
         ]);
 
         $universityMajor = $this->universityMajorRepository->create($input);
@@ -100,7 +100,7 @@ class UniversityMajorAPIController extends AppBaseController
             'name',
             'description',
             'accreditation',
-            'temp'
+            'level'
         ]);
 
         /** @var UniversityMajor $universityMajor */

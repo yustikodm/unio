@@ -32,9 +32,9 @@ class CountryAPIController extends AppBaseController
      *
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $countries = $this->countryRepository->paginate(15);
+        $countries = $this->countryRepository->paginate(15, [], ['name' => $request->name]);
 
         return $this->sendResponse($countries, 'Countries retrieved successfully');
     }
@@ -49,7 +49,13 @@ class CountryAPIController extends AppBaseController
      */
     public function store(CreateCountryAPIRequest $request)
     {
-        $input = $request->only(['name']);
+        $input = $request->only([
+            'code',
+            'name',
+            'region',
+            'currency_code',
+            'currency_name'
+        ]);
 
         $country = $this->countryRepository->create($input);
 
@@ -87,7 +93,13 @@ class CountryAPIController extends AppBaseController
      */
     public function update($id, UpdateCountryAPIRequest $request)
     {
-        $input = $request->only(['name']);
+        $input = $request->only([
+            'code',
+            'name',
+            'region',
+            'currency_code',
+            'currency_name'
+        ]);
 
         /** @var Country $country */
         $country = $this->countryRepository->find($id);

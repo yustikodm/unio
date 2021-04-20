@@ -54,7 +54,19 @@ class BiodataAPIController extends AppBaseController
      */
     public function store(CreateBiodataAPIRequest $request)
     {
-        $input = $request->all();
+        $input = $request->only([
+            'user_id',
+            'fullname',
+            'address',
+            'gender',
+            'picture',
+            'school_origin',
+            'graduation_year',
+            'birth_place',
+            'birth_date',
+            'identity_number',
+            'religion_id'
+        ]);
 
         $biodata = $this->biodataRepository->create($input);
 
@@ -92,7 +104,19 @@ class BiodataAPIController extends AppBaseController
      */
     public function update($id, UpdateBiodataAPIRequest $request)
     {
-        $input = $request->all();
+        $input = $request->only([
+            'user_id',
+            'fullname',
+            'address',
+            'gender',
+            'picture',
+            'school_origin',
+            'graduation_year',
+            'birth_place',
+            'birth_date',
+            'identity_number',
+            'religion_id',
+        ]);
 
         /** @var Biodata $biodata */
         $biodata = $this->biodataRepository->find($id);
