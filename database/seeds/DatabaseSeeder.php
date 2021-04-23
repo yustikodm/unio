@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
    */
   public function run()
   {
+      // DATA REAL
       $this->call([
           PermissionsSeeder::class,
           RolesSeeder::class,
@@ -34,19 +35,23 @@ class DatabaseSeeder extends Seeder
           StatesSeeder::class,
           DistrictSeeder::class,
           UniversitiesSeeder::class,
-          UniversityFacultySeeder::class,
           UniversityMajorSeeder::class,
-          UniversityRequirementSeeder::class,
-          UniversityFeeSeeder::class,
-          UniversityScholarshipSeeder::class,
-          UniversityFacilitiesSeeder::class,
-          PlaceToLiveSeeder::class,
-          ArticleSeeder::class,
-          VendorCategoriesSeeder::class,
-          VendorsSeeder::class,
-          VendorServiceSeeder::class,
-          VendorEmployeeSeeder::class,
-          WishlistSeeder::class,
       ]);
+      
+      // DATA DUMMY (FAKER)
+      // $this->call([
+      //     UniversityFacultySeeder::class,
+      //     UniversityRequirementSeeder::class,
+      //     UniversityFeeSeeder::class,
+      //     UniversityScholarshipSeeder::class,
+      //     UniversityFacilitiesSeeder::class,
+      //     PlaceToLiveSeeder::class,
+      //     ArticleSeeder::class,
+      //     VendorCategoriesSeeder::class,
+      //     VendorsSeeder::class,
+      //     VendorServiceSeeder::class,
+      //     VendorEmployeeSeeder::class,
+      //     WishlistSeeder::class,
+      // ]);
   }
 }

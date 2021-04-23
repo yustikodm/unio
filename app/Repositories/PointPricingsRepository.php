@@ -39,4 +39,9 @@ class PointPricingsRepository extends BaseRepository
     {
         return PointPricings::class;
     }
+
+    public function findBy(Array $arr=[])
+    {
+        return PointPricings::where($arr)->orderBy('id', 'desc')->first();
+    }
 }

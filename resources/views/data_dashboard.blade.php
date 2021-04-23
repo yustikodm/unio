@@ -17,16 +17,16 @@
     <div class="col-md-3">
         <div class="small-box bg-yellow">
         <div class="inner">
-          <h3>NaN</h3>
+          <h3>{{ $user }}</h3>
 
-          <p>Student</p>
+          <p>User</p>
         </div>
         <div class="icon">
           <i class="ion ion-person-add"></i>
         </div>
       </div>
     </div>
-    <div class="col-md-3">
+    {{-- <div class="col-md-3">
         <div class="small-box bg-red">
         <div class="inner">
           <h3>NaN</h3>
@@ -37,7 +37,7 @@
           <i class="ion ion-ios-people-outline"></i>
         </div>
       </div>
-    </div>
+    </div> --}}
     <div class="col-md-3">
         <div class="small-box bg-green">
         <div class="inner">

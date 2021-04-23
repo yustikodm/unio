@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\University;
 use App\Models\Vendor;
-
+use App\User;
 
 class HomeController extends Controller
 {
@@ -28,7 +28,9 @@ class HomeController extends Controller
   {
     return view('home', [
       'university' => University::query()->count(),
-      'vendor' => Vendor::query()->count()
+      'vendor' => Vendor::query()->count(),
+      'user' => User::query()->count(),
+      // 'parent'
     ]);
   }
 }

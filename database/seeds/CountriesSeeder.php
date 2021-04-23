@@ -14,6 +14,7 @@ class CountriesSeeder extends Seeder
   public function run()
   {
       $countries = [
+          ['code' => 'IDN','name' => 'Indonesia','region' => 'Asia','currency_code' => 'IDR','currency_name' => 'Indonesian rupiah','calling_code' => '62'],
           ['code' => 'AFG','name' => 'Afghanistan','region' => 'Asia','currency_code' => 'AFN','currency_name' => 'Afghan afghani','calling_code' => '93'],
           ['code' => 'ALA','name' => 'Åland Islands','region' => 'Europe','currency_code' => 'EUR','currency_name' => 'Euro','calling_code' => '358'],
           ['code' => 'ALB','name' => 'Albania','region' => 'Europe','currency_code' => 'ALL','currency_name' => 'Albanian lek','calling_code' => '355'],
@@ -119,7 +120,6 @@ class CountriesSeeder extends Seeder
           ['code' => 'HUN','name' => 'Hungary','region' => 'Europe','currency_code' => 'HUF','currency_name' => 'Hungarian forint','calling_code' => '36'],
           ['code' => 'ISL','name' => 'Iceland','region' => 'Europe','currency_code' => 'ISK','currency_name' => 'Icelandic króna','calling_code' => '354'],
           ['code' => 'IND','name' => 'India','region' => 'Asia','currency_code' => 'INR','currency_name' => 'Indian rupee','calling_code' => '91'],
-          ['code' => 'IDN','name' => 'Indonesia','region' => 'Asia','currency_code' => 'IDR','currency_name' => 'Indonesian rupiah','calling_code' => '62'],
           ['code' => 'CIV','name' => 'Côte d\'Ivoire','region' => 'Africa','currency_code' => 'XOF','currency_name' => 'West African CFA franc','calling_code' => '225'],
           ['code' => 'IRN','name' => 'Iran (Islamic Republic of)','region' => 'Asia','currency_code' => 'IRR','currency_name' => 'Iranian rial','calling_code' => '98'],
           ['code' => 'IRQ','name' => 'Iraq','region' => 'Asia','currency_code' => 'IQD','currency_name' => 'Iraqi dinar','calling_code' => '964'],

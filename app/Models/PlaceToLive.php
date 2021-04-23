@@ -130,4 +130,10 @@ class PlaceToLive extends Model
 
     return $search->select($select_list)->get();
   }
+
+  public function getCatalog($query)
+  {
+      $placetolive = DB::table('placetolive')
+                      ->selectRaw("id as entity_id, 'placetolive' as entity_type, name");
+  }
 }

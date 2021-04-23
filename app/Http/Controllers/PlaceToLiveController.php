@@ -95,7 +95,7 @@ class PlaceToLiveController extends AppBaseController
         if (empty($placeToLive)) {
             Flash::error('Place To Live not found');
 
-            return redirect(route('placeToLives.index'));
+            return redirect(route('place-to-live.index'));
         }
 
         return view('place_to_lives.show')->with('placeToLive', $placeToLive);
@@ -115,7 +115,7 @@ class PlaceToLiveController extends AppBaseController
         if (empty($placeToLive)) {
             Flash::error('Place To Live not found');
 
-            return redirect(route('placeToLives.index'));
+            return redirect(route('place-to-live.index'));
         }
 
         return view('place_to_lives.edit')->with('placeToLive', $placeToLive);
@@ -136,7 +136,7 @@ class PlaceToLiveController extends AppBaseController
         if (empty($placeToLive)) {
             Flash::error('Place To Live not found');
 
-            return redirect(route('placeToLives.index'));
+            return redirect(route('place-to-live.index'));
         }
 
         $input = $request->only([
@@ -153,9 +153,20 @@ class PlaceToLiveController extends AppBaseController
 
         $placeToLive = $this->placeToLiveRepository->update($input, $id);
 
+        // Pricing Point Table
+        $pricing = $this->pointPricingRepository->findBy(['entity_id' => $id, 'entity_type' => 'placetolive']);
+        
+        if (!$pricing || $pricing->amount != $request->price) {
+            $this->pointPricingRepository->create([
+                'entity_id' => $id,
+                'entity_type' => 'placetolive',
+                'amount' => $request->price,
+            ]);
+        }
+
         Flash::success('Place To Live updated successfully.');
 
-        return redirect(route('placeToLives.index'));
+        return redirect(route('place-to-live.index'));
     }
 
     /**
@@ -172,13 +183,18 @@ class PlaceToLiveController extends AppBaseController
         if (empty($placeToLive)) {
             Flash::error('Place To Live not found');
 
-            return redirect(route('placeToLives.index'));
+            return redirect(route('place-to-live.index'));
         }
 
         $this->placeToLiveRepository->delete($id);
 
         Flash::success('Place To Live deleted successfully.');
 
-        return redirect(route('placeToLives.index'));
+        return redirect(route('place-to-live.index'));
+    }
+
+    public function catalog()
+    {
+        return view();
     }
 }
