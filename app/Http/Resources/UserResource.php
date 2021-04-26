@@ -15,7 +15,7 @@ class UserResource extends JsonResource
    */
   public function toArray($request)
   {
-    return [
+    $user = [
       'id' => $this->id,
       'username' => $this->username,
       'email' => $this->email,
@@ -23,7 +23,28 @@ class UserResource extends JsonResource
       'email_verified_at' => $this->email_verified_at,
       'image_path' => $this->image_path,
       'created_at' => Carbon::parse($this->created_at)->format('d/m/Y H:i:s'),
-      'updated_at' => Carbon::parse($this->updated_at)->format('d/m/Y H:i:s')
+      'updated_at' => Carbon::parse($this->updated_at)->format('d/m/Y H:i:s'),
     ];
+
+    if (!empty($this->biodata->id)) {
+        $user = array_merge($user, [
+            'biodata' => [
+              'id' => $this->biodata->id,
+              'fullname' => $this->biodata->fullname,
+              'address' => $this->biodata->address,
+              'picture' => $this->biodata->picture,
+              'school_origin' => $this->biodata->school_origin,
+              'graduation_year' => $this->biodata->graduation_year,
+              'birth_place' => $this->biodata->birth_place,
+              'birth_date' => $this->biodata->birth_date,
+              'identity_number' => $this->biodata->identity_number,
+              'created_at' => Carbon::parse($this->biodata->created_at)->format('d/m/Y H:i:s'),
+              'updated_at' => Carbon::parse($this->biodata->updated_at)->format('d/m/Y H:i:s'),
+              'religion' => new ReligionResource($this->biodata->religion)
+          ]
+        ]);
+    }
+
+    return $user;
   }
 }

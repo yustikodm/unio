@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $description
  * @property string $picture
  * @property string $email
- * @property string $back_account_number
+ * @property string $bank_account_number
  * @property string $website
  * @property string $address
  * @property string $phone
@@ -40,7 +40,7 @@ class Vendor extends Model
     'description',
     'picture',
     'email',
-    'back_account_number',
+    'bank_account_number',
     'website',
     'address',
     'phone'
@@ -58,7 +58,7 @@ class Vendor extends Model
     'description' => 'string',
     'picture' => 'string',
     'email' => 'string',
-    'back_account_number' => 'string',
+    'bank_account_number' => 'string',
     'website' => 'string',
     'address' => 'string',
     'phone' => 'string'
@@ -75,7 +75,7 @@ class Vendor extends Model
     'description' => 'nullable|string',
     'picture' => 'nullable|file',
     'email' => 'nullable|string|max:255',
-    'back_account_number' => 'nullable|string|max:255',
+    'bank_account_number' => 'nullable|string|max:255',
     'website' => 'nullable|string|max:255',
     'created_at' => 'nullable',
     'updated_at' => 'nullable',

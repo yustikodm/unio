@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\AppBaseController;
 use App\Http\Resources\UserResource;
 use App\Repositories\UserRepository;
+use App\Repositories\BiodataRepository;
 use Response;
 
 class UserAPIConctroller extends AppBaseController
@@ -12,9 +13,13 @@ class UserAPIConctroller extends AppBaseController
     /** @var  UserRepository */
     private $userRepository;
 
-    public function __construct(UserRepository $userRepo)
+    private $biodataRepository;
+
+    public function __construct(UserRepository $userRepo, BiodataRepository $biodataRepo)
     {
         $this->userRepository = $userRepo;
+
+        $this->biodataRepository = $biodataRepo;
     }
 
     /**
@@ -27,7 +32,6 @@ class UserAPIConctroller extends AppBaseController
      */
     public function profile()
     {
-
         $user = $this->userRepository->find(auth()->id());
 
         if (empty($user)) {

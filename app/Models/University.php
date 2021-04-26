@@ -32,8 +32,6 @@ class University extends Model
 
   protected $dates = ['deleted_at'];
 
-  protected $with = ['faculty', 'major'];
-
   public $fillable = [
     'country_id',
     'state_id',

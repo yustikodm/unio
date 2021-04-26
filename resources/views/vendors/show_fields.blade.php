@@ -51,10 +51,10 @@
     <p>{{ $vendor->email }}</p>
 </div>
 
-<!-- Back Account Number Field -->
+<!-- Bank Account Number Field -->
 <div class="form-group">
-    {!! Form::label('back_account_number', 'Back Account Number:') !!}
-    <p>{{ $vendor->back_account_number }}</p>
+    {!! Form::label('bank_account_number', 'Bank Account Number:') !!}
+    <p>{{ $vendor->bank_account_number }}</p>
 </div>
 
 <!-- Website Field -->

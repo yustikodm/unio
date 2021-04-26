@@ -72,11 +72,6 @@ class Biodata extends Model
     'religion_id' => 'nullable|integer',
   ];
 
-  public function user()
-  {
-    return $this->belongsTo(User::class);
-  }
-
   public function religion()
   {
     return $this->belongsTo(Religion::class);

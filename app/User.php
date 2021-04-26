@@ -136,7 +136,7 @@ class User extends Authenticatable
 
   public function biodata()
   {
-    return $this->hasOne(Biodata::class, 'id');
+    return $this->hasOneThrough(Biodata::class, User::class, 'id', 'user_id');
   }
 
   public function parent()

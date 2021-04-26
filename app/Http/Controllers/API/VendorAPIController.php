@@ -58,7 +58,7 @@ class VendorAPIController extends AppBaseController
             'description',
             'picture',
             'email',
-            'back_account_number',
+            'bank_account_number',
             'website',
             'address',
             'phone'
@@ -109,7 +109,7 @@ class VendorAPIController extends AppBaseController
             'description',
             'picture',
             'email',
-            'back_account_number',
+            'bank_account_number',
             'website',
             'address',
             'phone'
