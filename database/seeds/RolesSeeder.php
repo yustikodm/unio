@@ -14,7 +14,7 @@ class RolesSeeder extends Seeder
    */
   public function run()
   {
-    $defaultRoles = ['admin', 'parent', 'student', 'vendor', 'owner_living_place'];
+    $defaultRoles = ['admin', 'parent', 'student', 'vendor', 'owner_living_place', 'college'];
 
     foreach ($defaultRoles as $role) {
       $roles = Role::firstOrCreate([

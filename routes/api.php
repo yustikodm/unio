@@ -20,9 +20,12 @@ Route::post('login', 'AuthAPIController@login');
 Route::get('search', 'GlobalSearchAPIController@search');
 
 Route::group(['middleware' => ['auth:api']], function () {
-  Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-  });
+  
+  Route::get('logout', 'AuthAPIController@logout');
+
+  // Route::get('/user', function (Request $request) {
+  //   return $request->user();
+  // });
 
   Route::get('permissions/role-has-permission', 'PermissionAPIController@roleHasPermission');
 
@@ -35,16 +38,20 @@ Route::group(['middleware' => ['auth:api']], function () {
   Route::resource('roles', 'RoleAPIController');
 
   Route::resource('permissions', 'PermissionAPIController');
-  
-  Route::resource('wishlists', 'WishlistAPIController');
-
-  Route::resource('carts', 'CartAPIController');
 
   Route::get('users/profile', 'UserAPIConctroller@profile');
 
-  Route::get('users/show/{id}', 'UserAPIConctroller@show');
+  Route::put('users/change-password', 'UserAPIConctroller@changePassword');
+  
+  Route::apiResource('users', 'UserAPIConctroller');
 
   Route::resource('families', 'FamilyAPIController');
+  
+  Route::resource('biodata', 'BiodataAPIController')->except(['index', 'create', 'edit']);
+
+  Route::resource('wishlists', 'WishlistAPIController');
+
+  Route::resource('carts', 'CartAPIController');
 });
 
 Route::resource('articles', 'ArticleAPIController');
@@ -82,5 +89,3 @@ Route::resource('vendor-employees', 'VendorEmployeeAPIController');
 Route::resource('vendor-categories', 'VendorCategoryAPIController');
 
 Route::resource('place-to-lives', 'PlaceToLiveAPIController');
-
-Route::resource('biodata', 'BiodataAPIController');

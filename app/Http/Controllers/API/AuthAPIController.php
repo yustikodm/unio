@@ -9,6 +9,8 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use App\Http\Resources\UserResource;
+use Illuminate\Support\Facades\Auth;
 
 class AuthAPIController extends AppBaseController
 {
@@ -59,8 +61,20 @@ class AuthAPIController extends AppBaseController
       ]);
     }
 
-    $user = $this->userRepository->update($user->id, ['api_token' => Str::random(100)]);
+    $this->userRepository->update($user->id, ['api_token' => Str::random(100)]);
+    
+    Auth::login($user);
+    
+    $user = $this->userRepository->find(auth()->id());
+    
+    return $this->sendResponse(new UserResource($user), 'Logged in successfully');
+  }
+  
+  public function logout()
+  {
+      // return $this->userRepository->find(auth()->id());
+      $this->userRepository->update(auth()->id(), ['api_token' => null]);
 
-    return $this->sendResponse(new AuthResource($user), 'Logged in successfully');
+      return $this->sendSuccess('Logged out successfully');
   }
 }

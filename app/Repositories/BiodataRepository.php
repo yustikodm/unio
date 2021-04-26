@@ -37,4 +37,11 @@ class BiodataRepository extends BaseRepository
     {
         return Biodata::class;
     }
+
+    public function findByUser($user_id)
+    {
+        return Biodata::where('user_id', $user_id)
+                    ->select('id', 'user_id', 'fullname')
+                    ->first();
+    }
 }

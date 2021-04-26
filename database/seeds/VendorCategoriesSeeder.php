@@ -12,35 +12,22 @@ class VendorCategoriesSeeder extends Seeder
    */
   public function run()
   {
-    // $data = [
-    //   [
-    //     'name' => 'Health',
-    //     'description' => 'Health Service',
-    //     'created_at' => Carbon::now(),
-    //     'updated_at' => Carbon::now(),
-    //   ],
-    //   [
-    //     'name' => 'Consultation',
-    //     'description' => 'Constultation Service',
-    //     'created_at' => Carbon::now(),
-    //     'updated_at' => Carbon::now(),
-    //   ],
-    //   [
-    //     'name' => 'Tutoring',
-    //     'description' => 'Tutoring Service',
-    //     'created_at' => Carbon::now(),
-    //     'updated_at' => Carbon::now(),
-    //   ],
-    //   [
-    //     'name' => 'TOEFL',
-    //     'description' => 'Toefl Service',
-    //     'created_at' => Carbon::now(),
-    //     'updated_at' => Carbon::now(),
-    //   ],
-    // ];
+    $categories = [
+      [
+        'name' => 'Tutoring',
+        'description' => null,
+      ],
+      [
+        'name' => 'Computer Course',
+        'description' => null,
+      ]
+    ];
 
-    // VendorCategory::insert($data);
-
-    factory(VendorCategory::class, 30)->create();
+    foreach ($categories as $category) {
+      VendorCategory::create(array_merge($category, [
+          'created_at' => Carbon::now(),
+          'updated_at' => Carbon::now()
+        ]));
+    };
   }
 }

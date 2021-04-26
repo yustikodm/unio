@@ -6,7 +6,10 @@ use App\Http\Controllers\AppBaseController;
 use App\Http\Resources\UserResource;
 use App\Repositories\UserRepository;
 use App\Repositories\BiodataRepository;
-use Response;
+use Illuminate\Http\Request;
+use Exception;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class UserAPIConctroller extends AppBaseController
 {
@@ -20,6 +23,14 @@ class UserAPIConctroller extends AppBaseController
         $this->userRepository = $userRepo;
 
         $this->biodataRepository = $biodataRepo;
+    }
+
+    public function index(Request $request)
+    {
+        $user = $this->userRepository->paginate(15, [], ['name' => $request->name]);
+
+        // return $this->sendResponse($users, 'Users retrieved successfully');
+        return $this->sendResponse($user, 'User retrieved successfully');
     }
 
     /**
@@ -59,5 +70,100 @@ class UserAPIConctroller extends AppBaseController
         }
 
         return $this->sendResponse(new UserResource($user), 'User retrieved successfully');
+    }
+
+    public function update(Request $request, $id)
+    {
+        $user = $this->userRepository->findOrFail($id);
+
+        if (empty($user)) {
+            return $this->sendError('User not found!');
+        }
+
+        $input = $request->only([
+            // User field
+            'username',
+            'phone',
+            'image_path',
+
+            // Biodata field
+            'name', # as fullname
+            'fullname',
+            'address',
+            'gender',
+            'picture',
+            'school_origin',
+            'graduation_year',
+            'birth_place',
+            'birth_date',
+            'identity_number',
+            'religion_id',
+        ]);
+
+        try {
+            $user->update($input);
+
+            $biodata = $this->biodataRepository->findByUser($id);
+
+            // Pointing field
+            $input['fullname'] = empty($input['name']) ? $input['fullname'] : $input['name'];
+
+            $biodata->update($input);
+
+        } catch (Exception $error) {
+            
+            return $this->sendError('Error updating data into database!', $error->getCode());
+        }
+
+        return $this->sendResponse(new UserResource($user), 'User updated successfully');
+    }
+    
+    public function destroy($id)
+    {
+        $user = $this->userRepository->findOrFail($id);
+
+        if (empty($user)) {
+            return $this->sendError('User not found!');
+        }
+        
+        try {
+            $biodata = $this->biodataRepository->findByUser($user->id);
+
+            $biodata->delete();
+
+            $user->delete();
+        } catch (Exception $error) {
+            
+            return $this->sendError('Error updating data into database!', $error->getCode());
+        }
+
+        return $this->sendSuccess('User has been deleted successfully');
+    }
+    
+    public function changePassword(Request $request)
+    {
+        $user = $this->userRepository->find(auth()->id());
+
+        if (empty($user)) {
+            return $this->sendError('User not found!');
+        }
+
+        $input = $request->only([
+            'current_password',
+            'new_password',
+            'confirm_password'
+        ]);
+
+        if (!Hash::check($input['current_password'], $user->password)) {
+            return $this->sendError('Password didn\'t correct with your old password!', 406);
+        }
+
+        if ($input['new_password'] != $input['confirm_password']) {
+            return $this->sendError('Password and confirmation password didn\'t match!', 406);
+        }
+
+        $user->update(['password' => Hash::make($input['new_password'])]);
+
+        return $this->sendSuccess('Password has been updated successfully');
     }
 }

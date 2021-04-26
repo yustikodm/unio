@@ -24,7 +24,7 @@ class CreateVendorsTable extends Migration
             $table->string('icon', 255)->nullable();
             $table->string('header_img', 255)->nullable();
             $table->string('email', 255)->nullable();
-            $table->string('back_account_number', 255)->nullable();
+            $table->string('bank_account_number', 255)->nullable();
             $table->string('website', 255)->nullable();
             $table->longText('address', 255)->nullable();
             $table->string('phone', 100)->nullable();

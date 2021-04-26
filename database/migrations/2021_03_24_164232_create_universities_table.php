@@ -24,6 +24,7 @@ class CreateUniversitiesTable extends Migration
             $table->string('header_img', 200)->nullable();
             $table->string('type', 255)->nullable();
             $table->string('website', 255)->nullable();
+            $table->string('email', 255)->nullable();
             $table->char('accreditation', 3)->nullable();
             $table->longText('address')->nullable();
             $table->timestamps();

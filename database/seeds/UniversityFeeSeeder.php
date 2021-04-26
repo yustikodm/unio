@@ -12,6 +12,23 @@ class UniversityFeeSeeder extends Seeder
      */
     public function run()
     {
-        factory(UniversityFee::class, 100)->create();
+        $fees = [
+            [
+                'university_id' => 1,
+                'faculty_id' => 1,
+                'major_id' => 1,
+                'type' => 1,
+                'admission_fee' => 12000000,
+                'semester_fee' => 3000000,
+                'description' => null,
+            ]
+        ];
+
+        foreach($fees as $fee){
+            UniversityFee::create(array_merge($fee, [
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ]));
+        }
     }
 }

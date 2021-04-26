@@ -18,6 +18,7 @@ class CreateVendorServicesTable extends Migration
             $table->bigInteger('vendor_id')->unsigned();
             $table->string('name', 255);
             $table->longText('description')->nullable();
+            $table->string('level')->nullable();
             $table->string('picture')->nullable();
             $table->bigInteger('price')->nullable();
             $table->timestamps();

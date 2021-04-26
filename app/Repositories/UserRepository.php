@@ -59,9 +59,11 @@ class UserRepository extends BaseRepository
    */
   public function store($input)
   {
-    $input = $this->validateInput($input);
-
+    DB::beginTransaction();
+    
     try {
+      $input = $this->validateInput($input);
+
       if (isset($input['photo']) && !empty($input['photo'])) {
         $input['image_path'] = ImageTrait::makeImage($input['photo'], User::IMAGE_PATH);
       }
@@ -74,18 +76,14 @@ class UserRepository extends BaseRepository
       $input['roles'] = isset($input['roles']) ? $input['roles'] : ['student'];
 
       // Spatie [Sync Role User]
-      $user->assignRole($input['roles']);
-
-      if (!empty($input['name'])) {
-        Biodata::create([
-          'user_id' => $user->id,
-          'fullname' => $input['name']
-        ]);
-      }
-      
+      $user->assignRole($input['roles']);      
     } catch (Exception $e) {
+      DB::rollBack();
+      
       throw new BadRequestHttpException($e->getMessage());
     }
+
+    DB::commit();
 
     return $user;
   }
@@ -101,14 +99,14 @@ class UserRepository extends BaseRepository
    */
   public function update($id, $input)
   {
-    $input = $this->validateInput($input);
-
     /** @var User $user */
     $user = $this->findOrFail($id);
+    
+    DB::beginTransaction();
 
     try {
-      DB::beginTransaction();
-
+      $input = $this->validateInput($input);
+      
       if (isset($input['photo']) && !empty($input['photo'])) {
         $user->deleteImage();
 
@@ -124,14 +122,15 @@ class UserRepository extends BaseRepository
       DB::table('model_has_roles')->where('model_id', $user->id)->delete();
       $user->assignRole($input['roles']);
 
-      DB::commit();
-
-      return $user;
     } catch (Exception $e) {
       DB::rollBack();
 
       throw new ApiOperationFailedException($e->getMessage());
     }
+
+    DB::commit();
+
+    return $user;
   }
 
   /**

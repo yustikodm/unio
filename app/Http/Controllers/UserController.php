@@ -6,6 +6,7 @@ use App\DataTables\UserDataTable;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserProfileRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Repositories\BiodataRepository;
 use App\Repositories\UserRepository;
 use App\User;
 use Exception;
@@ -13,20 +14,22 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use Laracasts\Flash\Flash;
-use Response;
 
 class UserController extends AppBaseController
 {
   /** @var  UserRepository */
   private $userRepository;
 
-  public function __construct(UserRepository $userRepo)
+  private $biodataRepository;
+  
+  public function __construct(UserRepository $userRepo, BiodataRepository $biodataRepo)
   {
     $this->userRepository = $userRepo;
+
+    $this->biodataRepository = $biodataRepo;
   }
 
   /**
@@ -73,7 +76,14 @@ class UserController extends AppBaseController
         'roles'
       ]);
 
-      $this->userRepository->store($input);
+      $user = $this->userRepository->store($input);
+
+      if (!empty($input['name'])) {
+        $this->biodataRepository->create([
+          'user_id' => $user->id,
+          'fullname' => $input['name']
+        ]);
+      }
     } catch (Exception $e) {
       return Redirect::back()->withInput()->withErrors($e->getMessage());
     }
@@ -113,11 +123,7 @@ class UserController extends AppBaseController
    */
   public function edit($id, Request $request)
   {
-    $user = User::find($id);
-
-    if ($request->ajax()) {
-      return $this->sendResponse($user, 'User retrieved successfully.');
-    }
+    $user = $this->userRepository->find($id);
 
     if (empty($user)) {
       Flash::error('User not found');
@@ -181,7 +187,7 @@ class UserController extends AppBaseController
   public function editProfile()
   {
     try {
-      $user = $this->userRepository->findWithoutFail(Auth::id());
+      $user = $this->userRepository->findWithoutFail(auth()->id());
 
       return view('profile.edit', compact('user'));
     } catch (Exception $e) {
@@ -197,7 +203,7 @@ class UserController extends AppBaseController
   public function updateProfile(UpdateUserProfileRequest $request)
   {
     try {
-      $user = $this->userRepository->findWithoutFail(Auth::id());
+      $user = $this->userRepository->findWithoutFail(auth()->id());
       if (empty($user)) {
         Flash::error('User not found');
 

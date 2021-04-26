@@ -45,6 +45,14 @@ class UserResource extends JsonResource
         ]);
     }
 
+    if (auth()->id() == $this->id) {
+        $user = array_merge($user, [
+            'token' => [
+                'api_token' => $this->api_token
+            ]
+        ]);
+    }
+
     return $user;
   }
 }

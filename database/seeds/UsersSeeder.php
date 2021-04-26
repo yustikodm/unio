@@ -34,5 +34,35 @@ class UsersSeeder extends Seeder
     ]);
 
     $student->assignRole('student');
+
+    $vendor = User::create([
+      'username' => 'vendor',
+      'email' => 'vendor@demo.com',
+      'password' => Hash::make('password'),
+      'created_at' => Carbon::now(),
+      'updated_at' => Carbon::now(),
+    ]);
+
+    $vendor->assignRole('vendor');
+
+    $college = User::create([
+      'username' => 'college',
+      'email' => 'college@demo.com',
+      'password' => Hash::make('password'),
+      'created_at' => Carbon::now(),
+      'updated_at' => Carbon::now(),
+    ]);
+
+    $college->assignRole('college');
+    
+    $living = User::create([
+      'username' => 'living',
+      'email' => 'living@demo.com',
+      'password' => Hash::make('password'),
+      'created_at' => Carbon::now(),
+      'updated_at' => Carbon::now(),
+    ]);
+
+    $living->assignRole('owner_living_place');
   }
 }
