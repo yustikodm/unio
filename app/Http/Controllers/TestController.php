@@ -12,6 +12,9 @@ class TestController extends Controller
 {
   public function index()
   {
+    // dd(auth()->user()->hasRole(['student']));
+    // dd(auth()->user()->hasPermissionTo('wishlists.show'));
+    // dd(auth()->user()->getRoleNames());
     // $array = [
     //   ['name' => '123', 'desc' => 'asdf'],
     //   ['name' => '456', 'desc' => 'shji'],

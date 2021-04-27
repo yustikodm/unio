@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Auth;
 
 class UserResource extends JsonResource
 {
@@ -15,6 +16,8 @@ class UserResource extends JsonResource
    */
   public function toArray($request)
   {
+    $auth = Auth::user();
+
     $user = [
       'id' => $this->id,
       'username' => $this->username,
@@ -46,7 +49,7 @@ class UserResource extends JsonResource
         ]);
     }
 
-    if (auth()->id() == $this->id) {
+    if (Auth::id() == $this->id || Auth::user()->hasRole('admin')) {
         $user = array_merge($user, [
             'token' => [
                 'api_token' => $this->api_token
