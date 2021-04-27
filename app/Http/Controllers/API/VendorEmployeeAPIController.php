@@ -34,7 +34,15 @@ class VendorEmployeeAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $vendorEmployees = $this->vendorEmployeeRepository->paginate(15, [], ['name' => $request->name]);
+        $search = [];
+
+        if ($request->vendor_id) {
+            $search = array_merge($search, [
+                'vendor_id' => $request->vendor_id,    
+            ]);
+        }
+
+        $vendorEmployees = $this->vendorEmployeeRepository->paginate(15, [], $search);
 
         return $this->sendResponse($vendorEmployees, 'Vendor Employees retrieved successfully');
     }

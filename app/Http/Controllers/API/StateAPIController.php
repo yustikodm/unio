@@ -34,7 +34,15 @@ class StateAPIController extends AppBaseController
    */
   public function index(Request $request)
   {
-    $states = $this->stateRepository->paginate(15, [], ['name' => $request->name]);
+    $search = [];
+
+    if ($request->country_id) {
+        $search = array_merge($search, [
+            'country_id' => $request->country_id,    
+        ]);
+    }
+
+    $states = $this->stateRepository->paginate(15, [], $search);
 
     return $this->sendResponse($states, 'States retrieved successfully');
   }

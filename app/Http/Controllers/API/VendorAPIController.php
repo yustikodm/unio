@@ -34,7 +34,15 @@ class VendorAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $vendors = $this->vendorRepository->paginate(15, [], ['name' => $request->name]);
+        $search = [];
+
+        if ($request->category_id) {
+            $search = array_merge($search, [
+                'vendor_category_id' => $request->category_id,    
+            ]);
+        }
+
+        $vendors = $this->vendorRepository->paginate(15, [], $search);
 
         return $this->sendResponse($vendors, 'Vendors retrieved successfully');
     }

@@ -34,7 +34,15 @@ class UniversityFacultiesAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $universityFaculties = $this->universityFacultiesRepository->paginate(15, [], ['name' => $request->name]);
+        $search = [];
+
+        if ($request->university_id) {
+            $search = array_merge($search, [
+                'university_id' => $request->university_id,    
+            ]);
+        }
+
+        $universityFaculties = $this->universityFacultiesRepository->paginate(15, [], $search);
 
         return $this->sendResponse($universityFaculties, 'University Faculties retrieved successfully');
     }

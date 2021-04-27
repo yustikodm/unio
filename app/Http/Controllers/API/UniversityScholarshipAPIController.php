@@ -34,7 +34,15 @@ class UniversityScholarshipAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $universityScholarships = $this->universityScholarshipRepository->paginate(15, [], ['name' => $request->name]);
+        $search = [];
+
+        if ($request->university_id) {
+            $search = array_merge($search, [
+                'university_id' => $request->university_id,    
+            ]);
+        }
+
+        $universityScholarships = $this->universityScholarshipRepository->paginate(15, [], $search);
 
         return $this->sendResponse($universityScholarships, 'University Scholarships retrieved successfully');
     }

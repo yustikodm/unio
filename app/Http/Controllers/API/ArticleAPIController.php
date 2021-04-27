@@ -34,7 +34,21 @@ class ArticleAPIController extends AppBaseController
    */
   public function index(Request $request)
   {
-    $articles = $this->articleRepository->paginate(15, [], ['title' => $request->title]);
+    $search = [];
+
+    if ($request->user_id) {
+        $search = array_merge($search, [
+            'user_id' => $request->user_id,
+        ]);
+    }
+
+    if ($request->title) {
+        $search = array_merge($search, [
+            'title' => $request->title,
+        ]);
+    }
+
+    $articles = $this->articleRepository->paginate(15, [], $search);
 
     return $this->sendResponse($articles, 'Articles retrieved successfully');
   }

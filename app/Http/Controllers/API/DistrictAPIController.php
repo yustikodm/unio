@@ -34,7 +34,15 @@ class DistrictAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $districts = $this->districtRepository->paginate(15, [], ['name' => $request->name]);
+        $search = [];
+
+        if ($request->country_id) {
+            $search = array_merge($search, [
+                'country_id' => $request->country_id,    
+            ]);
+        }
+
+        $districts = $this->districtRepository->paginate(15, [], $search);
 
         return $this->sendResponse($districts, 'Districts retrieved successfully');
     }

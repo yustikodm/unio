@@ -32,9 +32,17 @@ class UniversityFeeAPIController extends AppBaseController
      *
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $universityFees = $this->universityFeeRepository->paginate(15);
+        $search = [];
+
+        if ($request->university_id) {
+            $search = array_merge($search, [
+                'university_id' => $request->university_id,    
+            ]);
+        }
+
+        $universityFees = $this->universityFeeRepository->paginate(15, [], $search);
 
         return $this->sendResponse($universityFees, 'University Fees retrieved successfully');
     }

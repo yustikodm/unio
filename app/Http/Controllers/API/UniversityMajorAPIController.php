@@ -34,7 +34,21 @@ class UniversityMajorAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $universityMajors = $this->universityMajorRepository->paginate(15, [], ['name' => $request->name]);
+        $search = [];
+
+        if ($request->university_id) {
+            $search = array_merge($search, [
+                'university_id' => $request->university_id,    
+            ]);
+        }
+        
+        if ($request->faculty_id) {
+            $search = array_merge($search, [
+                'faculty_id' => $request->faculty_id,    
+            ]);
+        }
+
+        $universityMajors = $this->universityMajorRepository->paginate(15, [], $search);
 
         return $this->sendResponse($universityMajors, 'University Majors retrieved successfully');
     }

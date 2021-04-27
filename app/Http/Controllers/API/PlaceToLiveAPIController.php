@@ -34,7 +34,13 @@ class PlaceToLiveAPIController extends AppBaseController
    */
   public function index(Request $request)
   {
-    $placeToLives = $this->placeToLiveRepository->paginate(15, [], ['name' => $request->name]);
+    $search = [
+        'country_id' => $request->country_id,
+        'state_id' => $request->state_id,
+        'district_id' => $request->district_id
+    ];
+
+    $placeToLives = $this->placeToLiveRepository->paginate(15, [], $search);
 
     return $this->sendResponse($placeToLives, 'Place To Lives retrieved successfully');
   }

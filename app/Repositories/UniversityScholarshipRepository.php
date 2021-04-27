@@ -18,6 +18,7 @@ class UniversityScholarshipRepository extends BaseRepository
      */
     protected $fieldSearchable = [
         'university_id',
+        'name',
         'description',
         'picture',
         'year'
