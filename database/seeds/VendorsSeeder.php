@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Vendor;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
 class VendorsSeeder extends Seeder
@@ -14,10 +15,13 @@ class VendorsSeeder extends Seeder
   {
     $vendors = [
       [
+        'country_id' => 1,
+        'state_id' => 12,
+        'district_id' => 164,
         'vendor_category_id' => 1,
         'name' => 'Ganesha Operation',
         'description' => 'Bimbel Ganesha Operation merupakan lembaga bimbingan belajar terbaik dan terbesar di Indonesia. Berdiri sejak 2 Mei 1984 di Kota Bandung, saat ini Ganesha Operation telah tersebar di 265 kota di Indonesia, mulai dari Aceh hingga Ambon.',
-        'picture' => 'https://ganeshaoperation.com/img/logo5.png',
+        'logo' => 'https://ganeshaoperation.com/img/logo5.png',
         'email' => 'bimbel@ganesha-operation.com',
         'bank_account_number' => null,
         'website' => 'https://ganeshaoperation.com/',
@@ -25,10 +29,13 @@ class VendorsSeeder extends Seeder
         'phone' => '+62 81806667660'
       ],
       [
+        'country_id' => 1,
+        'state_id' => 12,
+        'district_id' => 3,
         'vendor_category_id' => 1,
         'name' => 'Primagama',
         'description' => 'Primagama adalah usaha jasa pendidikan luar sekolah yang bergerak dibidang bimbingan belajar, didirikan tahun 1982, tepatnya pada tanggal 10 Maret 1982 di Yogyakarta. Program Bimbingan Belajar Primagama memiliki pasar sangat luas (siswa 3,4,5,6 SD – 7,8,9 SMP, dan 10,11,12 SMA IPA/IPS) dengan target pendidikan adalah meningkatkan prestasi akademik di sekolah, Ujian Akhir Sekolah, Ujian Nasional , dan Sukses Ujian Masuk Perguruan Tinggi Negeri/Favorit serta sekolah kedinasan (bagi SMA/SMK).',
-        'picture' => 'https://www.primagama.co.id/assets/images/logo.svg',
+        'logo' => 'https://www.primagama.co.id/assets/images/logo.svg',
         'email' => 'info@primagama.co.id',
         'bank_account_number' => null,
         'website' => 'https://www.primagama.co.id/',
@@ -36,10 +43,13 @@ class VendorsSeeder extends Seeder
         'phone' => '0274 - 619 853'
       ],
       [
+        'country_id' => 1,
+        'state_id' => 11,
+        'district_id' => 3,
         'vendor_category_id' => 2,
         'name' => 'Pintaria',
         'description' => 'Pintaria merupakan portal pendidikan yang menawarkan produk kuliah S1/S2 dengan metode blended learning dan program kursus lainnya. Pintaria bekerjasama dengan kampus-kampus unggulan yang terakreditasi BAN-PT di Indonesia.',
-        'picture' => 'https://storage.googleapis.com/cdn-1.pintaria.com/pintaria/homepage-settings/assets/image/logo-pintaria-white.png',
+        'logo' => 'https://storage.googleapis.com/cdn-1.pintaria.com/pintaria/homepage-settings/assets/image/logo-pintaria-white.png',
         'email' => 'info@pintaria.com',
         'bank_account_number' => null,
         'website' => 'https://pintaria.com/',

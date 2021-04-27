@@ -12,15 +12,12 @@
 <!-- Password Field -->
 <div class="form-group col-sm-3">
     {!! Form::label('password', 'New Password:') !!}<span class="required confirm-pwd">*</span>
-    <input class="form-control input-group__addon" id="pfNewPassword" type="password"
-           name="password">
+    <input class="form-control input-group__addon" id="pfNewPassword" type="password" name="password">
 </div>
 
 <div class="form-group col-sm-3">
-    {!! Form::label('password_confirmation', 'Confirm Password:') !!}<span
-            class="required confirm-pwd">*</span>
-    <input class="form-control input-group__addon" id="pfNewConfirmPassword" type="password"
-           name="password_confirmation">
+    {!! Form::label('password_confirmation', 'Confirm Password:') !!}<span class="required confirm-pwd">*</span>
+    <input class="form-control input-group__addon" id="pfNewConfirmPassword" type="password" name="password_confirmation">
 </div>
 
 <!-- Phone Field -->
@@ -28,13 +25,15 @@
     {!! Form::label('phone', 'Phone:') !!}
     {!! Form::number('phone', null, ['id'=>'phone','class' => 'form-control']) !!}
 </div>
+
+<!-- Image Path Field -->
 <div class="form-group col-sm-3 ">
     {!! Form::label('photo', 'Photo') !!}
     <div class="input-group-btn">
         <div class="col-sm-1" style="width: 11.333333%;">
             <span class="btn btn-primary btn-file" style="margin-right: 5px;margin-left: -17px;">
                 <div id="lb">Upload</div>
-                {!! Form::file('photo',['id'=>'editUserImage']) !!}
+                {!! Form::file('image_path',['id'=>'image_path', 'accept'=>'image/*']) !!}
             </span>
         </div>
     </div>

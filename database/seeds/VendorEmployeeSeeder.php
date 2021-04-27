@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\VendorEmployee;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
 class VendorEmployeeSeeder extends Seeder
@@ -20,10 +21,7 @@ class VendorEmployeeSeeder extends Seeder
                 'position' => 'Customer Service',
                 'phone' => '(+62) 898 2216 6254',
                 'email' => 'adewulandari@gmail.com',
-                'address' => 'Jl. Raden No. 723, Jakarta',
-                'description' => null,
-                'created_at' => date('Y-m-d H:i:s'),
-                'updated_at' => date('Y-m-d H:i:s')
+                'address' => 'Jl. Raden No. 723, Jakarta'
             ],
             [
                 'vendor_id' => 1,
@@ -32,10 +30,7 @@ class VendorEmployeeSeeder extends Seeder
                 'position' => 'Operations Manager',
                 'phone' => '(+62) 818 505 9032',
                 'email' => 'adhiarja.hardiansyah@gmail.com',
-                'address' => 'Jl. Bakaru No. 34, Jakarta',
-                'description' => null,
-                'created_at' => date('Y-m-d H:i:s'),
-                'updated_at' => date('Y-m-d H:i:s')
+                'address' => 'Jl. Merdeka No. 34, Jakarta'
             ],
             [
                 'vendor_id' => 2,
@@ -44,10 +39,7 @@ class VendorEmployeeSeeder extends Seeder
                 'position' => 'Office manager',
                 'phone' => '(+62) 823 948 0538',
                 'email' => 'gamanto.nugroho@gmail.com',
-                'address' => 'Jl. Parepare No. 93, Jakarta',
-                'description' => null,
-                'created_at' => date('Y-m-d H:i:s'),
-                'updated_at' => date('Y-m-d H:i:s')
+                'address' => 'Jl. Bagas Pati No. 93, Jakarta'
             ],
             [
                 'vendor_id' => 2,
@@ -56,10 +48,7 @@ class VendorEmployeeSeeder extends Seeder
                 'position' => 'Office Staff',
                 'phone' => '(+62) 873 0485 1745',
                 'email' => 'aris.gunawan@gmail.com',
-                'address' => 'Jl. Setiabudhi No. 38 Jakarta',
-                'description' => null,
-                'created_at' => date('Y-m-d H:i:s'),
-                'updated_at' => date('Y-m-d H:i:s')
+                'address' => 'Jl. Setiabudi No. 38 Jakarta'
             ],
             [
                 'vendor_id' => 2,
@@ -68,10 +57,7 @@ class VendorEmployeeSeeder extends Seeder
                 'position' => 'Receptionist',
                 'phone' => '(+62) 853 2384 3957',
                 'email' => 'rini.laksita@gmail.com',
-                'address' => 'Jl. Surapati No. 172 Jakarta',
-                'description' => null,
-                'created_at' => date('Y-m-d H:i:s'),
-                'updated_at' => date('Y-m-d H:i:s')
+                'address' => 'Jl. Cokroaminoto No. 172 Jakarta'
             ],
             [
                 'vendor_id' => 2,
@@ -80,11 +66,26 @@ class VendorEmployeeSeeder extends Seeder
                 'position' => 'Receptionist',
                 'phone' => '(+62) 813 5385 7593',
                 'email' => 'ella.pratiwi@gmail.com',
-                'address' => 'Jl. Sudirman No. 45 Jakarta',
-                'description' => null,
-                'created_at' => date('Y-m-d H:i:s'),
-                'updated_at' => date('Y-m-d H:i:s')
+                'address' => 'Jl. Sudirman No. 45 Jakarta'
             ],
+            [
+                'vendor_id' => 3,
+                'name' => 'Sabrina Suryatmi',
+                'birthdate' => '1979-12-28',
+                'position' => 'Staff',
+                'phone' => '(+62) 819 5884 4555',
+                'email' => 'sabrina.suryatmi@gmail.com',
+                'address' => 'Jl. Sumoharjo No. 94 Jakarta'
+            ],
+            [
+                'vendor_id' => 3,
+                'name' => 'Septi Natalia',
+                'birthdate' => '1981-05-03',
+                'position' => 'Receptionist',
+                'phone' => '(+62) 811 4858 6023',
+                'email' => 'septi.natalia@gmail.com',
+                'address' => 'Jl. Adisucipto No. 66 Jakarta'
+            ]
         ];
 
         foreach($employees as $employee){

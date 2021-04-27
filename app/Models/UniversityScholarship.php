@@ -59,7 +59,7 @@ class UniversityScholarship extends Model
     'university_id' => 'required|integer',
     'name' => 'required|string',
     'description' => 'nullable|string',
-    'picture' => 'nullable|string',
+    'picture' => 'nullable',
     'year' => 'nullable|integer',
     'created_at' => 'nullable',
     'updated_at' => 'nullable',

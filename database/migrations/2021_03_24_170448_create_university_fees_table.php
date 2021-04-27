@@ -18,7 +18,7 @@ class CreateUniversityFeesTable extends Migration
             $table->bigInteger('university_id')->unsigned();
             $table->bigInteger('faculty_id')->unsigned();
             $table->bigInteger('major_id')->unsigned();
-            $table->string('type', 255);
+            $table->string('type', 255)->nullable();
             $table->decimal('admission_fee', 10, 2);
             $table->decimal('semester_fee', 10, 2);
             $table->longText('description')->nullable();

@@ -64,8 +64,8 @@ class UserRepository extends BaseRepository
     try {
       $input = $this->validateInput($input);
 
-      if (isset($input['photo']) && !empty($input['photo'])) {
-        $input['image_path'] = ImageTrait::makeImage($input['photo'], User::IMAGE_PATH);
+      if (isset($input['image_path']) && !empty($input['image_path'])) {
+        $input['image_path'] = ImageTrait::makeImage($input['image_path'], User::IMAGE_PATH);
       }
 
       $input['api_token'] = Str::random(100);

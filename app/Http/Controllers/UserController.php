@@ -154,15 +154,13 @@ class UserController extends AppBaseController
       ]);
 
       $user = $this->userRepository->update($user->id, $input);
-
-      Flash::success('User updated successfully.');
     } catch (Exception $e) {
       return Redirect::back()->withInput()->withErrors($e->getMessage());
     }
 
     Flash::success('User updated successfully.');
     
-    return redirect(route('users.show', $user->id));
+    return redirect(route('users.index'));
   }
 
   /**

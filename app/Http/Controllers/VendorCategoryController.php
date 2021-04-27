@@ -56,7 +56,7 @@ class VendorCategoryController extends AppBaseController
 
         Flash::success('Vendor Category saved successfully.');
 
-        return redirect(route('vendorCategories.index'));
+        return redirect(route('vendor-categories.index'));
     }
 
     /**
@@ -73,7 +73,7 @@ class VendorCategoryController extends AppBaseController
         if (empty($vendorCategory)) {
             Flash::error('Vendor Category not found');
 
-            return redirect(route('vendorCategories.index'));
+            return redirect(route('vendor-categories.index'));
         }
 
         return view('vendor_categories.show')->with('vendorCategory', $vendorCategory);
@@ -93,7 +93,7 @@ class VendorCategoryController extends AppBaseController
         if (empty($vendorCategory)) {
             Flash::error('Vendor Category not found');
 
-            return redirect(route('vendorCategories.index'));
+            return redirect(route('vendor-categories.index'));
         }
 
         return view('vendor_categories.edit')->with('vendorCategory', $vendorCategory);
@@ -114,7 +114,7 @@ class VendorCategoryController extends AppBaseController
         if (empty($vendorCategory)) {
             Flash::error('Vendor Category not found');
 
-            return redirect(route('vendorCategories.index'));
+            return redirect(route('vendor-categories.index'));
         }
 
         $input = $request->only(['name', 'description']);
@@ -123,7 +123,7 @@ class VendorCategoryController extends AppBaseController
 
         Flash::success('Vendor Category updated successfully.');
 
-        return redirect(route('vendorCategories.index'));
+        return redirect(route('vendor-categories.index'));
     }
 
     /**
@@ -140,13 +140,13 @@ class VendorCategoryController extends AppBaseController
         if (empty($vendorCategory)) {
             Flash::error('Vendor Category not found');
 
-            return redirect(route('vendorCategories.index'));
+            return redirect(route('vendor-categories.index'));
         }
 
         $this->vendorCategoryRepository->delete($id);
 
         Flash::success('Vendor Category deleted successfully.');
 
-        return redirect(route('vendorCategories.index'));
+        return redirect(route('vendor-categories.index'));
     }
 }

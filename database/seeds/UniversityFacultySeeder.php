@@ -2,6 +2,7 @@
 
 use App\Models\UniversityFaculties;
 use Illuminate\Database\Seeder;
+use Carbon\Carbon;
 
 class UniversityFacultySeeder extends Seeder
 {
@@ -95,57 +96,27 @@ class UniversityFacultySeeder extends Seeder
             ],
             [
                 'university_id' => 3,
-                'name' => 'Faculty of Agriculture and Veterinary Medicine',
+                'name' => 'Faculty of Building Architecture',
                 'description' => null
             ],
             [
                 'university_id' => 3,
-                'name' => 'Faculty of pure and applied science',
+                'name' => 'Faculty of Business and Management',
                 'description' => null
             ],
             [
                 'university_id' => 3,
-                'name' => 'Faculty of building architecture',
+                'name' => 'Faculty of Biomedical Science',
                 'description' => null
             ],
             [
                 'university_id' => 3,
-                'name' => 'Faculty of business and management',
+                'name' => 'Faculty of Computer Science and Information Technology',
                 'description' => null
             ],
             [
                 'university_id' => 3,
-                'name' => 'Faculty of computer science and information technology',
-                'description' => null
-            ],
-            [
-                'university_id' => 3,
-                'name' => 'Faculty of art and Design',
-                'description' => null
-            ],
-            [
-                'university_id' => 3,
-                'name' => 'Faculty of education and training',
-                'description' => null
-            ],
-            [
-                'university_id' => 3,
-                'name' => 'Faculty of Engineering',
-                'description' => null
-            ],
-            [
-                'university_id' => 3,
-                'name' => 'Faculty of self-care and physical fitness',
-                'description' => null
-            ],
-            [
-                'university_id' => 3,
-                'name' => 'Faculty of medicine and health',
-                'description' => null
-            ],
-            [
-                'university_id' => 3,
-                'name' => 'Faculty of humanities',
+                'name' => 'Faculty of Hospitality',
                 'description' => null
             ],
             [
@@ -155,15 +126,9 @@ class UniversityFacultySeeder extends Seeder
             ],
             [
                 'university_id' => 3,
-                'name' => 'Faculty of master of business administration',
+                'name' => 'Faculty of Property Management',
                 'description' => null
             ],
-            [
-                'university_id' => 3,
-                'name' => 'Faculty of social sciences and media',
-                'description' => null
-            ],
-
         ];
 
         foreach ($faculties as $faculty) {

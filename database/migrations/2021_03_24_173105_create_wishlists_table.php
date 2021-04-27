@@ -15,16 +15,12 @@ class CreateWishlistsTable extends Migration
     {
         Schema::create('wishlists', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('university_id')->unsigned();
-            $table->bigInteger('major_id')->unsigned();
-            $table->bigInteger('service_id')->unsigned();
             $table->bigInteger('user_id')->unsigned();
+            $table->bigInteger('entity_id')->unsigned();
+            $table->string('entity_type');
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('university_id')->references('id')->on('universities');
-            $table->foreign('major_id')->references('id')->on('university_majors');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('service_id')->references('id')->on('vendor_services');
         });
     }
 

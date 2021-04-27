@@ -20,7 +20,7 @@ class CreateUniversityScholarshipsTable extends Migration
             $table->longText('description')->nullable();
             $table->string('organizer', 255)->nullable();
             $table->string('picture')->nullable();
-            $table->year('year')->nullable();
+            $table->date('year')->nullable();
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('university_id')->references('id')->on('universities');

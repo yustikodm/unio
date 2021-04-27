@@ -26,6 +26,7 @@ class UpdateUserRequest extends FormRequest
     {
         $id = $this->route('user')->id;
         $rules = User::$rules;
+        $rules['username'] = 'required|unique:users,username,'.$id;
         $rules['email'] = 'required|email|unique:users,email,'.$id.'|regex:/^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/';
 
         return $rules;

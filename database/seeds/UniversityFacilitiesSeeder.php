@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\UniversityFacility;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
 class UniversityFacilitiesSeeder extends Seeder
@@ -87,8 +88,8 @@ class UniversityFacilitiesSeeder extends Seeder
             ]
         ];
 
-        foreach($fees as $fee){
-            UniversityFacility::create(array_merge($fee, [
+        foreach($facitlities as $facitlity){
+            UniversityFacility::create(array_merge($facitlity, [
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ]));

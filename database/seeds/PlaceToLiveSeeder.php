@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\PlaceToLive;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
 class PlaceToLiveSeeder extends Seeder
