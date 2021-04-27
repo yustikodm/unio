@@ -24,7 +24,7 @@ class Biodata extends Model
     'user_id',
     'fullname',
     'address',
-    'gender',
+    'gender', 
     'picture',
     'school_origin',
     'graduation_year',
@@ -75,5 +75,10 @@ class Biodata extends Model
   public function religion()
   {
     return $this->belongsTo(Religion::class);
+  }
+
+  public function user()
+  {
+    return $this->belongsTo(User::class);
   }
 }

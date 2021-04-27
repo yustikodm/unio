@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\Biodata;
+use Carbon\Carbon;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Column;
@@ -20,10 +21,17 @@ class BiodataDataTable extends DataTable
         $dataTable = new EloquentDataTable($query);
 
         return $dataTable->addColumn('action', 'biodata.datatables_actions')
-        ->editColumn('user.username', function ($query) {
-          return '<a href="' . route('users.show', $query->user->id) . '">' . $query->user->username . '</a>';
-        })
-        ->rawColumns(['action', 'user.username']);
+            ->editColumn('user.username', function ($query) {
+                return '<a href="' . route('users.show', $query->user->id) . '">' . $query->user->username . '</a>';
+            })
+            ->editColumn('birth_date', function ($query) {
+                if (empty($query->birth_date)) {
+                    return '';
+                }
+
+                return Carbon::parse($query->birth_date)->format('d/m/Y');
+            })
+            ->rawColumns(['action', 'user.username', 'birth_date']);
     }
 
     /**

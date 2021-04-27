@@ -18,6 +18,7 @@ class BiodataResource extends JsonResource
             'id' => $this->id,
             'fullname' => $this->fullname,
             'address' => $this->address,
+            'gender' => $this->gender,
             'picture' => $this->picture,
             'school_origin' => $this->school_origin,
             'graduation_year' => $this->graduation_year,

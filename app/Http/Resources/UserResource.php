@@ -33,6 +33,7 @@ class UserResource extends JsonResource
               'fullname' => $this->biodata->fullname,
               'address' => $this->biodata->address,
               'picture' => $this->biodata->picture,
+              'gender' => $this->biodata->gender,
               'school_origin' => $this->biodata->school_origin,
               'graduation_year' => $this->biodata->graduation_year,
               'birth_place' => $this->biodata->birth_place,
