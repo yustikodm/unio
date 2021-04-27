@@ -1,10 +1,10 @@
 <?php
 
+use App\Models\Biodata;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 
 class UsersSeeder extends Seeder
 {
@@ -23,6 +23,14 @@ class UsersSeeder extends Seeder
       'updated_at' => Carbon::now(),
     ]);
 
+    Biodata::create([
+      'user_id' => $admin->id,
+      'fullname' => 'Administrator',
+      'address' => 'Surabaya 17',
+      'gender' => 'Male',
+      'identity_number' => 4523495239548,
+    ]);
+
     $admin->assignRole('admin');
 
     $student = User::create([
@@ -33,6 +41,14 @@ class UsersSeeder extends Seeder
       'updated_at' => Carbon::now(),
     ]);
 
+    Biodata::create([
+      'user_id' => $student->id,
+      'fullname' => 'Student',
+      'address' => 'Jakarta 66',
+      'gender' => 'Male',
+      'identity_number' => 936735656462,
+    ]);
+
     $student->assignRole('student');
 
     $vendor = User::create([
@@ -41,6 +57,14 @@ class UsersSeeder extends Seeder
       'password' => Hash::make('password'),
       'created_at' => Carbon::now(),
       'updated_at' => Carbon::now(),
+    ]);
+
+    Biodata::create([
+      'user_id' => $vendor->id,
+      'fullname' => 'Vendor',
+      'address' => 'Semarang 20',
+      'gender' => 'Male',
+      'identity_number' => 5745623423,
     ]);
 
     $vendor->assignRole('vendor');

@@ -12,7 +12,7 @@ class DistrictSeeder extends Seeder
    * @return void
    */
   public function run()
-  {
+  {      
       $districts = [
           ['state_id' => '1', 'name' => 'KABUPATEN SIMEULUE'],
           ['state_id' => '1', 'name' => 'KABUPATEN ACEH SINGKIL'],

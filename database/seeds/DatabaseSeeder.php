@@ -30,8 +30,7 @@ class DatabaseSeeder extends Seeder
           VendorsSeeder::class,
           VendorServiceSeeder::class,
           VendorEmployeeSeeder::class,
-          ArticleSeeder::class,
-          BiodataSeeder::class,
+          ArticleSeeder::class
       ]);
           
       // DATA DUMMY (FAKER)

@@ -13,7 +13,7 @@ class ArticleSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
+    {        
         $articles = [
             [
                 'title' => 'Motivation is a key factor in whether students cheat',

@@ -3,6 +3,7 @@
 use App\Models\Permission;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class PermissionsSeeder extends Seeder
 {
