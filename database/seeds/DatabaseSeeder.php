@@ -1,21 +1,6 @@
 <?php
 
-use App\Models\District;
-use App\Models\Permission;
-use App\Models\PlaceToLive;
-use App\Models\University;
-use App\Models\UniversityFaculties;
-use App\Models\UniversityFee;
-use App\Models\UniversityMajor;
-use App\Models\UniversityRequirement;
-use App\Models\UniversityScholarship;
-use App\Models\VendorCategory;
-use App\Models\VendorService;
-use App\Models\Wishlist;
 use Illuminate\Database\Seeder;
-use Spatie\Permission\Commands\CreatePermission;
-use Spatie\Permission\Commands\CreateRole;
-
 class DatabaseSeeder extends Seeder
 {
   /**
@@ -46,6 +31,7 @@ class DatabaseSeeder extends Seeder
           VendorServiceSeeder::class,
           VendorEmployeeSeeder::class,
           ArticleSeeder::class,
+          BiodataSeeder::class,
       ]);
           
       // DATA DUMMY (FAKER)
