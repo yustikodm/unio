@@ -58,7 +58,8 @@ class VendorController extends AppBaseController
             'vendor_category_id',
             'name',
             'description',
-            'picture',
+            'logo',
+            'header_img',
             'email',
             'bank_account_number',
             'website',
@@ -67,12 +68,17 @@ class VendorController extends AppBaseController
         ]);
 
         $save = $this->vendorRepository->create($input);
+        
         if ($save) {
-            $image = $request->file('picture');
-            $save->picture = $image->hashName();
+            $logo = $request->file('logo');
+            $save->logo = $logo->hashName();
+            
+            $header = $request->file('header_img');
+            $save->header_img = $header->hashName();
             $save->save();
 
-            Storage::disk('public')->put('vendors/', $image, 'public');
+            Storage::disk('public')->put('vendors/', $logo, 'public');
+            Storage::disk('public')->put('vendors/', $header, 'public');
         }
 
         Flash::success('Vendor saved successfully.');
@@ -145,7 +151,8 @@ class VendorController extends AppBaseController
             'vendor_category_id',
             'name',
             'description',
-            'picture',
+            'logo',
+            'header_img',
             'email',
             'bank_account_number',
             'website',
@@ -153,7 +160,19 @@ class VendorController extends AppBaseController
             'phone'
         ]);
 
-        $vendor = $this->vendorRepository->update($input, $id);
+        $save = $this->vendorRepository->update($input, $id);
+
+        if ($save) {
+            $logo = $request->file('logo');
+            $save->logo = $logo->hashName();
+            
+            $header = $request->file('header_img');
+            $save->header_img = $header->hashName();
+            $save->save();
+
+            Storage::disk('public')->put('vendors/', $logo, 'public');
+            Storage::disk('public')->put('vendors/', $header, 'public');
+        }
 
         Flash::success('Vendor updated successfully.');
 

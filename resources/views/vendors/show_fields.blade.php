@@ -1,10 +1,3 @@
-<!-- Picture Field -->
-<div class="form-group">
-    {!! Form::label('picture', 'Picture:') !!}
-    <br>
-    <img style="width: 25%" src="{{ asset('storage/vendors/'.$vendor->picture) }}" alt="">
-</div>
-
 <!-- Country Id Field -->
 <div class="form-group">
     {!! Form::label('country_id', 'Country:') !!}
@@ -48,7 +41,7 @@
 <!-- Email Field -->
 <div class="form-group">
     {!! Form::label('email', 'Email:') !!}
-    <p>{{ $vendor->email }}</p>
+    <p><a href="mailto:{{ $vendor->email }}">{{ $vendor->email }}</a></p>
 </div>
 
 <!-- Bank Account Number Field -->
@@ -60,7 +53,7 @@
 <!-- Website Field -->
 <div class="form-group">
     {!! Form::label('website', 'Website:') !!}
-    <p>{{ $vendor->website }}</p>
+    <p><a href="{{ $vendor->website }}">{{ $vendor->website }}</a></p>
 </div>
 
 <!-- Address Field -->
@@ -73,6 +66,20 @@
 <div class="form-group">
     {!! Form::label('phone', 'Phone:') !!}
     <p>{{ $vendor->phone }}</p>
+</div>
+
+<!-- Logo Field -->
+<div class="form-group">
+    {!! Form::label('logo', 'Logo:') !!}
+    <br>
+    <img style="width: 25%" src="{{ asset('storage/vendors/'.$vendor->logo) }}" alt="">
+</div>
+
+<!-- Header Image Field -->
+<div class="form-group">
+    {!! Form::label('header_img', 'Header Image:') !!}
+    <br>
+    <img style="width: 25%" src="{{ asset('storage/vendors/'.$vendor->header_img) }}" alt="">
 </div>
 
 <!-- Created At Field -->
