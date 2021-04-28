@@ -50,7 +50,7 @@ class Biodata extends Model
     'graduation_year' => 'date',
     'birth_place' => 'string',
     'birth_date' => 'date',
-    'identity_number' => 'integer',
+    'identity_number' => 'string',
     'religion_id' => 'integer',
   ];
 
@@ -68,7 +68,7 @@ class Biodata extends Model
     'graduation_year' => 'nullable|date',
     'birth_place' => 'nullable|string',
     'birth_date' => 'nullable|date',
-    'identity_number' => 'nullable|integer',
+    'identity_number' => 'nullable|string',
     'religion_id' => 'nullable|integer',
   ];
 
