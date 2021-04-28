@@ -34,7 +34,7 @@ class UniversityFacilityDataTable extends DataTable
      */
     public function query(UniversityFacility $model)
     {
-        return $model->newQuery();
+        return $model->newQuery()->orderBy('name', 'asc');
     }
 
     /**

@@ -2,9 +2,7 @@
 
 @section('content')
     <section class="content-header">
-        <h1>
-            Country
-        </h1>
+        <h1>Country</h1>
     </section>
     <div class="content">
         <div class="box box-primary">

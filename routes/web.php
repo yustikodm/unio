@@ -81,7 +81,7 @@ Route::group(['middleware' => ['auth']], function () {
 
   Route::resource('vendor-categories', 'VendorCategoryController');
 
-  Route::resource('wishlists', 'WishlistController');
+  Route::resource('wishlists', 'WishlistController')->except(['create', 'edit']);
 
   Route::resource('carts', 'CartController');
 

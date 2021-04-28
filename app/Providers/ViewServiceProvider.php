@@ -40,6 +40,12 @@ class ViewServiceProvider extends ServiceProvider
    */
   public function boot()
   {
+    // Country Region
+    View::composer(['countries.fields'], function ($view) {
+      $region = Country::pluck('region', 'region')->toArray();
+      $view->with('region', $region);
+    });
+
     // Vendor Service
     View::composer(['vendor_services.fields'], function ($view) {
       $vendorItems = Vendor::pluck('name', 'id')->toArray();
@@ -110,6 +116,12 @@ class ViewServiceProvider extends ServiceProvider
 
     // University Faculty - List Universities
     View::composer(['university_faculties.fields'], function ($view) {
+      $universityItems = University::pluck('name', 'id')->toArray();
+      $view->with('universityItems', $universityItems);
+    });
+
+    // University Fee - List Universities
+    View::composer(['university_fees.fields'], function ($view) {
       $universityItems = University::pluck('name', 'id')->toArray();
       $view->with('universityItems', $universityItems);
     });

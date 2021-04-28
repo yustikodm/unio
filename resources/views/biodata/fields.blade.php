@@ -1,75 +1,99 @@
 <!-- User ID Field -->
-<div class="form-group col-sm-6">
-  {!! Form::label('user_id', 'User ID:') !!}
-  {!! Form::select('user_id', $userItems, null, ['class' => 'form-control']) !!}
+<div class="form-group">
+    {!! Form::label('user_id', 'User ID:', ['class' => 'control-label col-sm-2']) !!}
+    <div class="col-sm-5">
+        {!! Form::select('user_id', $userItems, null, ['class' => 'form-control']) !!}
+    </div>
 </div>
 
 <!-- Full Name Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('fullname', 'Full Name:') !!}
-    {!! Form::text('fullname', null, ['class' => 'form-control','maxlength' => 255]) !!}
+<div class="form-group">
+    {!! Form::label('fullname', 'Full Name:', ['class' => 'control-label col-sm-2']) !!}
+    <div class="col-sm-8">
+        {!! Form::text('fullname', null, ['class' => 'form-control']) !!}
+    </div>
 </div>
 
 <!-- Gender Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('gender', 'Gender:') !!}
-    <div class="radio">
-      <label>{!! Form::radio('gender', 'Male'); !!} Male</label>
-      <label style="margin: 0 2em;">{!! Form::radio('gender', 'Female'); !!} Female</label>
-      <label>{!! Form::radio('gender', 'Other', ['selected']); !!} Other</label>
+<div class="form-group">
+    {!! Form::label('gender', 'Gender:', ['class' => 'control-label col-sm-2']) !!}
+    <div class="col-sm-8">
+        <div class="radio">
+            <label>{!! Form::radio('gender', 'Male'); !!} Male</label>
+            <label style="margin: 0 2em;">{!! Form::radio('gender', 'Female'); !!} Female</label>
+            <label>{!! Form::radio('gender', 'Other', ['selected']); !!} Other</label>
+        </div>
     </div>
 </div>
 
 <!-- Address Field -->
-<div class="form-group col-sm-12 col-lg-12">
-    {!! Form::label('address', 'Address:') !!}
-    {!! Form::textarea('address', null, ['class' => 'form-control']) !!}
+<div class="form-group">
+    {!! Form::label('address', 'Address:', ['class' => 'control-label col-sm-2']) !!}
+    <div class="col-sm-8">
+        {!! Form::textarea('address', null, ['class' => 'form-control']) !!}
+    </div>
 </div>
 
 <!-- Picture Field -->
-<div class="form-group col-sm-12 col-lg-12">
-    {!! Form::label('picture', 'Picture:') !!}
-    {!! Form::file('picture', null, ['class' => 'form-control']) !!}
+<div class="form-group">
+    {!! Form::label('picture', 'Picture:', ['class' => 'control-label col-sm-2']) !!}
+    <div class="col-sm-8">
+        {!! Form::file('picture', null, ['class' => 'form-control']) !!}
+    </div>
 </div>
 
 <!-- School Origin Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('school_origin', 'School Origin:') !!}
-    {!! Form::text('school_origin', null, ['class' => 'form-control','maxlength' => 255]) !!}
+<div class="form-group">
+    {!! Form::label('school_origin', 'School Origin:', ['class' => 'control-label col-sm-2']) !!}
+    <div class="col-sm-8">
+        {!! Form::text('school_origin', null, ['class' => 'form-control']) !!}
+    </div>
 </div>
 
 <!-- Graduation Year Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('graduation_year', 'Graduation Year:') !!}
-    {!! Form::date('graduation_year', null, ['class' => 'form-control','id'=>'graduation_year']) !!}
+<div class="form-group">
+    {!! Form::label('graduation_year', 'Graduation Year:', ['class' => 'control-label col-sm-2']) !!}
+    <div class="col-sm-8">
+        {!! Form::date('graduation_year', null, ['class' => 'form-control','id'=>'graduation_year']) !!}
+    </div>
 </div>
 
 <!-- Birth Place Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('birth_place', 'Birth Place:') !!}
-    {!! Form::text('birth_place', null, ['class' => 'form-control','maxlength' => 255]) !!}
+<div class="form-group">
+    {!! Form::label('birth_place', 'Birth Place:', ['class' => 'control-label col-sm-2']) !!}
+    <div class="col-sm-8">
+        {!! Form::text('birth_place', null, ['class' => 'form-control']) !!}
+    </div>
 </div>
 
 <!-- Birth Date Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('birth_date', 'Birth Date:') !!}
-    {!! Form::date('birth_date', null, ['class' => 'form-control','id'=>'birth_date']) !!}
+<div class="form-group">
+    {!! Form::label('birth_date', 'Birth Date:', ['class' => 'control-label col-sm-2']) !!}
+    <div class="col-sm-8">
+        {!! Form::date('birth_date', null, ['class' => 'form-control','id'=>'birth_date']) !!}
+    </div>
 </div>
 
 <!-- Identity Number Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('identity_number', 'Identity Number:') !!}
-    {!! Form::number('identity_number', null, ['class' => 'form-control','maxlength' => 255]) !!}
+<div class="form-group">
+    {!! Form::label('identity_number', 'Identity Number:', ['class' => 'control-label col-sm-2']) !!}
+    <div class="col-sm-8">
+        {!! Form::text('identity_number', null, ['class' => 'form-control']) !!}
+    </div>
 </div>
 
 <!-- Religion ID Field -->
-<div class="form-group col-sm-6">
-  {!! Form::label('religion_id', 'Religion ID:') !!}
-  {!! Form::select('religion_id', $religionItems, null, ['class' => 'form-control']) !!}
+<div class="form-group">
+    {!! Form::label('religion_id', 'Religion ID:', ['class' => 'control-label col-sm-2']) !!}
+    <div class="col-sm-8">
+        {!! Form::select('religion_id', $religionItems, null, ['class' => 'form-control']) !!}
+    </div>
 </div>
 
 <!-- Submit Field -->
-<div class="form-group col-sm-12">
-    {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-    <a href="{{ route('biodata.index') }}" class="btn btn-default">Cancel</a>
+<div class="form-group">
+    <div class="col-sm-offset-2 col-sm-7">
+        {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
+        <a href="{{ route('biodata.index') }}" class="btn btn-default">Cancel</a>
+    </div>
 </div>

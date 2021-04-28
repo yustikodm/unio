@@ -2,9 +2,7 @@
 
 @section('content')
 <section class="content-header">
-  <h1>
-    University Major
-  </h1>
+  <h1>University Major</h1>
 </section>
 <div class="content">
   <div class="box box-primary">

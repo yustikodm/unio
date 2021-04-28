@@ -34,7 +34,7 @@ class VendorDataTable extends DataTable
      */
     public function query(Vendor $model)
     {
-        return $model->newQuery()->with(['vendor_category']);
+        return $model->newQuery()->with(['vendor_category'])->orderBy('name', 'asc');
     }
 
     /**

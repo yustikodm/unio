@@ -68,7 +68,7 @@ class VendorEmployee extends Model
    */
   public static $rules = [
     'vendor_id' => 'required|integer',
-    'name' => 'nullable|string|max:255',
+    'name' => 'required|string|max:255',
     'birthdate' => 'nullable',
     'position' => 'nullable|string|max:255',
     'phone' => 'nullable|string|max:255',

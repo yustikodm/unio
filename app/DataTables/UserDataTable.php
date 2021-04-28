@@ -33,7 +33,7 @@ class UserDataTable extends DataTable
      */
     public function query(User $model)
     {
-        return $model->newQuery()->with('roles');
+        return $model->newQuery()->with('roles')->orderBy('id', 'asc');
     }
 
     /**

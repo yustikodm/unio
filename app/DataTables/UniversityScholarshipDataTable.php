@@ -34,7 +34,7 @@ class UniversityScholarshipDataTable extends DataTable
      */
     public function query(UniversityScholarship $model)
     {
-        return $model->newQuery()->with(['university']);
+        return $model->newQuery()->with(['university'])->orderBy('year', 'desc');
     }
 
     /**

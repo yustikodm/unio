@@ -29,7 +29,7 @@ class ReligionDataTable extends DataTable
      */
     public function query(Religion $model)
     {
-        return $model->newQuery();
+        return $model->newQuery()->orderBy('name', 'asc');
     }
 
     /**

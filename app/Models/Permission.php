@@ -96,9 +96,7 @@ class Permission extends SpatiePermission
 
       'wishlists.index',
       'wishlists.show',
-      'wishlists.create',
       'wishlists.store',
-      'wishlists.edit',
       'wishlists.update',
       'wishlists.destroy',
 

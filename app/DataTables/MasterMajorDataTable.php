@@ -20,11 +20,11 @@ class MasterMajorDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'master_majors.datatables_actions')
-                    ->editColumn('count', function($query){
-                        return UniversityMajor::countMajors($query->id);
-                    })
-                    ->rawColumns(['action','count']);
+        return $dataTable
+            ->editColumn('count', function ($query) {
+                return UniversityMajor::countMajors($query->id);
+            })
+            ->rawColumns(['count']);
     }
 
     /**
@@ -48,7 +48,6 @@ class MasterMajorDataTable extends DataTable
         return $this->builder()
             ->columns($this->getColumns())
             ->minifiedAjax()
-            ->addAction(['width' => '120px', 'printable' => false])
             ->parameters([
                 'dom'       => 'Bfrtip',
                 'stateSave' => true,

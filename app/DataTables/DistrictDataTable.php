@@ -21,7 +21,7 @@ class DistrictDataTable extends DataTable
 
         return $dataTable->addColumn('action', 'districts.datatables_actions')
             ->editColumn('state.name', function ($query) {
-                return '<a href="' . route('swtates.show', $query->state->id) . '">' . $query->state->name . '</a>';
+                return '<a href="' . route('states.show', $query->state->id) . '">' . $query->state->name . '</a>';
             })
             ->rawColumns(['action', 'state.name']);
     }
@@ -34,7 +34,7 @@ class DistrictDataTable extends DataTable
      */
     public function query(District $model)
     {
-        return $model->newQuery()->with(['state']);
+        return $model->newQuery()->with(['state'])->orderBy('name', 'asc');
     }
 
     /**

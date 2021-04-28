@@ -78,22 +78,28 @@ f{{-- Dashboard --}}
                     <a href="{{ route('universities.index') }}"><i class="fa fa-circle-thin"></i><span>Universities</span></a>
                 </li>
             @endcan
+            {{-- University Facility --}}
+            @can('university-facilities.index')
+                <li class="{{ Request::is('university-facilities*') ? 'active' : '' }}">
+                    <a href="{{ route('university-facilities.index') }}"><i class="fa fa-circle-thin"></i><span>University Facilities</span></a>
+                </li>
+            @endcan
             {{-- University Faculties --}}
             @can('university-faculties.index')
                 <li class="{{ Request::is('university-faculties*') ? 'active' : '' }}">
                     <a href="{{ route('university-faculties.index') }}"><i class="fa fa-circle-thin"></i><span>University Faculties</span></a>
                 </li>
             @endcan
-            {{-- University Majors --}}
-            @can('university-majors.index')
-                <li class="{{ Request::is('university-majors*') ? 'active' : '' }}">
-                    <a href="{{ route('university-majors.index') }}"><i class="fa fa-circle-thin"></i><span>University Majors</span></a>
-                </li>
-            @endcan
             {{-- University Fees --}}
             @can('university-fees.index')
                 <li class="{{ Request::is('university-fees*') ? 'active' : '' }}">
                     <a href="{{ route('university-fees.index') }}"><i class="fa fa-circle-thin"></i><span>University Fees</span></a>
+                </li>
+            @endcan
+            {{-- University Majors --}}
+            @can('university-majors.index')
+                <li class="{{ Request::is('university-majors*') ? 'active' : '' }}">
+                    <a href="{{ route('university-majors.index') }}"><i class="fa fa-circle-thin"></i><span>University Majors</span></a>
                 </li>
             @endcan
             {{-- University Requirements --}}
@@ -107,12 +113,6 @@ f{{-- Dashboard --}}
                 <li class="{{ Request::is('university-scholarships*') ? 'active' : '' }}">
                     <a href="{{ route('university-scholarships.index') }}"><i class="fa fa-circle-thin"></i><span>University Scholarships</span></a>
                 </li>
-            @endcan
-            {{-- University Facility --}}
-            @can('university-facilities.index')
-              <li class="{{ Request::is('university-facilities*') ? 'active' : '' }}">
-                  <a href="{{ route('university-facilities.index') }}"><i class="fa fa-circle-thin"></i><span>University Facilities</span></a>
-              </li>
             @endcan
 
             @can('master-majors.index')

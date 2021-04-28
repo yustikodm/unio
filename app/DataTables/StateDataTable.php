@@ -34,7 +34,7 @@ class StateDataTable extends DataTable
      */
     public function query(State $model)
     {
-        return $model->newQuery()->with(['country']);
+        return $model->newQuery()->with(['country'])->orderBy('name', 'asc');
     }
 
     /**

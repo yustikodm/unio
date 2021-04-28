@@ -40,7 +40,7 @@ class UniversityMajorDataTable extends DataTable
      */
     public function query(UniversityMajor $model)
     {
-        return $model->newQuery()->with(['university', 'faculty']);
+        return $model->newQuery()->with(['university', 'faculty'])->orderBy('name', 'asc');
     }
 
     /**

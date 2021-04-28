@@ -10,13 +10,9 @@
   @include('adminlte-templates::common.errors')
   <div class="box box-primary">
     <div class="box-body">
-      <div class="row">
-        {!! Form::open(['route' => 'place-to-live.store', 'enctype' => 'multipart/form-data']) !!}
-
+        {!! Form::open(['route' => 'place-to-live.store', 'enctype' => 'multipart/form-data', 'class' => 'form-horizontal']) !!}
         @include('place_to_lives.fields')
-
         {!! Form::close() !!}
-      </div>
     </div>
   </div>
 </div>

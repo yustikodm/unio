@@ -37,7 +37,7 @@ class VendorEmployeeDataTable extends DataTable
      */
     public function query(VendorEmployee $model)
     {
-        return $model->newQuery()->with(['vendor']);
+        return $model->newQuery()->with(['vendor'])->orderBy('name', 'asc');
     }
 
     /**
