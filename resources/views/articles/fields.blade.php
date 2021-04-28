@@ -18,7 +18,7 @@
 <div class="form-group">
   {!! Form::label('picture', 'Picture:', ['class' => 'col-sm-2 control-label']) !!}
   <div class="col-sm-8">
-    {!! Form::file('picture', null, ['class' => 'form-control']) !!}
+    {!! Form::file('picture', ['accept' => 'image/*']) !!}
   </div>
 </div>
 

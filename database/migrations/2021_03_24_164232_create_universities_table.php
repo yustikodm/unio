@@ -21,7 +21,7 @@ class CreateUniversitiesTable extends Migration
             $table->string('name', 255);
             $table->longText('description')->nullable();
             $table->string('logo_src', 200)->nullable();
-            $table->string('header_img', 200)->nullable();
+            $table->string('header_src', 200)->nullable();
             $table->string('type', 255)->nullable();
             $table->string('website', 255)->nullable();
             $table->string('email', 255)->nullable();

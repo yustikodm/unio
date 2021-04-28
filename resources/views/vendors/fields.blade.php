@@ -88,17 +88,17 @@
 
 <!-- Logo Field -->
 <div class="form-group">
-    {!! Form::label('logo', 'Logo:', ['class' => 'control-label col-sm-2']) !!}
+    {!! Form::label('logo_src', 'Logo:', ['class' => 'control-label col-sm-2']) !!}
     <div class="col-sm-6">
-        {!! Form::file('logo', null, ['class' => 'form-control']) !!}
+        {!! Form::file('logo_src', ['accept' => 'image/*']) !!}
     </div>
 </div>
 
 <!-- Header Image Field -->
 <div class="form-group">
-    {!! Form::label('header_img', 'Header Image:', ['class' => 'control-label col-sm-2']) !!}
+    {!! Form::label('header_src', 'Header Image:', ['class' => 'control-label col-sm-2']) !!}
     <div class="col-sm-6">
-        {!! Form::file('header_img', null, ['class' => 'form-control']) !!}
+        {!! Form::file('header_src', ['accept' => 'image/*', 'id' => 'header_src', 'class' => 'custom-file-input']) !!}
     </div>
 </div>
 

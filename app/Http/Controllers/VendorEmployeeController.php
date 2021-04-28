@@ -62,7 +62,7 @@ class VendorEmployeeController extends AppBaseController
             'description'
         ]);
 
-        $vendorEmployee = $this->vendorEmployeeRepository->create($input);
+        $this->vendorEmployeeRepository->save($input);
 
         Flash::success('Vendor Employee saved successfully.');
 
@@ -139,7 +139,7 @@ class VendorEmployeeController extends AppBaseController
             'description'
         ]);
 
-        $vendorEmployee = $this->vendorEmployeeRepository->update($input, $id);
+        $this->vendorEmployeeRepository->save($input, $id);
 
         Flash::success('Vendor Employee updated successfully.');
 

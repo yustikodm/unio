@@ -56,12 +56,15 @@ class UniversityController extends AppBaseController
             'name',
             'description',
             'logo_src',
+            'header_src',
             'type',
+            'website',
+            'email',
             'accreditation',
             'address'
         ]);
 
-        $university = $this->universityRepository->create($input);
+        $this->universityRepository->save($input);
 
         Flash::success('University saved successfully.');
 
@@ -133,12 +136,15 @@ class UniversityController extends AppBaseController
             'name',
             'description',
             'logo_src',
+            'header_src',
             'type',
+            'website',
+            'email',
             'accreditation',
             'address'
         ]);
 
-        $university = $this->universityRepository->update($input, $id);
+        $this->universityRepository->save($input, $id);
 
         Flash::success('University updated successfully.');
 

@@ -58,28 +58,16 @@ class VendorController extends AppBaseController
             'vendor_category_id',
             'name',
             'description',
-            'logo',
-            'header_img',
             'email',
             'bank_account_number',
             'website',
             'address',
-            'phone'
+            'phone',
+            'logo_src',
+            'header_img'
         ]);
 
-        $save = $this->vendorRepository->create($input);
-        
-        if ($save) {
-            $logo = $request->file('logo');
-            $save->logo = $logo->hashName();
-            
-            $header = $request->file('header_img');
-            $save->header_img = $header->hashName();
-            $save->save();
-
-            Storage::disk('public')->put('vendors/', $logo, 'public');
-            Storage::disk('public')->put('vendors/', $header, 'public');
-        }
+        $this->vendorRepository->save($input);
 
         Flash::success('Vendor saved successfully.');
 
@@ -151,28 +139,16 @@ class VendorController extends AppBaseController
             'vendor_category_id',
             'name',
             'description',
-            'logo',
-            'header_img',
             'email',
             'bank_account_number',
             'website',
             'address',
-            'phone'
+            'phone',
+            'logo_src',
+            'header_img'
         ]);
 
-        $save = $this->vendorRepository->update($input, $id);
-
-        if ($save) {
-            $logo = $request->file('logo');
-            $save->logo = $logo->hashName();
-            
-            $header = $request->file('header_img');
-            $save->header_img = $header->hashName();
-            $save->save();
-
-            Storage::disk('public')->put('vendors/', $logo, 'public');
-            Storage::disk('public')->put('vendors/', $header, 'public');
-        }
+        $this->vendorRepository->save($input, $id);
 
         Flash::success('Vendor updated successfully.');
 

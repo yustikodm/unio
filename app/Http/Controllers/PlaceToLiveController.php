@@ -68,7 +68,7 @@ class PlaceToLiveController extends AppBaseController
             'picture'
         ]);
 
-        $placeToLive = $this->placeToLiveRepository->create($input);
+        $placeToLive = $this->placeToLiveRepository->save($input);
 
         $this->pointPricingRepository->create([
             'entity_id' => $placeToLive->id,
@@ -151,7 +151,7 @@ class PlaceToLiveController extends AppBaseController
             'picture'
         ]);
 
-        $placeToLive = $this->placeToLiveRepository->update($input, $id);
+        $placeToLive = $this->placeToLiveRepository->save($input, $id);
 
         // Pricing Point Table
         $pricing = $this->pointPricingRepository->findBy(['entity_id' => $id, 'entity_type' => 'placetolive']);

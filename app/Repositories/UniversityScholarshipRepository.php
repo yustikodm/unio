@@ -20,6 +20,7 @@ class UniversityScholarshipRepository extends BaseRepository
         'university_id',
         'name',
         'description',
+        'organizer',
         'picture',
         'year'
     ];
@@ -40,5 +41,24 @@ class UniversityScholarshipRepository extends BaseRepository
     public function model()
     {
         return UniversityScholarship::class;
+    }
+
+    public function save($input, $id = null)
+    {
+        if (request()->hasFile('picture')) {
+            $field = ['picture'];
+            $path = 'scholarships/';
+
+            // Helper Upload App\helper.php
+            $ouput = upload($input['name'], $field, $path);
+
+            $input = array_merge($input, $ouput);
+        }
+
+        if (!empty($id)) {
+            return $this->update($input, $id);
+        } else {
+            return $this->create($input);
+        }
     }
 }

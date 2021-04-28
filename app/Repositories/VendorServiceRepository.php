@@ -20,6 +20,7 @@ class VendorServiceRepository extends BaseRepository
         'vendor_id',
         'name',
         'description',
+        'level',
         'picture',
         'price'
     ];
@@ -40,5 +41,24 @@ class VendorServiceRepository extends BaseRepository
     public function model()
     {
         return VendorService::class;
+    }
+
+    public function save($input, $id = null)
+    {
+        if (request()->hasFile('picture')) {
+            $field = ['picture'];
+            $path = 'services/';
+
+            // Helper Upload App\helper.php
+            $ouput = upload($input['name'], $field, $path);
+
+            $input = array_merge($input, $ouput);
+        }
+
+        if (!empty($id)) {
+            return $this->update($input, $id);
+        } else {
+            return $this->create($input);
+        }
     }
 }

@@ -8,7 +8,7 @@
     @include('adminlte-templates::common.errors')
     <div class="box box-primary">
         <div class="box-body">
-            {!! Form::open(['route' => 'university-facilities.store', 'class' => 'form-horizontal']) !!}
+            {!! Form::open(['route' => 'university-facilities.store', 'enctype' => 'multipart/form-data', 'class' => 'form-horizontal']) !!}
             @include('university_facilities.fields')
             {!! Form::close() !!}
         </div>

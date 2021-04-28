@@ -53,12 +53,13 @@ class UniversityScholarshipController extends AppBaseController
         $input = $request->only([
             'university_id',
             'name',
+            'organizer',
             'description',
             'picture',
             'year'
         ]);
 
-        $universityScholarship = $this->universityScholarshipRepository->create($input);
+        $this->universityScholarshipRepository->save($input);
 
         Flash::success('University Scholarship saved successfully.');
 
@@ -127,11 +128,12 @@ class UniversityScholarshipController extends AppBaseController
             'university_id',
             'name',
             'description',
+            'organizer',
             'picture',
             'year'
         ]);
 
-        $universityScholarship = $this->universityScholarshipRepository->update($input, $id);
+        $this->universityScholarshipRepository->save($input, $id);
 
         Flash::success('University Scholarship updated successfully.');
 

@@ -22,6 +22,14 @@
     </div>
 </div>
 
+<!-- Organizer Field -->
+<div class="form-group">
+    {!! Form::label('Organizer', 'Organizer:', ['class' => 'control-label col-sm-2']) !!}
+    <div class="col-sm-6">
+        {!! Form::text('organizer', null, ['class' => 'form-control']) !!}
+    </div>
+</div>
+
 <!-- Year Field -->
 <div class="form-group">
     {!! Form::label('year', 'Year:', ['class' => 'control-label col-sm-2']) !!}
@@ -34,7 +42,7 @@
 <div class="form-group">
     {!! Form::label('picture', 'Picture:', ['class' => 'control-label col-sm-2']) !!}
     <div class="col-sm-6">
-        {!! Form::file('picture', null, ['class' => 'form-control']) !!}
+        {!! Form::file('picture', ['accept' => 'image/*']) !!}
     </div>
 </div>
 

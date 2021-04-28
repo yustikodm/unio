@@ -20,6 +20,7 @@ class CreateUniversityFacilitiesTable extends Migration
             $table->string('name');
             $table->longText('description')->nullable();
             $table->integer('amount');
+            $table->string('picture');
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('university_id')->references('id')->on('universities');

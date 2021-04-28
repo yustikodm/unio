@@ -23,7 +23,13 @@ class UniversityFacility extends Model
 
     protected $dates = ['deleted_at'];
 
-    public $fillable = ['university_id', 'name', 'description', 'amount'];
+    public $fillable = [
+        'university_id', 
+        'name', 
+        'description', 
+        'amount', 
+        'picture'
+    ];
 
     protected $with = ['university'];
     
@@ -37,7 +43,8 @@ class UniversityFacility extends Model
         'university_id' => 'integer',
         'name' => 'string',
         'description' => 'string',
-        'amount' => 'integer'
+        'amount' => 'integer',
+        'picture' => 'string'
     ];
 
     /**
@@ -49,7 +56,8 @@ class UniversityFacility extends Model
         'university_id' => 'required|integer',
         'name' => 'required|string',
         'description' => 'nullable|string',
-        'amount' => 'required|integer'
+        'amount' => 'required|integer',
+        'picture' => 'nullable'
     ];
 
     public function university()

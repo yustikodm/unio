@@ -40,16 +40,16 @@
     <p>{{ $vendorEmployee->address }}</p>
 </div>
 
-<!-- Picture Field -->
-<div class="form-group">
-    {!! Form::label('picture', 'Picture:') !!}
-    <p>{{ $vendorEmployee->picture }}</p>
-</div>
-
 <!-- Description Field -->
 <div class="form-group">
     {!! Form::label('description', 'Description:') !!}
     <p>{{ $vendorEmployee->description }}</p>
+</div>
+
+<!-- Picture Field -->
+<div class="form-group">
+    {!! Form::label('picture', 'Picture:') !!}
+    <img style="width: 25%" src="{{ asset('storage/employees/'.$vendorEmployee->picture) }}">
 </div>
 
 <!-- Created At Field -->

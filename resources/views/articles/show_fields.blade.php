@@ -25,7 +25,7 @@
 <!-- Picture Field -->
 <div class="form-group">
     {!! Form::label('picture', 'Picture:') !!}
-    <p>{{ $article->picture }}</p>
+    <img style="width: 25%" src="{{ asset('storage/articles/'.$article->picture) }}">
 </div>
 
 <!-- Created At Field -->

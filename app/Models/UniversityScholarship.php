@@ -30,6 +30,7 @@ class UniversityScholarship extends Model
     'university_id',
     'name',
     'description',
+    'organizer',
     'picture',
     'year'
   ];
@@ -46,6 +47,7 @@ class UniversityScholarship extends Model
     'university_id' => 'integer',
     'name' => 'string',
     'description' => 'string',
+    'organizer' => 'string',
     'picture' => 'string',
     'year' => 'integer'
   ];
@@ -59,6 +61,7 @@ class UniversityScholarship extends Model
     'university_id' => 'required|integer',
     'name' => 'required|string',
     'description' => 'nullable|string',
+    'organizer' => 'nullable|string',
     'picture' => 'nullable',
     'year' => 'nullable|integer',
     'created_at' => 'nullable',

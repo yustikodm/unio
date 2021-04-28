@@ -31,6 +31,7 @@ class VendorService extends Model
     'vendor_id',
     'name',
     'description',
+    'level',
     'picture',
     'price'
   ];
@@ -45,6 +46,7 @@ class VendorService extends Model
     'vendor_id' => 'integer',
     'name' => 'string',
     'description' => 'string',
+    'level' => 'string',
     'picture' => 'string',
     'price' => 'integer'
   ];
@@ -56,9 +58,10 @@ class VendorService extends Model
    */
   public static $rules = [
     'vendor_id' => 'required|integer',
-    'name' => 'required|string|max:255',
+    'name' => 'required|string',
     'description' => 'nullable|string',
-    'picture' => 'string',
+    'picture' => 'nullable',
+    'level' => 'string|nullable',
     'price' => 'required',
     'created_at' => 'nullable',
     'updated_at' => 'nullable',

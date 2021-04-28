@@ -12,6 +12,7 @@ class TestController extends Controller
 {
   public function index()
   {
+    echo getLoggedInUser();
     // dd(auth()->user()->hasRole(['student']));
     // dd(auth()->user()->hasPermissionTo('wishlists.show'));
     // dd(auth()->user()->getRoleNames());
@@ -34,8 +35,8 @@ class TestController extends Controller
     // print_r($new);
 
     // COUNTRY API
-    $data = file_get_contents('countries.json');
-    $data = json_decode($data, true);
+    // $data = file_get_contents('countries.json');
+    // $data = json_decode($data, true);
     // print_r($data); die;
     
     // $region = [];
@@ -47,7 +48,7 @@ class TestController extends Controller
       // $region[$value['flag']] = $value;
     // }
     // print_r(array_values($region));
-    die;
+    // die;
     // foreach ($data as $v) {
     //   DB::table('countries-seeds')->insert([
     //       'code' => $v['alpha3Code'],

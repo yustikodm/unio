@@ -66,7 +66,7 @@
 <div class="form-group">
     {!! Form::label('picture', 'Picture:', ['class' => 'control-label col-sm-2']) !!}
     <div class="col-sm-6">
-        {!! Form::file('picture', null, ['class' => 'form-control']) !!}
+        {!! Form::file('picture', ['accept' => 'image/*']) !!}
     </div>
 </div>
 
@@ -81,8 +81,8 @@
 @push('scripts')
 <script type="text/javascript">
     $('#birthdate').datetimepicker({
-        format: 'YYYY-MM-DD HH:mm:ss'
-        , useCurrent: false
+        format: 'YYYY-MM-DD HH:mm:ss',
+        useCurrent: false
     })
 
 </script>

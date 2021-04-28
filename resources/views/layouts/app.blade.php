@@ -102,7 +102,6 @@
 
             <!-- Logo -->
             <a href="" class="logo">
-                <!-- <strong>Sodermee</strong> -->
                 <span class="logo-lg pull-left">Unio</span>
             </a>
 

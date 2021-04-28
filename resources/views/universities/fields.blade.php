@@ -46,6 +46,22 @@
     </div>
 </div>
 
+<!-- Email Field -->
+<div class="form-group">
+    {!! Form::label('email', 'Email:', ['class' => 'control-label col-sm-2']) !!}
+    <div class="col-sm-6">
+        {!! Form::email('email', null, ['class' => 'form-control','maxlength' => 255]) !!}
+    </div>
+</div>
+
+<!-- Website Field -->
+<div class="form-group">
+    {!! Form::label('website', 'Website:', ['class' => 'control-label col-sm-2']) !!}
+    <div class="col-sm-6">
+        {!! Form::text('website', null, ['class' => 'form-control','maxlength' => 255]) !!}
+    </div>
+</div>
+
 <!-- Accreditation Field -->
 <div class="form-group">
     {!! Form::label('accreditation', 'Accreditation:', ['class' => 'control-label col-sm-2']) !!}
@@ -66,7 +82,15 @@
 <div class="form-group">
     {!! Form::label('logo_src', 'University Logo:', ['class' => 'control-label col-sm-2']) !!}
     <div class="col-sm-6">
-        {!! Form::file('logo_src', null, ['class' => 'form-control']) !!}
+        {!! Form::file('logo_src', ['accept' => 'image/*']) !!}
+    </div>
+</div>
+
+<!-- Header Src Field -->
+<div class="form-group">
+    {!! Form::label('header_src', 'University Header:', ['class' => 'control-label col-sm-2']) !!}
+    <div class="col-sm-6">
+        {!! Form::file('header_src', ['accept' => 'image/*']) !!}
     </div>
 </div>
 

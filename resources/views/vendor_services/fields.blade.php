@@ -10,7 +10,7 @@
 <div class="form-group">
     {!! Form::label('name', 'Name:', ['class' => 'control-label col-sm-2']) !!}
     <div class="col-sm-6">
-        {!! Form::text('name', null, ['class' => 'form-control','maxlength' => 255]) !!}
+        {!! Form::text('name', null, ['class' => 'form-control']) !!}
     </div>
 </div>
 
@@ -19,6 +19,14 @@
     {!! Form::label('description', 'Description:', ['class' => 'control-label col-sm-2']) !!}
     <div class="col-sm-6">
         {!! Form::textarea('description', null, ['class' => 'form-control']) !!}
+    </div>
+</div>
+
+<!-- Level Field -->
+<div class="form-group">
+    {!! Form::label('Level', 'Level:', ['class' => 'control-label col-sm-2']) !!}
+    <div class="col-sm-6">
+        {!! Form::text('level', null, ['class' => 'form-control']) !!}
     </div>
 </div>
 
@@ -34,7 +42,7 @@
 <div class="form-group">
     {!! Form::label('picture', 'Picture:', ['class' => 'control-label col-sm-2']) !!}
     <div class="col-sm-6">
-        {!! Form::file('picture', null, ['class' => 'form-control']) !!}
+        {!! Form::file('picture', ['accept' => 'image/*']) !!}
     </div>
 </div>
 

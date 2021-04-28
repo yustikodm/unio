@@ -70,16 +70,16 @@
 
 <!-- Logo Field -->
 <div class="form-group">
-    {!! Form::label('logo', 'Logo:') !!}
+    {!! Form::label('logo_src', 'Logo:') !!}
     <br>
-    <img style="width: 25%" src="{{ asset('storage/vendors/'.$vendor->logo) }}" alt="">
+    <img style="width: 25%" src="{{ asset('storage/vendors/'.$vendor->logo_src) }}">
 </div>
 
 <!-- Header Image Field -->
 <div class="form-group">
-    {!! Form::label('header_img', 'Header Image:') !!}
+    {!! Form::label('header_src', 'Header Image:') !!}
     <br>
-    <img style="width: 25%" src="{{ asset('storage/vendors/'.$vendor->header_img) }}" alt="">
+    <img style="width: 25%" src="{{ asset('storage/vendors/'.$vendor->header_src) }}">
 </div>
 
 <!-- Created At Field -->

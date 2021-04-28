@@ -61,7 +61,7 @@ class ArticleController extends AppBaseController
 
         $input['slug'] = Str::slug($request->title);
 
-        $article = $this->articleRepository->create($input);
+        $this->articleRepository->save($input);
 
         Flash::success('Article saved successfully.');
 
@@ -134,7 +134,7 @@ class ArticleController extends AppBaseController
             'picture'
         ]);
 
-        $article = $this->articleRepository->update($input, $id);
+        $this->articleRepository->save($input, $id);
 
         Flash::success('Article updated successfully.');
 

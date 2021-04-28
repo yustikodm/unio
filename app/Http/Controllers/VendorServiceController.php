@@ -60,11 +60,12 @@ class VendorServiceController extends AppBaseController
             'vendor_id',
             'name',
             'description',
+            'level',
             'picture',
             'price'
         ]);
 
-        $vendorService = $this->vendorServiceRepository->create($input);
+        $vendorService = $this->vendorServiceRepository->save($input);
 
         $this->pointPricingRepository->create([
             'entity_id' => $vendorService->id,
@@ -139,11 +140,12 @@ class VendorServiceController extends AppBaseController
             'vendor_id',
             'name',
             'description',
+            'level',
             'picture',
             'price'
         ]);
 
-        $vendorService = $this->vendorServiceRepository->update($input, $id);
+        $vendorService = $this->vendorServiceRepository->save($input, $id);
 
         Flash::success('Vendor Service updated successfully.');
 

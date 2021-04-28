@@ -30,6 +30,14 @@
     </div>
 </div>
 
+<!-- Picture Field -->
+<div class="form-group">
+    {!! Form::label('Picture', 'Picture:', ['class' => 'control-label col-sm-2']) !!}
+    <div class="col-sm-6">
+        {!! Form::file('picture', ['accept' => 'image/*']) !!}
+    </div>
+</div>
+
 <!-- Submit Field -->
 <div class="form-group">
     <div class="col-sm-offset-2 col-sm-6">

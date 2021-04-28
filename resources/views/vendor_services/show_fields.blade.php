@@ -16,16 +16,22 @@
     <p>{{ $vendorService->description }}</p>
 </div>
 
-<!-- Picture Field -->
+<!-- Level Field -->
 <div class="form-group">
-    {!! Form::label('picture', 'Picture:') !!}
-    <p>{{ $vendorService->picture }}</p>
+    {!! Form::label('level', 'Level:') !!}
+    <p>{{ $vendorService->level }}</p>
 </div>
 
 <!-- Price Field -->
 <div class="form-group">
     {!! Form::label('price', 'Price:') !!}
     <p>{{ $vendorService->price }}</p>
+</div>
+
+<!-- Picture Field -->
+<div class="form-group">
+    {!! Form::label('picture', 'Picture:') !!}
+    <img style="width: 25%" src="{{ asset('storage/services/'.$vendorService->picture) }}">
 </div>
 
 <!-- Created At Field -->
@@ -39,4 +45,3 @@
     {!! Form::label('updated_at', 'Updated At:') !!}
     <p>{{ $vendorService->updated_at }}</p>
 </div>
-

@@ -1,6 +1,9 @@
 <?php
 
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 /**
  * @return int
@@ -28,7 +31,7 @@ function getLoggedInUser()
  */
 function getUserImageInitial($userId, $name)
 {
-    return getAvatarUrl()."?name=$name&size=30&rounded=true&color=fff&background=".getRandomColor($userId);
+    return getAvatarUrl() . "?name=$name&size=30&rounded=true&color=fff&background=" . getRandomColor($userId);
 }
 
 /**
@@ -64,4 +67,40 @@ function getRandomColor($userId)
     $index = $userId % 5;
 
     return $colors[$index];
+}
+
+/**
+ * File Upload Multi Field
+ *
+ * @param string $filename
+ * @param array $fields (e.g. ['logo', 'header_img']
+ * @param string $path
+ * @return array[field_name]
+ */
+function upload($filename = 'default', $fields = [], $path = '')
+{
+    DB::beginTransaction();
+
+    $output = [];
+
+    try {
+        foreach ($fields as $field) {
+            $image = request()->file($field);
+
+            if (!empty($image)) {
+                $image_extension = '.' . $image->getClientOriginalExtension();
+                $image_name = $field . '_' . Str::slug($filename) . '_' . time() . $image_extension;
+                $image->storeAs('public/' . $path, $image_name);
+                $output[$field] = $image_name;
+            }
+        }
+    } catch (\Exception $error) {
+        DB::rollBack();
+
+        return 'Error! ' . $error->getMessage();
+    }
+
+    DB::commit();
+
+    return $output;
 }

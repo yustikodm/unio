@@ -39,7 +39,10 @@ class University extends Model
     'name',
     'description',
     'logo_src',
+    'header_src',
     'type',
+    'website',
+    'email',
     'accreditation',
     'address'
   ];
@@ -57,6 +60,9 @@ class University extends Model
     'name' => 'string',
     'description' => 'string',
     'logo_src' => 'string',
+    'header_src' => 'string',
+    'website' => 'string',
+    'email' => 'string',
     'type' => 'string',
     'accreditation' => 'string',
     'address' => 'string'
@@ -73,7 +79,10 @@ class University extends Model
     'district_id' => 'nullable|integer',
     'name' => 'required|string|max:255',
     'description' => 'nullable|string',
-    'logo_src' => 'nullable|string|max:200',
+    'logo_src' => 'nullable|string',
+    'header_src' => 'nullable|string',
+    'website' => 'nullable|string',
+    'email' => 'nullable|string',
     'type' => 'string|max:255',
     'accreditation' => 'string|max:255',
     'address' => 'nullable|string',

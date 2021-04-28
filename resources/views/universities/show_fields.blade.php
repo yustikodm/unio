@@ -23,7 +23,13 @@
 <!-- Logo Src Field -->
 <div class="form-group">
     {!! Form::label('logo_src', 'Logo Src:') !!}
-    <p><img src="{{ $university->logo_src }}"></p>
+    <img style="width: 25%" src="{{ asset('storage/universities/'.$university->logo_src) }}">
+</div>
+
+<!-- Header Src Field -->
+<div class="form-group">
+    {!! Form::label('header_src', 'Header Src:') !!}
+    <img style="width: 25%" src="{{ asset('storage/universities/'.$university->header_src) }}">
 </div>
 
 <!-- Name Field -->
@@ -36,6 +42,18 @@
 <div class="form-group">
     {!! Form::label('type', 'Type:') !!}
     <p>{{ $university->type }}</p>
+</div>
+
+<!-- Email Field -->
+<div class="form-group">
+    {!! Form::label('email', 'Email:') !!}
+    <p>{{ $university->email }}</p>
+</div>
+
+<!-- Website Field -->
+<div class="form-group">
+    {!! Form::label('Website', 'Website:') !!}
+    <p>{{ $university->website }}</p>
 </div>
 
 <!-- Accreditation Field -->

@@ -22,12 +22,6 @@
     <p>{{ $placeToLive->address }}</p>
 </div>
 
-<!-- Address Field -->
-<div class="form-group">
-    {!! Form::label('address', 'Address:') !!}
-    <p>{{ $placeToLive->address }}</p>
-</div>
-
 <!-- Phone Field -->
 <div class="form-group">
     {!! Form::label('phone', 'Phone:') !!}
@@ -37,7 +31,7 @@
 <!-- Picture Field -->
 <div class="form-group">
     {!! Form::label('picture', 'Picture:') !!}
-    <p>{{ $placeToLive->picture }}</p>
+    <img style="width: 25%" src="{{ asset('storage/placetolive/'.$placeToLive->picture) }}">
 </div>
 
 <!-- Created At Field -->

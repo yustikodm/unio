@@ -38,12 +38,13 @@ class Vendor extends Model
     'vendor_category_id',
     'name',
     'description',
-    'picture',
     'email',
     'bank_account_number',
     'website',
     'address',
-    'phone'
+    'phone',
+    'logo_src',
+    'header_src'
   ];
 
   /**
@@ -56,7 +57,8 @@ class Vendor extends Model
     'vendor_category_id' => 'integer',
     'name' => 'string',
     'description' => 'string',
-    'picture' => 'string',
+    'logo_src' => 'string',
+    'header_src' => 'string',
     'email' => 'string',
     'bank_account_number' => 'string',
     'website' => 'string',
@@ -73,7 +75,8 @@ class Vendor extends Model
     'vendor_category_id' => 'required|integer',
     'name' => 'required|string|max:50',
     'description' => 'nullable|string',
-    'picture' => 'nullable|file',
+    'logo_src' => 'nullable|file',
+    'header_src' => 'nullable|file',
     'email' => 'nullable|string|max:255',
     'bank_account_number' => 'nullable|string|max:255',
     'website' => 'nullable|string|max:255',

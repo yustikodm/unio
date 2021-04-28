@@ -16,6 +16,12 @@
     <p>{{ $universityScholarship->description }}</p>
 </div>
 
+<!-- Organizer Field -->
+<div class="form-group">
+    {!! Form::label('organizer', 'Organizer:') !!}
+    <p>{{ $universityScholarship->organizer }}</p>
+</div>
+
 <!-- Year Field -->
 <div class="form-group">
     {!! Form::label('year', 'Year:') !!}
@@ -25,7 +31,7 @@
 <!-- Picture Field -->
 <div class="form-group">
     {!! Form::label('picture', 'Picture:') !!}
-    <p><img src="{{ $universityScholarship->logo_src }}"></p>
+    <img style="width: 25%" src="{{ asset('storage/scholarships/'.$universityScholarship->picture) }}">
 </div>
 
 <!-- Created At Field -->
