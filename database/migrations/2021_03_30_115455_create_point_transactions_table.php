@@ -13,13 +13,12 @@ class CreatePointTransactionsTable extends Migration
    */
   public function up()
   {
-    Schema::create('point_transactions', function (Blueprint $table) {
+    Schema::create('transactions', function (Blueprint $table) {
       $table->bigIncrements('id');
       $table->bigInteger('user_id')->unsigned();
-      $table->bigInteger('entity_id');
-      $table->char('entity_type');
-      $table->decimal('amount', 10, 2);
-      $table->decimal('point_conversion', 10, 2);
+      $table->string('code')->unique()->nullable();
+      $table->decimal('grand_total', 10, 2);
+      $table->char('status')->default('pending');
       $table->timestamps();
       $table->softDeletes();
       $table->foreign('user_id')->references('id')->on('users');

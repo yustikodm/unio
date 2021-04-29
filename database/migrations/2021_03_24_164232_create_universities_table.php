@@ -18,6 +18,7 @@ class CreateUniversitiesTable extends Migration
             $table->bigInteger('country_id')->unsigned();
             $table->bigInteger('state_id')->unsigned()->nullable();
             $table->bigInteger('district_id')->unsigned()->nullable();
+            $table->char('code')->unique()->nullable();
             $table->string('name', 255);
             $table->longText('description')->nullable();
             $table->string('logo_src', 200)->nullable();

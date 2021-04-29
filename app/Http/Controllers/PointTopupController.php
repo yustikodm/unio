@@ -74,13 +74,13 @@ class PointTopupController extends AppBaseController
     try {
       $pointTopup = $this->pointTopupRepository->save($input);
 
-      $transaction = $this->pointTransactionRepository->create([
-        'user_id' => $input['user_id'],
-        'entity_id' => $pointTopup->id,
-        'entity_type' => 'point-topup',
-        'amount' => $input['amount'],
-        'point_conversion' => $input['point_conversion'],
-      ]);
+      // $transaction = $this->pointTransactionRepository->create([
+      //   'user_id' => $input['user_id'],
+      //   'entity_id' => $pointTopup->id,
+      //   'entity_type' => 'point-topup',
+      //   'amount' => $input['amount'],
+      //   'point_conversion' => $input['point_conversion'],
+      // ]);
 
       $family = Family::getFamilyByChild($input['user_id']);
       $point = $this->pointLogRepository->getPointData($family->parent_user);
