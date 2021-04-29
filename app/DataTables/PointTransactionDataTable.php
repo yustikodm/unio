@@ -23,24 +23,32 @@ class PointTransactionDataTable extends DataTable
         $dataTable = new EloquentDataTable($query);
 
         return $dataTable->addColumn('action', 'point_transactions.datatables_actions')
-          ->editColumn('entity_type', function ($query) {
-              if ($query->entity_type == 'placetolive') {
-                return '<span class="label label-info"><strong>Place to Live</strong></span>';
-              }
+            ->editColumn('entity_type', function ($query) {
+                if ($query->entity_type == 'placetolive') {
+                    return '<span class="label label-info"><strong>Place to Live</strong></span>';
+                }
+                
+                if ($query->entity_type == 'point-topup') {
+                    return '<span class="label label-danger"><strong>Point TOP UP</strong></span>';
+                }
 
-              return '<span class="label label-success"><strong>Vendor Service</strong></span>';
-          })
-          ->editColumn('name', function($query){
-              if ($query->entity_type == 'placetolive') {
-                  return '<a href="'.route('place-to-live.show', $query->entity_id).'">'.PlaceToLive::find($query->entity_id)->name.'</a>';
-              }
-              
-              return '<a href="'.route('vendor-services.show', $query->entity_id).'">'.VendorService::find($query->entity_id)->name.'</a>';
-          })
-          ->editColumn('created_at', function ($query) {
-              return Carbon::parse($query->created_at)->format('d/m/Y H:i');
-          })
-          ->rawColumns(['action', 'entity_type', 'name', 'created_at']);
+                return '<span class="label label-success"><strong>Vendor Service</strong></span>';
+            })
+            ->editColumn('name', function ($query) {
+                if ($query->entity_type == 'placetolive') {
+                    return '<a href="' . route('place-to-live.show', $query->entity_id) . '">' . PlaceToLive::find($query->entity_id)->name . '</a>';
+                }
+
+                if ($query->entity_type == 'point-topup') {
+                    return '<a href="' . route('point-topup.show', $query->entity_id) . '">Point TOP UP</a>';
+                }
+
+                return '<a href="' . route('vendor-services.show', $query->entity_id) . '">' . VendorService::find($query->entity_id)->name . '</a>';
+            })
+            ->editColumn('created_at', function ($query) {
+                return Carbon::parse($query->created_at)->format('d/m/Y H:i');
+            })
+            ->rawColumns(['action', 'entity_type', 'name', 'created_at']);
     }
 
     /**

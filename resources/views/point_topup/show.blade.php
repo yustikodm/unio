@@ -10,7 +10,7 @@
   <div class="box box-primary">
     <div class="box-body">
       <div class="row" style="padding-left: 20px">
-        @include('point_topups.show_fields')
+        @include('point_topup.show_fields')
         <a href="{{ route('point-topup.index') }}" class="btn btn-default">Back</a>
       </div>
     </div>

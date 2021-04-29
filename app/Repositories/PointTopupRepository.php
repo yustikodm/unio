@@ -37,4 +37,23 @@ class PointTopupRepository extends BaseRepository
     {
         return PointTopup::class;
     }
+
+    public function save($input, $id = null)
+    {
+        if (request()->hasFile('payment_proof')) {
+            $field = ['payment_proof'];
+            $path = 'points/';
+
+            // Helper Upload App\helper.php
+            $ouput = upload($input['user_id'], $field, $path);
+
+            $input = array_merge($input, $ouput);
+        }
+
+        if (!empty($id)) {
+            return $this->update($input, $id);
+        } else {
+            return $this->create($input);
+        }
+    }
 }

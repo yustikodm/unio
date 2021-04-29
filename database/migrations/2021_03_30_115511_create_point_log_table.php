@@ -16,8 +16,8 @@ class CreatePointLogTable extends Migration
     Schema::create('point_log', function (Blueprint $table) {
       $table->bigIncrements('id');
       $table->bigInteger('parent_id')->unsigned();
-      $table->bigInteger('transaction_id')->unsigned();
-      $table->char('transaction_type');
+      $table->bigInteger('transaction_id')->unsigned()->nullable();
+      $table->char('transaction_type')->nullable();
       $table->decimal('point_before', 10, 2);
       $table->decimal('point_after', 10, 2);
       $table->timestamps();

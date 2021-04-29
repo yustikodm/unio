@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -58,5 +59,24 @@ class PointLog extends Model
   public function transaction()
   {
     return $this->belongsTo(PointTransaction::class);
+  }
+
+  public function parent()
+  {
+    return $this->belongsTo(User::class);
+  }
+
+  public static function getPointData($parentId)
+  {
+    $point = static::where('parent_id', $parentId)->first();
+
+    if (empty($point)) {
+      return (object) [
+        'point_before' => 0,
+        'parent_id' => $parentId
+      ];
+    }
+
+    return $point;
   }
 }

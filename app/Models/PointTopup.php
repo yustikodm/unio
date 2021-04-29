@@ -24,7 +24,8 @@ class PointTopup extends Model
     'user_id',
     'country_id',
     'amount',
-    'point_conversion'
+    'point_conversion',
+    'payment_proof'
   ];
 
   /**
@@ -37,7 +38,8 @@ class PointTopup extends Model
     'user_id' => 'integer',
     'country_id' => 'integer',
     'amount' => 'decimal:2',
-    'point_conversion' => 'decimal:2'
+    'point_conversion' => 'decimal:2',
+    'payment_proof' => 'string'
   ];
 
   /**
@@ -48,8 +50,9 @@ class PointTopup extends Model
   public static $rules = [
     'user_id' => 'required|integer',
     'country_id' => 'required|integer',
-    'amount' => 'required|decimal',
-    'point_conversion' => 'required|decimal'
+    'amount' => 'required',
+    'point_conversion' => 'required',
+    'payment_proof' => 'nullable'
   ];
 
   public function user()

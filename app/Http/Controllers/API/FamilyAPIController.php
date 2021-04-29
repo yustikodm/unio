@@ -9,7 +9,6 @@ use App\Repositories\FamilyRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use App\Http\Resources\FamilyResource;
-use Response;
 
 /**
  * Class FamilyController
@@ -33,15 +32,11 @@ class FamilyAPIController extends AppBaseController
      * @param Request $request
      * @return Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $families = $this->familyRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
-        );
+        $families = $this->familyRepository->paginate(15);
 
-        return $this->sendResponse(FamilyResource::collection($families), 'Families retrieved successfully');
+        return $this->sendResponse($families, 'Families retrieved successfully');
     }
 
     /**
@@ -146,4 +141,9 @@ class FamilyAPIController extends AppBaseController
 
         return $this->sendSuccess('Family deleted successfully');
     }
+
+    // public function parent()
+    // {
+    //     return 
+    // }
 }

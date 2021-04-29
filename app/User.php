@@ -5,6 +5,7 @@ namespace App;
 use App\Models\Article;
 use App\Models\Biodata;
 use App\Models\Family;
+use App\Models\PointLog;
 use App\Models\PointTopup;
 use App\Models\QuestionnaireAnswer;
 use App\Models\SocialAccount;
@@ -168,6 +169,11 @@ class User extends Authenticatable
   public function socialAccount()
   {
     return $this->hasMany(SocialAccount::class);
+  }
+
+  public function point_log()
+  {
+    return $this->hasMany(PointLog::class);
   }
 
   /**

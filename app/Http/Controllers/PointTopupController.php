@@ -9,15 +9,28 @@ use App\Http\Requests\UpdatePointTopupRequest;
 use App\Repositories\PointTopupRepository;
 use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
+use App\Models\Family;
+use App\Repositories\PointLogRepository;
+use App\Repositories\PointTransactionRepository;
 
 class PointTopupController extends AppBaseController
 {
   /** @var  PointTopupRepository */
   private $pointTopupRepository;
 
-  public function __construct(PointTopupRepository $pointTopupRepo)
+  /** @var  PointTransactionRepository */
+  private $pointTransactionRepository;
+
+  /** @var  PointLogRepository */
+  private $pointLogRepository;
+
+  public function __construct(PointTopupRepository $pointTopupRepo, PointTransactionRepository $pointTransactionRepo, PointLogRepository $pointLogRepo)
   {
     $this->pointTopupRepository = $pointTopupRepo;
+
+    $this->pointTransactionRepository = $pointTransactionRepo;
+
+    $this->pointLogRepository = $pointLogRepo;
   }
 
   /**
@@ -51,13 +64,37 @@ class PointTopupController extends AppBaseController
   public function store(CreatePointTopupRequest $request)
   {
     $input = $request->only([
-        'user_id',
-        'country_id',
-        'amount',
-        'point_conversion'
+      'user_id',
+      'country_id',
+      'amount',
+      'point_conversion',
+      'payment_proof'
     ]);
 
-    $pointTopup = $this->pointTopupRepository->create($input);
+    try {
+      $pointTopup = $this->pointTopupRepository->save($input);
+
+      $transaction = $this->pointTransactionRepository->create([
+        'user_id' => $input['user_id'],
+        'entity_id' => $pointTopup->id,
+        'entity_type' => 'point-topup',
+        'amount' => $input['amount'],
+        'point_conversion' => $input['point_conversion'],
+      ]);
+
+      $family = Family::getFamilyByChild($input['user_id']);
+      $point = $this->pointLogRepository->getPointData($family->parent_user);
+
+      $this->pointLogRepository->create([
+        'parent_id' => $family->parent_user,
+        'transaction_id' => $transaction->id,
+        'transaction_type' => 'point-topup',
+        'point_before' => $point->point_before,
+        'point_after' => $point->point_before + $input['point_conversion']
+      ]);
+    } catch (\Exception $error) {
+      return 'Error! ' . $error->getMessage();
+    }
 
     Flash::success('Point Topup saved successfully.');
 
@@ -123,13 +160,14 @@ class PointTopupController extends AppBaseController
     }
 
     $input = $request->only([
-        'user_id',
-        'country_id',
-        'amount',
-        'point_conversion'
+      'user_id',
+      'country_id',
+      'amount',
+      'point_conversion',
+      'payment_proof'
     ]);
 
-    $pointTopup = $this->pointTopupRepository->update($input, $id);
+    $this->pointTopupRepository->save($input, $id);
 
     Flash::success('Point Topup updated successfully.');
 

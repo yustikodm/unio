@@ -37,4 +37,9 @@ class PointLogRepository extends BaseRepository
     {
         return PointLog::class;
     }
+
+    public function getPointData($parentId)
+    {
+        return $this->model->getPointData($parentId);
+    }
 }

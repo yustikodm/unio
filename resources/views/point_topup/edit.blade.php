@@ -11,9 +11,9 @@
   <div class="box box-primary">
     <div class="box-body">
       <div class="row">
-        {!! Form::model($pointTopup, ['route' => ['point-topup.update', $pointTopup->id], 'method' => 'patch']) !!}
+        {!! Form::model($pointTopup, ['route' => ['point-topup.update', $pointTopup->id], 'method' => 'patch', 'enctype' => 'multipart/form-data', 'class' => 'form-horizontal']) !!}
 
-        @include('point_topups.fields')
+        @include('point_topup.fields')
 
         {!! Form::close() !!}
       </div>

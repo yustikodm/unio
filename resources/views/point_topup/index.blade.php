@@ -12,7 +12,7 @@
         <div class="clearfix"></div>
         <div class="box box-primary">
             <div class="box-body">
-                    @include('point_topup.table')
+                @include('point_topup.table')
             </div>
         </div>
         <div class="text-center">

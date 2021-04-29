@@ -19,6 +19,7 @@ class CreatePointTopupTable extends Migration
       $table->bigInteger('country_id')->unsigned();
       $table->decimal('amount', 10, 2);
       $table->decimal('point_conversion', 10, 2);
+      $table->string('payment_proof', 255)->nullable();
       $table->timestamps();
       $table->softDeletes();
       $table->foreign('user_id')->references('id')->on('users');

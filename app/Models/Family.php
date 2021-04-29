@@ -63,4 +63,9 @@ class Family extends Model
   {
     return $this->belongsTo(User::class, 'child_user');
   }
+
+  public static function getFamilyByChild($child_user)
+  {
+    return static::where('child_user', $child_user)->first();
+  }
 }

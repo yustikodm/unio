@@ -193,6 +193,18 @@ class ViewServiceProvider extends ServiceProvider
       $relationItems = ['parent' => 'Parent', 'child' => 'Child'];
       $view->with('relationItems', $relationItems);
     });
+    
+    // Point Top Up - List User
+    View::composer(['point_topup.fields'], function ($view) {
+      $userItems = User::pluck('username', 'id')->toArray();
+      $view->with('userItems', $userItems);
+    });
+
+    // Point Top Up - List Countries
+    View::composer(['point_topup.fields'], function ($view) {
+      $countryItems = Country::pluck('name', 'id')->toArray();
+      $view->with('countryItems', $countryItems);
+    });
 
     // Biodata - User List
     View::composer(['biodata.fields'], function ($view) {

@@ -20,7 +20,7 @@ Route::post('login', 'AuthAPIController@login');
 Route::get('search', 'GlobalSearchAPIController@search');
 
 Route::group(['middleware' => ['auth:api']], function () {
-  
+
   Route::get('logout', 'AuthAPIController@logout');
 
   // Route::get('/user', function (Request $request) {
@@ -42,11 +42,11 @@ Route::group(['middleware' => ['auth:api']], function () {
   Route::get('users/profile', 'UserAPIConctroller@profile');
 
   Route::put('users/change-password', 'UserAPIConctroller@changePassword');
-  
+
   Route::apiResource('users', 'UserAPIConctroller');
 
   Route::apiResource('families', 'FamilyAPIController');
-  
+
   Route::resource('biodata', 'BiodataAPIController')->except(['index', 'create', 'edit']);
 
   Route::resource('wishlists', 'WishlistAPIController');
@@ -74,11 +74,15 @@ Route::resource('university-fees', 'UniversityFeeAPIController');
 
 Route::resource('university-majors', 'UniversityMajorAPIController');
 
+Route::resource('master-majors', 'UniversityMajorAPIController');
+
 Route::resource('university-requirements', 'UniversityRequirementAPIController');
 
 Route::resource('university-scholarships', 'UniversityScholarshipAPIController');
 
 Route::resource('university-faculties', 'UniversityFacultiesAPIController');
+
+Route::resource('university-facilities', 'UniversityFacultiesAPIController');
 
 Route::resource('vendors', 'VendorAPIController');
 

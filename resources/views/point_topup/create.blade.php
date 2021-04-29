@@ -2,22 +2,17 @@
 
 @section('content')
 <section class="content-header">
-  <h1>
-    Point Topup
-  </h1>
+    <h1>Point Topup</h1>
 </section>
+
 <div class="content">
-  @include('adminlte-templates::common.errors')
-  <div class="box box-primary">
-    <div class="box-body">
-      <div class="row">
-        {!! Form::open(['route' => 'point-topup.store']) !!}
-
-        @include('point_topups.fields')
-
-        {!! Form::close() !!}
-      </div>
+    @include('adminlte-templates::common.errors')
+    <div class="box box-primary">
+        <div class="box-body">
+            {!! Form::open(['route' => 'point-topup.store', 'enctype' => 'multipart/form-data', 'class' => 'form-horizontal']) !!}
+            @include('point_topup.fields')
+            {!! Form::close() !!}
+        </div>
     </div>
-  </div>
 </div>
 @endsection

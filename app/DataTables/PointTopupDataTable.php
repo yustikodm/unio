@@ -26,10 +26,13 @@ class PointTopupDataTable extends DataTable
             ->editColumn('country.name', function ($query) {
                 return '<a href="' . route('countries.show', $query->country->id) . '">' . $query->country->name . '</a>';
             })
+            ->editColumn('user.username', function ($query) {
+                return '<a href="' . route('users.show', $query->user->id) . '">' . $query->user->username . '</a>';
+            })
             ->editColumn('created_at', function ($query) {
                 return Carbon::parse($query->created_at)->format('d/m/Y H:i');
             })
-            ->rawColumns(['action', 'country.name', 'created_at']);
+            ->rawColumns(['action', 'country.name', 'created_at', 'user.username']);
     }
 
     /**
@@ -76,11 +79,11 @@ class PointTopupDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('user.username')->title('Username')->width('15%'),
-            Column::make('country.name')->title('Country')->width('20%'),
+            Column::make('created_at')->title('Date')->width('15%'),
             Column::make('amount')->title('Amount')->width('25%'),
             Column::make('point_conversion')->title('Conversion')->width('15%'),
-            Column::make('created_at')->title('Date')->width('15%'),
+            Column::make('country.name')->title('Country')->width('20%'),
+            Column::make('user.username')->title('Username')->width('15%'),
         ];
     }
 

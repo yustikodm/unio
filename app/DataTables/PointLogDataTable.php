@@ -22,16 +22,16 @@ class PointLogDataTable extends DataTable
         $dataTable = new EloquentDataTable($query);
 
         return $dataTable->editColumn('parent_id', function ($query) {
-                      $user = User::find($query->parent_id);
-                      return '<a href="'.$user->id.'">'.$user->username.'</a>';
+                    //   $user = User::find($query->parent_id);
+                      return '<a href="'.route('users.show', $query->parent->id).'">'.$query->parent->username.'</a>';
                   })
                   ->editColumn('created_at', function ($query) {
                       return Carbon::parse($query->created_at)->format('d/m/Y H:i');
                   })
-                  ->editColumn('transaction_name', function ($query) {
-                      return '<a href="#">Modul Name / '.$query->id.'</a>';
+                  ->editColumn('transaction_type', function ($query) {
+                      return '<a href="'.route('point-transactions.show', $query->transaction->id).'">'.strtoupper($query->transaction_type).'</a>';
                   })
-                  ->rawColumns(['parent_id', 'created_at', 'transaction_name']);
+                  ->rawColumns(['parent_id', 'created_at', 'transaction_type']);
     }
 
     /**
@@ -61,7 +61,6 @@ class PointLogDataTable extends DataTable
                 'stateSave' => true,
                 'order'     => [[0, 'desc']],
                 'buttons'   => [
-                    ['extend' => 'create', 'className' => 'btn btn-default btn-sm no-corner',],
                     ['extend' => 'export', 'className' => 'btn btn-default btn-sm no-corner',],
                     ['extend' => 'print', 'className' => 'btn btn-default btn-sm no-corner',],
                     ['extend' => 'reset', 'className' => 'btn btn-default btn-sm no-corner',],
@@ -79,8 +78,7 @@ class PointLogDataTable extends DataTable
     {
         return [
             Column::make('created_at')->title('Trans. Date')->width('10%'),
-            Column::make('transaction_type')->title('Trans. Type')->width('15%'),
-            Column::make('transaction_name')->title('Trans. Name')->width('25%'),
+            Column::make('transaction_type')->title('Transaction')->width('25%'),
             Column::make('point_before')->title('Point Before')->width('10%'),
             Column::make('point_after')->title('Point After')->width('10%'),
             Column::make('parent_id')->title('Parent User')->width('10%'),
