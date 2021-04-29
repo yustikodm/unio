@@ -68,7 +68,9 @@ class UserRepository extends BaseRepository
         $input['image_path'] = ImageTrait::makeImage($input['image_path'], User::IMAGE_PATH);
       }
 
-      $input['api_token'] = Str::random(100);
+      if (empty($input['username'])) {
+        $input['username'] = explode('@', $input['email'])[0];
+      }
 
       $user = User::create($input);
 
@@ -76,7 +78,7 @@ class UserRepository extends BaseRepository
       $input['roles'] = isset($input['roles']) ? $input['roles'] : ['student'];
 
       // Spatie [Sync Role User]
-      $user->assignRole($input['roles']);      
+      $user->assignRole($input['roles']);
     } catch (Exception $e) {
       DB::rollBack();
       

@@ -54,13 +54,16 @@ class FamilyAPIController extends AppBaseController
      */
     public function store(CreateFamilyAPIRequest $request)
     {
-        dd($request);
         $input = $request->only([
             'parent_user',
             'child_user',
             'family_as',
             'family_verified_at',
         ]);
+
+        if (!in_array($input['family_as'], ['parent', 'child'])) {
+            $input['family_as'] = 'child';
+        }
 
         $family = $this->familyRepository->create($input);
 
@@ -98,6 +101,12 @@ class FamilyAPIController extends AppBaseController
      */
     public function update($id, UpdateFamilyAPIRequest $request)
     {
+        $family = $this->familyRepository->find($id);
+
+        if (empty($family)) {
+            return $this->sendError('Family not found');
+        }
+
         $input = $request->only([
             'parent_user',
             'child_user',
@@ -105,11 +114,8 @@ class FamilyAPIController extends AppBaseController
             'family_verified_at',
         ]);
 
-        /** @var Family $family */
-        $family = $this->familyRepository->find($id);
-
-        if (empty($family)) {
-            return $this->sendError('Family not found');
+        if (!in_array($input['family_as'], ['parent', 'child'])) {
+            $input['family_as'] = 'child';
         }
 
         $family = $this->familyRepository->update($input, $id);

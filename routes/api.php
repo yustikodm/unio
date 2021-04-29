@@ -45,7 +45,7 @@ Route::group(['middleware' => ['auth:api']], function () {
   
   Route::apiResource('users', 'UserAPIConctroller');
 
-  Route::resource('families', 'FamilyAPIController');
+  Route::apiResource('families', 'FamilyAPIController');
   
   Route::resource('biodata', 'BiodataAPIController')->except(['index', 'create', 'edit']);
 

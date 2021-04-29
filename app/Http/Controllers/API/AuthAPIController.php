@@ -33,6 +33,8 @@ class AuthAPIController extends AppBaseController
       'phone'
     ]);
 
+    $input['api_token'] = Str::random(100);
+
     $user = $this->userRepository->store($input);
 
     return $this->sendResponse(new UserResource($user), 'Account registered successfully');

@@ -49,7 +49,6 @@ class Family extends Model
     'parent_user' => 'required|integer',
     'child_user' => 'required|integer',
     'family_as' => 'required|string',
-    'family_verified_at' => 'nullable|datetime',
     'created_at' => 'nullable',
     'updated_at' => 'nullable',
     'deleted_at' => 'nullable',
