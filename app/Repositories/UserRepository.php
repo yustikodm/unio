@@ -71,11 +71,13 @@ class UserRepository extends BaseRepository
       if (empty($input['username'])) {
         $input['username'] = explode('@', $input['email'])[0];
       }
-
-      $user = User::create($input);
+dd($input['roles']);
+      // $user = User::create($input);
 
       // if empty roles
-      $input['roles'] = isset($input['roles']) ? $input['roles'] : ['student'];
+      if (empty($input['roles'])) {
+        $input['roles'] = ['student'];
+      }
 
       // Spatie [Sync Role User]
       $user->assignRole($input['roles']);

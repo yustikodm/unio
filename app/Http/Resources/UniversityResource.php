@@ -23,6 +23,8 @@ class UniversityResource extends JsonResource
       'logo_src' => $this->logo_src,
       'header_src' => $this->header_src,
       'type' => $this->type,
+      'website' => $this->website,
+      'email' => $this->email,
       'accreditation' => $this->accreditation,
       'description' => $this->description,
       'created_at' => Carbon::parse($this->created_at)->format('d/m/Y H:i:s'),
