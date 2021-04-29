@@ -8,7 +8,7 @@
     @include('adminlte-templates::common.errors')
     <div class="box box-primary">
         <div class="box-body">
-            {!! Form::model($university-faculties, ['route' => ['university-faculties.update', $university-faculties->id], 'method' => 'patch', 'class' => 'form-horizontal']) !!}
+            {!! Form::model($universityFaculties, ['route' => ['university-faculties.update', $universityFaculties->id], 'method' => 'patch', 'class' => 'form-horizontal']) !!}
             @include('university_faculties.fields')
             {!! Form::close() !!}
         </div>

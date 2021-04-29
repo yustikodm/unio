@@ -10,7 +10,7 @@
 <div class="form-group">
     {!! Form::label('faculty_id', 'Faculty:', ['class' => 'control-label col-sm-2']) !!}
     <div class="col-sm-6">
-        {!! Form::number('faculty_id', null, ['class' => 'form-control']) !!}
+        {!! Form::select('faculty_id', $facultyItems, null, ['class' => 'form-control']) !!}
     </div>
 </div>
 
@@ -18,7 +18,7 @@
 <div class="form-group">
     {!! Form::label('major_id', 'Major:', ['class' => 'control-label col-sm-2']) !!}
     <div class="col-sm-6">
-        {!! Form::number('major_id', null, ['class' => 'form-control']) !!}
+        {!! Form::select('major_id', $majorItems, null, ['class' => 'form-control']) !!}
     </div>
 </div>
 

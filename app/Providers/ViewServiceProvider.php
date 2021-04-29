@@ -125,6 +125,14 @@ class ViewServiceProvider extends ServiceProvider
       $universityItems = University::pluck('name', 'id')->toArray();
       $view->with('universityItems', $universityItems);
     });
+    View::composer(['university_fees.fields'], function ($view) {
+      $facultyItems = UniversityFaculties::pluck('name', 'id')->toArray();
+      $view->with('facultyItems', $facultyItems);
+    });
+    View::composer(['university_fees.fields'], function ($view) {
+      $majorItems = UniversityMajor::pluck('name', 'id')->toArray();
+      $view->with('majorItems', $majorItems);
+    });
 
     // University - List District, State, Country
     View::composer(['universities.fields'], function ($view) {
