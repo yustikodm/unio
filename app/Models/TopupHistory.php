@@ -51,7 +51,7 @@ class TopupHistory extends Model
     'user_id' => 'required|integer',
     'country_id' => 'required|integer',
     'package_id' => 'required|integer',
-    'code' => 'required',
+    'code' => 'required|unique:topup_history,code',
     'amount' => 'required',
   ];
 

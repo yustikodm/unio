@@ -25,7 +25,6 @@ class UpdateUniversityRequest extends FormRequest
      */
     public function rules()
     {
-        // $id = $this->route('universities')->id;
         $rules = University::$rules;
         $rules['code'] = 'unique:universities,code,'.$this->university;
         

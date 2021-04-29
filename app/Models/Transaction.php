@@ -47,7 +47,7 @@ class Transaction extends Model
    */
   public static $rules = [
     'user_id' => 'required',
-    'code' => 'nullable',
+    'code' => 'required|unique:transactions,code',
     'grandtotal' => 'integer',
     'status' => 'required'
   ];

@@ -54,7 +54,14 @@ class CartAPIController extends AppBaseController
      */
     public function store(CreateCartAPIRequest $request)
     {
-        $input = $request->all();
+        $input = $request->only([
+            'user_id',
+            'service_id',
+            'name',
+            'qty',
+            'price',
+            'total_price'
+        ]);
 
         $cart = $this->cartRepository->create($input);
 
@@ -92,7 +99,14 @@ class CartAPIController extends AppBaseController
      */
     public function update($id, UpdateCartAPIRequest $request)
     {
-        $input = $request->all();
+        $input = $request->only([
+            'user_id',
+            'service_id',
+            'name',
+            'qty',
+            'price',
+            'total_price'
+        ]);
 
         /** @var Cart $cart */
         $cart = $this->cartRepository->find($id);

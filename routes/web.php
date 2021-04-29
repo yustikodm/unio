@@ -102,3 +102,5 @@ Route::group(['middleware' => ['auth']], function () {
 });
 
 Route::get('coba', 'TestController@index');
+
+Route::resource('topupPackages', 'TopupPackageController');

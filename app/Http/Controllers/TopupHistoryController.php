@@ -9,7 +9,6 @@ use App\Http\Requests\UpdateTopupHistoryRequest;
 use App\Repositories\TopupHistoryRepository;
 use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
-use App\Models\Family;
 use App\Repositories\PointLogRepository;
 use App\Repositories\TransactionRepository;
 

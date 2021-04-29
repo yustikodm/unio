@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests\API;
 
-use App\Models\University;
+use App\Models\TopupPackage;
 use InfyOm\Generator\Request\APIRequest;
 
-class UpdateUniversityAPIRequest extends APIRequest
+class CreateTopupPackageAPIRequest extends APIRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +24,6 @@ class UpdateUniversityAPIRequest extends APIRequest
      */
     public function rules()
     {
-        $rules = University::$rules;
-        $rules['code'] = 'unique:universities,code,'.$this->university;
-        
-        return $rules;
+        return TopupPackage::$rules;
     }
 }

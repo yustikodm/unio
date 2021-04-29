@@ -26,7 +26,8 @@ class UpdateTopupHistoryRequest extends FormRequest
     public function rules()
     {
         $rules = TopupHistory::$rules;
-        
+        $rules['code'] = 'unique:topup_history,code,'.$this->topuphistory;
+
         return $rules;
     }
 }

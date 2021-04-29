@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Requests\API;
+namespace App\Http\Requests;
 
-use App\Models\University;
-use InfyOm\Generator\Request\APIRequest;
+use Illuminate\Foundation\Http\FormRequest;
+use App\Models\TopupPackage;
 
-class UpdateUniversityAPIRequest extends APIRequest
+class UpdateTopupPackageRequest extends FormRequest
 {
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -24,8 +25,8 @@ class UpdateUniversityAPIRequest extends APIRequest
      */
     public function rules()
     {
-        $rules = University::$rules;
-        $rules['code'] = 'unique:universities,code,'.$this->university;
+        $rules = TopupPackage::$rules;
+        $rules['code'] = 'unique:topup_packages,code,'.$this->topuppackage;
         
         return $rules;
     }

@@ -301,3 +301,8 @@ f{{-- Dashboard --}}
         @endcan
     </ul>
 </li>
+@can('topupPackages.index')
+<li class="{{ Request::is('topupPackages*') ? 'active' : '' }}">
+    <a href="{{ route('topupPackages.index') }}"><i class="fa fa-edit"></i><span>Topup Packages</span></a>
+</li>
+@endcan

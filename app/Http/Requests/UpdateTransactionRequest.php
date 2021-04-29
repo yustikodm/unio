@@ -26,6 +26,7 @@ class UpdateTransactionRequest extends FormRequest
     public function rules()
     {
         $rules = Transaction::$rules;
+        $rules['code'] = 'unique:transactions,code,'.$this->transaction;
         
         return $rules;
     }

@@ -7,9 +7,8 @@ use App\Http\Requests;
 use App\Http\Requests\CreateCartRequest;
 use App\Http\Requests\UpdateCartRequest;
 use App\Repositories\CartRepository;
-use Flash;
+use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
-use Response;
 
 class CartController extends AppBaseController
 {
@@ -51,7 +50,14 @@ class CartController extends AppBaseController
      */
     public function store(CreateCartRequest $request)
     {
-        $input = $request->all();
+        $input = $request->only([
+            'user_id',
+            'service_id',
+            'name',
+            'qty',
+            'price',
+            'total_price'
+        ]);
 
         $cart = $this->cartRepository->create($input);
 
@@ -118,7 +124,16 @@ class CartController extends AppBaseController
             return redirect(route('carts.index'));
         }
 
-        $cart = $this->cartRepository->update($request->all(), $id);
+        $input = $request->only([
+            'user_id',
+            'service_id',
+            'name',
+            'qty',
+            'price',
+            'total_price'
+        ]);
+
+        $cart = $this->cartRepository->update($input, $id);
 
         Flash::success('Cart updated successfully.');
 

@@ -26,10 +26,7 @@ class Cart extends Model
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
-
     protected $dates = ['deleted_at'];
-
-
 
     public $fillable = [
         'user_id',
@@ -63,7 +60,7 @@ class Cart extends Model
     public static $rules = [
         'user_id' => 'required|integer',
         'service_id' => 'required|integer',
-        'name' => 'required|string|max:255',
+        'name' => 'required|string',
         'qty' => 'required|integer',
         'price' => 'required',
         'total_price' => 'required',

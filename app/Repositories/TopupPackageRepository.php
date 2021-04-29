@@ -2,22 +2,27 @@
 
 namespace App\Repositories;
 
-use App\Models\TopupHistory;
+use App\Models\TopupPackage;
 use App\Repositories\BaseRepository;
 
 /**
- * Class TopupHistoryRepository
+ * Class TopupPackageRepository
  * @package App\Repositories
- * @version April 29, 2021, 9:23 pm WIB
+ * @version April 29, 2021, 9:28 pm WIB
 */
 
-class TopupHistoryRepository extends BaseRepository
+class TopupPackageRepository extends BaseRepository
 {
     /**
      * @var array
      */
     protected $fieldSearchable = [
-        
+        'code',
+        'name',
+        'description',
+        'amount',
+        'due_date',
+        'status'
     ];
 
     /**
@@ -35,6 +40,6 @@ class TopupHistoryRepository extends BaseRepository
      **/
     public function model()
     {
-        return TopupHistory::class;
+        return TopupPackage::class;
     }
 }
