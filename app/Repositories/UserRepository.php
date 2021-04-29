@@ -71,9 +71,17 @@ class UserRepository extends BaseRepository
       if (empty($input['username'])) {
         $input['username'] = explode('@', $input['email'])[0];
       }
-dd($input['roles']);
-      // $user = User::create($input);
 
+      $user = User::create($input);
+
+      // Biodata
+      if (!empty($input['name'])) {
+        Biodata::create([
+          'user_id' => $user->id,
+          'fullname' => $input['name']
+        ]);
+      }
+      
       // if empty roles
       if (empty($input['roles'])) {
         $input['roles'] = ['student'];

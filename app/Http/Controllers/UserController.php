@@ -76,14 +76,7 @@ class UserController extends AppBaseController
         'roles'
       ]);
 
-      $user = $this->userRepository->store($input);
-
-      if (!empty($input['name'])) {
-        $this->biodataRepository->create([
-          'user_id' => $user->id,
-          'fullname' => $input['name']
-        ]);
-      }
+      $this->userRepository->store($input);
     } catch (Exception $e) {
       return Redirect::back()->withInput()->withErrors($e->getMessage());
     }

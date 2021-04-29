@@ -37,6 +37,8 @@ class AuthAPIController extends AppBaseController
 
     $user = $this->userRepository->store($input);
 
+    Auth::login($user);
+
     return $this->sendResponse(new UserResource($user), 'Account registered successfully');
   }
 
