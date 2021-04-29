@@ -4,15 +4,14 @@
 <section class="content-header">
     <h1>Family</h1>
 </section>
+
 <div class="content">
     @include('adminlte-templates::common.errors')
     <div class="box box-primary">
         <div class="box-body">
-            <div class="row">
-                {!! Form::open(['route' => 'families.store', 'class' => 'form-horizontal']) !!}
-                @include('families.fields')
-                {!! Form::close() !!}
-            </div>
+            {!! Form::open(['route' => 'families.store', 'class' => 'form-horizontal']) !!}
+            @include('families.fields')
+            {!! Form::close() !!}
         </div>
     </div>
 </div>

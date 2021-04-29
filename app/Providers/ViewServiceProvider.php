@@ -189,6 +189,10 @@ class ViewServiceProvider extends ServiceProvider
       $userItems = User::pluck('username', 'id')->toArray();
       $view->with('userItems', $userItems);
     });
+    View::composer(['families.fields'], function ($view) {
+      $relationItems = ['parent' => 'Parent', 'child' => 'Child'];
+      $view->with('relationItems', $relationItems);
+    });
 
     // Biodata - User List
     View::composer(['biodata.fields'], function ($view) {

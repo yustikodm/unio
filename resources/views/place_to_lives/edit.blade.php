@@ -2,10 +2,9 @@
 
 @section('content')
 <section class="content-header">
-    <h1>
-        Place To Live
-    </h1>
+    <h1>Place To Live</h1>
 </section>
+
 <div class="content">
     @include('adminlte-templates::common.errors')
     <div class="box box-primary">

@@ -23,12 +23,14 @@
 <!-- Logo Src Field -->
 <div class="form-group">
     {!! Form::label('logo_src', 'Logo Src:') !!}
+    <br>
     <img style="width: 25%" src="{{ asset('storage/universities/'.$university->logo_src) }}">
 </div>
 
 <!-- Header Src Field -->
 <div class="form-group">
     {!! Form::label('header_src', 'Header Src:') !!}
+    <br>
     <img style="width: 25%" src="{{ asset('storage/universities/'.$university->header_src) }}">
 </div>
 

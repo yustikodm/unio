@@ -31,6 +31,7 @@
 <!-- Picture Field -->
 <div class="form-group">
     {!! Form::label('picture', 'Picture:') !!}
+    <br>
     <img style="width: 25%" src="{{ asset('storage/placetolive/'.$placeToLive->picture) }}">
 </div>
 

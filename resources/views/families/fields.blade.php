@@ -16,9 +16,10 @@
 
 <!-- Family as Field -->
 <div class="form-group">
-    {!! Form::label('family_as', 'Family User:', ['class' => 'control-label col-sm-2']) !!}
+    {!! Form::label('family_as', 'Family As:', ['class' => 'control-label col-sm-2']) !!}
     <div class="col-sm-6">
-        {!! Form::text('family_as', null, ['class' => 'form-control','maxlength' => 255]) !!}
+        {{-- {!! Form::text('family_as', null, ['class' => 'form-control','maxlength' => 255]) !!} --}}
+        {!! Form::select('family_as', $relationItems, null, ['class' => 'form-control']) !!}
     </div>
 </div>
 

@@ -16,6 +16,10 @@ class FamilyResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'parent_user' => new UserResource($this->parent),
+            'child_user' => new UserResource($this->child),
+            'family_as' => $this->family_as,
+            'family_verified_at' => $this->family_verified_at,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at
         ];

@@ -54,6 +54,7 @@ class FamilyAPIController extends AppBaseController
      */
     public function store(CreateFamilyAPIRequest $request)
     {
+        dd($request);
         $input = $request->only([
             'parent_user',
             'child_user',

@@ -7,7 +7,7 @@
 <!-- Slug Field -->
 <div class="form-group">
     {!! Form::label('slug', 'Slug:') !!}
-    <p>{{ $article->slug }}</p>
+    <p><a href="{{ url('articles/'.$article->slug) }}">{{ url('articles/'.$article->slug) }}</a></p>
 </div>
 
 <!-- Description Field -->
@@ -25,6 +25,7 @@
 <!-- Picture Field -->
 <div class="form-group">
     {!! Form::label('picture', 'Picture:') !!}
+    <br>
     <img style="width: 25%" src="{{ asset('storage/articles/'.$article->picture) }}">
 </div>
 

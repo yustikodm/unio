@@ -36,8 +36,7 @@
         </div>
     </div>
     <div class="text-right" style="margin-top: -55px; margin-right: 170px;">
-        <img id='edit_preview_photos' class="img-thumbnail" width="100px;"
-             src="{{asset($user->image_path)}}"/>
+        <img id='edit_preview_photos' class="img-thumbnail" width="100px;" src="{{asset($user->image_path)}}"/>
     </div>
 </div>
 <!-- Submit Field -->

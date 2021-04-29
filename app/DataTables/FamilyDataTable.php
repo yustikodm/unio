@@ -26,7 +26,10 @@ class FamilyDataTable extends DataTable
         ->editColumn('parent.username', function ($query) {
           return '<a href="' . route('users.show', $query->parent->id) . '">' . $query->parent->username . '</a>';
         })
-        ->rawColumns(['action', 'child.username', 'parent.username']);
+        ->editColumn('family_as', function ($query) {
+            return ucwords($query->family_as);
+        })
+        ->rawColumns(['action', 'child.username', 'parent.username', 'family_as']);
     }
 
     /**
@@ -76,7 +79,7 @@ class FamilyDataTable extends DataTable
           Column::make('parent.username')->title('Parent User'),
           Column::make('child.username')->title('Child User'),
           Column::make('family_as')->title('As'),
-          Column::make('family_verified_at')->title('Verify At'),            
+        //   Column::make('family_verified_at')->title('Verify At'),            
         ];
     }
 
