@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\API;
 
-use Illuminate\Foundation\Http\FormRequest;
-use App\Models\University;
+use App\Models\PointLog;
+use InfyOm\Generator\Request\APIRequest;
 
-class UpdateUniversityRequest extends FormRequest
+class UpdatePointLogAPIRequest extends APIRequest
 {
-
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -25,9 +24,7 @@ class UpdateUniversityRequest extends FormRequest
      */
     public function rules()
     {
-        // $id = $this->route('universities')->id;
-        $rules = University::$rules;
-        $rules['code'] = 'unique:universities,code,'.$this->university;
+        $rules = PointLog::$rules;
         
         return $rules;
     }

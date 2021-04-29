@@ -4,7 +4,6 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Requests\API\CreateFamilyAPIRequest;
 use App\Http\Requests\API\UpdateFamilyAPIRequest;
-use App\Models\Family;
 use App\Repositories\FamilyRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
@@ -142,8 +141,15 @@ class FamilyAPIController extends AppBaseController
         return $this->sendSuccess('Family deleted successfully');
     }
 
-    // public function parent()
-    // {
-    //     return 
-    // }
+    public function familyList($parentId)
+    {
+        $families = $this->familyRepository->getFamilyList($parentId);
+
+        if (empty($families)) {
+            return $this->sendError('Family not found');
+        }
+
+        return $this->sendResponse(FamilyResource::collection($families), 'Family list retrieved successfully');
+    }
+
 }

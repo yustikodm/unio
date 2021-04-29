@@ -20,6 +20,7 @@ class UniversityRepository extends BaseRepository
         'country_id',
         'state_id',
         'district_id',
+        'code',
         'name',
         'description',
         'logo_src',

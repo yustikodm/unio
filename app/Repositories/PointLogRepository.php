@@ -8,7 +8,7 @@ use App\Repositories\BaseRepository;
 /**
  * Class PointLogRepository
  * @package App\Repositories
- * @version March 31, 2021, 11:04 am WIB
+ * @version April 29, 2021, 8:51 pm WIB
 */
 
 class PointLogRepository extends BaseRepository
@@ -37,9 +37,9 @@ class PointLogRepository extends BaseRepository
     {
         return PointLog::class;
     }
-
-    public function getPointData($parentId)
+    
+    public function getFamilyPoint($parentId)
     {
-        return $this->model->getPointData($parentId);
+        return $this->model->getFamilyPoint($parentId);
     }
 }

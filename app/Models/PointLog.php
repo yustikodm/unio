@@ -21,10 +21,11 @@ class PointLog extends Model
   protected $dates = ['deleted_at'];
 
   public $fillable = [
-    'parent_id',
+    'user_id',
     'transaction_id',
     'transaction_type',
     'point_before',
+    'point_amount',
     'point_after'
   ];
 
@@ -35,12 +36,12 @@ class PointLog extends Model
    */
   protected $casts = [
     'id' => 'integer',
-    'parent_id' => 'integer',
+    'user_id' => 'integer',
     'transaction_id' => 'integer',
     'transaction_type' => 'string',
-    'point_before' => 'decimal:2',
-    'point_after' => 'decimal:2',
-    // 'created_at' => 'datetime'
+    'point_before' => 'integer',
+    'point_amount' => 'integer',
+    'point_after' => 'integer',
   ];
 
   /**
@@ -49,16 +50,22 @@ class PointLog extends Model
    * @var array
    */
   public static $rules = [
-    'parent_id' => 'requried|integer',
-    'transaction_id' => 'requried|integer',
-    'transaction_type' => 'requried|string',
-    'point_before' => 'requried|decimal',
-    'point_after' => 'requried|decimal',
+    'user_id' => 'required|integer',
+    'transaction_id' => 'required|integer',
+    'transaction_type' => 'required|string',
+    'point_before' => 'required',
+    'point_amount' => 'required',
+    'point_after' => 'required',
   ];
 
   public function transaction()
   {
     return $this->belongsTo(Transaction::class);
+  }
+
+  public function user()
+  {
+    return $this->belongsTo(User::class);
   }
 
   public function parent()
@@ -72,11 +79,18 @@ class PointLog extends Model
 
     if (empty($point)) {
       return (object) [
-        'point_before' => 0,
+        'point_after' => 0,
         'parent_id' => $parentId
       ];
     }
 
     return $point;
+  }
+
+  public static function getFamilyPoint($parentId)
+  {
+    return static::where('parent_id', $parentId)
+      ->latest('point_log.created_at')
+      ->first();
   }
 }

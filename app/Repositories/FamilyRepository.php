@@ -37,4 +37,15 @@ class FamilyRepository extends BaseRepository
     {
         return Family::class;
     }
+
+    public function getFamilyList($parentId)
+    {
+        return $this->model->getFamilyList($parentId);
+    }
+
+    public function getByUserId($userId)
+    {
+        return $this->model->getByUserId($userId);
+    }
+    
 }

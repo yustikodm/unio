@@ -45,13 +45,19 @@ Route::group(['middleware' => ['auth:api']], function () {
 
   Route::apiResource('users', 'UserAPIConctroller');
 
+  Route::get('families/list/{id}', 'FamilyAPIController@familyList');
+  
   Route::apiResource('families', 'FamilyAPIController');
-
+  
   Route::resource('biodata', 'BiodataAPIController')->except(['index', 'create', 'edit']);
-
+  
   Route::resource('wishlists', 'WishlistAPIController');
-
+  
   Route::resource('carts', 'CartAPIController');
+  
+  Route::get('point/families/{userId}', 'PointLogAPIController@familyPoint');
+
+  Route::resource('points', 'PointLogAPIController')->only(['index', 'store', 'show']);
 });
 
 Route::resource('articles', 'ArticleAPIController');

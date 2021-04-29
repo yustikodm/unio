@@ -36,6 +36,12 @@
 
 <!-- Name Field -->
 <div class="form-group">
+    {!! Form::label('code', 'Name:') !!}
+    <p>{{ $university->code }}</p>
+</div>
+
+<!-- Name Field -->
+<div class="form-group">
     {!! Form::label('name', 'Name:') !!}
     <p>{{ $university->name }}</p>
 </div>

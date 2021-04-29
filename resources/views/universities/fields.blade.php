@@ -22,11 +22,19 @@
     </div>
 </div>
 
+<!-- Code Field -->
+<div class="form-group">
+    {!! Form::label('code', 'Code:', ['class' => 'control-label col-sm-2']) !!}
+    <div class="col-sm-6">
+        {!! Form::text('code', null, ['class' => 'form-control']) !!}
+    </div>
+</div>
+
 <!-- Name Field -->
 <div class="form-group">
     {!! Form::label('name', 'Name:', ['class' => 'control-label col-sm-2']) !!}
     <div class="col-sm-6">
-        {!! Form::text('name', null, ['class' => 'form-control','maxlength' => 255]) !!}
+        {!! Form::text('name', null, ['class' => 'form-control']) !!}
     </div>
 </div>
 
@@ -42,7 +50,7 @@
 <div class="form-group">
     {!! Form::label('type', 'Type:', ['class' => 'control-label col-sm-2']) !!}
     <div class="col-sm-6">
-        {!! Form::text('type', null, ['class' => 'form-control','maxlength' => 255]) !!}
+        {!! Form::text('type', null, ['class' => 'form-control']) !!}
     </div>
 </div>
 
@@ -50,7 +58,7 @@
 <div class="form-group">
     {!! Form::label('email', 'Email:', ['class' => 'control-label col-sm-2']) !!}
     <div class="col-sm-6">
-        {!! Form::email('email', null, ['class' => 'form-control','maxlength' => 255]) !!}
+        {!! Form::email('email', null, ['class' => 'form-control']) !!}
     </div>
 </div>
 
@@ -58,7 +66,7 @@
 <div class="form-group">
     {!! Form::label('website', 'Website:', ['class' => 'control-label col-sm-2']) !!}
     <div class="col-sm-6">
-        {!! Form::text('website', null, ['class' => 'form-control','maxlength' => 255]) !!}
+        {!! Form::text('website', null, ['class' => 'form-control']) !!}
     </div>
 </div>
 
@@ -66,7 +74,7 @@
 <div class="form-group">
     {!! Form::label('accreditation', 'Accreditation:', ['class' => 'control-label col-sm-2']) !!}
     <div class="col-sm-6">
-        {!! Form::text('accreditation', null, ['class' => 'form-control','maxlength' => 255]) !!}
+        {!! Form::text('accreditation', null, ['class' => 'form-control']) !!}
     </div>
 </div>
 

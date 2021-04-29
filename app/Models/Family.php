@@ -5,6 +5,7 @@ namespace App\Models;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class Family
@@ -68,4 +69,15 @@ class Family extends Model
   {
     return static::where('child_user', $child_user)->first();
   }
+
+  public function scopeGetFamilyList($query, $parentId)
+  {
+    return $query->where('parent_user', $parentId)->get();
+  }
+
+  public static function getByUserId($userId)
+  {
+    return static::where('child_user', $userId)->first();
+  }
+
 }
