@@ -18,9 +18,9 @@ class CreatePointLogTable extends Migration
       $table->bigInteger('parent_id')->unsigned();
       $table->bigInteger('transaction_id')->unsigned()->nullable();
       $table->string('type')->nullable();
-      $table->decimal('point_before', 10, 2);
-      $table->decimal('point_amount', 10, 2);
-      $table->decimal('point_after', 10, 2);
+      $table->integer('point_before');
+      $table->integer('point_amount');
+      $table->integer('point_after');
       $table->timestamps();
       $table->softDeletes();
       $table->foreign('parent_id')->references('parent_user')->on('families');

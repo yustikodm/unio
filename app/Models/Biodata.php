@@ -31,7 +31,7 @@ class Biodata extends Model
     'birth_place',
     'birth_date',
     'identity_number',
-    'religion_id',
+    'religion',
   ];
 
   /**
@@ -51,7 +51,7 @@ class Biodata extends Model
     'birth_place' => 'string',
     'birth_date' => 'date',
     'identity_number' => 'string',
-    'religion_id' => 'integer',
+    'religion' => 'string',
   ];
 
   /**
@@ -69,13 +69,8 @@ class Biodata extends Model
     'birth_place' => 'nullable|string',
     'birth_date' => 'nullable|date',
     'identity_number' => 'nullable|string',
-    'religion_id' => 'nullable|integer',
+    'religion' => 'nullable|string',
   ];
-
-  public function religion()
-  {
-    return $this->belongsTo(Religion::class);
-  }
 
   public function user()
   {

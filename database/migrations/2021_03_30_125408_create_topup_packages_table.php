@@ -4,9 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePointPricingsTable extends Migration
+class CreateTopupPackagesTable extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -14,11 +13,14 @@ class CreatePointPricingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('point_pricings', function (Blueprint $table) {
-            $table->increments('id');
-            $table->bigInteger('entity_id')->unsigned();
-            $table->string('entity_type');
+        Schema::create('topup_packages', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('code')->unique()->nullable();
+            $table->string('name');
+            $table->text('description')->nullable();
             $table->integer('amount');
+            $table->dateTime('due_date')->nullable();
+            $table->char('status')->default(1);
             $table->timestamps();
             $table->softDeletes();
         });
@@ -31,6 +33,6 @@ class CreatePointPricingsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('point_pricings');
+        Schema::dropIfExists('topup_packages');
     }
 }

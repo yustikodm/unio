@@ -25,11 +25,10 @@ class CreateBiodataTable extends Migration
       $table->string('birth_place')->nullable();
       $table->date('birth_date')->nullable();
       $table->string('identity_number', 255)->nullable();
-      $table->bigInteger('religion_id')->unsigned()->nullable();
+      $table->string('religion')->nullable();
       $table->timestamps();
       $table->softDeletes();
       $table->foreign('user_id')->references('id')->on('users');
-      $table->foreign('religion_id')->references('id')->on('religions');
     });
   }
 

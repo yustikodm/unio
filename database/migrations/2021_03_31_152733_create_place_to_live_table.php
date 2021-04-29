@@ -21,7 +21,7 @@ class CreatePlaceToLiveTable extends Migration
       $table->bigInteger('district_id')->unsigned();
       $table->string('name');
       $table->longText('description')->nullable();
-      $table->decimal('price', 10, 2);
+      $table->integer('price');
       $table->longText('address')->nullable();
       $table->string('phone',100)->nullable();
       $table->string('picture')->nullable();

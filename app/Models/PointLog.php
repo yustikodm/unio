@@ -58,7 +58,7 @@ class PointLog extends Model
 
   public function transaction()
   {
-    return $this->belongsTo(PointTransaction::class);
+    return $this->belongsTo(Transaction::class);
   }
 
   public function parent()

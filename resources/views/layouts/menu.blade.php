@@ -6,8 +6,8 @@ f{{-- Dashboard --}}
 @endcan
 
 {{-- Master --}}
-@can(['countries.index', 'states.index', 'districts.index', 'religions.index', 'questionnaires.index', 'questionnaire-answers.index'])
-    <li class="treeview {{ Request::is('countries*') || Request::is('states*') || Request::is('districts*') || Request::is('religions*') || Request::is('questionnaires*') || Request::is('questionnaire-answers*') ? 'active menu-open' : '' }}">
+@can(['countries.index', 'states.index', 'districts.index', 'questionnaires.index', 'questionnaire-answers.index'])
+    <li class="treeview {{ Request::is('countries*') || Request::is('states*') || Request::is('districts*') || Request::is('questionnaires*') || Request::is('questionnaire-answers*') ? 'active menu-open' : '' }}">
         <a href="#">
             <i class="fa fa-database"></i><span>Master</span>
             <span class="pull-right-container">
@@ -34,13 +34,6 @@ f{{-- Dashboard --}}
             @can('districts.index')
                 <li class="{{ Request::is('districts*') ? 'active' : '' }}">
                     <a href="{{ route('districts.index') }}"><i class="fa fa-circle-thin"></i><span>Districts</span></a>
-                </li>
-            @endcan
-
-            {{-- Religions --}}
-            @can('religions.index')
-                <li class="{{ Request::is('religions*') ? 'active' : '' }}">
-                    <a href="{{ route('religions.index') }}"><i class="fa fa-circle-thin"></i><span>Religions</span></a>
                 </li>
             @endcan
 
@@ -211,7 +204,7 @@ f{{-- Dashboard --}}
 @endcan
 
 {{-- Points --}}
-@can(['point-pricings.index', 'point-transactions.index', 'point-topup.index', 'point-logs.index'])
+@can(['point-pricings.index', 'point-logs.index'])
     <li class="treeview {{ Request::is('point*') ? 'active menu-open' : '' }}">
         <a href="#">
             <i class="fa fa-money"></i><span>Points</span>
@@ -221,21 +214,13 @@ f{{-- Dashboard --}}
         </a>
 
         <ul class="treeview-menu">
+        {{-- Point Pricings --}}
         @can('point-pricings.index')
         <li class="{{ Request::is('point-pricings*') ? 'active' : '' }}">
             <a href="{{ route('point-pricings.index') }}"><i class="fa fa-circle-thin"></i><span>Point Pricings</span></a>
         </li>
         @endcan
-        @can('point-transactions.index')
-            <li class="{{ Request::is('point-transactions*') ? 'active' : '' }}">
-                <a href="{{ route('point-transactions.index') }}"><i class="fa fa-circle-thin"></i><span>Point Transactions</span></a>
-            </li>
-        @endcan
-        @can('point-topup.index')
-            <li class="{{ Request::is('point-topup*') ? 'active' : '' }}">
-                <a href="{{ route('point-topup.index') }}"><i class="fa fa-circle-thin"></i><span>Point Topups</span></a>
-            </li>
-        @endcan
+        {{-- Point Logs --}}
         @can('point-logs.index')
             <li class="{{ Request::is('point-logs*') ? 'active' : '' }}">
                 <a href="{{ route('point-logs.index') }}"><i class="fa fa-circle-thin"></i><span>Point Logs</span></a>
@@ -245,7 +230,19 @@ f{{-- Dashboard --}}
     </li>
 @endcan
 
-{{-- Points --}}
+@can('transactions.index')
+<li class="{{ Request::is('transactions*') ? 'active' : '' }}">
+    <a href="{{ route('transactions.index') }}"><i class="fa fa-exchange"></i><span>Transactions</span></a>
+</li>
+@endcan
+
+@can('topup-history.index')
+<li class="{{ Request::is('topup-history*') ? 'active' : '' }}">
+    <a href="{{ route('topup-history.index') }}"><i class="fa fa-upload"></i><span>Topup History</span></a>
+</li>
+@endcan
+
+{{-- Users --}}
 @can(['users.index', 'families.index', 'biodata.index'])
     <li class="treeview {{ Request::is('users*') || Request::is('families*') || Request::is('biodata*') ? 'active menu-open' : '' }}">
         <a href="#">

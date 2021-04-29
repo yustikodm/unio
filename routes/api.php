@@ -62,8 +62,6 @@ Route::resource('states', 'StateAPIController');
 
 Route::resource('districts', 'DistrictAPIController');
 
-Route::resource('religions', 'ReligionAPIController');
-
 Route::resource('questionnaires', 'QuestionnaireAPIController');
 
 Route::resource('questionnaire-answers', 'QuestionnaireAnswerAPIController');

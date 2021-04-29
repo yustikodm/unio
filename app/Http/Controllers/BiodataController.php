@@ -61,7 +61,7 @@ class BiodataController extends AppBaseController
         'birth_place',
         'birth_date',
         'identity_number',
-        'religion_id',
+        'religion',
     ]);
 
     $biodata = $this->biodataRepository->create($input);
@@ -140,7 +140,7 @@ class BiodataController extends AppBaseController
         'birth_place',
         'birth_date',
         'identity_number',
-        'religion_id',
+        'religion',
     ]);
 
     $biodata = $this->biodataRepository->update($input, $id);

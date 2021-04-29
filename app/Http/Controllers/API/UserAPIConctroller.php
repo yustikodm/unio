@@ -97,7 +97,7 @@ class UserAPIConctroller extends AppBaseController
             'birth_place',
             'birth_date',
             'identity_number',
-            'religion_id',
+            'religion',
         ]);
 
         try {

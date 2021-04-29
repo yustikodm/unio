@@ -16,7 +16,6 @@ class DatabaseSeeder extends Seeder
           RolesSeeder::class,
           UsersSeeder::class,
           FamilySeeder::class,
-          ReligionsSeeder::class,
           CountriesSeeder::class,
           StatesSeeder::class,
           DistrictSeeder::class,

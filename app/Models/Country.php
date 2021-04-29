@@ -69,7 +69,7 @@ class Country extends Model
 
   public function topup()
   {
-    return $this->hasMany(PointTopup::class);
+    return $this->hasMany(TopupHistory::class);
   }
   
   public function vendor()

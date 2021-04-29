@@ -48,8 +48,8 @@
 
 <!-- Religion Field -->
 <div class="form-group">
-    {!! Form::label('religion', 'Identity Number:') !!}
-    <p>{{ $biodata->religion->name }}</p>
+    {!! Form::label('religion', 'Religion:') !!}
+    <p>{{ $biodata->religion }}</p>
 </div>
 
 <!-- Created At Field -->

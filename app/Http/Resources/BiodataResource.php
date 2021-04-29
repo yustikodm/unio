@@ -26,7 +26,7 @@ class BiodataResource extends JsonResource
             'birth_place' => $this->birth_place,
             'birth_date' => $this->birth_date,
             'identity_number' => $this->identity_number,
-            'religion' => new ReligionResource($this->religion),
+            'religion' => $this->religion,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at
         ];

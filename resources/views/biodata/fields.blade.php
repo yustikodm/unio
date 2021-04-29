@@ -82,11 +82,11 @@
     </div>
 </div>
 
-<!-- Religion ID Field -->
+<!-- Religion Field -->
 <div class="form-group">
-    {!! Form::label('religion_id', 'Religion ID:', ['class' => 'control-label col-sm-2']) !!}
+    {!! Form::label('religion', 'Religion:', ['class' => 'control-label col-sm-2']) !!}
     <div class="col-sm-8">
-        {!! Form::select('religion_id', $religionItems, null, ['class' => 'form-control']) !!}
+        {!! Form::text('religion', null, ['class' => 'form-control']) !!}
     </div>
 </div>
 

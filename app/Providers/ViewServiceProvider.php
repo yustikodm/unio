@@ -13,7 +13,6 @@ use App\Models\UniversityMajor;
 use App\Models\Vendor;
 use App\Models\VendorCategory;
 use App\User;
-use App\Models\Religion;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
@@ -195,13 +194,13 @@ class ViewServiceProvider extends ServiceProvider
     });
     
     // Point Top Up - List User
-    View::composer(['point_topup.fields'], function ($view) {
+    View::composer(['topup_history.fields'], function ($view) {
       $userItems = User::pluck('username', 'id')->toArray();
       $view->with('userItems', $userItems);
     });
 
     // Point Top Up - List Countries
-    View::composer(['point_topup.fields'], function ($view) {
+    View::composer(['topup_history.fields'], function ($view) {
       $countryItems = Country::pluck('name', 'id')->toArray();
       $view->with('countryItems', $countryItems);
     });
@@ -210,18 +209,6 @@ class ViewServiceProvider extends ServiceProvider
     View::composer(['biodata.fields'], function ($view) {
       $userItems = User::getNotExistBiodata()->pluck('username', 'id')->toArray();
       $view->with('userItems', $userItems);
-    });
-
-    // Biodata - List Religion
-    View::composer(['biodata.fields'], function ($view) {
-      $religionItems = Religion::pluck('name', 'id')->toArray();
-      $view->with('religionItems', $religionItems);
-    });
-
-    // Biodata - List Religion
-    View::composer(['biodata.edit_fields'], function ($view) {
-      $religionItems = Religion::pluck('name', 'id')->toArray();
-      $view->with('religionItems', $religionItems);
     });
 
     // Place to live - List District, State, Country

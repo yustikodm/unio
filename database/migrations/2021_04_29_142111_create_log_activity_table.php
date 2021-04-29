@@ -4,9 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePointPricingsTable extends Migration
+class CreateLogActivityTable extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -14,13 +13,14 @@ class CreatePointPricingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('point_pricings', function (Blueprint $table) {
-            $table->increments('id');
+        Schema::create('log_activity', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->bigInteger('user_id')->unsigned();
             $table->bigInteger('entity_id')->unsigned();
             $table->string('entity_type');
-            $table->integer('amount');
+            $table->text('description')->nullable();
             $table->timestamps();
-            $table->softDeletes();
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
@@ -31,6 +31,6 @@ class CreatePointPricingsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('point_pricings');
+        Schema::dropIfExists('log_activity');
     }
 }

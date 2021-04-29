@@ -51,8 +51,6 @@ Route::group(['middleware' => ['auth']], function () {
 
   Route::resource('districts', 'DistrictController');
 
-  Route::resource('religions', 'ReligionController');
-
   Route::resource('questionnaires', 'QuestionnaireController');
 
   Route::resource('questionnaire-answers', 'QuestionnaireAnswerController');
@@ -93,9 +91,9 @@ Route::group(['middleware' => ['auth']], function () {
 
   Route::resource('point-pricings', 'PointPricingsController')->only('index', 'store');
 
-  Route::resource('point-transactions', 'PointTransactionController');
+  Route::resource('transactions', 'TransactionController');
 
-  Route::resource('point-topup', 'PointTopupController');
+  Route::resource('topup-history', 'TopupHistoryController');
 
   Route::resource('place-to-live', 'PlaceToLiveController');
 

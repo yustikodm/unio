@@ -124,14 +124,6 @@ class Permission extends SpatiePermission
       'districts.update',
       'districts.destroy',
       
-      'religions.index',
-      'religions.show',
-      'religions.create',
-      'religions.store',
-      'religions.edit',
-      'religions.update',
-      'religions.destroy',
-
       'questionnaires.index',
       'questionnaires.show',
       'questionnaires.create',
@@ -260,6 +252,14 @@ class Permission extends SpatiePermission
       'articles.update',
       'articles.destroy',
       
+      'topup_packages.index',
+      'topup_packages.show',
+      'topup_packages.create',
+      'topup_packages.store',
+      'topup_packages.edit',
+      'topup_packages.update',
+      'topup_packages.destroy',
+      
       'place-to-live.index',
       'place-to-live.show',
       'place-to-live.create',
@@ -274,23 +274,33 @@ class Permission extends SpatiePermission
       'point-pricings.update',
       'point-pricings.destroy',
       
-      'point-transactions.index',
-      'point-transactions.show',
-      'point-transactions.create',
-      'point-transactions.store',
-      'point-transactions.edit',
-      'point-transactions.update',
-      'point-transactions.destroy',
+      'transactions.index',
+      'transactions.show',
+      'transactions.create',
+      'transactions.store',
+      'transactions.edit',
+      'transactions.update',
+      'transactions.destroy',
       
-      'point-topup.index',
-      'point-topup.show',
-      'point-topup.create',
-      'point-topup.store',
-      'point-topup.edit',
-      'point-topup.update',
-      'point-topup.destroy',
+      'transaction-details.index',
+      'transaction-details.show',
+      'transaction-details.create',
+      'transaction-details.store',
+      'transaction-details.edit',
+      'transaction-details.update',
+      'transaction-details.destroy',
+      
+      'topup-history.index',
+      'topup-history.show',
+      'topup-history.create',
+      'topup-history.store',
+      'topup-history.edit',
+      'topup-history.update',
+      'topup-history.destroy',
 
       'point-logs.index',
+      
+      'log-activities.index',
     ];
   }
 }

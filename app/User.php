@@ -6,9 +6,10 @@ use App\Models\Article;
 use App\Models\Biodata;
 use App\Models\Family;
 use App\Models\PointLog;
-use App\Models\PointTopup;
 use App\Models\QuestionnaireAnswer;
 use App\Models\SocialAccount;
+use App\Models\TopupHistory;
+use App\Models\Transaction;
 use App\Models\Wishlist;
 use App\Traits\ImageTrait;
 use Illuminate\Database\Eloquent\Builder;
@@ -153,12 +154,12 @@ class User extends Authenticatable
 
   public function transaction()
   {
-    return $this->hasMany(PointTransaction::class);
+    return $this->hasMany(Transaction::class);
   }
 
   public function topup()
   {
-    return $this->hasMany(PointTopup::class);
+    return $this->hasMany(TopupHistory::class);
   }
 
   public function wishlist()
