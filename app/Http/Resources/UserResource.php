@@ -28,17 +28,18 @@ class UserResource extends JsonResource
     ];
 
     if (!empty($this->biodata->id)) {
-        $user = array_merge($user, [
-              'biodata' => new BiodataResource($this->biodata)
-        ]);
+      $user = array_merge($user, [
+        'biodata' => new BiodataResource($this->biodata)
+      ]);
     }
 
-    if (Auth::id() == $this->id || Auth::user()->hasRole('admin')) {
-        $user = array_merge($user, [
-            'token' => [
-                'api_token' => $this->api_token
-            ]
-        ]);
+    // if (Auth::id() == $this->id || Auth::user()->hasRole('admin')) {
+    if (Auth::id() == $this->id) {
+      $user = array_merge($user, [
+        'token' => [
+          'api_token' => $this->api_token
+        ]
+      ]);
     }
 
     return $user;

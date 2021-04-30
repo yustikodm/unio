@@ -1,4 +1,4 @@
-{!! Form::open(['route' => ['woy', $id], 'method' => 'delete']) !!}
+{!! Form::open(['route' => ['transactions.show', $id], 'method' => 'delete']) !!}
 <div class='btn-group'>
     <a href="{{ route('transactions.show', $id) }}" class='btn btn-default btn-xs'>
         <i class="glyphicon glyphicon-eye-open"></i>

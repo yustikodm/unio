@@ -22,33 +22,17 @@ class TransactionDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'point_transactions.datatables_actions')
-            ->editColumn('entity_type', function ($query) {
-                if ($query->entity_type == 'placetolive') {
-                    return '<span class="label label-info"><strong>Place to Live</strong></span>';
-                }
-                
-                if ($query->entity_type == 'point-topup') {
-                    return '<span class="label label-danger"><strong>Point TOP UP</strong></span>';
-                }
-
-                return '<span class="label label-success"><strong>Vendor Service</strong></span>';
-            })
-            ->editColumn('name', function ($query) {
-                if ($query->entity_type == 'placetolive') {
-                    return '<a href="' . route('place-to-live.show', $query->entity_id) . '">' . PlaceToLive::find($query->entity_id)->name . '</a>';
-                }
-
-                if ($query->entity_type == 'point-topup') {
-                    return '<a href="' . route('point-topup.show', $query->entity_id) . '">Point TOP UP</a>';
-                }
-
-                return '<a href="' . route('vendor-services.show', $query->entity_id) . '">' . VendorService::find($query->entity_id)->name . '</a>';
-            })
+        return $dataTable->addColumn('action', 'transactions.datatables_actions')
             ->editColumn('created_at', function ($query) {
                 return Carbon::parse($query->created_at)->format('d/m/Y H:i');
             })
-            ->rawColumns(['action', 'entity_type', 'name', 'created_at']);
+            ->editColumn('transaction_name', function ($query) {
+                return null;
+            })
+            ->editColumn('user.username', function ($query) {
+                return '<a href="' . route('users.show', $query->user->id) . '">' . $query->user->username . '</a>';
+            })
+            ->rawColumns(['action', 'created_at', 'transaction_name', 'user.username']);
     }
 
     /**
@@ -95,12 +79,11 @@ class TransactionDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('user.username')->title('Username')->width('15%'),
-            Column::make('entity_type')->title('Entity Type')->width('13%'),
-            Column::make('name')->title('Name')->width('20%'),
-            Column::make('amount')->title('Amount')->width('17%'),
-            Column::make('point_conversion')->title('Conversion')->width('10%'),
-            Column::make('created_at')->title('Date')->width('15%'),
+            Column::make('created_at')->title('Date')->width('18%'),
+            Column::make('code')->title('Code')->width('15%'),
+            Column::make('transaction_name')->title('Transaction Name')->width('27%'),
+            Column::make('grand_total')->title('Grand Total')->width('20%'),
+            Column::make('user.username')->title('Username')->width('10%'),
         ];
     }
 
@@ -111,6 +94,6 @@ class TransactionDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'point_transactions_datatable_' . time();
+        return 'transactions' . time();
     }
 }
