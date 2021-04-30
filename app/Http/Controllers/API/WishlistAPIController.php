@@ -37,7 +37,7 @@ class WishlistAPIController extends AppBaseController
     {
         //$wishlists = $this->wishlistRepository->paginate(15);
         //return $this->sendResponse($wishlists, 'Wishlists retrieved successfully');
-        $query = Wishlist::query();
+        $query = Wishlist::query()->where('user_id', $request->input('user_id'));
 
         switch ($request->input('entity_type')) {
             case 'vendors' :
