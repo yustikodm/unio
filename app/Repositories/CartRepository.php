@@ -18,11 +18,9 @@ class CartRepository extends BaseRepository
      */
     protected $fieldSearchable = [
         'user_id',
-        'service_id',
-        'name',
+        'entity_id',
+        'entity_type',
         'qty',
-        'price',
-        'total_price'
     ];
 
     /**
@@ -41,5 +39,10 @@ class CartRepository extends BaseRepository
     public function model()
     {
         return Cart::class;
+    }
+
+    public function getByUserLogin()
+    {
+        return $this->model->getByUserLogin();
     }
 }

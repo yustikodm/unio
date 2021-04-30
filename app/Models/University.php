@@ -134,11 +134,6 @@ class University extends Model
     return $this->hasMany(UniversityScholarship::class);
   }
 
-  public function wishlist()
-  {
-    return $this->hasMany(Wishlist::class);
-  }
-
   public function facility()
   {
     return $this->hasMany(UniversityFacility::class);

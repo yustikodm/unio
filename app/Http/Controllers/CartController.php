@@ -3,21 +3,27 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\CartDataTable;
-use App\Http\Requests;
+use Illuminate\Http\Request;
 use App\Http\Requests\CreateCartRequest;
 use App\Http\Requests\UpdateCartRequest;
 use App\Repositories\CartRepository;
 use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
+use App\Repositories\TransactionRepository;
 
 class CartController extends AppBaseController
 {
     /** @var  CartRepository */
     private $cartRepository;
 
-    public function __construct(CartRepository $cartRepo)
+    /** @var  TransactionRepository */
+    private $TransactionRepository;
+
+    public function __construct(CartRepository $cartRepo, TransactionRepository $transactionRepo)
     {
         $this->cartRepository = $cartRepo;
+
+        $this->transactionRepository = $transactionRepo;
     }
 
     /**
@@ -26,19 +32,15 @@ class CartController extends AppBaseController
      * @param CartDataTable $cartDataTable
      * @return Response
      */
-    public function index(CartDataTable $cartDataTable)
+    // public function index(CartDataTable $cartDataTable)
+    // {
+    //     return $cartDataTable->render('carts.index');
+    // }
+    public function index(Request $request)
     {
-        return $cartDataTable->render('carts.index');
-    }
+        $carts = $this->cartRepository->getByUserLogin();
 
-    /**
-     * Show the form for creating a new Cart.
-     *
-     * @return Response
-     */
-    public function create()
-    {
-        return view('carts.create');
+        return view('carts.data_carts', compact('carts'));
     }
 
     /**
@@ -52,11 +54,9 @@ class CartController extends AppBaseController
     {
         $input = $request->only([
             'user_id',
-            'service_id',
-            'name',
+            'entity_id',
+            'entity_type',
             'qty',
-            'price',
-            'total_price'
         ]);
 
         $cart = $this->cartRepository->create($input);
@@ -87,26 +87,6 @@ class CartController extends AppBaseController
     }
 
     /**
-     * Show the form for editing the specified Cart.
-     *
-     * @param  int $id
-     *
-     * @return Response
-     */
-    public function edit($id)
-    {
-        $cart = $this->cartRepository->find($id);
-
-        if (empty($cart)) {
-            Flash::error('Cart not found');
-
-            return redirect(route('carts.index'));
-        }
-
-        return view('carts.edit')->with('cart', $cart);
-    }
-
-    /**
      * Update the specified Cart in storage.
      *
      * @param  int              $id
@@ -126,11 +106,9 @@ class CartController extends AppBaseController
 
         $input = $request->only([
             'user_id',
-            'service_id',
-            'name',
+            'entity_id',
+            'entity_type',
             'qty',
-            'price',
-            'total_price'
         ]);
 
         $cart = $this->cartRepository->update($input, $id);
@@ -162,5 +140,42 @@ class CartController extends AppBaseController
         Flash::success('Cart deleted successfully.');
 
         return redirect(route('carts.index'));
+    }
+
+    public function checkout()
+    {
+        $carts = $this->cartRepository->getByUserLogin();
+
+        try {
+            $grandtotal = 0;
+            $transactions = $this->transactionRepository->create([
+                'user_id' => auth()->id(),
+                'code' => rand(100, 1000),
+                'grand_total' => 0,
+                'status' => 'pending',
+            ]);
+
+            foreach ($carts as $cart) {
+                $this->transactionRepository->insertDetails([
+                    'transaction_id' => $transactions->id,
+                    'entity_id' => $cart->entity_id,
+                    'entity_type' => $cart->entity_type,
+                    'quantity' => $cart->qty,
+                    'amount' => $cart->amount
+                ]);
+                
+                $grandtotal += ($cart->qty * $cart->amount);
+            }
+
+            $transactions->update([
+                'grand_total' => $grandtotal
+            ]);
+
+            // $cart->delete();
+        } catch (\Exception $error) {
+            return 'Error! ' . $error->getMessage().$error->getFile().$error->getLine();
+        }
+
+        echo 'sukses';
     }
 }

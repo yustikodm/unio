@@ -94,11 +94,6 @@ class UniversityMajor extends Model
     return $this->hasMany(UniversityFee::class);
   }
 
-  public function wishlist()
-  {
-    return $this->hasMany(Wishlist::class);
-  }
-
   public function master()
   {
     return $this->belongsTo(MasterMajor::class);

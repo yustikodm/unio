@@ -73,11 +73,6 @@ class VendorService extends Model
     return $this->belongsTo(Vendor::class, 'vendor_id');
   }
 
-  public function wishlist()
-  {
-    return $this->hasMany(Wishlist::class);
-  }
-
   public function scopeApiSearch($query, $param, $vendor, $country, $state, $district)
   {
     $search = $query->when($param, function ($query) use ($param) {

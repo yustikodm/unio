@@ -35,13 +35,9 @@ class WishlistAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $wishlists = $this->wishlistRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
-        );
+        $wishlists = $this->wishlistRepository->paginate(15);
 
-        return $this->sendResponse(WishlistResource::collection($wishlists), 'Wishlists retrieved successfully');
+        return $this->sendResponse($wishlists, 'Wishlists retrieved successfully');
     }
 
     /**
@@ -55,67 +51,18 @@ class WishlistAPIController extends AppBaseController
     public function store(CreateWishlistAPIRequest $request)
     {
         $input = $request->only([
-            'university_id',
-            'major_id',
-            'service_id',
+            'entity_id',
+            'entity_type',
             'user_id',
-            'description'
         ]);
+
+        if (!in_array($input['entity_type'], ['vendors', 'services', 'universities', 'majors'])) {
+            return $this->sendError('Error insert data to wishlist!');
+        }
 
         $wishlist = $this->wishlistRepository->create($input);
 
         return $this->sendResponse(new WishlistResource($wishlist), 'Wishlist saved successfully');
-    }
-
-    /**
-     * Display the specified Wishlist.
-     * GET|HEAD /wishlists/{id}
-     *
-     * @param int $id
-     *
-     * @return Response
-     */
-    public function show($id)
-    {
-        /** @var Wishlist $wishlist */
-        $wishlist = $this->wishlistRepository->find($id);
-
-        if (empty($wishlist)) {
-            return $this->sendError('Wishlist not found');
-        }
-
-        return $this->sendResponse(new WishlistResource($wishlist), 'Wishlist retrieved successfully');
-    }
-
-    /**
-     * Update the specified Wishlist in storage.
-     * PUT/PATCH /wishlists/{id}
-     *
-     * @param int $id
-     * @param UpdateWishlistAPIRequest $request
-     *
-     * @return Response
-     */
-    public function update($id, UpdateWishlistAPIRequest $request)
-    {
-        $input = $request->only([
-            'university_id',
-            'major_id',
-            'service_id',
-            'user_id',
-            'description'
-        ]);
-
-        /** @var Wishlist $wishlist */
-        $wishlist = $this->wishlistRepository->find($id);
-
-        if (empty($wishlist)) {
-            return $this->sendError('Wishlist not found');
-        }
-
-        $wishlist = $this->wishlistRepository->update($input, $id);
-
-        return $this->sendResponse(new WishlistResource($wishlist), 'Wishlist updated successfully');
     }
 
     /**
@@ -139,6 +86,13 @@ class WishlistAPIController extends AppBaseController
 
         $wishlist->delete();
 
-        return $this->sendSuccess('Wishlist deleted successfully');
+        return $this->sendSuccess('asd Wishlist deleted successfully');
+    }
+
+    public function current()
+    {
+        $wishlist = $this->wishlistRepository->currentUser();
+
+        return $this->sendResponse(WishlistResource::collection($wishlist), 'Wishlist saved successfully');
     }
 }

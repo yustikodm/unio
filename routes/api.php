@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -50,7 +51,9 @@ Route::group(['middleware' => ['auth:api']], function () {
   
   Route::resource('biodata', 'BiodataAPIController')->except(['index', 'create', 'edit']);
   
-  Route::resource('wishlists', 'WishlistAPIController');
+  Route::get('wishlists/current', 'WishlistAPIController@current');
+  
+  Route::resource('wishlists', 'WishlistAPIController')->only(['index', 'destroy', 'store']);
   
   Route::resource('carts', 'CartAPIController');
   

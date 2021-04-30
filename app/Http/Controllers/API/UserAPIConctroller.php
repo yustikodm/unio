@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\AppBaseController;
+use App\Http\Requests\API\UpdateUserAPIRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\UserResource;
 use App\Repositories\UserRepository;
 use App\Repositories\BiodataRepository;
@@ -72,7 +74,7 @@ class UserAPIConctroller extends AppBaseController
         return $this->sendResponse(new UserResource($user), 'User retrieved successfully');
     }
 
-    public function update(Request $request, $id)
+    public function update($id, UpdateUserAPIRequest $request)
     {
         $user = $this->userRepository->findOrFail($id);
 
@@ -80,44 +82,59 @@ class UserAPIConctroller extends AppBaseController
             return $this->sendError('User not found!');
         }
 
-        $input = $request->only([
-            // User field
-            'username',
-            'phone',
-            'image_path',
-
-            // Biodata field
-            'name', # as fullname
-            'fullname',
-            'address',
-            'gender',
-            'picture',
-            'school_origin',
-            'graduation_year',
-            'birth_place',
-            'birth_date',
-            'identity_number',
-            'religion',
-        ]);
-
         try {
-            $user->update($input);
 
-            $biodata = $this->biodataRepository->findByUser($id);
+            $input = $request->only([
+                // User field
+                'username',
+                'phone',
+                'image_path',
 
-            // Pointing field
-            $input['fullname'] = empty($input['name']) ? $input['fullname'] : $input['name'];
+                // Biodata field
+                'name', # as fullname
+                'fullname',
+                'address',
+                'gender',
+                'picture',
+                'school_origin',
+                'graduation_year',
+                'birth_place',
+                'birth_date',
+                'identity_number',
+                'religion',
+            ]);
 
-            $biodata->update($input);
+            $this->userRepository->update($id, $input);
 
+            $biodata = $this->biodataRepository->findByUser($user->id);
+
+            if (empty($biodata)) {
+                $this->biodataRepository->create([
+                    'fullname' => $input['name'],
+                    'address' => $input['address'],
+                    'gender' => $input['gender'],
+                    'picture' => $input['picture'],
+                    'school_origin' => $input['school_origin'],
+                    'graduation_year' => $input['graduation_year'],
+                    'birth_place' => $input['birth_place'],
+                    'birth_date' => $input['birth_date'],
+                    'identity_number' => $input['identity_number'],
+                    'religion' => $input['religion'],
+                ]);
+            } else {
+                // Pointing field
+                $input['fullname'] = empty($input['name']) ? $input['fullname'] : $input['name'];
+
+                $biodata->update($input);
+            }
         } catch (Exception $error) {
-            
+
             return $this->sendError('Error updating data into database!', $error->getCode());
         }
 
         return $this->sendResponse(new UserResource($user), 'User updated successfully');
     }
-    
+
     public function destroy($id)
     {
         $user = $this->userRepository->findOrFail($id);
@@ -125,7 +142,7 @@ class UserAPIConctroller extends AppBaseController
         if (empty($user)) {
             return $this->sendError('User not found!');
         }
-        
+
         try {
             $biodata = $this->biodataRepository->findByUser($user->id);
 
@@ -133,13 +150,13 @@ class UserAPIConctroller extends AppBaseController
 
             $user->delete();
         } catch (Exception $error) {
-            
+
             return $this->sendError('Error updating data into database!', $error->getCode());
         }
 
         return $this->sendSuccess('User has been deleted successfully');
     }
-    
+
     public function changePassword(Request $request)
     {
         $user = $this->userRepository->find(auth()->id());

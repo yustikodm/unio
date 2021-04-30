@@ -3,13 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\TransactionDataTable;
-use App\Http\Requests;
+use Illuminate\Http\Request;
 use App\Http\Requests\CreateTransactionRequest;
 use App\Http\Requests\UpdateTransactionRequest;
 use App\Repositories\TransactionRepository;
 use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
-use Response;
 
 class TransactionController extends AppBaseController
 {
@@ -53,10 +52,9 @@ class TransactionController extends AppBaseController
     {
         $input = $request->only([
             'user_id',
-            'entity_id',
-            'entity_type',
-            'amount',
-            'point_conversion',
+            'code',
+            'grand_total',
+            'status',
         ]);
 
         $pointTransaction = $this->TransactionRepository->create($input);
@@ -126,10 +124,9 @@ class TransactionController extends AppBaseController
 
         $input = $request->only([
             'user_id',
-            'entity_id',
-            'entity_type',
-            'amount',
-            'point_conversion',
+            'code',
+            'grand_total',
+            'status',
         ]);
 
         $pointTransaction = $this->TransactionRepository->update($input, $id);

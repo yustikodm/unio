@@ -29,11 +29,9 @@ class Wishlist extends Model
   protected $dates = ['deleted_at'];
 
   public $fillable = [
-    'university_id',
-    'major_id',
-    'service_id',
+    'entity_id',
+    'entity_type',
     'user_id',
-    'description'
   ];
 
   /**
@@ -43,11 +41,9 @@ class Wishlist extends Model
    */
   protected $casts = [
     'id' => 'integer',
-    'university_id' => 'integer',
-    'major_id' => 'integer',
-    'service_id' => 'integer',
+    'entity_id' => 'integer',
+    'entity_type' => 'string',
     'user_id' => 'integer',
-    'description' => 'string'
   ];
 
   /**
@@ -56,11 +52,9 @@ class Wishlist extends Model
    * @var array
    */
   public static $rules = [
-    'university_id' => 'nullable|integer',
-    'major_id' => 'nullable|integer',
-    'service_id' => 'nullable|integer',
+    'entity_id' => 'required|integer',
+    'entity_type' => 'required|string',
     'user_id' => 'required|integer',
-    'description' => 'nullable|string',
     'created_at' => 'nullable',
     'updated_at' => 'nullable',
     'deleted_at' => 'nullable'
@@ -71,18 +65,8 @@ class Wishlist extends Model
     return $this->belongsTo(User::class);
   }
 
-  public function service()
+  public function currentUser()
   {
-    return $this->belongsTo(VendorService::class);
-  }
-
-  public function major()
-  {
-    return $this->belongsTo(UniversityMajor::class);
-  }
-  
-  public function university() 
-  {
-    return $this->belongsTo(University::class);
+    return static::where('user_id', auth()->id())->get();
   }
 }

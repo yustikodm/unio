@@ -9,7 +9,7 @@ use App\Repositories\BaseRepository;
  * Class TransactionRepository
  * @package App\Repositories
  * @version April 29, 2021, 9:22 pm WIB
-*/
+ */
 
 class TransactionRepository extends BaseRepository
 {
@@ -17,7 +17,10 @@ class TransactionRepository extends BaseRepository
      * @var array
      */
     protected $fieldSearchable = [
-        
+        'user_id',
+        'code',
+        'grand_total',
+        'status',
     ];
 
     /**
@@ -36,5 +39,10 @@ class TransactionRepository extends BaseRepository
     public function model()
     {
         return Transaction::class;
+    }
+
+    public function insertDetails($input)
+    {
+        return $this->model->insertDetails($input);
     }
 }

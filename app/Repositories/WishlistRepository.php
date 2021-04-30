@@ -41,4 +41,9 @@ class WishlistRepository extends BaseRepository
     {
         return Wishlist::class;
     }
+
+    public function currentUser()
+    {
+        return $this->model->currentUser();
+    }
 }

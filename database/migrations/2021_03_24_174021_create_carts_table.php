@@ -18,10 +18,7 @@ class CreateCartsTable extends Migration
             $table->bigInteger('user_id')->unsigned();
             $table->bigInteger('entity_id')->unsigned();
             $table->string('entity_type');
-            $table->string('name', 255);
-            $table->integer('qty');
-            $table->bigInteger('price');
-            $table->bigInteger('total_price');
+            $table->integer('qty')->default(1);
             $table->timestamps();
             $table->softDeletes();
         });

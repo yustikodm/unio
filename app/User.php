@@ -177,6 +177,11 @@ class User extends Authenticatable
     return $this->hasMany(PointLog::class);
   }
 
+  public function cart()
+  {
+    return $this->hasMany(Cart::class);
+  }
+
   /**
    * @param $value
    *
