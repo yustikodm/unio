@@ -100,4 +100,9 @@ class Cart extends Model
 
         return $builder->get();
     }
+
+    public function service(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(VendorService::class, 'entity_id');
+    }
 }
