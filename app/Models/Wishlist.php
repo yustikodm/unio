@@ -19,54 +19,74 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Wishlist extends Model
 {
-  use SoftDeletes;
+    use SoftDeletes;
 
-  public $table = 'wishlists';
+    public $table = 'wishlists';
 
-  const CREATED_AT = 'created_at';
-  const UPDATED_AT = 'updated_at';
+    const CREATED_AT = 'created_at';
+    const UPDATED_AT = 'updated_at';
 
-  protected $dates = ['deleted_at'];
+    protected $dates = ['deleted_at'];
 
-  public $fillable = [
-    'entity_id',
-    'entity_type',
-    'user_id',
-  ];
+    public $fillable = [
+        'entity_id',
+        'entity_type',
+        'user_id',
+    ];
 
-  /**
-   * The attributes that should be casted to native types.
-   *
-   * @var array
-   */
-  protected $casts = [
-    'id' => 'integer',
-    'entity_id' => 'integer',
-    'entity_type' => 'string',
-    'user_id' => 'integer',
-  ];
+    /**
+     * The attributes that should be casted to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'id' => 'integer',
+        'entity_id' => 'integer',
+        'entity_type' => 'string',
+        'user_id' => 'integer',
+    ];
 
-  /**
-   * Validation rules
-   *
-   * @var array
-   */
-  public static $rules = [
-    'entity_id' => 'required|integer',
-    'entity_type' => 'required|string',
-    'user_id' => 'required|integer',
-    'created_at' => 'nullable',
-    'updated_at' => 'nullable',
-    'deleted_at' => 'nullable'
-  ];
+    /**
+     * Validation rules
+     *
+     * @var array
+     */
+    public static $rules = [
+        'entity_id' => 'required|integer',
+        'entity_type' => 'required|string',
+        'user_id' => 'required|integer',
+        'created_at' => 'nullable',
+        'updated_at' => 'nullable',
+        'deleted_at' => 'nullable'
+    ];
 
-  public function user()
-  {
-    return $this->belongsTo(User::class);
-  }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
-  public function currentUser()
-  {
-    return static::where('user_id', auth()->id())->get();
-  }
+    public function currentUser()
+    {
+        return static::where('user_id', auth()->id())->get();
+    }
+
+    public function vendor(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Vendor::class, 'entity_id');
+    }
+
+    public function service(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(VendorService::class, 'entity_id');
+    }
+
+    public function university(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(University::class, 'entity_id');
+    }
+
+    public function major(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(UniversityMajor::class, 'entity_id');
+    }
 }
