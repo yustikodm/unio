@@ -41,16 +41,16 @@ class WishlistAPIController extends AppBaseController
 
         switch ($request->input('entity_type')) {
             case 'vendors' :
-                $query->with('vendor');
+                $query->where('vendors')->with('vendor');
                 break;
             case 'services':
-                $query->with('service');
+                $query->where('services')->with('service');
                 break;
             case 'universities':
-                $query->with('university');
+                $query->where('universities')->with('university');
                 break;
             case 'majors':
-                $query->with('major');
+                $query->where('majors')->with('major');
                 break;
         };
 
