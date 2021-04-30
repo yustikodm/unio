@@ -17,7 +17,7 @@ class CartController extends AppBaseController
     private $cartRepository;
 
     /** @var  TransactionRepository */
-    private $TransactionRepository;
+    private $transactionRepository;
 
     public function __construct(CartRepository $cartRepo, TransactionRepository $transactionRepo)
     {
@@ -36,11 +36,9 @@ class CartController extends AppBaseController
     // {
     //     return $cartDataTable->render('carts.index');
     // }
-    public function index(Request $request)
+    public function index(CartDataTable $cartDataTable)
     {
-        $carts = $this->cartRepository->getByUserLogin();
-
-        return view('carts.data_carts', compact('carts'));
+        return $cartDataTable->render('carts.index');
     }
 
     /**
@@ -177,5 +175,12 @@ class CartController extends AppBaseController
         }
 
         echo 'sukses';
+    }
+
+    public function current(Request $request)
+    {
+        $carts = $this->cartRepository->getByUserLogin();
+
+        return view('carts.data_carts', compact('carts'));
     }
 }

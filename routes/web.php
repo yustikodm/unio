@@ -85,6 +85,8 @@ Route::group(['middleware' => ['auth']], function () {
 
   Route::get('carts/checkout', 'CartController@checkout')->name('carts.checkout');
 
+  Route::get('carts/current', 'CartController@current')->name('carts.current');
+
   Route::resource('carts', 'CartController')->except(['create', 'edit']);
 
   Route::resource('articles', 'ArticleController');

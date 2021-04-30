@@ -18,7 +18,11 @@ class CartDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'carts.datatables_actions');
+        return $dataTable->addColumn('action', 'carts.datatables_actions')
+            ->editColumn('user.username', function ($query) {
+                return '<a href="' . route('users.show', $query->user->id) . '">' . $query->user->username . '</a>';
+            })
+            ->rawColumns(['action', 'user.username']);
     }
 
     /**
@@ -29,7 +33,7 @@ class CartDataTable extends DataTable
      */
     public function query(Cart $model)
     {
-        return $model->newQuery();
+        return $model->newQuery()->with(['user']);
     }
 
     /**
@@ -65,12 +69,10 @@ class CartDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'user_id',
-            'service_id',
-            'name',
+            'user.username',
+            'entity_id',
+            'entity_type',
             'qty',
-            'price',
-            'total_price'
         ];
     }
 

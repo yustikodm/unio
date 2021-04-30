@@ -56,11 +56,9 @@ class CartAPIController extends AppBaseController
     {
         $input = $request->only([
             'user_id',
-            'service_id',
-            'name',
+            'entity_id',
+            'entity_type',
             'qty',
-            'price',
-            'total_price'
         ]);
 
         $cart = $this->cartRepository->create($input);
@@ -101,11 +99,9 @@ class CartAPIController extends AppBaseController
     {
         $input = $request->only([
             'user_id',
-            'service_id',
-            'name',
+            'entity_id',
+            'entity_type',
             'qty',
-            'price',
-            'total_price'
         ]);
 
         /** @var Cart $cart */
@@ -142,5 +138,12 @@ class CartAPIController extends AppBaseController
         $cart->delete();
 
         return $this->sendSuccess('Cart deleted successfully');
+    }
+
+    public function current()
+    {
+        $cart = $this->cartRepository->getByUserLogin();
+
+        return $this->sendResponse(CartResource::collection($cart), 'Cart retrieved successfully');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
@@ -79,7 +80,7 @@ class Cart extends Model
                 $join->on('vendor_services.id', '=', 'point_pricings.entity_id')
                     ->where('point_pricings.entity_type', 'services');
             })
-            ->select('carts.id as cart_id', 'carts.entity_id', 'carts.entity_type', 'carts.qty', 'vendor_services.name as name', 'point_pricings.amount');
+            ->select('carts.id as cart_id', 'carts.entity_id', 'carts.entity_type', 'carts.qty', 'vendor_services.name as name', 'point_pricings.amount', 'carts.created_at', 'carts.updated_at', 'carts.user_id');
 
         $lives = DB::table('carts')
             ->where('user_id', auth()->id())
@@ -89,13 +90,13 @@ class Cart extends Model
                 $join->on('place_to_live.id', '=', 'point_pricings.entity_id')
                     ->where('point_pricings.entity_type', 'lives');
             })
-            ->select('carts.id as cart_id', 'carts.entity_id', 'carts.entity_type', 'carts.qty', 'place_to_live.name as name', 'point_pricings.amount');
+            ->select('carts.id as cart_id', 'carts.entity_id', 'carts.entity_type', 'carts.qty', 'place_to_live.name as name', 'point_pricings.amount', 'carts.created_at', 'carts.updated_at', 'carts.user_id');
 
         $services->union($lives);
 
         $builder = DB::table(DB::raw("({$services->toSql()}) AS a"))
             ->mergeBindings($services)
-            ->select(['cart_id', 'entity_id', 'entity_type', 'qty', 'name', 'amount']);
+            ->select(['cart_id', 'entity_id', 'entity_type', 'qty', 'name', 'amount', 'created_at', 'updated_at', 'user_id']);
 
         return $builder->get();
     }

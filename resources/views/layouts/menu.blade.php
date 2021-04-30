@@ -156,8 +156,8 @@ f{{-- Dashboard --}}
     </li>
 @endcan
 
-@can(['users.profile', 'wishlists.index', 'carts.index'])
-  <li class="treeview {{ Request::is('users/profile') || Request::is('wishlists*') ? 'active menu-open' : '' }}">
+@can(['users.profile', 'wishlists.index', 'carts.current'])
+  <li class="treeview {{ Request::is('users/profile') || Request::is('wishlists*') || Request::is('carts*') ? 'active menu-open' : '' }}">
     <a href="#">
         <i class="fa fa-user"></i><span>User Profile</span>
         <span class="pull-right-container">
@@ -180,11 +180,19 @@ f{{-- Dashboard --}}
       @endcan
 
       {{-- Carts User --}}
-      @can('carts.index')
-          <li class="{{ Request::is('carts*') ? 'active' : '' }}">
-              <a href="{{ route('carts.index') }}"><i class="fa fa-circle-thin"></i><span>Carts</span></a>
+      @can('carts.current')
+          <li class="{{ Request::is('carts/current') ? 'active' : '' }}">
+              <a href="{{ route('carts.current') }}"><i class="fa fa-circle-thin"></i><span>Carts</span></a>
           </li>
       @endcan
+
+      @if(auth()->user()->hasRole('admin'))
+        @can('carts.index')
+            <li class="{{ Request::is('carts*') && !Request::is('carts/current') ? 'active' : '' }}">
+                <a href="{{ route('carts.index') }}"><i class="fa fa-circle-thin"></i><span>Carts All</span></a>
+            </li>
+        @endcan
+      @endif
     </ul>
   </li>
 @endcan

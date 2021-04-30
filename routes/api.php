@@ -55,6 +55,8 @@ Route::group(['middleware' => ['auth:api']], function () {
   
   Route::resource('wishlists', 'WishlistAPIController')->only(['index', 'destroy', 'store']);
   
+  Route::get('carts/current', 'CartAPIController@current');
+
   Route::resource('carts', 'CartAPIController');
   
   Route::get('point/families/{userId}', 'PointLogAPIController@familyPoint');

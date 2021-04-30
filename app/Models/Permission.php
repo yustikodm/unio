@@ -99,6 +99,7 @@ class Permission extends SpatiePermission
       'wishlists.store',
       'wishlists.update',
       'wishlists.destroy',
+      'wishlists.current',
 
       'countries.index',
       'countries.show',
@@ -243,6 +244,8 @@ class Permission extends SpatiePermission
       'carts.edit',
       'carts.update',
       'carts.destroy',
+      'carts.current',
+      'carts.checkout',
       
       'articles.index',
       'articles.show',
