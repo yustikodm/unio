@@ -90,7 +90,7 @@ Route::resource('university-scholarships', 'UniversityScholarshipAPIController')
 
 Route::resource('university-faculties', 'UniversityFacultiesAPIController');
 
-Route::resource('university-facilities', 'UniversityFacultiesAPIController');
+Route::resource('university-facilities', 'UniversityFacilitiesAPIController');
 
 Route::resource('vendors', 'VendorAPIController');
 
