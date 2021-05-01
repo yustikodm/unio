@@ -1456,7 +1456,6 @@
             "require": {
                 "php": ">=5.5.9"
             },
-            "default-branch": true,
             "type": "library",
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -1515,7 +1514,6 @@
                 "ext-imagick": "to use Imagick based image processing.",
                 "intervention/imagecache": "Caching extension for the Intervention Image library"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1777,10 +1775,13 @@
                 "framework",
                 "laravel"
             ],
+<<<<<<< HEAD
             "support": {
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
+=======
+>>>>>>> origin/master
             "time": "2021-04-28T14:38:32+00:00"
         },
         {
@@ -4481,10 +4482,13 @@
                 "swagger",
                 "ui"
             ],
+<<<<<<< HEAD
             "support": {
                 "issues": "https://github.com/swagger-api/swagger-ui/issues",
                 "source": "https://github.com/swagger-api/swagger-ui/tree/v3.48.0"
             },
+=======
+>>>>>>> origin/master
             "time": "2021-04-29T22:10:35+00:00"
         },
         {
@@ -7414,11 +7418,14 @@
                 "dependency",
                 "package"
             ],
+<<<<<<< HEAD
             "support": {
                 "irc": "irc://irc.freenode.org/composer",
                 "issues": "https://github.com/composer/composer/issues",
                 "source": "https://github.com/composer/composer/tree/2.0.13"
             },
+=======
+>>>>>>> origin/master
             "funding": [
                 {
                     "url": "https://packagist.com",
@@ -7456,6 +7463,7 @@
                 "composer/composer": "^2",
                 "phpstan/phpstan": "^0.12.55",
                 "symfony/phpunit-bridge": "^4.2 || ^5"
+<<<<<<< HEAD
             },
             "type": "library",
             "extra": {
@@ -7487,7 +7495,36 @@
             "support": {
                 "issues": "https://github.com/composer/metadata-minifier/issues",
                 "source": "https://github.com/composer/metadata-minifier/tree/1.0.0"
+=======
+>>>>>>> origin/master
             },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Composer\\MetadataMinifier\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jordi Boggiano",
+                    "email": "j.boggiano@seld.be",
+                    "homepage": "http://seld.be"
+                }
+            ],
+            "description": "Small utility library that handles metadata minification and expansion.",
+            "keywords": [
+                "composer",
+                "compression"
+            ],
             "funding": [
                 {
                     "url": "https://packagist.com",
@@ -10125,5 +10162,5 @@
         "php": "^7.2"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "1.1.0"
 }

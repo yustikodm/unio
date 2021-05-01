@@ -27,6 +27,8 @@ class VendorService extends Model
 
   protected $dates = ['deleted_at'];
 
+  protected $with = ['vendor'];
+
   public $fillable = [
     'vendor_id',
     'name',
@@ -119,8 +121,8 @@ class VendorService extends Model
 
     if (!empty($country)) {
       $select_list = array_merge($select_list, [
-        'countries.id as c_id', 
-        'countries.name as c_name', 
+        'countries.id as c_id',
+        'countries.name as c_name',
         'countries.created_at as c_created_at',
         'countries.updated_at as c_updated_at'
       ]);
@@ -128,8 +130,8 @@ class VendorService extends Model
 
     if (!empty($state)) {
       $select_list = array_merge($select_list, [
-        'states.id as s_id', 
-        'states.name as s_name', 
+        'states.id as s_id',
+        'states.name as s_name',
         'states.created_at as s_created_at',
         'states.updated_at as s_updated_at'
       ]);
@@ -137,8 +139,8 @@ class VendorService extends Model
 
     if (!empty($district)) {
       $select_list = array_merge($select_list, [
-        'districts.id as d_id', 
-        'districts.name as d_name', 
+        'districts.id as d_id',
+        'districts.name as d_name',
         'districts.created_at as d_created_at',
         'districts.updated_at as d_updated_at'
       ]);

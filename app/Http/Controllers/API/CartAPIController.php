@@ -35,13 +35,18 @@ class CartAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $carts = $this->cartRepository->all(
+        /*$carts = $this->cartRepository->all(
             $request->except(['skip', 'limit']),
             $request->get('skip'),
             $request->get('limit')
         );
+        return $this->sendResponse(CartResource::collection($carts), 'Carts retrieved successfully');*/
 
-        return $this->sendResponse(CartResource::collection($carts), 'Carts retrieved successfully');
+        $query = Cart::query()
+            ->where('user_id', $request->input('user_id'))
+            ->with('service');
+
+        return $this->sendResponse($query->paginate(15), 'Carts retrieved successfully');
     }
 
     /**

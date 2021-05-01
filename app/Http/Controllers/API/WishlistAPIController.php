@@ -35,9 +35,26 @@ class WishlistAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $wishlists = $this->wishlistRepository->paginate(15);
+        //$wishlists = $this->wishlistRepository->paginate(15);
+        //return $this->sendResponse($wishlists, 'Wishlists retrieved successfully');
+        $query = Wishlist::query()->where('user_id', $request->input('user_id'));
 
-        return $this->sendResponse($wishlists, 'Wishlists retrieved successfully');
+        switch ($request->input('entity_type')) {
+            case 'vendors' :
+                $query->where('entity_type','vendors')->with('vendor');
+                break;
+            case 'services':
+                $query->where('entity_type','services')->with('service');
+                break;
+            case 'universities':
+                $query->where('entity_type','universities')->with('university');
+                break;
+            case 'majors':
+                $query->where('entity_type','majors')->with('major');
+                break;
+        };
+
+        return $this->sendResponse($query->paginate(15), 'Bookmarks retrieved successfully');
     }
 
     /**
