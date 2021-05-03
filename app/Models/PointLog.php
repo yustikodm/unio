@@ -68,28 +68,23 @@ class PointLog extends Model
     return $this->belongsTo(User::class);
   }
 
-  public function parent()
+  public static function getPointData($userId)
   {
-    return $this->belongsTo(User::class);
-  }
-
-  public static function getPointData($parentId)
-  {
-    $point = static::where('parent_id', $parentId)->first();
+    $point = static::where('user_id', $userId)->first();
 
     if (empty($point)) {
       return (object) [
         'point_after' => 0,
-        'parent_id' => $parentId
+        'user_id' => $userId
       ];
     }
 
     return $point;
   }
 
-  public static function getFamilyPoint($parentId)
+  public static function getFamilyPoint($userId)
   {
-    return static::where('parent_id', $parentId)
+    return static::where('user_id', $userId)
       ->latest('point_log.created_at')
       ->first();
   }
