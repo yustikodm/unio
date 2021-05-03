@@ -43,7 +43,7 @@ Route::group(['middleware' => ['auth:api']], function () {
 
   Route::put('users/change-password', 'UserAPIConctroller@changePassword');
 
-  Route::apiResource('users', 'UserAPIConctroller');
+  Route::apiResource('users', 'UserAPIController');
 
   Route::get('families/list/{id}', 'FamilyAPIController@familyList');
   

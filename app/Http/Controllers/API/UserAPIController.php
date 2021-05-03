@@ -2,16 +2,22 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Controllers\AppBaseController;
+use App\Http\Requests\API\CreateUserAPIRequest;
 use App\Http\Requests\API\UpdateUserAPIRequest;
-use App\Http\Resources\UserResource;
+use App\User;
 use App\Repositories\UserRepository;
-use App\Repositories\BiodataRepository;
 use Illuminate\Http\Request;
+use App\Http\Controllers\AppBaseController;
+use App\Http\Resources\UserResource;
+use App\Repositories\BiodataRepository;
 use Exception;
-use Illuminate\Support\Facades\Hash;
 
-class UserAPIConctroller extends AppBaseController
+/**
+ * Class UserController
+ * @package App\Http\Controllers\API
+ */
+
+class UserAPIController extends AppBaseController
 {
     /** @var  UserRepository */
     private $userRepository;
@@ -25,36 +31,40 @@ class UserAPIConctroller extends AppBaseController
         $this->biodataRepository = $biodataRepo;
     }
 
+    /**
+     * Display a listing of the User.
+     * GET|HEAD /users
+     *
+     * @param Request $request
+     * @return Response
+     */
     public function index(Request $request)
     {
         $user = $this->userRepository->paginate(15, [], ['name' => $request->name]);
 
-        // return $this->sendResponse($users, 'Users retrieved successfully');
         return $this->sendResponse($user, 'User retrieved successfully');
     }
 
-    /**
-     * Display the detail user logged in .
-     * GET|HEAD /countries/{id}
-     *
-     * @param int $id
-     *
-     * @return Response
-     */
-    public function profile()
-    {
-        $user = $this->userRepository->find(auth()->id());
+    // /**
+    //  * Store a newly created User in storage.
+    //  * POST /users
+    //  *
+    //  * @param CreateUserAPIRequest $request
+    //  *
+    //  * @return Response
+    //  */
+    // public function store(CreateUserAPIRequest $request)
+    // {
+    //     $input = $request->all();
 
-        if (empty($user)) {
-            return $this->sendError('User not found');
-        }
+    //     $user = $this->userRepository->create($input);
 
-        return $this->sendResponse(new UserResource($user), 'User retrieved successfully');
-    }
+    //     return $this->sendResponse(new UserResource($user), 'User saved successfully');
+    // }
 
     /**
-     * Display the specified user.
-     * GET|HEAD /countries/{id}
+     * Display the specified User.
+     * GET|HEAD /users/{id}
      *
      * @param int $id
      *
@@ -72,9 +82,25 @@ class UserAPIConctroller extends AppBaseController
         return $this->sendResponse(new UserResource($user), 'User retrieved successfully');
     }
 
-    public function update($id, UpdateUserAPIRequest $request)
+    /**
+     * Update the specified User in storage.
+     * PUT/PATCH /users/{id}
+     *
+     * @param int $id
+     * @param UpdateUserAPIRequest $request
+     *
+     * @return Response
+     */
     // public function update($id, Request $request)
-    {        
+    public function update($id, Request $request)
+    {
+        /** @var User $user */
+        $user = $this->userRepository->find($id);
+
+        if (empty($user)) {
+            return $this->sendError('User not found');
+        }
+
         $input = $request->only([
             // User field
             'username',
@@ -94,30 +120,25 @@ class UserAPIConctroller extends AppBaseController
             'identity_number',
             'religion',
         ]);
-        
-        $user = $this->userRepository->findOrFail($id);
-
-        if (empty($user)) {
-            return $this->sendError('User not found!');
-        }
 
         try {
 
-            $this->userRepository->update($user->id, $input);
+            // $user->update($input, $user->id);
+            // $user = $user->update($input);
 
-            // $this->biodataRepository->firstOrCreate(['user_id' => $user->id], [
-            //     'fullname' => $input['name'],
-            //     'address' => $input['address'],
-            //     'gender' => $input['gender'],
-            //     'picture' => $input['picture'],
-            //     'school_origin' => $input['school_origin'],
-            //     'graduation_year' => $input['graduation_year'],
-            //     'birth_place' => $input['birth_place'],
-            //     'birth_date' => $input['birth_date'],
-            //     'identity_number' => $input['identity_number'],
-            //     'religion' => $input['religion'],
-            // ]);
-
+            $this->biodataRepository->firstOrCreate(['user_id' => $id], [
+                'fullname' => $input['name'],
+                'address' => $input['address'],
+                'gender' => $input['gender'],
+                'picture' => $input['picture'],
+                'school_origin' => $input['school_origin'],
+                'graduation_year' => $input['graduation_year'],
+                'birth_place' => $input['birth_place'],
+                'birth_date' => $input['birth_date'],
+                'identity_number' => $input['identity_number'],
+                'religion' => $input['religion'],
+            ]);
+// dd("okesip");
             // $biodata = $this->biodataRepository->findByUser($user->id);
 
             // if (empty($biodata)) {
@@ -144,9 +165,24 @@ class UserAPIConctroller extends AppBaseController
             return $this->sendError('Error updating data into database!', $error->getMessage());
         }
 
-        return $this->sendResponse(new UserResource($user), 'User updated successfully');
+        return 'oke';
+        // return $this->sendResponse(new UserResource($user), 'User updated successfully');
+
+        // $user = $this->userRepository->update($input, $id);
+
+        // return $this->sendResponse(new UserResource($user), 'User updated successfully');
     }
 
+    /**
+     * Remove the specified User from storage.
+     * DELETE /users/{id}
+     *
+     * @param int $id
+     *
+     * @throws \Exception
+     *
+     * @return Response
+     */
     public function destroy($id)
     {
         $user = $this->userRepository->findOrFail($id);
@@ -169,30 +205,22 @@ class UserAPIConctroller extends AppBaseController
         return $this->sendSuccess('User has been deleted successfully');
     }
 
-    public function changePassword(Request $request)
+    /**
+     * Display the detail user logged in .
+     * GET|HEAD /countries/{id}
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
+    public function profile()
     {
         $user = $this->userRepository->find(auth()->id());
 
         if (empty($user)) {
-            return $this->sendError('User not found!');
+            return $this->sendError('User not found');
         }
 
-        $input = $request->only([
-            'current_password',
-            'new_password',
-            'confirm_password'
-        ]);
-
-        if (!Hash::check($input['current_password'], $user->password)) {
-            return $this->sendError('Password didn\'t correct with your old password!', 406);
-        }
-
-        if ($input['new_password'] != $input['confirm_password']) {
-            return $this->sendError('Password and confirmation password didn\'t match!', 406);
-        }
-
-        $user->update(['password' => Hash::make($input['new_password'])]);
-
-        return $this->sendSuccess('Password has been updated successfully');
+        return $this->sendResponse(new UserResource($user), 'User retrieved successfully');
     }
 }

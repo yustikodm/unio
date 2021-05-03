@@ -59,7 +59,7 @@ class PlaceToLive extends Model
     'country_id' => 'required|nullable',
     'state_id' => 'nullable',
     'district_id' => 'nullable',
-    'name' => 'required|required',
+    'name' => 'required',
     'description' => 'nullable',
     'price' => 'nullable',
     'address' => 'required',

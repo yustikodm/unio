@@ -73,8 +73,9 @@ class TopupPackage extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      **/
-    public function topupHistories()
+    public function history()
     {
         return $this->hasMany(TopupHistory::class);
     }
+    
 }

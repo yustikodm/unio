@@ -14,29 +14,21 @@
     </div>
 </div>
 
+<!-- Package Id Field -->
+<div class="form-group">
+    {!! Form::label('package_id', 'Package:', ['class' => 'control-label col-sm-2']) !!}
+    <div class="col-sm-6">
+        {!! Form::select('package_id', $packageItems, null, ['class' => 'form-control']) !!}
+    </div>
+</div>
+
 <!-- Amount Field -->
-<div class="form-group">
-    {!! Form::label('amount', 'Amount:', ['class' => 'control-label col-sm-2']) !!}
-    <div class="col-sm-6">
-        {!! Form::number('amount', null, ['class' => 'form-control']) !!}
-    </div>
-</div>
-
-<!-- Point Conversion Field -->
-<div class="form-group">
-    {!! Form::label('point_conversion', 'Point Conversion:', ['class' => 'control-label col-sm-2']) !!}
-    <div class="col-sm-6">
-        {!! Form::number('point_conversion', null, ['class' => 'form-control']) !!}
-    </div>
-</div>
-
-<!-- Payment Proof Field -->
-<div class="form-group">
-    {!! Form::label('payment_proof', 'Payment Proof:', ['class' => 'control-label col-sm-2']) !!}
-    <div class="col-sm-6">
-        {!! Form::file('payment_proof', ['accept' => 'image/*']) !!}
-    </div>
-</div>
+{{-- <div class="form-group"> --}}
+    {{-- {!! Form::label('amount', 'Amount:', ['class' => 'control-label col-sm-2']) !!} --}}
+    {{-- <div class="col-sm-6"> --}}
+        {{-- {!! Form::number('amount', null, ['class' => 'form-control']) !!} --}}
+    {{-- </div> --}}
+{{-- </div> --}}
 
 <!-- Submit Field -->
 <div class="form-group">

@@ -63,7 +63,7 @@ class TopupPackageController extends AppBaseController
 
         Flash::success('Topup Package saved successfully.');
 
-        return redirect(route('topupPackages.index'));
+        return redirect(route('topup-packages.index'));
     }
 
     /**
@@ -80,7 +80,7 @@ class TopupPackageController extends AppBaseController
         if (empty($topupPackage)) {
             Flash::error('Topup Package not found');
 
-            return redirect(route('topupPackages.index'));
+            return redirect(route('topup-packages.index'));
         }
 
         return view('topup_packages.show')->with('topupPackage', $topupPackage);
@@ -100,7 +100,7 @@ class TopupPackageController extends AppBaseController
         if (empty($topupPackage)) {
             Flash::error('Topup Package not found');
 
-            return redirect(route('topupPackages.index'));
+            return redirect(route('topup-packages.index'));
         }
 
         return view('topup_packages.edit')->with('topupPackage', $topupPackage);
@@ -121,7 +121,7 @@ class TopupPackageController extends AppBaseController
         if (empty($topupPackage)) {
             Flash::error('Topup Package not found');
 
-            return redirect(route('topupPackages.index'));
+            return redirect(route('topup-packages.index'));
         }
 
         $input = $request->only([
@@ -137,7 +137,7 @@ class TopupPackageController extends AppBaseController
 
         Flash::success('Topup Package updated successfully.');
 
-        return redirect(route('topupPackages.index'));
+        return redirect(route('topup-packages.index'));
     }
 
     /**
@@ -154,13 +154,13 @@ class TopupPackageController extends AppBaseController
         if (empty($topupPackage)) {
             Flash::error('Topup Package not found');
 
-            return redirect(route('topupPackages.index'));
+            return redirect(route('topup-packages.index'));
         }
 
         $this->topupPackageRepository->delete($id);
 
         Flash::success('Topup Package deleted successfully.');
 
-        return redirect(route('topupPackages.index'));
+        return redirect(route('topup-packages.index'));
     }
 }

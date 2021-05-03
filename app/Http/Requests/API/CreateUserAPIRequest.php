@@ -5,7 +5,7 @@ namespace App\Http\Requests\API;
 use App\User;
 use InfyOm\Generator\Request\APIRequest;
 
-class UpdateUserAPIRequest extends APIRequest
+class CreateUserAPIRequest extends APIRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,6 @@ class UpdateUserAPIRequest extends APIRequest
      */
     public function rules()
     {
-        $rules = User::$rules;
-        
-        return $rules;
+        return User::$rules;
     }
 }

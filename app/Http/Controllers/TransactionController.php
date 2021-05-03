@@ -23,12 +23,12 @@ class TransactionController extends AppBaseController
     /**
      * Display a listing of the PointTransaction.
      *
-     * @param PointTransactionDataTable $pointTransactionDataTable
+     * @param PointTransactionDataTable $transactionDataTable
      * @return Response
      */
-    public function index(TransactionDataTable $pointTransactionDataTable)
+    public function index(TransactionDataTable $transactionDataTable)
     {
-        return $pointTransactionDataTable->render('transactions.index');
+        return $transactionDataTable->render('transactions.index');
     }
 
     /**
@@ -57,7 +57,7 @@ class TransactionController extends AppBaseController
             'status',
         ]);
 
-        $pointTransaction = $this->TransactionRepository->create($input);
+        $transaction = $this->TransactionRepository->create($input);
 
         Flash::success('Transaction saved successfully.');
 
@@ -73,15 +73,15 @@ class TransactionController extends AppBaseController
      */
     public function show($id)
     {
-        $pointTransaction = $this->TransactionRepository->find($id);
+        $transaction = $this->TransactionRepository->find($id);
 
-        if (empty($pointTransaction)) {
+        if (empty($transaction)) {
             Flash::error('Transaction not found');
 
             return redirect(route('transactions.index'));
         }
 
-        return view('transactions.show')->with('pointTransaction', $pointTransaction);
+        return view('transactions.show')->with('transaction', $transaction);
     }
 
     /**
@@ -93,15 +93,15 @@ class TransactionController extends AppBaseController
      */
     public function edit($id)
     {
-        $pointTransaction = $this->TransactionRepository->find($id);
+        $transaction = $this->TransactionRepository->find($id);
 
-        if (empty($pointTransaction)) {
+        if (empty($transaction)) {
             Flash::error('Transaction not found');
 
             return redirect(route('transactions.index'));
         }
 
-        return view('transactions.edit')->with('pointTransaction', $pointTransaction);
+        return view('transactions.edit')->with('transaction', $transaction);
     }
 
     /**
@@ -114,9 +114,9 @@ class TransactionController extends AppBaseController
      */
     public function update($id, UpdateTransactionRequest $request)
     {
-        $pointTransaction = $this->TransactionRepository->find($id);
+        $transaction = $this->TransactionRepository->find($id);
 
-        if (empty($pointTransaction)) {
+        if (empty($transaction)) {
             Flash::error('Transaction not found');
 
             return redirect(route('transactions.index'));
@@ -129,7 +129,7 @@ class TransactionController extends AppBaseController
             'status',
         ]);
 
-        $pointTransaction = $this->TransactionRepository->update($input, $id);
+        $transaction = $this->TransactionRepository->update($input, $id);
 
         Flash::success('Transaction updated successfully.');
 
@@ -145,9 +145,9 @@ class TransactionController extends AppBaseController
      */
     public function destroy($id)
     {
-        $pointTransaction = $this->TransactionRepository->find($id);
+        $transaction = $this->TransactionRepository->find($id);
 
-        if (empty($pointTransaction)) {
+        if (empty($transaction)) {
             Flash::error('Transaction not found');
 
             return redirect(route('transactions.index'));

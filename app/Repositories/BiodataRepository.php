@@ -44,4 +44,9 @@ class BiodataRepository extends BaseRepository
                     ->select('id', 'user_id', 'fullname')
                     ->first();
     }
+
+    public function firstOrCreate(array $param, array $fields)
+    {
+        return $this->model->firstOrCreate($param, $fields);
+    }
 }

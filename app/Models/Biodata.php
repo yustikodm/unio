@@ -76,4 +76,10 @@ class Biodata extends Model
   {
     return $this->belongsTo(User::class);
   }
+
+  public static function firstOrCreate($param, $fields)
+  {
+    dd('oke12');
+    // return static::firstOrCreate($param, $fields);
+  }
 }

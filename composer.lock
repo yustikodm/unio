@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7edec21d392a7120928656f01d5140a4",
+    "content-hash": "aae227e264c2c5ddbb3b20fb92dca9cd",
     "packages": [
         {
             "name": "appointer/swaggervel",
@@ -1775,13 +1775,10 @@
                 "framework",
                 "laravel"
             ],
-<<<<<<< HEAD
             "support": {
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-=======
->>>>>>> origin/master
             "time": "2021-04-28T14:38:32+00:00"
         },
         {
@@ -4482,13 +4479,10 @@
                 "swagger",
                 "ui"
             ],
-<<<<<<< HEAD
             "support": {
                 "issues": "https://github.com/swagger-api/swagger-ui/issues",
                 "source": "https://github.com/swagger-api/swagger-ui/tree/v3.48.0"
             },
-=======
->>>>>>> origin/master
             "time": "2021-04-29T22:10:35+00:00"
         },
         {
@@ -6743,6 +6737,51 @@
             "time": "2021-01-20T14:39:46+00:00"
         },
         {
+            "name": "xendit/xendit-php",
+            "version": "2.10.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/xendit/xendit-php.git",
+                "reference": "e4df989aac9e71512a544e7cb69f863d51adcfe3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/xendit/xendit-php/zipball/e4df989aac9e71512a544e7cb69f863d51adcfe3",
+                "reference": "e4df989aac9e71512a544e7cb69f863d51adcfe3",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "guzzlehttp/guzzle": ">=6.0",
+                "php": ">=7.2.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^8.5.13",
+                "squizlabs/php_codesniffer": "~3.5",
+                "vlucas/phpdotenv": "^4.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Xendit\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "PHP clients for Xendit API",
+            "homepage": "https://github.com/xendit/xendit-php",
+            "keywords": [
+                "xendit"
+            ],
+            "support": {
+                "issues": "https://github.com/xendit/xendit-php/issues",
+                "source": "https://github.com/xendit/xendit-php/tree/2.10.0"
+            },
+            "time": "2021-03-10T08:46:31+00:00"
+        },
+        {
             "name": "yajra/laravel-datatables-buttons",
             "version": "v4.13.0",
             "source": {
@@ -7418,14 +7457,11 @@
                 "dependency",
                 "package"
             ],
-<<<<<<< HEAD
             "support": {
                 "irc": "irc://irc.freenode.org/composer",
                 "issues": "https://github.com/composer/composer/issues",
                 "source": "https://github.com/composer/composer/tree/2.0.13"
             },
-=======
->>>>>>> origin/master
             "funding": [
                 {
                     "url": "https://packagist.com",
@@ -7463,40 +7499,6 @@
                 "composer/composer": "^2",
                 "phpstan/phpstan": "^0.12.55",
                 "symfony/phpunit-bridge": "^4.2 || ^5"
-<<<<<<< HEAD
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-main": "1.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Composer\\MetadataMinifier\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jordi Boggiano",
-                    "email": "j.boggiano@seld.be",
-                    "homepage": "http://seld.be"
-                }
-            ],
-            "description": "Small utility library that handles metadata minification and expansion.",
-            "keywords": [
-                "composer",
-                "compression"
-            ],
-            "support": {
-                "issues": "https://github.com/composer/metadata-minifier/issues",
-                "source": "https://github.com/composer/metadata-minifier/tree/1.0.0"
-=======
->>>>>>> origin/master
             },
             "type": "library",
             "extra": {
@@ -10162,5 +10164,5 @@
         "php": "^7.2"
     },
     "platform-dev": [],
-    "plugin-api-version": "1.1.0"
+    "plugin-api-version": "2.0.0"
 }

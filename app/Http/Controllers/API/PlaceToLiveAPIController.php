@@ -101,7 +101,7 @@ class PlaceToLiveAPIController extends AppBaseController
    *
    * @return Response
    */
-  public function update($id, UpdatePlaceToLiveAPIRequest $request)
+  public function update($id, Request $request)
   {
     $input = $request->only([
       'country_id',

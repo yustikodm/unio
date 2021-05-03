@@ -26,13 +26,16 @@ class TopupHistoryDataTable extends DataTable
             ->editColumn('country.name', function ($query) {
                 return '<a href="' . route('countries.show', $query->country->id) . '">' . $query->country->name . '</a>';
             })
+            ->editColumn('package.name', function ($query) {
+                return '<a href="' . route('topup-packages.show', $query->package->id) . '">' . $query->package->name . '</a>';
+            })
             ->editColumn('user.username', function ($query) {
                 return '<a href="' . route('users.show', $query->user->id) . '">' . $query->user->username . '</a>';
             })
             ->editColumn('created_at', function ($query) {
                 return Carbon::parse($query->created_at)->format('d/m/Y H:i');
             })
-            ->rawColumns(['action', 'country.name', 'created_at', 'user.username']);
+            ->rawColumns(['action', 'country.name', 'created_at', 'user.username', 'package.name']);
     }
 
     /**
@@ -43,7 +46,7 @@ class TopupHistoryDataTable extends DataTable
      */
     public function query(TopupHistory $model)
     {
-        return $model->newQuery()->with(['user']);
+        return $model->newQuery()->with(['user', 'country', 'package']);
     }
 
     /**
@@ -81,7 +84,7 @@ class TopupHistoryDataTable extends DataTable
         return [
             Column::make('created_at')->title('Date')->width('15%'),
             Column::make('amount')->title('Amount')->width('25%'),
-            Column::make('point_conversion')->title('Conversion')->width('15%'),
+            Column::make('package.name')->title('Package')->width('15%'),
             Column::make('country.name')->title('Country')->width('20%'),
             Column::make('user.username')->title('Username')->width('15%'),
         ];

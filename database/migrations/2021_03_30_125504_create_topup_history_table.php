@@ -19,7 +19,7 @@ class CreateTopupHistoryTable extends Migration
       $table->bigInteger('country_id')->unsigned();
       $table->bigInteger('package_id')->unsigned();
       $table->string('code')->unique()->nullable();
-      $table->integer('amount');
+      $table->integer('amount')->default(1);
       $table->timestamps();
       $table->softDeletes();
       $table->foreign('user_id')->references('id')->on('users');
