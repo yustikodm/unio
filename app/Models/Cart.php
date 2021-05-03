@@ -35,6 +35,8 @@ class Cart extends Model
         'entity_id',
         'entity_type',
         'qty',
+        'price',
+        'total_price',
     ];
 
     /**
@@ -48,6 +50,8 @@ class Cart extends Model
         'entity_id' => 'integer',
         'entity_type' => 'string',
         'qty' => 'integer',
+        'price' => 'integer',
+        'total_price' => 'integer',
     ];
 
     /**
@@ -60,6 +64,17 @@ class Cart extends Model
         'entity_id' => 'required|integer',
         'entity_type' => 'required|string',
         'qty' => 'required|integer',
+        'created_at' => 'nullable',
+        'updated_at' => 'nullable',
+        'deleted_at' => 'nullable'
+    ];
+
+    /**
+     * Validation rules
+     *
+     * @var array
+     */
+    public static $editRules = [        
         'created_at' => 'nullable',
         'updated_at' => 'nullable',
         'deleted_at' => 'nullable'

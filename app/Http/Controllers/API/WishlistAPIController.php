@@ -35,8 +35,18 @@ class WishlistAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        //$wishlists = $this->wishlistRepository->paginate(15);
-        //return $this->sendResponse($wishlists, 'Wishlists retrieved successfully');
+        // $search = [];
+
+        // if ($request->user_id) {
+        //     $search = array_merge($search, [
+        //         'user_id' => $request->user_id,    
+        //     ]);
+        // }
+
+        // $wishlists = $this->wishlistRepository->paginate(15, [], $search);
+        // foreach ($wishlists as $row) {            
+        // }
+        // return $this->sendResponse($wishlists, 'Wishlists retrieved successfully');
         $query = Wishlist::query()->where('user_id', $request->input('user_id'));
 
         switch ($request->input('entity_type')) {
@@ -73,13 +83,23 @@ class WishlistAPIController extends AppBaseController
             'user_id',
         ]);
 
+        $query = Wishlist::query()
+                        ->where('user_id', $input['user_id'])
+                        ->where('entity_type', $input['entity_type'])
+                        ->where('entity_id', $input['entity_id']);
+
+        if(!empty($query)){
+            return Response::json(['message' => "you've bookmarked it", "success" => false], 200);
+            // return $this->sendError("you've bookmarked it");
+        }
+
         if (!in_array($input['entity_type'], ['vendors', 'services', 'universities', 'majors'])) {
-            return $this->sendError('Error insert data to wishlist!');
+            return $this->sendError('Entity Type is Not registered!');
         }
 
         $wishlist = $this->wishlistRepository->create($input);
 
-        return $this->sendResponse(new WishlistResource($wishlist), 'Wishlist saved successfully');
+        return $this->sendResponse(new WishlistResource($wishlist), 'Bookmarked successfully');
     }
 
     /**

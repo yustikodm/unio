@@ -45,6 +45,22 @@ class UniversityMajorResource extends JsonResource
       ]);
     }
 
+    if (!empty($this->f_id)) {
+      $output = array_merge($output, [
+        'faculty' => [
+          'id' => $this->f_id,
+          'name' => $this->f_name,
+          'description' => $this->f_description,
+          'created_at' => Carbon::parse($this->u_created_at)->format('d/m/Y H:i:s'),
+          'updated_at' => Carbon::parse($this->u_updated_at)->format('d/m/Y H:i:s')
+        ]
+      ]);
+    } else {
+      $output = array_merge($output, [
+        'faculty' => new UniversityFacultiesResource($this->faculty)
+      ]);
+    }
+
     if (!empty($this->c_id)) {
       $output = array_merge($output, [
         'country' => [

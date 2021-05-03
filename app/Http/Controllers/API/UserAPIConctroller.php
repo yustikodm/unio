@@ -87,6 +87,8 @@ class UserAPIConctroller extends AppBaseController
             $input = $request->only([
                 // User field
                 'username',
+                'email',
+                'password',
                 'phone',
                 'image_path',
 
@@ -103,6 +105,9 @@ class UserAPIConctroller extends AppBaseController
                 'identity_number',
                 'religion',
             ]);
+            if(!empty($input['password'])){
+                $input['password'] = Hash::make($input['password']);
+            }            
 
             $this->userRepository->update($id, $input);
 

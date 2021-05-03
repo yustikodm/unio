@@ -24,7 +24,7 @@ class UpdateCartAPIRequest extends APIRequest
      */
     public function rules()
     {
-        $rules = Cart::$rules;
+        $rules = Cart::$editRules;
         
         return $rules;
     }
