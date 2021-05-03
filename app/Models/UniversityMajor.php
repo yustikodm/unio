@@ -28,7 +28,7 @@ class UniversityMajor extends Model
 
   protected $dates = ['deleted_at'];
 
-  protected $with = ['university'];
+  protected $with = ['university', 'faculty'];
 
   public $fillable = [
     'university_id',

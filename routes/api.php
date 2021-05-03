@@ -82,7 +82,7 @@ Route::resource('university-fees', 'UniversityFeeAPIController');
 
 Route::resource('university-majors', 'UniversityMajorAPIController');
 
-Route::resource('master-majors', 'UniversityMajorAPIController');
+Route::resource('master-majors', 'MasterMajorAPIController');
 
 Route::resource('university-requirements', 'UniversityRequirementAPIController');
 

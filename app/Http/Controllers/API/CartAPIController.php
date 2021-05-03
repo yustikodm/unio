@@ -64,6 +64,8 @@ class CartAPIController extends AppBaseController
             'entity_id',
             'entity_type',
             'qty',
+            'price',
+            'total_price',
         ]);
 
         $cart = $this->cartRepository->create($input);
@@ -107,6 +109,8 @@ class CartAPIController extends AppBaseController
             'entity_id',
             'entity_type',
             'qty',
+            'price',
+            'total_price',
         ]);
 
         /** @var Cart $cart */
