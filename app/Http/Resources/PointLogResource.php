@@ -17,8 +17,8 @@ class PointLogResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'parent' => new UserResource($this->parent),
-            'transaction_id' => new TransactionResource($this->transaction),
+            'user' => new UserResource($this->user),
+            'transaction' => new TransactionResource($this->transaction),
             'type' => $this->type,
             'point_before' => $this->point_before,
             'point_amount' => $this->point_amount,

@@ -27,7 +27,7 @@ class PointLogAPIController extends AppBaseController
     public function __construct(PointLogRepository $pointLogRepo, FamilyRepository $familyRepo)
     {
         $this->pointLogRepository = $pointLogRepo;
-
+        
         $this->familyRepository = $familyRepo;
     }
 
