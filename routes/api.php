@@ -59,6 +59,8 @@ Route::group(['middleware' => ['auth:api']], function () {
   Route::get('carts/current', 'CartAPIController@current');
 
   Route::resource('carts', 'CartAPIController');
+
+  Route::post('checkout', 'CheckoutAPIController@checkout');
   
   Route::get('point/families/{userId}', 'PointLogAPIController@familyPoint');
 
@@ -69,7 +71,17 @@ Route::group(['middleware' => ['auth:api']], function () {
   Route::get('xendit/list-va', 'XenditAPIController@getListVA');
   
   Route::get('xendit/transaction/{method}/{id}', 'XenditAPIController@getTransaction');
+
+  Route::resource('transaction', 'TransactionAPIController');
+
+  Route::post('transaction-refund/{id}', 'TransactionAPIController@refund');
+
+  Route::post('transaction-refund/accept/{id}', 'TransactionAPIController@acceptRefund');
+
+  Route::post('transaction-refund/reject/{id}', 'TransactionAPIController@rejectRefund');
+  
 });
+Route::get('transaction-invoice/{id}', 'CheckoutAPIController@cetakInvoicePdf');
 
 Route::resource('articles', 'ArticleAPIController');
 

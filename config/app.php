@@ -174,6 +174,7 @@ return [
         Yajra\DataTables\HtmlServiceProvider::class,
         Yajra\DataTables\ButtonsServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
         /*
          * Application Service Providers...
@@ -242,6 +243,7 @@ return [
         'Flash'        => Laracasts\Flash\Flash::class,
         'DataTables'   => Yajra\DataTables\Facades\DataTables::class,
         'Socialite'    => Laravel\Socialite\Facades\Socialite::class,
+        'PDF'          => Barryvdh\DomPDF\Facade::class,
     ],
 
 ];

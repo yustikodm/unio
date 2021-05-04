@@ -17,11 +17,8 @@ class WishlistRepository extends BaseRepository
      * @var array
      */
     protected $fieldSearchable = [
-        'university_id',
-        'major_id',
-        'service_id',
-        'user_id',
-        'description'
+        'entity_type',        
+        'user_id'        
     ];
 
     /**

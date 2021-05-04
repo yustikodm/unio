@@ -5,6 +5,7 @@ namespace App\Models;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class PointLog
@@ -25,7 +26,7 @@ class PointLog extends Model
     'transaction_id',
     'transaction_type',
     'point_before',
-    'point_amount',
+    // 'point_amount',
     'point_after'
   ];
 
@@ -40,7 +41,7 @@ class PointLog extends Model
     'transaction_id' => 'integer',
     'transaction_type' => 'string',
     'point_before' => 'integer',
-    'point_amount' => 'integer',
+    // 'point_amount' => 'integer',
     'point_after' => 'integer',
   ];
 
@@ -54,7 +55,7 @@ class PointLog extends Model
     'transaction_id' => 'required|integer',
     'transaction_type' => 'required|string',
     'point_before' => 'required',
-    'point_amount' => 'required',
+    // 'point_amount' => 'required',
     'point_after' => 'required',
   ];
 
@@ -87,5 +88,10 @@ class PointLog extends Model
     return static::where('user_id', $userId)
       ->latest('point_log.created_at')
       ->first();
+  }
+
+  public static function insertLog($input)
+  {
+    return DB::table('point_log')->insert($input);
   }
 }

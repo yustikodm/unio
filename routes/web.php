@@ -105,9 +105,13 @@ Route::group(['middleware' => ['auth']], function () {
 
   Route::resource('place-to-live', 'PlaceToLiveController');
 
-  Route::resource('point-logs', 'PointLogController')->only('index', 'store');
+  Route::resource('point-logs', 'PointLogController')->only('index', 'store');  
   
 });
+
+Route::post('transaction-refund/accept/{id}', 'TransactionController@acceptRefund');
+
+Route::post('transaction-refund/reject/{id}', 'TransactionController@rejectRefund');
 
 Route::get('coba', 'TestController@index');
 
