@@ -77,6 +77,13 @@ class Biodata extends Model
     return $this->belongsTo(User::class);
   }
 
+  public static function findByUser($user_id)
+  {
+    return static::where('user_id', $user_id)
+                ->join('users', 'users.id', 'biodata.user_id')
+                ->first();
+  }
+
   public static function firstOrCreate($param, $fields)
   {
     dd('oke12');

@@ -4,6 +4,10 @@ namespace App\Repositories;
 
 use App\Models\TopupHistory;
 use App\Repositories\BaseRepository;
+use Xendit\Balance;
+use Xendit\Cards;
+use Xendit\VirtualAccounts;
+use Xendit\Xendit;
 
 /**
  * Class TopupHistoryRepository
@@ -17,7 +21,10 @@ class TopupHistoryRepository extends BaseRepository
      * @var array
      */
     protected $fieldSearchable = [
-        
+        'user_id',
+        'country_id',
+        'package_id',
+        'amount',
     ];
 
     /**
@@ -36,5 +43,12 @@ class TopupHistoryRepository extends BaseRepository
     public function model()
     {
         return TopupHistory::class;
+    }
+
+    public function save($input)
+    {
+        $input['code'] = $input['method'].bin2hex($input['user_id']).time();
+
+        return $this->create($input);
     }
 }

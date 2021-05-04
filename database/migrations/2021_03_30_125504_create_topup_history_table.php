@@ -20,6 +20,9 @@ class CreateTopupHistoryTable extends Migration
       $table->bigInteger('package_id')->unsigned();
       $table->string('code')->unique()->nullable();
       $table->integer('amount')->default(1);
+      $table->char('payment_method')->nullable();
+      $table->string('payment_trans', 255)->nullable();
+      $table->smallIncrements('status')->default(0);
       $table->timestamps();
       $table->softDeletes();
       $table->foreign('user_id')->references('id')->on('users');

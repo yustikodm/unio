@@ -1,5 +1,6 @@
 <?php
 
+use App\Repositories\XenditRepository;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -62,6 +63,12 @@ Route::group(['middleware' => ['auth:api']], function () {
   Route::get('point/families/{userId}', 'PointLogAPIController@familyPoint');
 
   Route::resource('points', 'PointLogAPIController')->only(['index', 'store', 'show']);
+  
+  Route::resource('topup-history', 'TopupHistoryAPIController');
+  
+  Route::get('xendit/list-va', 'XenditAPIController@getListVA');
+  
+  Route::get('xendit/transaction/{method}/{id}', 'XenditAPIController@getTransaction');
 });
 
 Route::resource('articles', 'ArticleAPIController');

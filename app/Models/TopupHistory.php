@@ -27,6 +27,9 @@ class TopupHistory extends Model
     'package_id',
     'code',
     'amount',
+    'payment_method',
+    'payment_trans',
+    'status'
   ];
 
   /**
@@ -41,6 +44,9 @@ class TopupHistory extends Model
     'package_id' => 'integer',
     'code' => 'string',
     'amount' => 'integer',
+    'payment_method' => 'string',
+    'payment_trans' => 'string',
+    'status'
   ];
 
   /**
@@ -53,6 +59,10 @@ class TopupHistory extends Model
     'country_id' => 'required|integer',
     'package_id' => 'required|integer',
     'amount' => 'nullable',
+    'code' => 'nullable',
+    'payment_method' => 'nullable',
+    'payment_trans' => 'nullable',
+    'status' => 'nullable'
   ];
 
   public function user()

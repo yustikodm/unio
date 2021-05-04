@@ -40,9 +40,7 @@ class BiodataRepository extends BaseRepository
 
     public function findByUser($user_id)
     {
-        return Biodata::where('user_id', $user_id)
-                    ->select('id', 'user_id', 'fullname')
-                    ->first();
+        return $this->model->findByUser($user_id);
     }
 
     public function firstOrCreate(array $param, array $fields)
