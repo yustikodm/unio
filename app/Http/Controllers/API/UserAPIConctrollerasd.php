@@ -103,54 +103,42 @@ class UserAPIConctroller extends AppBaseController
 
         try {
 
-            $input = $request->only([
-                // User field
-                'username',
-                'email',
-                'password',
-                'phone',
-                'image_path',
+            $this->userRepository->update($user->id, $input);
 
-                // Biodata field
-                'name', # as fullname
-                'fullname',
-                'address',
-                'gender',
-                'picture',
-                'school_origin',
-                'graduation_year',
-                'birth_place',
-                'birth_date',
-                'identity_number',
-                'religion',
-            ]);
-            if(!empty($input['password'])){
-                $input['password'] = Hash::make($input['password']);
-            }            
+            // $this->biodataRepository->firstOrCreate(['user_id' => $user->id], [
+            //     'fullname' => $input['name'],
+            //     'address' => $input['address'],
+            //     'gender' => $input['gender'],
+            //     'picture' => $input['picture'],
+            //     'school_origin' => $input['school_origin'],
+            //     'graduation_year' => $input['graduation_year'],
+            //     'birth_place' => $input['birth_place'],
+            //     'birth_date' => $input['birth_date'],
+            //     'identity_number' => $input['identity_number'],
+            //     'religion' => $input['religion'],
+            // ]);
 
-            $this->userRepository->update($id, $input);
+            // $biodata = $this->biodataRepository->findByUser($user->id);
 
-            $biodata = $this->biodataRepository->findByUser($user->id);
+            // if (empty($biodata)) {
+            //     $this->biodataRepository->create([
+            //         'fullname' => $input['name'],
+            //         'address' => $input['address'],
+            //         'gender' => $input['gender'],
+            //         'picture' => $input['picture'],
+            //         'school_origin' => $input['school_origin'],
+            //         'graduation_year' => $input['graduation_year'],
+            //         'birth_place' => $input['birth_place'],
+            //         'birth_date' => $input['birth_date'],
+            //         'identity_number' => $input['identity_number'],
+            //         'religion' => $input['religion'],
+            //     ]);
+            // } else {
+            //     // Pointing field
+            //     $input['fullname'] = empty($input['name']) ? $input['fullname'] : $input['name'];
 
-            if (empty($biodata)) {
-                $this->biodataRepository->create([
-                    'fullname' => $input['name'],
-                    'address' => $input['address'],
-                    'gender' => $input['gender'],
-                    'picture' => $input['picture'],
-                    'school_origin' => $input['school_origin'],
-                    'graduation_year' => $input['graduation_year'],
-                    'birth_place' => $input['birth_place'],
-                    'birth_date' => $input['birth_date'],
-                    'identity_number' => $input['identity_number'],
-                    'religion' => $input['religion'],
-                ]);
-            } else {
-                // Pointing field
-                $input['fullname'] = empty($input['name']) ? $input['fullname'] : $input['name'];
-
-                $biodata->update($input);
-            }
+            //     $biodata->update($input);
+            // }
         } catch (Exception $error) {
 
             return $this->sendError('Error updating data into database!', $error->getMessage());

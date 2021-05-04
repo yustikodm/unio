@@ -244,9 +244,22 @@ f{{-- Dashboard --}}
 </li>
 @endcan
 
-@can('topup-history.index')
-<li class="{{ Request::is('topup-history*') ? 'active' : '' }}">
-    <a href="{{ route('topup-history.index') }}"><i class="fa fa-upload"></i><span>Topup History</span></a>
+@can(['topup-history.index', 'topup-packages.index'])
+<li class="treeview {{ Request::is('topup-packages*') || Request::is('topup-history*') ? 'active menu-open' : '' }}">
+    <a href="#">
+        <i class="fa fa-user"></i><span>Top up</span>
+        <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+        </span>
+    </a>
+    <ul class="treeview-menu">
+        <li class="{{ Request::is('topup-history*') ? 'active' : '' }}">
+            <a href="{{ route('topup-history.index') }}"><i class="fa fa-circle-thin"></i><span>Topup History</span></a>
+        </li>
+        <li class="{{ Request::is('topup-packages*') ? 'active' : '' }}">
+            <a href="{{ route('topup-packages.index') }}"><i class="fa fa-circle-thin"></i><span>Topup Packages</span></a>
+        </li>
+    </ul>
 </li>
 @endcan
 

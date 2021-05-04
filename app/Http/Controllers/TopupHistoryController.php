@@ -66,7 +66,6 @@ class TopupHistoryController extends AppBaseController
       'user_id',
       'country_id',
       'package_id',
-      'code',
       'amount',
     ]);
 
@@ -195,5 +194,12 @@ class TopupHistoryController extends AppBaseController
     Flash::success('Point Topup deleted successfully.');
 
     return redirect(route('topup-history.index'));
+  }
+
+  public function getListVA()
+  {
+    // $listVA = $this->topupHistoryRepository->getListVA();
+
+    
   }
 }

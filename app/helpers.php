@@ -1,6 +1,7 @@
 <?php
 
-use App\Models\User;
+use App\Models\Biodata;
+use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -67,6 +68,11 @@ function getRandomColor($userId)
     $index = $userId % 5;
 
     return $colors[$index];
+}
+
+function biodata($userId)
+{
+    return Biodata::findByUser($userId);
 }
 
 /**

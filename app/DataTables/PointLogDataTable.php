@@ -21,17 +21,16 @@ class PointLogDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->editColumn('parent_id', function ($query) {
-                    //   $user = User::find($query->parent_id);
-                      return '<a href="'.route('users.show', $query->parent->id).'">'.$query->parent->username.'</a>';
+        return $dataTable->editColumn('user.username', function ($query) {
+                      return '<a href="'.route('users.show', $query->user->id).'">'.$query->user->username.'</a>';
                   })
                   ->editColumn('created_at', function ($query) {
                       return Carbon::parse($query->created_at)->format('d/m/Y H:i');
                   })
                   ->editColumn('transaction_type', function ($query) {
-                      return '<a href="'.route('point-transactions.show', $query->transaction->id).'">'.strtoupper($query->transaction_type).'</a>';
+                      return '<a href="'.route('transactions.show', $query->transaction->id).'">'.strtoupper($query->type).'</a>';
                   })
-                  ->rawColumns(['parent_id', 'created_at', 'transaction_type']);
+                  ->rawColumns(['user.username', 'created_at', 'transaction_type']);
     }
 
     /**
@@ -80,8 +79,9 @@ class PointLogDataTable extends DataTable
             Column::make('created_at')->title('Trans. Date')->width('10%'),
             Column::make('transaction_type')->title('Transaction')->width('25%'),
             Column::make('point_before')->title('Point Before')->width('10%'),
+            Column::make('point_amount')->title('Point Amount')->width('10%'),
             Column::make('point_after')->title('Point After')->width('10%'),
-            Column::make('parent_id')->title('Parent User')->width('10%'),
+            Column::make('user.username')->title('Parent User')->width('10%'),
         ];
     }
 

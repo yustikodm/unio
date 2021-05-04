@@ -65,7 +65,7 @@ class AuthAPIController extends AppBaseController
       ]);
     }
 
-    $this->userRepository->update($user->id, ['api_token' => Str::random(100)]);
+    $this->userRepository->loginApi($user->id);
     
     Auth::login($user);
     

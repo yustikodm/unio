@@ -100,6 +100,8 @@ Route::group(['middleware' => ['auth']], function () {
   Route::resource('transactions', 'TransactionController');
 
   Route::resource('topup-history', 'TopupHistoryController');
+  
+  Route::resource('topup-packages', 'TopupPackageController');
 
   Route::resource('place-to-live', 'PlaceToLiveController');
 

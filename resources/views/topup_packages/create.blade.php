@@ -10,13 +10,9 @@
         @include('adminlte-templates::common.errors')
         <div class="box box-primary">
             <div class="box-body">
-                <div class="row">
-                    {!! Form::open(['route' => 'topupPackages.store']) !!}
-
-                        @include('topup_packages.fields')
-
-                    {!! Form::close() !!}
-                </div>
+                {!! Form::open(['route' => 'topup-packages.store', 'class' => 'form-horizontal']) !!}
+                    @include('topup_packages.fields')
+                {!! Form::close() !!}
             </div>
         </div>
     </div>

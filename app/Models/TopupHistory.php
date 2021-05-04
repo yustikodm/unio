@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\User;
+use Composer\Package\Package;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -26,6 +27,9 @@ class TopupHistory extends Model
     'package_id',
     'code',
     'amount',
+    'payment_method',
+    'payment_trans',
+    'status'
   ];
 
   /**
@@ -40,6 +44,9 @@ class TopupHistory extends Model
     'package_id' => 'integer',
     'code' => 'string',
     'amount' => 'integer',
+    'payment_method' => 'string',
+    'payment_trans' => 'string',
+    'status'
   ];
 
   /**
@@ -51,8 +58,11 @@ class TopupHistory extends Model
     'user_id' => 'required|integer',
     'country_id' => 'required|integer',
     'package_id' => 'required|integer',
-    'code' => 'required|unique:topup_history,code',
-    'amount' => 'required',
+    'amount' => 'nullable',
+    'code' => 'nullable',
+    'payment_method' => 'nullable',
+    'payment_trans' => 'nullable',
+    'status' => 'nullable'
   ];
 
   public function user()
@@ -63,5 +73,10 @@ class TopupHistory extends Model
   public function country()
   {
     return $this->belongsTo(Country::class);
+  }
+
+  public function package()
+  {
+    return $this->belongsTo(TopupPackage::class);
   }
 }

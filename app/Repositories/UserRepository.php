@@ -193,4 +193,15 @@ class UserRepository extends BaseRepository
       return new ApiOperationFailedException('Unable to Update Profile' . $e->getMessage(), $e->getCode());
     }
   }
+
+  public function loginApi($userId)
+  {
+    $user = $this->model->find($userId);
+
+    abort_if(!$user, 404, 'User not found!');
+
+    $user->update(['api_token' => Str::random(100)]);
+
+    return true;
+  }
 }

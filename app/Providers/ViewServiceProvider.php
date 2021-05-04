@@ -6,7 +6,7 @@ use App\Models\District;
 use App\Models\Questionnaire;
 use App\Models\State;
 use App\Models\Country;
-
+use App\Models\TopupPackage;
 use App\Models\University;
 use App\Models\UniversityFaculties;
 use App\Models\UniversityMajor;
@@ -203,6 +203,12 @@ class ViewServiceProvider extends ServiceProvider
     View::composer(['topup_history.fields'], function ($view) {
       $countryItems = Country::pluck('name', 'id')->toArray();
       $view->with('countryItems', $countryItems);
+    });
+
+    // Point Top Up - List Packages
+    View::composer(['topup_history.fields'], function ($view) {
+      $packageItems = TopupPackage::pluck('name', 'id')->toArray();
+      $view->with('packageItems', $packageItems);
     });
 
     // Biodata - User List
