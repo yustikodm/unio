@@ -9,6 +9,10 @@ use App\Http\Requests\UpdateTransactionRequest;
 use App\Repositories\TransactionRepository;
 use Laracasts\Flash\Flash;
 use App\Http\Controllers\AppBaseController;
+use App\Models\Transaction;
+use App\Models\Family;
+use App\User;
+use App\Models\PointLog;
 
 class TransactionController extends AppBaseController
 {
@@ -158,5 +162,56 @@ class TransactionController extends AppBaseController
         Flash::success('Transaction deleted successfully.');
 
         return redirect(route('transactions.index'));
+    }
+
+    public function acceptRefund($id){
+        // return $id;        
+        $transaction = $this->TransactionRepository->find($id);
+
+        if (empty($transaction)) {
+            return $this->sendError('Transaction not found');
+        }
+
+        if ($transaction->status != "Refund") {
+            // return $this->sendError('Transaction Status is not valid');
+            return Response::json(['message' => "Transaction Status is not valid", "success" => false], 200);
+        }
+
+        $input = [
+            "status" => "Accept Refund"
+        ];
+
+        $transaction = $this->TransactionRepository->update($input, $id);
+
+        $user = User::query()->where('id', $transaction->user_id)->with("roles")->first();
+        $parent = NULL;
+        if($user->roles[0]->name == "Student"){
+            $family = Family::query()->where('parent_id', $transaction->user_id)->first();
+            if(empty($family)){
+                $parent = $transaction->user_id;
+            }else{
+                $parent = $family->parent_id;
+            }
+        }else{
+            $parent = $transaction->user_id;
+        } 
+
+        $userPoint = PointLog::where("perent_id", $parent)->where("transaction_id", $id)->where("transaction_type", "service")->last()->point_after;
+
+        $logPoin = [
+          "parent_id" => $parent,
+          "transaction_id" => $id,
+          "transaction_type" => "refund service",
+          "point_before" => intval($userPoint),
+          "point_after" => intval($userPoint) + intval($transaction->grand_total),
+        ];
+
+        PointLog::insertLog($logPoin);
+
+        return $this->sendResponse('refund transaction is approved');
+    }
+
+    public function rejectRefund($id){
+        
     }
 }

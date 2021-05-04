@@ -58,11 +58,23 @@ Route::group(['middleware' => ['auth:api']], function () {
   Route::get('carts/current', 'CartAPIController@current');
 
   Route::resource('carts', 'CartAPIController');
+
+  Route::post('checkout', 'CheckoutAPIController@checkout');
   
   Route::get('point/families/{userId}', 'PointLogAPIController@familyPoint');
 
   Route::resource('points', 'PointLogAPIController')->only(['index', 'store', 'show']);
+
+  Route::resource('transaction', 'TransactionAPIController');
+
+  Route::post('transaction-refund/{id}', 'TransactionAPIController@refund');
+
+  Route::post('transaction-refund/accept/{id}', 'TransactionAPIController@acceptRefund');
+
+  Route::post('transaction-refund/reject/{id}', 'TransactionAPIController@rejectRefund');
+  
 });
+Route::get('transaction-invoice/{id}', 'CheckoutAPIController@cetakInvoicePdf');
 
 Route::resource('articles', 'ArticleAPIController');
 
