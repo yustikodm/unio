@@ -113,3 +113,7 @@ Route::resource('vendor-employees', 'VendorEmployeeAPIController');
 Route::resource('vendor-categories', 'VendorCategoryAPIController');
 
 Route::resource('place-to-lives', 'PlaceToLiveAPIController');
+
+Route::get('xendit/va/list', 'XenditAPITESTController@getListVa');
+
+Route::post('xendit/va/invoice', 'XenditAPITESTController@createVa');
