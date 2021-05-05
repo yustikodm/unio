@@ -80,8 +80,10 @@ Route::group(['middleware' => ['auth:api']], function () {
 
   Route::post('transaction-refund/reject/{id}', 'TransactionAPIController@rejectRefund');
   
+  Route::get('transaction-invoice/{id}', 'CheckoutAPIController@cetakInvoicePdf');
+  
 });
-Route::get('transaction-invoice/{id}', 'CheckoutAPIController@cetakInvoicePdf');
+
 
 Route::resource('articles', 'ArticleAPIController');
 
@@ -124,3 +126,5 @@ Route::resource('place-to-lives', 'PlaceToLiveAPIController');
 Route::get('xendit/va/list', 'XenditAPITESTController@getListVa');
 
 Route::post('xendit/va/invoice', 'XenditAPITESTController@createVa');
+
+Route::post('xendit/va/callback', 'XenditAPITESTController@callbackVa');

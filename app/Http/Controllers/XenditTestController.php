@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Xendit\Xendit;
 
+
 class XenditController extends Controller
 {
     private $token = "xnd_development_mt417RoNZoaUgSw295bI2d6gVKLE3fJmhkOtZh1RoGa04i9Nxs0eaxKbwOZsvLqF";
@@ -21,7 +22,6 @@ class XenditController extends Controller
 
     public function createVa(Request $request){
     	Xendit::setApiKey($this->token);
-
 	 	$params = [ 
 	    	"external_id" => \uniqid(),
 	    	"bank_code" => "BCA",
@@ -29,7 +29,7 @@ class XenditController extends Controller
 	  	];
 
 	  	$createVA = \Xendit\VirtualAccounts::create($params);
-	  	
+
 	  	return response()->json([
     		'data' => $createVA,
     	])->setStatusCode(200);
