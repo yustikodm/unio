@@ -60,20 +60,24 @@ class WishlistAPIController extends AppBaseController
                     SELECT w.*, j.name, j.description, j.picture, i.id detail_id, i.name detail_name FROM wishlists w 
                         JOIN vendor_services j ON j.id = w.entity_id 
                         JOIN vendors i ON i.id = j.vendor_id 
-                        WHERE entity_type = 'services' AND user_id = $user_id AND j.name LIKE '%$name%'
+                        WHERE w.entity_type = 'services' AND w.user_id = $user_id AND j.name LIKE '%$name%'
                     UNION ALL 
                     SELECT w.*, j.name, j.description, j.logo picture, '' detail_id, '' detail_name FROM wishlists w 
                         JOIN vendors j ON j.id = w.entity_id 
-                        WHERE entity_type = 'vendors' AND user_id = $user_id AND j.name LIKE '%$name%'
+                        WHERE w.entity_type = 'vendors' AND w.user_id = $user_id AND j.name LIKE '%$name%'
                     UNION ALL 
                     SELECT w.*, j.name, j.description, j.logo_src picture, '' detail_id, '' detail_name FROM wishlists w 
-                        JOIN universities j ON j.id = w.entity_id 
-                        WHERE entity_type = 'universities' AND user_id = $user_id AND j.name LIKE '%$name%'
+                        JOIN universities j ON j.id = w.entity_id
+                        WHERE w.entity_type = 'universities' AND w.user_id = $user_id AND j.name LIKE '%$name%'
                     UNION ALL 
                     SELECT w.*, j.name, j.description, i.logo_src picture, i.id detail_id, i.name detail_name FROM wishlists w 
                         JOIN university_majors j ON j.id = w.entity_id 
                         JOIN universities i ON i.id = j.university_id 
-                        WHERE entity_type = 'university_majors' AND user_id = $user_id AND j.name LIKE '%$name%'
+                        WHERE w.entity_type = 'majors' AND w.user_id = $user_id AND j.name LIKE '%$name%'
+                    UNION ALL 
+                    SELECT w.*, j.name, j.description, j.picture, '' detail_id, '' detail_name FROM wishlists w 
+                        JOIN place_to_live j ON j.id = w.entity_id 
+                        WHERE w.entity_type = 'place_lives' AND w.user_id = $user_id AND j.name LIKE '%$name%'
                     ) t $filter
             ")
         );       
@@ -100,14 +104,15 @@ class WishlistAPIController extends AppBaseController
         $query = Wishlist::query()
                         ->where('user_id', $input['user_id'])
                         ->where('entity_type', $input['entity_type'])
-                        ->where('entity_id', $input['entity_id']);
+                        ->where('entity_id', $input['entity_id'])
+                        ->get();
 
-        if(!empty($query)){
-            return Response::json(['message' => "you've bookmarked it", "success" => false], 200);
+        if(count($query) != 0){
+            return Response::json(['message' => "you've bookmarked it", "success" => false, "data" => $query], 200);
             // return $this->sendError("you've bookmarked it");
         }
 
-        if (!in_array($input['entity_type'], ['vendors', 'services', 'universities', 'majors'])) {
+        if (!in_array($input['entity_type'], ['vendors', 'services', 'universities', 'majors', 'place_lives'])) {
             return $this->sendError('Entity Type is Not registered!');
         }
 
@@ -137,7 +142,7 @@ class WishlistAPIController extends AppBaseController
 
         $wishlist->delete();
 
-        return $this->sendSuccess('asd Wishlist deleted successfully');
+        return $this->sendSuccess('Wishlist deleted successfully');
     }
 
     public function current()

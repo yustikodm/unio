@@ -72,4 +72,12 @@ class XenditAPITESTController extends AppBaseController
             ]);
         }
     }
+
+    public function createInvoice(Request $request){
+        
+    }
+
+    public function callbackInvoice(Request $request){
+        
+    }
 }
