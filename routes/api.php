@@ -20,6 +20,8 @@ Route::post('login', 'AuthAPIController@login');
 
 Route::get('verify/{id}', 'VerificationAPIController@verify');
 
+Route::get('resend-verify', 'VerificationAPIController@resend');
+
 Route::get('search', 'GlobalSearchAPIController@search');
 
 Route::group(['middleware' => ['auth:api']], function () {

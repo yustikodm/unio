@@ -8,6 +8,9 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class UniversityResource extends JsonResource
 {
+
+  // dd(th);
+
   /**
    * Transform the resource into an array.
    *
@@ -31,13 +34,13 @@ class UniversityResource extends JsonResource
       'updated_at' => Carbon::parse($this->updated_at)->format('d/m/Y H:i:s')
     ];
 
-    if (!empty($this->um_id)) {
+    if (!empty($this->major->id)) {
       $output = array_merge($output, [
         'major' => [
           'id' => $this->um_id,
           'university_id' => $this->um_university_id,
           'faculty_id' => $this->um_faculty_id,
-          'name' => $this->um_name,
+          'name_major' => $this->um_name,
           'description' => $this->um_description,
           'accreditation' => $this->um_accreditation,
           'level' => $this->um_level,

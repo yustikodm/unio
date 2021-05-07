@@ -83,7 +83,9 @@ class UniversityAPIController extends AppBaseController
     public function show($id)
     {
         /** @var University $university */
-        $university = $this->universityRepository->find($id);
+        //$university = $this->universityRepository->find($id);
+
+        $university = University::query()->where('id', $id)->with(['facility', "major", "fee", "requirement", "scholarship"])->first();
 
         if (empty($university)) {
             return $this->sendError('University not found');
