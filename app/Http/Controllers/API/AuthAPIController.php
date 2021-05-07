@@ -40,7 +40,7 @@ class AuthAPIController extends AppBaseController
     // Auth::login($user);
 
     // return $this->sendResponse(new UserResource($user), 'Account registered successfully');
-    return $this->sendResponse([], 'Account registered successfully');
+    return $this->sendResponse([], 'Account registered successfully, email verification has sended in your email addresss');
   }
 
   public function login(Request $request)
