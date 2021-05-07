@@ -19,7 +19,7 @@ class VendorServiceResource extends JsonResource
       'id' => $this->id,
       'name' => $this->name,
       'description' => $this->description,
-      'picture' => $this->picture,
+      'header_src' => $this->picture,
       'price' => $this->price,
       'created_at' => Carbon::parse($this->created_at)->format('d/m/Y H:i:s'),
       'updated_at' => Carbon::parse($this->updated_at)->format('d/m/Y H:i:s')
@@ -31,7 +31,8 @@ class VendorServiceResource extends JsonResource
           'id' => $this->v_id,
           'name' => $this->v_name,
           'description' => $this->v_description,
-          'picture' => $this->v_picture,
+          'logo_src' => $this->v_logo_src,
+          'header_src' => $this->v_header_src,
           'email' => $this->v_email,
           'back_account_number' => $this->v_back_account_number,
           'website' => $this->v_website,

@@ -32,6 +32,7 @@ class UniversityMajorResource extends JsonResource
           'name' => $this->u_name,
           'address' => $this->u_address,
           'logo_src' => $this->u_logo_src,
+          'header_src' => $this->u_header_src,
           'type' => $this->u_type,
           'accreditation' => $this->u_accreditation,
           'description' => $this->u_description,

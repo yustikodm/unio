@@ -37,9 +37,10 @@ class AuthAPIController extends AppBaseController
 
     $user = $this->userRepository->store($input);
 
-    Auth::login($user);
+    // Auth::login($user);
 
-    return $this->sendResponse(new UserResource($user), 'Account registered successfully');
+    // return $this->sendResponse(new UserResource($user), 'Account registered successfully');
+    return $this->sendResponse([], 'Account registered successfully');
   }
 
   public function login(Request $request)
@@ -50,6 +51,13 @@ class AuthAPIController extends AppBaseController
     ]);
 
     $user = User::where('email', $request->email)->first();
+
+    if (empty($user->email_verified_at)) {
+      return response()->json([
+        'message' => 'unverified email, please verify it first!',
+        'success' => false,
+      ]);
+    }
 
     if (!$user) {
       return response()->json([

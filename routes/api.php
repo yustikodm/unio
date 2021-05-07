@@ -18,6 +18,8 @@ Route::post('register', 'AuthAPIController@register');
 
 Route::post('login', 'AuthAPIController@login');
 
+Route::get('verify/{id}', 'VerificationAPIController@verify');
+
 Route::get('search', 'GlobalSearchAPIController@search');
 
 Route::group(['middleware' => ['auth:api']], function () {
