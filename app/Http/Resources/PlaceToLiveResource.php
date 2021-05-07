@@ -22,7 +22,7 @@ class PlaceToLiveResource extends JsonResource
       'price' => $this->price,
       'address' => $this->address,
       'phone' => $this->phone,
-      'picture' => $this->picture,
+      'header_src' => $this->picture,
       'created_at' => Carbon::parse($this->created_at)->format('d/m/Y H:i:s'),
       'updated_at' => Carbon::parse($this->updated_at)->format('d/m/Y H:i:s')
     ];
