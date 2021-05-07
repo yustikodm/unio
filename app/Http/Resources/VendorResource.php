@@ -20,7 +20,7 @@ class VendorResource extends JsonResource
           'name' => $this->name,
           'description' => $this->description,
           'logo' => $this->logo,
-          'header_img' => $this->header_img,
+          'header_src' => $this->header_img,
           'email' => $this->email,
           'back_account_number' => $this->back_account_number,
           'website' => $this->website,

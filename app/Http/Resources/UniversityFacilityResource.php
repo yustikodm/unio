@@ -19,6 +19,7 @@ class UniversityFacilityResource extends JsonResource
       'id' => $this->id,
       'name' => $this->name,
       'description' => $this->description,
+      'header_src' => $this->picture,
       'university' => new UniversityResource($this->university),
       'created_at' => Carbon::parse($this->created_at)->format('d/m/Y H:i:s'),
       'updated_at' => Carbon::parse($this->updated_at)->format('d/m/Y H:i:s')
@@ -31,6 +32,7 @@ class UniversityFacilityResource extends JsonResource
           'name' => $this->u_name,
           'address' => $this->u_address,
           'logo_src' => $this->u_logo_src,
+          'header_src' => $this->u_header_src,
           'type' => $this->u_type,
           'accreditation' => $this->u_accreditation,
           'description' => $this->u_description,

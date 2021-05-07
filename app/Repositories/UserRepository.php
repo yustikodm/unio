@@ -72,16 +72,24 @@ class UserRepository extends BaseRepository
         $input['username'] = explode('@', $input['email'])[0];
       }
 
-      $user = User::create($input);
+      User::create($input)->sendEmailVerificationNotification();
 
-      // Biodata
-      if (!empty($input['name'])) {
-        Biodata::create([
-          'user_id' => $user->id,
-          'fullname' => $input['name']
-        ]);
-      }
-      
+      // throw new Exception(json_encode($user));            
+            
+    } catch (Exception $e) {
+      DB::rollBack();      
+      throw new BadRequestHttpException($e->getMessage());
+    }
+
+    DB::commit();
+
+    $user = User::where('email', $input['email'])->first();
+    // Biodata
+    if (!empty($user)) {
+      Biodata::create([
+        'user_id' => $user->id,
+        'fullname' => $input['name']
+      ]);
       // if empty roles
       if (empty($input['roles'])) {
         $input['roles'] = ['student'];
@@ -89,15 +97,10 @@ class UserRepository extends BaseRepository
 
       // Spatie [Sync Role User]
       $user->assignRole($input['roles']);
-    } catch (Exception $e) {
-      DB::rollBack();
-      
-      throw new BadRequestHttpException($e->getMessage());
     }
 
-    DB::commit();
-
-    return $user;
+    // return $user;
+    return "Ok";
   }
 
   /**
