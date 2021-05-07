@@ -11,6 +11,7 @@ use App\Http\Controllers\AppBaseController;
 use App\Http\Resources\UserResource;
 use App\Repositories\BiodataRepository;
 use Exception;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class UserController
@@ -101,15 +102,14 @@ class UserAPIController extends AppBaseController
             return $this->sendError('User not found');
         }
 
-        $input = $request->only([
-            // User field
+        $user_field = $request->only([
             'username',
             'phone',
             'image_path',
+        ]);
 
-            // Biodata field
+        $biodata_field = $request->only([
             'name', # as fullname
-            'fullname',
             'address',
             'gender',
             'picture',
@@ -120,57 +120,26 @@ class UserAPIController extends AppBaseController
             'identity_number',
             'religion',
         ]);
+        
+        DB::beginTransaction();
 
         try {
 
-            // $user->update($input, $user->id);
-            // $user = $user->update($input);
+            $user->update($user_field);
 
-            $this->biodataRepository->firstOrCreate(['user_id' => $id], [
-                'fullname' => $input['name'],
-                'address' => $input['address'],
-                'gender' => $input['gender'],
-                'picture' => $input['picture'],
-                'school_origin' => $input['school_origin'],
-                'graduation_year' => $input['graduation_year'],
-                'birth_place' => $input['birth_place'],
-                'birth_date' => $input['birth_date'],
-                'identity_number' => $input['identity_number'],
-                'religion' => $input['religion'],
-            ]);
-// dd("okesip");
-            // $biodata = $this->biodataRepository->findByUser($user->id);
+            if ($biodata_field) {
+                $biodata = $this->biodataRepository->createOrUpdate($id, $biodata_field);
+            }
 
-            // if (empty($biodata)) {
-            //     $this->biodataRepository->create([
-            //         'fullname' => $input['name'],
-            //         'address' => $input['address'],
-            //         'gender' => $input['gender'],
-            //         'picture' => $input['picture'],
-            //         'school_origin' => $input['school_origin'],
-            //         'graduation_year' => $input['graduation_year'],
-            //         'birth_place' => $input['birth_place'],
-            //         'birth_date' => $input['birth_date'],
-            //         'identity_number' => $input['identity_number'],
-            //         'religion' => $input['religion'],
-            //     ]);
-            // } else {
-            //     // Pointing field
-            //     $input['fullname'] = empty($input['name']) ? $input['fullname'] : $input['name'];
-
-            //     $biodata->update($input);
-            // }
         } catch (Exception $error) {
-
+            DB::rollback();
+            
             return $this->sendError('Error updating data into database!', $error->getMessage());
         }
 
-        return 'oke';
-        // return $this->sendResponse(new UserResource($user), 'User updated successfully');
+        DB::commit();
 
-        // $user = $this->userRepository->update($input, $id);
-
-        // return $this->sendResponse(new UserResource($user), 'User updated successfully');
+        return $this->sendResponse(new UserResource($user), 'User updated successfully');
     }
 
     /**

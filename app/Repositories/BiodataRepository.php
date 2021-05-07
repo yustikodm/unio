@@ -43,8 +43,27 @@ class BiodataRepository extends BaseRepository
         return $this->model->findByUser($user_id);
     }
 
-    public function firstOrCreate(array $param, array $fields)
+    public function createOrUpdate($userId, $input)
     {
-        return $this->model->firstOrCreate($param, $fields);
+        $exist = $this->findByUser($userId);
+
+        $biodata = [
+                'fullname' => $input['name'],
+                'address' => $input['address'] ?? '',
+                'gender' => $input['gender'] ?? '',
+                'picture' => $input['picture'] ?? '',
+                'school_origin' => $input['school_origin'] ?? '',
+                'graduation_year' => $input['graduation_year'] ?? '',
+                'birth_place' => $input['birth_place'] ?? '',
+                'birth_date' => $input['birth_date'] ?? '',
+                'identity_number' => $input['identity_number'] ?? '',
+                'religion' => $input['religion'] ?? '',
+            ];
+            
+        if ($exist) {
+            return $this->update($biodata, $userId);
+        }
+
+        return $this->create(array_merge($biodata, ['user_id' => $userId]));
     }
 }
