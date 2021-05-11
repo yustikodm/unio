@@ -40,7 +40,7 @@ class PlaceToLiveAPIController extends AppBaseController
         'district_id' => $request->district_id
     ];
 
-    $placeToLives = $this->placeToLiveRepository->paginate(15, [], $search);
+    $placeToLives = $this->placeToLiveRepository->paginate(15, ["*", "picture as header_src"], $search);
 
     return $this->sendResponse($placeToLives, 'Place To Lives retrieved successfully');
   }

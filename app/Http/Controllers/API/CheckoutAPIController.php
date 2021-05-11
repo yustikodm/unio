@@ -38,7 +38,9 @@ class CheckoutAPIController extends AppBaseController
 
   public function checkout(Request $request)
   {   
-    try{
+    DB::beginTransaction();
+    
+    try{              
       //Get User Data
       $user = User::query()->where('id', $request->input('user_id'))->with("roles")->first();
 
@@ -56,15 +58,11 @@ class CheckoutAPIController extends AppBaseController
       }      
 
       //query item cart
-      $query = Cart::query()->where('user_id', $request->input('user_id'));
-      foreach ($request->input('items') as $row) {
-        $query->orWhere('id', $row);
-      }
+      $data = Cart::query()->where('user_id', $request->input('user_id'))->whereIn('id', $request->input('items'))->get();      
 
       //check validation item
-      $data = $query->get();
       if(count($data) == 0){
-        return Response::json(['message' => "items is no available", "success" => false], 200);  
+        throw new \Exception("items is no available");      
       }
       
       //totalPrice
@@ -84,7 +82,7 @@ class CheckoutAPIController extends AppBaseController
 
       //Validation check user point and total price
       if($userPoint <= $totalPrice){
-        return Response::json(['message' => "Your points are insufficient", "success" => false], 200);  
+        throw new \Exception("Your points are insufficient");      
       }
 
       //add transaction to db
@@ -116,41 +114,41 @@ class CheckoutAPIController extends AppBaseController
           "point_before" => intval($userPoint),
           "point_after" => intval($userPoint) - intval($totalPrice),
         ];
-        PointLog::insertLog($logPoin);
-
-        //return for invoice
-        $ret = [
-          "transaction_code" => $transaction->code,
-          "transaction_date" => $transaction->created_at,
-          "transaction_status" => $transaction->status,
-          "total_price" => $totalPrice,
-          "total_qty" => $totalQty,
-          "current_point" => $userPoint,
-          "items" => $data,
-        ];        
-
-        return $this->sendResponse($ret, 'Your transaction successfully to save');        
-
+        PointLog::insertLog($logPoin);             
         // $this->cetakInvoicePdf($transaction->id);
-
       }else{
-        
-        return Response::json(['message' => "Can't save your transaction", "success" => false], 200);
+        throw new \Exception("Can't save your transaction");
       }
     }catch(\Exception $err){
+      DB::rollback();
       return Response::json(['message' => $err->getMessage(), "success" => false], 200);
-    }    
+    }      
+    DB::commit();
+
+    //return for invoice
+    $ret = [
+      "transaction_code" => $transaction->code,
+      "transaction_date" => $transaction->created_at,
+      "transaction_status" => $transaction->status,
+      "total_price" => $totalPrice,
+      "total_qty" => $totalQty,
+      "current_point" => $userPoint,
+      "items" => $data,
+      "url" => "/print/invoice/".$transaction->id
+    ];  
+
+    return $this->sendResponse($ret, 'Your transaction successfully to save');        
   }
 
   public function cetakInvoicePdf($id)
   {
-    $trx = Transaction::query()->where('id', $id)->first();
+    $trx = Transaction::query()->where('code', $id)->first();
     $trx->user = Biodata::query()->where('user_id', $trx->user_id)->first();
     $trxdetail = DB::table('transaction_details')
                     ->join('vendor_services', 'vendor_services.id', '=', 'transaction_details.entity_id')
                     ->join('vendors', 'vendor_services.vendor_id', '=', 'vendors.id')
                     ->select('transaction_details.*', 'vendor_services.name as service_name', 'vendors.name as vendor_name')
-                    ->where('transaction_id', $id)
+                    ->where('transaction_id', $trx->id)
                     ->get();    
     $pdf_name = time() . ".pdf";
     $path = public_path('/invoice/pdf/' . $pdf_name);    

@@ -70,4 +70,18 @@ class Article extends Model
   {
     return $this->belongsTo(User::class);
   }
+
+  public function scopeApiSearch($query, $name, $slug="")
+  {
+    $search = $query->when($name, function ($query) use ($name) {
+      return $query->where('articles.title', 'LIKE', "%$name%");
+    })
+    ->when($slug, function ($query) use ($slug) {
+      return $query->where('articles.slug', 'LIKE', "%$slug%");
+    });
+
+    $select_list = ['articles.*'];   
+
+    return $search->select($select_list)->with('user');
+  }
 }

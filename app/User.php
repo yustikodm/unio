@@ -55,7 +55,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $image_path
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property-read int|null $notifications_count
- */
+*/
 class User extends Authenticatable implements MustVerifyEmail
 {
   use HasRoles, Notifiable, ImageTrait, SoftDeletes;
@@ -65,7 +65,11 @@ class User extends Authenticatable implements MustVerifyEmail
   }
 
   public $table = 'users';
-  const IMAGE_PATH = 'users';
+
+  public $timestamps = false;
+
+  
+  const IMAGE_PATH = 'users';  
 
   /**
    * The attributes that are mass assignable.

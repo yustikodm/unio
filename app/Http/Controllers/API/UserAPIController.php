@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Requests\API\CreateUserAPIRequest;
 use App\Http\Requests\API\UpdateUserAPIRequest;
 use App\User;
+use App\Models\Biodata;
 use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
@@ -28,7 +29,6 @@ class UserAPIController extends AppBaseController
     public function __construct(UserRepository $userRepo, BiodataRepository $biodataRepo)
     {
         $this->userRepository = $userRepo;
-
         $this->biodataRepository = $biodataRepo;
     }
 
@@ -80,6 +80,8 @@ class UserAPIController extends AppBaseController
             return $this->sendError('User not found');
         }
 
+        $user->biodata = Biodata::where('user_id', $id)->first();
+
         return $this->sendResponse(new UserResource($user), 'User retrieved successfully');
     }
 
@@ -96,6 +98,8 @@ class UserAPIController extends AppBaseController
     public function update($id, Request $request)
     {
         /** @var User $user */
+        
+        // return $request->all();
         $user = $this->userRepository->find($id);
 
         if (empty($user)) {
@@ -108,8 +112,11 @@ class UserAPIController extends AppBaseController
             'image_path',
         ]);
 
+        // return $user_field;
+
         $biodata_field = $request->only([
             'name', # as fullname
+            'fullname',    
             'address',
             'gender',
             'picture',
@@ -118,26 +125,32 @@ class UserAPIController extends AppBaseController
             'birth_place',
             'birth_date',
             'identity_number',
-            'religion',
+            'religion_id',
         ]);
-        
+
+
         DB::beginTransaction();
 
         try {
 
             $user->update($user_field);
 
+
             if ($biodata_field) {
                 $biodata = $this->biodataRepository->createOrUpdate($id, $biodata_field);
+
+                // return $biodata;
             }
 
         } catch (Exception $error) {
             DB::rollback();
             
-            return $this->sendError('Error updating data into database!', $error->getMessage());
+            return $this->sendError('Error updating data into database!'.$error->getMessage());
         }
 
         DB::commit();
+
+        $user->biodata = Biodata::where('user_id', $id)->first();
 
         return $this->sendResponse(new UserResource($user), 'User updated successfully');
     }

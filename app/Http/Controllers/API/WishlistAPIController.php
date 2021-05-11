@@ -49,7 +49,7 @@ class WishlistAPIController extends AppBaseController
         }
         $filter = '';
         if ($request->entity_type) {
-            $filter = "WHERE entity_type = '$request->entity_type'";
+            $filter = "AND entity_type = '$request->entity_type'";
         }
 
         $user_id = $request->input('user_id');
@@ -78,7 +78,7 @@ class WishlistAPIController extends AppBaseController
                     SELECT w.*, j.name, j.description, j.picture, '' detail_id, '' detail_name FROM wishlists w 
                         JOIN place_to_live j ON j.id = w.entity_id 
                         WHERE w.entity_type = 'place_lives' AND w.user_id = $user_id AND j.name LIKE '%$name%'
-                    ) t $filter
+                    ) t  $filter
             ")
         );       
 

@@ -327,3 +327,8 @@ f{{-- Dashboard --}}
     <a href="{{ route('topupPackages.index') }}"><i class="fa fa-edit"></i><span>Topup Packages</span></a>
 </li>
 @endcan
+@can('review.index')
+<li class="{{ Request::is('review*') ? 'active' : '' }}">
+    <a href="{{ route('review.index') }}"><i class="fa fa-edit"></i><span>Review</span></a>
+</li>
+@endcan

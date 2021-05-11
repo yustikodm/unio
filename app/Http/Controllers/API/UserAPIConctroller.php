@@ -8,6 +8,7 @@ use App\Http\Resources\UserResource;
 use App\Repositories\UserRepository;
 use App\Repositories\BiodataRepository;
 use Illuminate\Http\Request;
+use App\Models\Biodata;
 use Exception;
 use Illuminate\Support\Facades\Hash;
 
@@ -49,6 +50,8 @@ class UserAPIConctroller extends AppBaseController
             return $this->sendError('User not found');
         }
 
+       $user->biodata = Biodata::where('user_id', auth()->id())->first();
+
         return $this->sendResponse(new UserResource($user), 'User retrieved successfully');
     }
 
@@ -68,6 +71,8 @@ class UserAPIConctroller extends AppBaseController
         if (empty($user)) {
             return $this->sendError('User not found');
         }
+
+        $user->biodata = Biodata::where('user_id', $id)->first();
 
         return $this->sendResponse(new UserResource($user), 'User retrieved successfully');
     }

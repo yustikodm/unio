@@ -77,7 +77,7 @@ class UniversityScholarship extends Model
   public function scopeApiSearch($query, $param, $university, $country, $state, $district)
   {
     $search = $query->when($param, function ($query) use ($param) {
-      return $query->where('university_scholarships.description', 'LIKE', "%$param%");
+      return $query->where('university_scholarships.name', 'LIKE', "%$param%");
     })
       ->when($university or $country or $state or $district, function ($query) use ($university, $country, $state, $district) {
         $univ = $query->join('universities', 'universities.id', 'university_scholarships.university_id')

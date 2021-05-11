@@ -16,6 +16,8 @@ class Biodata extends Model
 {
   use SoftDeletes;
 
+  public $timestamps = false;
+
   public $table = 'biodata';
 
   protected $dates = ['deleted_at'];
@@ -31,7 +33,7 @@ class Biodata extends Model
     'birth_place',
     'birth_date',
     'identity_number',
-    'religion',
+    'religion_id',
   ];
 
   /**
@@ -47,11 +49,11 @@ class Biodata extends Model
     'gender' => 'string',
     'picture' => 'string',
     'school_origin' => 'string',
-    'graduation_year' => 'date',
+    'graduation_year' => 'string',
     'birth_place' => 'string',
     'birth_date' => 'date',
     'identity_number' => 'string',
-    'religion' => 'string',
+    'religion_d' => 'integer',
   ];
 
   /**
@@ -65,11 +67,11 @@ class Biodata extends Model
     'address' => 'nullable|string',
     'picture' => 'nullable|file',
     'school_origin' => 'nullable|string',
-    'graduation_year' => 'nullable|date',
+    'graduation_year' => 'nullable',
     'birth_place' => 'nullable|string',
     'birth_date' => 'nullable|date',
     'identity_number' => 'nullable|string',
-    'religion' => 'nullable|string',
+    'religion_id' => 'nullable|integer',
   ];
 
   public function user()
@@ -80,7 +82,6 @@ class Biodata extends Model
   public static function findByUser($user_id)
   {
     return static::where('user_id', $user_id)
-                ->join('users', 'users.id', 'biodata.user_id')
                 ->first();
   }
 

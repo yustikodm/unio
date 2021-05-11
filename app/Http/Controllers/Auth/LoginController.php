@@ -12,6 +12,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Laracasts\Flash\Flash;
 use Laravel\Socialite\Facades\Socialite;
+use Illuminate\Support\Facades\Hash;
+use Agent;
 
 class LoginController extends Controller
 {
@@ -59,7 +61,7 @@ class LoginController extends Controller
           return Socialite::driver($provider)->redirect();
       }
 
-      return redirect()->to('login');
+      // return redirect()->to('login');
     }
 
     public function responseProviderCallback($provider)
@@ -69,14 +71,30 @@ class LoginController extends Controller
 
           $user = $this->firstOrCreate($socialite, $provider);
 
-          Auth::login($user, true);
+          // Auth::login($user);
+          // $user = $this->userRepository->find($user->id);
+
+          // $user->biodata = Biodata::where('user_id', $user->id)->first();
+          
+          // return $this->sendResponse($user, 'Logged in successfully');
+          
+          if(Agent::isDesktop()){
+            return redirect(env('APP_URL_FRONTEND')."auth/auth-other?id=".$user->id."&request=".Hash::make($user->email));
+          }else if(Agent::isMobile()){
+            return redirect(env('APP_URL_FRONTEND')."?message=SUCCESS MOBILE");
+          }
         } catch (Exception $error) {
-          Flash::error('Something wrong! ' . $error->getMessage().', '.$error->getLine());
-
-          return redirect()->to('login');
-        }
-
-        return redirect()->to('dashboard');
+          // Flash::error('Something wrong! ' . $error->getMessage().', '.$error->getLine());          
+          if(Agent::isDesktop()){
+            return redirect(env('APP_URL_FRONTEND')."?message=ERROR DEKSTOP".$error->getMessage());
+          }else if(Agent::isMobile()){
+            return redirect(env('APP_URL_FRONTEND')."?message=ERROR MOBILE".$error->getMessage());
+          }
+          // return response()->json([
+          //     'message' => $error->getMessage(),
+          //     'success' => false,
+          //   ]);
+        }        
     }
 
     private function firstOrCreate($socialite, $provider)

@@ -39,6 +39,13 @@ class VendorCategoryAPIController extends AppBaseController
         return $this->sendResponse($vendorCategories, 'Vendor Categories retrieved successfully');
     }
 
+    public function all(Request $request)
+    {
+        $vendorCategories = VendorCategory::all();
+
+        return $this->sendResponse($vendorCategories, 'Vendor Categories retrieved successfully');
+    }
+
     /**
      * Store a newly created VendorCategory in storage.
      * POST /vendorCategories

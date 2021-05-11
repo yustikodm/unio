@@ -40,30 +40,35 @@ class BiodataRepository extends BaseRepository
 
     public function findByUser($user_id)
     {
-        return $this->model->findByUser($user_id);
+        return Biodata::where("user_id",$user_id)->first();
     }
 
     public function createOrUpdate($userId, $input)
     {
         $exist = $this->findByUser($userId);
 
-        $biodata = [
-                'fullname' => $input['name'],
-                'address' => $input['address'] ?? '',
-                'gender' => $input['gender'] ?? '',
-                'picture' => $input['picture'] ?? '',
-                'school_origin' => $input['school_origin'] ?? '',
-                'graduation_year' => $input['graduation_year'] ?? '',
-                'birth_place' => $input['birth_place'] ?? '',
-                'birth_date' => $input['birth_date'] ?? '',
-                'identity_number' => $input['identity_number'] ?? '',
-                'religion' => $input['religion'] ?? '',
-            ];
-            
-        if ($exist) {
-            return $this->update($biodata, $userId);
-        }
+        // return ;
 
-        return $this->create(array_merge($biodata, ['user_id' => $userId]));
+        $biodata = [
+            'fullname' => $input['name'],
+            'address' => $input['address'] ?? '',
+            'gender' => $input['gender'] ?? '',
+            'picture' => $input['picture'] ?? '',
+            'school_origin' => $input['school_origin'] ?? '',
+            'graduation_year' => $input['graduation_year'] ?? '',
+            'birth_place' => $input['birth_place'] ?? '',
+            'birth_date' => date('Y-m-d', strtotime($input['birth_date'])) ?? '',
+            'identity_number' => $input['identity_number'] ?? '',
+            'religion_id' => $input['religion_id'] ?? '',
+        ];
+
+        $input['fullname'] = $input['name'];
+        $input['birth_date'] = date('Y-m-d', strtotime($input['birth_date']));
+            
+        if ($exist) {            
+            return $this->update($input, $exist->id);
+        }else{
+            return $this->create(array_merge($biodata, ['user_id' => $userId]));
+        }        
     }
 }

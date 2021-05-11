@@ -17,6 +17,8 @@ class UniversityScholarshipResource extends JsonResource
   {
     $output = [
       'id' => $this->id,
+      'name' => $this->name,
+      'organizer' => $this->organizer,
       'description' => $this->description,
       'picture' => $this->picture,
       'year' => $this->year,

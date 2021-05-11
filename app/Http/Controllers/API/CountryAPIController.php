@@ -34,7 +34,8 @@ class CountryAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $countries = $this->countryRepository->paginate(15, [], ['name' => $request->name]);
+        $countries = Country::all();
+        // $this->countryRepository->paginate(15, [], ['name' => $request->name]);
 
         return $this->sendResponse($countries, 'Countries retrieved successfully');
     }

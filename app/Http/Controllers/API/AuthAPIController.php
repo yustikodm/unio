@@ -6,6 +6,7 @@ use App\Http\Controllers\AppBaseController;
 use App\Http\Resources\AuthResource;
 use App\Repositories\UserRepository;
 use App\User;
+use App\Models\Biodata;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -52,13 +53,6 @@ class AuthAPIController extends AppBaseController
 
     $user = User::where('email', $request->email)->first();
 
-    if (empty($user->email_verified_at)) {
-      return response()->json([
-        'message' => 'unverified email, please verify it first!',
-        'success' => false,
-      ]);
-    }
-
     if (!$user) {
       return response()->json([
         'message' => 'User not found!',
@@ -73,11 +67,20 @@ class AuthAPIController extends AppBaseController
       ]);
     }
 
+    if (empty($user->email_verified_at)) {
+      return response()->json([
+        'message' => 'Unverified email, please verify it first!',
+        'success' => false,
+      ]);
+    }
+
     $this->userRepository->loginApi($user->id);
     
     Auth::login($user);
     
-    $user = $this->userRepository->find(auth()->id());
+    $user = $this->userRepository->find($user->id);
+
+    $user->biodata = Biodata::where('user_id', $user->id)->first();
     
     return $this->sendResponse(new UserResource($user), 'Logged in successfully');
   }
@@ -86,7 +89,7 @@ class AuthAPIController extends AppBaseController
   {
       // return $this->userRepository->find(auth()->id());
       $this->userRepository->update(auth()->id(), ['api_token' => null]);
-
-      return $this->sendSuccess('Logged out successfully');
+      // Auth::logout();
+      return $this->sendSuccess('Sing out successfully');
   }
 }

@@ -129,7 +129,7 @@ class PlaceToLive extends Model
       ]);
     }
 
-    return $search->select($select_list)->get();
+    return $search->select($select_list);
   }
 
   public function getCatalog($query)

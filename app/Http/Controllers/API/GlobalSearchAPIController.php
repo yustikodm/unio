@@ -16,6 +16,7 @@ use App\Models\UniversityFaculties;
 use App\Models\UniversityMajor;
 use App\Models\UniversityScholarship;
 use App\Models\Vendor;
+use App\Models\Article;
 use App\Models\VendorService;
 use Illuminate\Http\Request;
 
@@ -71,6 +72,12 @@ class GlobalSearchAPIController extends AppBaseController
         $universityScholarship = UniversityScholarship::apiSearch($request->name, $request->university, $request->country, $request->state, $request->district);
 
         return UniversityScholarshipResource::collection($universityScholarship->paginate(15))->toResponse(15);
+        break;
+
+      case 'articles':
+        $article = Article::apiSearch($request->name, $request->slug);
+
+        return $article->paginate(15);
         break;
 
       default: // University Major // DONE

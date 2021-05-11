@@ -47,6 +47,21 @@ class StateAPIController extends AppBaseController
     return $this->sendResponse($states, 'States retrieved successfully');
   }
 
+  public function all(Request $request)
+  {
+    $search = [];
+
+    if ($request->country_id) {
+        $search = array_merge($search, [
+            'country_id' => $request->country_id,    
+        ]);
+    }
+
+    $states = State::where('country_id', $request->country_id)->get();
+
+    return $this->sendResponse($states, 'States retrieved successfully');
+  }
+
   /**
    * Store a newly created State in storage.
    * POST /states

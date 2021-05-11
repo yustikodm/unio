@@ -203,7 +203,9 @@ class UserRepository extends BaseRepository
 
     abort_if(!$user, 404, 'User not found!');
 
-    $user->update(['api_token' => Str::random(100)]);
+    if(empty($user->api_token)){
+      $user->update(['api_token' => Str::random(100)]);
+    } 
 
     return true;
   }

@@ -176,6 +176,7 @@ return [
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
+        Jenssegers\Agent\AgentServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -183,7 +184,7 @@ return [
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
+        App\Providers\RouteServiceProvider::class,        
         /**
          * Laravel Socialite
          */
@@ -244,6 +245,7 @@ return [
         'DataTables'   => Yajra\DataTables\Facades\DataTables::class,
         'Socialite'    => Laravel\Socialite\Facades\Socialite::class,
         'PDF'          => Barryvdh\DomPDF\Facade::class,
+        'Agent'        => Jenssegers\Agent\Facades\Agent::class,
     ],
 
 ];

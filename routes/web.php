@@ -19,10 +19,6 @@ Route::get('/', function () {
 
 Route::get('auth/{provider}', 'Auth\LoginController@redirectToProvider')->name('auth.provider');
 
-Route::get('email/verify/{id}', 'VerificationController@verify')->name('verification.verify');
-
-Route::get('email/resend', 'VerificationController@resend')->name('verification.resend');
-
 Route::get('auth/{provider}/callback', 'Auth\LoginController@responseProviderCallback')->name('auth.callback');
 
 Auth::routes(['verify' => true]);
@@ -121,3 +117,6 @@ Route::get('coba', 'TestController@index');
 
 Route::resource('topupPackages', 'TopupPackageController');
 
+
+
+Route::resource('review', 'ReviewController');

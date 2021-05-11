@@ -20,9 +20,19 @@ Route::post('login', 'AuthAPIController@login');
 
 Route::get('verify/{id}', 'VerificationAPIController@verify');
 
-Route::get('resend-verify', 'VerificationAPIController@resend');
+Route::get('auth-other/{id}', 'VerificationAPIController@authOther');
+
+Route::post('resend-verify', 'VerificationAPIController@resend');
+
+Route::post('forgot-password', 'VerificationAPIController@forgotPassword');
+
+Route::get('verify-forgot-password/{id}', 'VerificationAPIController@verifyForgotPassword');
+
+Route::post('reset-password', 'VerificationAPIController@resetPassword');
 
 Route::get('search', 'GlobalSearchAPIController@search');
+
+Route::get('transaction-invoice/{id}', 'CheckoutAPIController@cetakInvoicePdf');
 
 Route::group(['middleware' => ['auth:api']], function () {
 
@@ -82,11 +92,11 @@ Route::group(['middleware' => ['auth:api']], function () {
 
   Route::post('transaction-refund/accept/{id}', 'TransactionAPIController@acceptRefund');
 
-  Route::post('transaction-refund/reject/{id}', 'TransactionAPIController@rejectRefund');
-  
-  Route::get('transaction-invoice/{id}', 'CheckoutAPIController@cetakInvoicePdf');
+  Route::post('transaction-refund/reject/{id}', 'TransactionAPIController@rejectRefund');    
   
 });
+
+Route::resource('review', 'ReviewAPIController');
 
 
 Route::resource('articles', 'ArticleAPIController');
@@ -124,6 +134,10 @@ Route::resource('vendor-services', 'VendorServiceAPIController');
 Route::resource('vendor-employees', 'VendorEmployeeAPIController');
 
 Route::resource('vendor-categories', 'VendorCategoryAPIController');
+
+Route::get('vendor-categories-all', 'VendorCategoryAPIController@all');
+
+Route::get('state-all', 'StateAPIController@all');
 
 Route::resource('place-to-lives', 'PlaceToLiveAPIController');
 

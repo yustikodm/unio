@@ -130,8 +130,7 @@
                                 <li class="user-header">
                                     <img src="{{ auth()->user()->image_path }}" class="img-circle" alt="User Image">
                                     <p>
-                                        {{ auth()->user()->username }}
-                                        <small>Member since {!! auth()->user()->created_at->format('M. Y') !!}</small>
+                                        {{ auth()->user()->username }}                                        
                                     </p>
                                 </li>
                                 <!-- Menu Footer-->
