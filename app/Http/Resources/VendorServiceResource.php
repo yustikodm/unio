@@ -35,7 +35,7 @@ class VendorServiceResource extends JsonResource
           'logo_src' => $this->v_logo_src,
           'header_src' => $this->v_header_src,
           'email' => $this->v_email,
-          'back_account_number' => $this->v_back_account_number,
+          'bank_account_number' => $this->v_bank_account_number,
           'website' => $this->v_website,
           'address' => $this->v_address,
           'phone' => $this->v_phone,

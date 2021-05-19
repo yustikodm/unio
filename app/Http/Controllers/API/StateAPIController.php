@@ -54,7 +54,7 @@ class StateAPIController extends AppBaseController
     if ($request->country_id) {
         $search = array_merge($search, [
             'country_id' => $request->country_id,    
-        ]);
+        ]);        
     }
 
     $states = State::where('country_id', $request->country_id)->get();

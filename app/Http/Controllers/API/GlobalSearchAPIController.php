@@ -28,13 +28,14 @@ class GlobalSearchAPIController extends AppBaseController
     /** 
      * API
      * Global Search API
-     * 1. universities => major country state district, 
-     * 2. [DEFAULT] major => universitas country state distric, 
+     * 1. universities => major country state district, DONE
+     * 2. [DEFAULT] major => universitas country state distric, DONE
      * 3. faculties => major universitas country state district, 
-     * 4. placetolive (boarding house) => country state district, 
-     * 5. vendors => category country state district, 
-     * 6. vendorservices => vendor country state district, 
-     * 7. scholarship => university country state district
+     * 4. placetolive (boarding house) => country state district, DONE 
+     * 5. vendors => category country state district, DONE
+     * 6. vendorservices => vendor country state district, DONE  
+     * 7. scholarship => university country state district, DONE
+     * 8. article => country state district DONE
      */
 
     switch ($request->keyword) {

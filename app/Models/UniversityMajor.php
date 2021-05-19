@@ -104,23 +104,23 @@ class UniversityMajor extends Model
     $search = $query->when($param, function ($query) use ($param) {
       return $query->where('university_majors.name', 'LIKE', "%$param%");
     })
-      ->when($university or $country or $state or $district, function ($query) use ($university, $country, $state, $district) {
-        $univ = $query->join('universities', 'universities.id', 'university_majors.university_id')
-          ->where('universities.name', 'LIKE', "%$university%")
-          ->orWhere('universities.id', $university);
-
-        return $univ->when($country, function ($query) use ($country) {
-          return $query->join('countries', 'countries.id', 'universities.country_id')
-            ->where('countries.id', $country);
-        })
-          ->when($state, function ($query) use ($state) {
-            return $query->join('states', 'states.id', 'universities.state_id')
-              ->where('states.id', $state);
-          })
-          ->when($district, function ($query) use ($district) {
-            return $query->join('districts', 'districts.id', 'universities.district_id')
-              ->where('districts.id', $district);
-          });
+      ->when($university , function ($query) use ($university) {
+        return $query->join('universities', 'universities.id', 'university_majors.university_id')
+          ->where('universities.name', 'LIKE', "%$university%");
+      })->when($country, function ($query) use ($country) {
+        return $query->join('universities as ua', 'ua.id', 'university_majors.university_id')
+          ->join('countries', 'countries.id', 'ua.country_id')
+          ->where('countries.id', $country);
+      })
+      ->when($state, function ($query) use ($state) {
+        return $query->join('universities as ub', 'ub.id', 'university_majors.university_id')
+          ->join('states', 'states.id', 'ub.state_id')
+          ->where('states.id', $state);
+      })
+      ->when($district, function ($query) use ($district) {
+        return $query->join('universities as uc', 'uc.id', 'university_majors.university_id')
+          ->join('districts', 'districts.id', 'uc.district_id')
+          ->where('districts.id', $district);
       });
 
     $select_list = ['university_majors.*'];

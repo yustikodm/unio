@@ -81,19 +81,22 @@ class UniversityScholarship extends Model
     })
       ->when($university or $country or $state or $district, function ($query) use ($university, $country, $state, $district) {
         $univ = $query->join('universities', 'universities.id', 'university_scholarships.university_id')
-          ->where('universities.name', 'LIKE', "%$university%")
-          ->orWhere('universities.id', $university);
+          ->where('universities.name', 'LIKE', "%$university%");
+          // ->orWhere('universities.id', $university);
 
         return $univ->when($country, function ($query) use ($country) {
-          return $query->join('countries', 'countries.id', 'universities.country_id')
+          return $query->join('universities as ua', 'ua.id', 'university_scholarships.university_id')
+            ->join('countries', 'countries.id', 'ua.country_id')
             ->where('countries.id', $country);
         })
           ->when($state, function ($query) use ($state) {
-            return $query->join('states', 'states.id', 'universities.state_id')
+            return $query->join('universities as ud', 'ud.id', 'university_scholarships.university_id')
+              ->join('states', 'states.id', 'ud.state_id')
               ->where('states.id', $state);
           })
           ->when($district, function ($query) use ($district) {
-            return $query->join('districts', 'districts.id', 'universities.district_id')
+            return $query->join('universities as uc', 'uc.id', 'university_scholarships.university_id')
+              ->join('districts', 'districts.id', 'uc.district_id')
               ->where('districts.id', $district);
           });
       });
