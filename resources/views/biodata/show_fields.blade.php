@@ -4,6 +4,8 @@
     <p><a href="{{ route('users.show', $biodata->user->id) }}">{{ $biodata->user->username }}</a></p>
 </div>
 
+<!-- asjajfasjlkasjfafj -->
+
 <!-- Full Name Field -->
 <div class="form-group">
     {!! Form::label('full_name', 'Full Name:') !!}
