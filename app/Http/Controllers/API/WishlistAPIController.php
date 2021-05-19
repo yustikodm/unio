@@ -49,7 +49,7 @@ class WishlistAPIController extends AppBaseController
         }
         $filter = '';
         if ($request->entity_type) {
-            $filter = "AND entity_type = '$request->entity_type'";
+            $filter = "WHERE entity_type = '$request->entity_type'";
         }
 
         $user_id = $request->input('user_id');
