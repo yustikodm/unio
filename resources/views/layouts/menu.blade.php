@@ -332,3 +332,18 @@ f{{-- Dashboard --}}
     <a href="{{ route('review.index') }}"><i class="fa fa-edit"></i><span>Review</span></a>
 </li>
 @endcan
+@can('majorPrediction.index')
+<li class="{{ Request::is('majorPrediction*') ? 'active' : '' }}">
+    <a href="{{ route('majorPrediction.index') }}"><i class="fa fa-edit"></i><span>Major Prediction</span></a>
+</li>
+@endcan
+@can('reviewMajors.index')
+<li class="{{ Request::is('reviewMajors*') ? 'active' : '' }}">
+    <a href="{{ route('reviewMajors.index') }}"><i class="fa fa-edit"></i><span>Review Majors</span></a>
+</li>
+@endcan
+@can('questionnaireImage.index')
+<li class="{{ Request::is('questionnaireImage*') ? 'active' : '' }}">
+    <a href="{{ route('questionnaireImage.index') }}"><i class="fa fa-edit"></i><span>Questionnaire Image</span></a>
+</li>
+@endcan

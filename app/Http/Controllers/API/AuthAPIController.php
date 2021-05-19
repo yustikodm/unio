@@ -78,11 +78,16 @@ class AuthAPIController extends AppBaseController
     
     Auth::login($user);
     
-    $user = $this->userRepository->find($user->id);
+    $user = $this->userRepository->find($user->id);    
+
+    $pictureUser = Biodata::where('user_id', $user->id)->where('picture', null)->first();    
+    if(!empty($pictureUser)){
+      Biodata::where('user_id', $user->id)->update(['picture' => $user->image_path]);
+    }
 
     $user->biodata = Biodata::where('user_id', $user->id)->first();
     
-    return $this->sendResponse(new UserResource($user), 'Logged in successfully');
+    return $this->sendResponse(new UserResource($user), 'Logged in successfully 2');
   }
   
   public function logout()

@@ -205,4 +205,43 @@ class UserAPIController extends AppBaseController
 
         return $this->sendResponse(new UserResource($user), 'User retrieved successfully');
     }
+
+    public function setHC($id, Request $request)
+    {
+        /** @var User $user */
+        
+        // return $request->all();
+        $user = $this->userRepository->find($id);
+
+        if (empty($user)) {
+            return $this->sendError('User not found');
+        }
+
+        $hc = $request->hc;
+
+        $validateHC = str_split($hc);
+
+        $hcdefault = ['R', 'I', 'A', 'S', 'E', 'C'];
+        
+        foreach ($validateHC as $row) {        
+            $check = array_search($row, $hcdefault);
+            if($check === false){
+                return $this->sendError('Holland Code not registered');
+            }
+        }
+
+        $checkDuplicate = array_count_values($validateHC);
+
+        foreach ($checkDuplicate as $row) {
+            if($row != 1){
+                return $this->sendError('Duplicated Holland Code');
+            }
+        }
+
+        Biodata::where('user_id', $id)->update(['hc' => $hc]);
+
+        $user->biodata = Biodata::where('user_id', $id)->first();
+
+        return $this->sendResponse(new UserResource($user), 'User retrieved successfully');
+    }
 }

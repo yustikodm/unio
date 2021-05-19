@@ -56,9 +56,11 @@ Route::group(['middleware' => ['auth:api']], function () {
 
   Route::get('users/profile', 'UserAPIConctroller@profile');
 
-  Route::put('users/change-password', 'UserAPIConctroller@changePassword');
+  Route::put('users/change-password', 'UserAPIConctroller@changePassword');  
 
   Route::apiResource('users', 'UserAPIController');
+
+  Route::post('user/set-hc/{id}', 'UserAPIController@setHC');
 
   Route::get('families/list/{id}', 'FamilyAPIController@familyList');
   
@@ -92,12 +94,15 @@ Route::group(['middleware' => ['auth:api']], function () {
 
   Route::post('transaction-refund/accept/{id}', 'TransactionAPIController@acceptRefund');
 
-  Route::post('transaction-refund/reject/{id}', 'TransactionAPIController@rejectRefund');    
+  Route::post('transaction-refund/reject/{id}', 'TransactionAPIController@rejectRefund');  
+
+  Route::get('history-user', 'HistoryUserAPIController@index');  
+
+  Route::resource('questionnaire_image', 'QuestionnaireImageAPIController');
   
 });
 
 Route::resource('review', 'ReviewAPIController');
-
 
 Route::resource('articles', 'ArticleAPIController');
 
@@ -146,3 +151,10 @@ Route::get('xendit/va/list', 'XenditAPITESTController@getListVa');
 Route::post('xendit/va/invoice', 'XenditAPITESTController@createVa');
 
 Route::post('xendit/va/callback', 'XenditAPITESTController@callbackVa');
+
+Route::resource('major_prediction', 'MajorPredictionAPIController');
+
+Route::get('frontend-home', 'FrontendHomeAPIController@index');
+
+
+Route::resource('review_majors', 'ReviewMajorsAPIController');

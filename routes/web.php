@@ -120,3 +120,9 @@ Route::resource('topupPackages', 'TopupPackageController');
 
 
 Route::resource('review', 'ReviewController');
+
+Route::resource('majorPrediction', 'MajorPredictionController');
+
+Route::resource('reviewMajors', 'ReviewMajorsController');
+
+Route::resource('questionnaireImage', 'QuestionnaireImageController');
