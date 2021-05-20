@@ -98,6 +98,8 @@ Route::group(['middleware' => ['auth:api']], function () {
 
   Route::get('history-user', 'HistoryUserAPIController@index');  
 
+  Route::get('match-with-me/{hc}', 'MatchWithMeAPIController@index');  
+
   Route::resource('questionnaire_image', 'QuestionnaireImageAPIController');
   
 });
@@ -155,6 +157,5 @@ Route::post('xendit/va/callback', 'XenditAPITESTController@callbackVa');
 Route::resource('major_prediction', 'MajorPredictionAPIController');
 
 Route::get('frontend-home', 'FrontendHomeAPIController@index');
-
 
 Route::resource('review_majors', 'ReviewMajorsAPIController');

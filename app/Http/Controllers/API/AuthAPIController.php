@@ -87,7 +87,7 @@ class AuthAPIController extends AppBaseController
 
     $user->biodata = Biodata::where('user_id', $user->id)->first();
     
-    return $this->sendResponse(new UserResource($user), 'Logged in successfully 2');
+    return $this->sendResponse(new UserResource($user), 'Logged in successfully');
   }
   
   public function logout()
