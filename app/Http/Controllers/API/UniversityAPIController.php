@@ -40,7 +40,11 @@ class UniversityAPIController extends AppBaseController
             'district_id' => $request->district_id,
         ];
 
-        $universities = $this->universityRepository->paginate(15, [], $search);
+        if($request->name){
+            $universities = University::query()->where('name', 'LIKE', "%$request->name%")->paginate(15);
+        }else{
+            $universities = University::query()->paginate(15);
+        }        
         // $universities = University::paginate(15);
         return $this->sendResponse($universities, 'Universities retrieved successfully');
     }

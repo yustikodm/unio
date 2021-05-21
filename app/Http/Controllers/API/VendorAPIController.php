@@ -42,7 +42,11 @@ class VendorAPIController extends AppBaseController
             ]);
         }
 
-        $vendors = $this->vendorRepository->paginate(15, [], $search);
+        if($request->name){
+            $vendors = Vendor::query()->where('name','LIKE', "%$request->name%")->paginate(15);
+        }else{
+            $vendors = Vendor::query()->paginate(15);
+        }
 
         return $this->sendResponse($vendors, 'Vendors retrieved successfully');
     }

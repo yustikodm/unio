@@ -48,7 +48,13 @@ class ArticleAPIController extends AppBaseController
         ]);
     }
 
-    $articles = $this->articleRepository->paginate(15, [], $search);
+    if($request->name){
+        $articles = Article::query()->where('title','LIKE', "%$request->name%")->paginate(15);
+    }else{
+        $articles = Article::query()->paginate(15);
+    }    
+
+    // $articles = $this->articleRepository->paginate(15, [], $search);
 
     return $this->sendResponse($articles, 'Articles retrieved successfully');
   }

@@ -42,7 +42,13 @@ class VendorServiceAPIController extends AppBaseController
             ]);
         }
 
-        $vendorServices = $this->vendorServiceRepository->paginate(15, [], $search);
+       if($request->name){
+            $vendorServices = VendorService::query()->where('name','LIKE', "%$request->name%")->paginate(15);
+        }else{
+            $vendorServices = VendorService::query()->paginate(15);
+        }
+
+        // $vendorServices = $this->vendorServiceRepository->paginate(15, [], $search);
 
         return $this->sendResponse($vendorServices, 'Vendor Services retrieved successfully');
     }

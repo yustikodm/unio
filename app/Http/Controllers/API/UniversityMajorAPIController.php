@@ -36,19 +36,25 @@ class UniversityMajorAPIController extends AppBaseController
     {
         $search = [];
 
-        if ($request->university_id) {
-            $search = array_merge($search, [
-                'university_id' => $request->university_id,    
-            ]);
-        }
+        // if ($request->university_id) {
+        //     $search = array_merge($search, [
+        //         'university_id' => $request->university_id,    
+        //     ]);
+        // }
         
-        if ($request->faculty_id) {
-            $search = array_merge($search, [
-                'faculty_id' => $request->faculty_id,    
-            ]);
-        }
+        // if ($request->faculty_id) {
+        //     $search = array_merge($search, [
+        //         'faculty_id' => $request->faculty_id,    
+        //     ]);
+        // }
 
-        $universityMajors = $this->universityMajorRepository->paginate(15, [], $search);
+        if($request->name){
+            $universityMajors = UniversityMajor::query()->where('university_majors.name', 'LIKE', "%$request->name%")->paginate(15);
+        }else{
+            $universityMajors = UniversityMajor::query()->paginate(15);
+        }    
+
+        // $universityMajors = $this->universityMajorRepository->paginate(15, [], $search);
 
         return $this->sendResponse($universityMajors, 'University Majors retrieved successfully');
     }
