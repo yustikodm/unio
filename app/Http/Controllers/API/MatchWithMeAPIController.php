@@ -5,13 +5,16 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use App\Models\Wishlist;
+use App\Models\Biodata;
+// use App\Wishlist;
 use Illuminate\Support\Facades\Auth;
 
 class MatchWithMeAPIController extends AppBaseController
 {
-    public function index($hc){
+    public function index(){
     	try{
-    		$postRequest = json_encode(['hc' => $hc]);
+    		$user = Biodata::where('user_id', auth()->id())->first();
+    		$postRequest = json_encode(['hc' => $user->hc]);
 	    	$url = getenv('APP_URL_ML')."fos";
 			$cURLConnection = curl_init($url);
 			curl_setopt($cURLConnection, CURLOPT_POSTFIELDS, $postRequest);
