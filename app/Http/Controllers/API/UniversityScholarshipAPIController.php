@@ -42,7 +42,14 @@ class UniversityScholarshipAPIController extends AppBaseController
             ]);
         }
 
-        $universityScholarships = $this->universityScholarshipRepository->paginate(15, [], $search);
+        if($request->name){
+            $universityScholarships = UniversityScholarship::query()->where('name','LIKE', "%$request->name%")->paginate(15);
+        }else{
+            $universityScholarships = UniversityScholarship::query()->paginate(15);
+        }    
+
+
+        // $universityScholarships = $this->universityScholarshipRepository->paginate(15, [], $search);
 
         return $this->sendResponse($universityScholarships, 'University Scholarships retrieved successfully');
     }
