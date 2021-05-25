@@ -40,15 +40,23 @@ class PlaceToLiveAPIController extends AppBaseController
         'district_id' => $request->district_id
     ];
 
-   if($request->name){
-        $placeToLives = PlaceToLive::query()->where('name','LIKE', "%$request->name%")->paginate(15);
-    }else{
-        $placeToLives = PlaceToLive::query()->paginate(15);
-    }    
+    $placeToLives = PlaceToLive::query();
+
+    if($request->name){
+      $placeToLives->where('name','LIKE', "%$request->name%");
+    }
+
+    if($request->country){
+      $placeToLives->where('country_id', $request->country);
+    }
+
+    if($request->state){
+      $placeToLives->where('state_id', $request->state);
+    }
 
     // $placeToLives = $this->placeToLiveRepository->paginate(15, ["*", "picture as header_src"], $search);
 
-    return $this->sendResponse($placeToLives, 'Place To Lives retrieved successfully');
+    return $this->sendResponse($placeToLives->paginate(15), 'Place To Lives retrieved successfully');
   }
 
   /**

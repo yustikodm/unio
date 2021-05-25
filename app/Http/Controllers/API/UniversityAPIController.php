@@ -34,19 +34,22 @@ class UniversityAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $search = [
-            'country_id' => $request->country_id,
-            'state_id' => $request->state_id,
-            'district_id' => $request->district_id,
-        ];
+        $universities = University::query();
 
         if($request->name){
-            $universities = University::query()->where('name', 'LIKE', "%$request->name%")->paginate(15);
-        }else{
-            $universities = University::query()->paginate(15);
-        }        
+            $universities->where('name', 'LIKE', "%$request->name%");
+        }
+
+        if($request->country){
+            $universities->where('country_id', $request->country);
+        }
+
+        if($request->state){
+            $universities->where('state_id', $request->state);
+        }
+        
         // $universities = University::paginate(15);
-        return $this->sendResponse($universities, 'Universities retrieved successfully');
+        return $this->sendResponse($universities->paginate(15), 'Universities retrieved successfully');
     }
 
     /**
