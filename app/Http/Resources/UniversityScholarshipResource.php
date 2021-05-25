@@ -22,6 +22,7 @@ class UniversityScholarshipResource extends JsonResource
       'description' => $this->description,
       'picture' => $this->picture,
       'year' => $this->year,
+      'is_checked' => $this->is_checked,
       'created_at' => Carbon::parse($this->created_at)->format('d/m/Y H:i:s'),
       'updated_at' => Carbon::parse($this->updated_at)->format('d/m/Y H:i:s')
     ];

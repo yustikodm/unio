@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use App\Http\Resources\PlaceToLiveResource;
 use Response;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class PlaceToLiveController
@@ -34,12 +35,7 @@ class PlaceToLiveAPIController extends AppBaseController
    */
   public function index(Request $request)
   {
-    $search = [
-        'country_id' => $request->country_id,
-        'state_id' => $request->state_id,
-        'district_id' => $request->district_id
-    ];
-
+    
     $placeToLives = PlaceToLive::query();
 
     if($request->name){
@@ -52,6 +48,15 @@ class PlaceToLiveAPIController extends AppBaseController
 
     if($request->state){
       $placeToLives->where('state_id', $request->state);
+    }
+
+    if($request->user_id){
+        $user_id = $request->user_id;
+        $placeToLives->leftJoin('wishlists', function ($join) use ($user_id) {                            
+                        $join->on("wishlists.entity_id" , '=', DB::raw("place_to_live.id AND wishlists.entity_type = 'place_lives' AND wishlists.user_id = $user_id")); 
+                    })->selectRaw("place_to_live.*, COALESCE(wishlists.id, '0') as is_checked");
+    }else{
+        $placeToLives->selectRaw("place_to_live.*, '0' as is_checked");
     }
 
     // $placeToLives = $this->placeToLiveRepository->paginate(15, ["*", "picture as header_src"], $search);
@@ -94,10 +99,21 @@ class PlaceToLiveAPIController extends AppBaseController
    *
    * @return Response
    */
-  public function show($id)
+  public function show($id, Request $request)
   {
     /** @var PlaceToLive $placeToLive */
-    $placeToLive = $this->placeToLiveRepository->find($id);
+    $placeToLive = PlaceToLive::query()->where('place_to_live.id', $id);
+
+    if($request->input('user_id')){
+        $user_id = $request->input('user_id');
+        $placeToLive->leftJoin('wishlists', function ($join) use ($user_id) {                            
+                        $join->on("wishlists.entity_id" , '=', DB::raw("place_to_live.id AND wishlists.entity_type = 'place_lives' AND wishlists.user_id = $user_id")); 
+                    })->selectRaw("place_to_live.*, COALESCE(wishlists.id, '0') as is_checked");
+    }else{
+        $placeToLive->selectRaw("place_to_live.*, '0' as is_checked");
+    }
+
+    $placeToLive = $placeToLive->first(); 
 
     if (empty($placeToLive)) {
       return $this->sendError('Place To Live not found');

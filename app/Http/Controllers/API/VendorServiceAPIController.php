@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use App\Http\Resources\VendorServiceResource;
 use Response;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class VendorServiceController
@@ -34,7 +35,7 @@ class VendorServiceAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $vendorServices = VendorService::query()->join('vendors', 'vendors.id', '=', 'vendor_services.vendor_id')->select('vendor_services.*');
+        $vendorServices = VendorService::query()->join('vendors', 'vendors.id', '=', 'vendor_services.vendor_id');
 
         if($request->name){
             $vendorServices->where('vendor_services.name','LIKE', "%$request->name%");
@@ -47,7 +48,16 @@ class VendorServiceAPIController extends AppBaseController
         if($request->state){
             $vendorServices->where('vendors.state_id', $request->state);
         }
-
+       
+        if($request->user_id){
+            $user_id = $request->user_id;
+            $vendorServices->leftJoin('wishlists', function ($join) use ($user_id) {                            
+                            $join->on("wishlists.entity_id" , '=', DB::raw("vendor_services.id AND wishlists.entity_type = 'services' AND wishlists.user_id = $user_id")); 
+                        })->selectRaw("vendor_services.*, COALESCE(wishlists.id, '0') as is_checked");
+        }else{
+            $vendorServices->selectRaw("vendor_services.*, '0' as is_checked");
+        }
+        
         return $this->sendResponse($vendorServices->paginate(15), 'Vendor Services retrieved successfully');
     }
 
@@ -82,10 +92,21 @@ class VendorServiceAPIController extends AppBaseController
      *
      * @return Response
      */
-    public function show($id)
+    public function show($id, Request $request)
     {
         /** @var VendorService $vendorService */
-        $vendorService = $this->vendorServiceRepository->find($id);
+        $vendorService = VendorService::query()->where('vendor_services.id', $id);
+        
+        if($request->input('user_id')){
+            $user_id = $request->input('user_id');
+            $vendorService->leftJoin('wishlists', function ($join) use ($user_id) {                            
+                            $join->on("wishlists.entity_id" , '=', DB::raw("vendor_services.id AND wishlists.entity_type = 'services' AND wishlists.user_id = $user_id")); 
+                        })->selectRaw("vendor_services.*, COALESCE(wishlists.id, '0') as is_checked");
+        }else{
+            $vendorService->selectRaw("vendor_services.*, '0' as is_checked");
+        }
+
+        $vendorService = $vendorService->first();
 
         if (empty($vendorService)) {
             return $this->sendError('Vendor Service not found');

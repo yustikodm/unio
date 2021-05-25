@@ -47,13 +47,21 @@ class WishlistAPIController extends AppBaseController
         }else{
             return $this->sendResponse([], 'Wishlists retrieved successfully');
         }
+
+        $user_id = $request->input('user_id');
+        $name = $request->input('name');
+
+        // $wishlistService = Wishlist::query()
+        //                         ->from('wishlists as w')
+        //                         ->join('vendor_services as j', 'j.id', '=', 'w.entity_id')
+        //                         ->join('vendors as i', 'i.id', '=', 'j.vendor_id')
+        //                         ->where('w.entity_type', 'services')
+        //                         ->where('w.user_id')
+        //                         ->selectRaw('w.*, j.name, j.description, j.picture, i.id detail_id, i.name detail_name');
         $filter = '';
         if ($request->entity_type) {
             $filter = "WHERE entity_type = '$request->entity_type'";
         }
-
-        $user_id = $request->input('user_id');
-        $name = $request->input('name');
 
         $query = DB::select(
             DB::raw("SELECT * FROM (
@@ -108,7 +116,13 @@ class WishlistAPIController extends AppBaseController
                         ->get();
 
         if(count($query) != 0){
-            return Response::json(['message' => "you've bookmarked it", "success" => false, "data" => $query], 200);
+            Wishlist::query()
+                    ->where('user_id', $input['user_id'])
+                    ->where('entity_type', $input['entity_type'])
+                    ->where('entity_id', $input['entity_id'])
+                    ->delete();
+            // return Response::json(['message' => "you've bookmarked it", "success" => true, "data" => $query], 200);
+            return $this->sendResponse([], 'Unbookmarked successfully')
             // return $this->sendError("you've bookmarked it");
         }
 

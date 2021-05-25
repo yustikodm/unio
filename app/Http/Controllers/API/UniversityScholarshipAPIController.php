@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use App\Http\Resources\UniversityScholarshipResource;
 use Response;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class UniversityScholarshipController
@@ -48,6 +49,15 @@ class UniversityScholarshipAPIController extends AppBaseController
             $universityScholarships->where('universities.state_id', $request->state);
         }
 
+        if($request->user_id){
+            $user_id = $request->user_id;
+            $universityScholarships->leftJoin('wishlists', function ($join) use ($user_id) {                            
+                            $join->on("wishlists.entity_id" , '=', DB::raw("university_scholarships.id AND wishlists.entity_type = 'scholarships' AND wishlists.user_id = $user_id")); 
+                        })->selectRaw("university_scholarships.*, COALESCE(wishlists.id, '0') as is_checked");
+        }else{
+            $universityScholarships->selectRaw("university_scholarships.*, '0' as is_checked");
+        }
+
         // $universityScholarships = $this->universityScholarshipRepository->paginate(15, [], $search);
 
         return $this->sendResponse($universityScholarships->paginate(15), 'University Scholarships retrieved successfully');
@@ -84,10 +94,21 @@ class UniversityScholarshipAPIController extends AppBaseController
      *
      * @return Response
      */
-    public function show($id)
+    public function show($id, Request $request)
     {
         /** @var UniversityScholarship $universityScholarship */
-        $universityScholarship = $this->universityScholarshipRepository->find($id);
+        $universityScholarship = UniversityScholarship::query()->where('university_scholarships.id', $id);
+
+        if($request->input('user_id')){
+            $user_id = $request->input('user_id');
+            $universityScholarship->leftJoin('wishlists', function ($join) use ($user_id) {                            
+                            $join->on("wishlists.entity_id" , '=', DB::raw("university_scholarships.id AND wishlists.entity_type = 'scholarships' AND wishlists.user_id = $user_id")); 
+                        })->selectRaw("university_scholarships.*, COALESCE(wishlists.id, '0') as is_checked");
+        }else{
+            $universityScholarship->selectRaw("university_scholarships.*, '0' as is_checked");
+        }
+
+        $universityScholarship = $universityScholarship->first();
 
         if (empty($universityScholarship)) {
             return $this->sendError('University Scholarship not found');

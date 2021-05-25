@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use App\Http\Resources\UniversityResource;
 use Response;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class UniversityController
@@ -47,7 +48,16 @@ class UniversityAPIController extends AppBaseController
         if($request->state){
             $universities->where('state_id', $request->state);
         }
-        
+
+       if($request->user_id){
+            $user_id = $request->user_id;
+            $universities->leftJoin('wishlists', function ($join) use ($user_id) {                            
+                            $join->on("wishlists.entity_id" , '=', DB::raw("universities.id AND wishlists.entity_type = 'universities' AND wishlists.user_id = $user_id")); 
+                        })->selectRaw("universities.*, COALESCE(wishlists.id, '0') as is_checked");
+        }else{
+            $universities->selectRaw("universities.*, '0' as is_checked");
+        }
+
         // $universities = University::paginate(15);
         return $this->sendResponse($universities->paginate(15), 'Universities retrieved successfully');
     }
@@ -87,12 +97,23 @@ class UniversityAPIController extends AppBaseController
      *
      * @return Response
      */
-    public function show($id)
+    public function show($id, Request $request)
     {
         /** @var University $university */
         //$university = $this->universityRepository->find($id);
 
-        $university = University::query()->where('id', $id)->with(['facility', "major", "fee", "requirement", "scholarship"])->first();
+        $university = University::query()->where('universities.id', $id);
+
+       if($request->input('user_id')){
+            $user_id = $request->input('user_id');
+            $university->leftJoin('wishlists', function ($join) use ($user_id) {                            
+                            $join->on("wishlists.entity_id" , '=', DB::raw("universities.id AND wishlists.entity_type = 'universities' AND wishlists.user_id = $user_id")); 
+                        })->selectRaw("universities.*, COALESCE(wishlists.id, '0') as is_checked");
+        }else{
+            $university->selectRaw("universities.*, '0' as is_checked");
+        }
+
+        $university = $university->with(['facility', "major", "fee", "requirement", "scholarship"])->first();
 
         if (empty($university)) {
             return $this->sendError('University not found');

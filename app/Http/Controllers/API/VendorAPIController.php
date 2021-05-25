@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use App\Http\Resources\VendorResource;
 use Response;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class VendorController
@@ -46,6 +47,15 @@ class VendorAPIController extends AppBaseController
 
         if($request->state){
             $vendors->where('state_id', $request->state);
+        }
+
+       if($request->user_id){
+            $user_id = $request->user_id;
+            $vendors->leftJoin('wishlists', function ($join) use ($user_id) {                            
+                            $join->on("wishlists.entity_id" , '=', DB::raw("vendors.id AND wishlists.entity_type = 'vendors' AND wishlists.user_id = $user_id")); 
+                        })->selectRaw("vendors.*, COALESCE(wishlists.id, '0') as is_checked");
+        }else{
+            $vendors->selectRaw("vendors.*, '0' as is_checked");
         }
 
         return $this->sendResponse($vendors->paginate(15), 'Vendors retrieved successfully');
@@ -89,10 +99,21 @@ class VendorAPIController extends AppBaseController
      *
      * @return Response
      */
-    public function show($id)
+    public function show($id, Request $request)
     {
         /** @var Vendor $vendor */
-        $vendor = $this->vendorRepository->find($id);
+        $vendor = Vendor::query()->where('vendors.id', $id);
+
+       if($request->input('user_id')){
+            $user_id = $request->input('user_id');
+            $vendor->leftJoin('wishlists', function ($join) use ($user_id) {                            
+                            $join->on("wishlists.entity_id" , '=', DB::raw("vendors.id AND wishlists.entity_type = 'vendors' AND wishlists.user_id = $user_id")); 
+                        })->selectRaw("vendors.*, COALESCE(wishlists.id, '0') as is_checked");
+        }else{
+            $vendor->selectRaw("vendors.*, '0' as is_checked");
+        }
+
+        $vendor = $vendor->first();
 
         if (empty($vendor)) {
             return $this->sendError('Vendor not found');

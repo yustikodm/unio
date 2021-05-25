@@ -22,6 +22,7 @@ class VendorServiceResource extends JsonResource
       'header_src' => $this->picture,
       'price' => $this->price,
       'level' => $this->level,
+      'is_checked' => $this->is_checked,
       'created_at' => Carbon::parse($this->created_at)->format('d/m/Y H:i:s'),
       'updated_at' => Carbon::parse($this->updated_at)->format('d/m/Y H:i:s')
     ];
