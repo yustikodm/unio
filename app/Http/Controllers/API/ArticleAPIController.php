@@ -36,27 +36,22 @@ class ArticleAPIController extends AppBaseController
   {
     $search = [];
 
-    if ($request->user_id) {
-        $search = array_merge($search, [
-            'user_id' => $request->user_id,
-        ]);
-    }
-
-    if ($request->title) {
-        $search = array_merge($search, [
-            'title' => $request->title,
-        ]);
-    }
-
+    $articles = Article::query();
+    
     if($request->name){
-        $articles = Article::query()->where('title','LIKE', "%$request->name%")->paginate(15);
-    }else{
-        $articles = Article::query()->paginate(15);
-    }    
+      $articles->where('title','LIKE', "%$request->name%");
+    }   
 
+    // if($request->country){
+    //     $articles->where('country_id', $request->country);
+    // }
+
+    // if($request->state){
+    //     $articles->where('state_id', $request->state);
+    // }
     // $articles = $this->articleRepository->paginate(15, [], $search);
 
-    return $this->sendResponse($articles, 'Articles retrieved successfully');
+    return $this->sendResponse($articles->paginate(15), 'Articles retrieved successfully');
   }
 
   /**

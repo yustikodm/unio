@@ -33,25 +33,24 @@ class UniversityScholarshipAPIController extends AppBaseController
      * @return Response
      */
     public function index(Request $request)
-    {
-        $search = [];
-
-        if ($request->university_id) {
-            $search = array_merge($search, [
-                'university_id' => $request->university_id,    
-            ]);
-        }
+    {   
+        $universityScholarships = UniversityScholarship::query()->join('universities', 'universities.id', '=', 'university_scholarships.university_id')->select('university_scholarships.*'); 
 
         if($request->name){
-            $universityScholarships = UniversityScholarship::query()->where('name','LIKE', "%$request->name%")->paginate(15);
-        }else{
-            $universityScholarships = UniversityScholarship::query()->paginate(15);
-        }    
+            $universityScholarships->where('university_scholarships.name','LIKE', "%$request->name%");
+        }
 
+        if($request->country){
+            $universityScholarships->where('universities.country_id', $request->country);
+        }
+
+        if($request->state){
+            $universityScholarships->where('universities.state_id', $request->state);
+        }
 
         // $universityScholarships = $this->universityScholarshipRepository->paginate(15, [], $search);
 
-        return $this->sendResponse($universityScholarships, 'University Scholarships retrieved successfully');
+        return $this->sendResponse($universityScholarships->paginate(15), 'University Scholarships retrieved successfully');
     }
 
     /**

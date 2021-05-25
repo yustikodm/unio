@@ -34,21 +34,21 @@ class VendorAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $search = [];
-
-        if ($request->category_id) {
-            $search = array_merge($search, [
-                'vendor_category_id' => $request->category_id,    
-            ]);
-        }
+        $vendors = Vendor::query();
 
         if($request->name){
-            $vendors = Vendor::query()->where('name','LIKE', "%$request->name%")->paginate(15);
-        }else{
-            $vendors = Vendor::query()->paginate(15);
+            $vendors->where('name','LIKE', "%$request->name%");
         }
 
-        return $this->sendResponse($vendors, 'Vendors retrieved successfully');
+        if($request->country){
+            $vendors->where('country_id', $request->country);
+        }
+
+        if($request->state){
+            $vendors->where('state_id', $request->state);
+        }
+
+        return $this->sendResponse($vendors->paginate(15), 'Vendors retrieved successfully');
     }
 
     /**

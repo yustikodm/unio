@@ -34,23 +34,21 @@ class VendorServiceAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $search = [];
+        $vendorServices = VendorService::query()->join('vendors', 'vendors.id', '=', 'vendor_services.vendor_id')->select('vendor_services.*');
 
-        if ($request->vendor_id) {
-            $search = array_merge($search, [
-                'vendor_id' => $request->vendor_id,    
-            ]);
+        if($request->name){
+            $vendorServices->where('vendor_services.name','LIKE', "%$request->name%");
         }
 
-       if($request->name){
-            $vendorServices = VendorService::query()->where('name','LIKE', "%$request->name%")->paginate(15);
-        }else{
-            $vendorServices = VendorService::query()->paginate(15);
+        if($request->country){
+            $vendorServices->where('vendors.country_id', $request->country);
         }
 
-        // $vendorServices = $this->vendorServiceRepository->paginate(15, [], $search);
+        if($request->state){
+            $vendorServices->where('vendors.state_id', $request->state);
+        }
 
-        return $this->sendResponse($vendorServices, 'Vendor Services retrieved successfully');
+        return $this->sendResponse($vendorServices->paginate(15), 'Vendor Services retrieved successfully');
     }
 
     /**

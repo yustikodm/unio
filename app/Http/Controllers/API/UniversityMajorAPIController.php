@@ -36,18 +36,18 @@ class UniversityMajorAPIController extends AppBaseController
     {
         $search = [];
 
-        $universityMajors = UniversityMajor::query()->join('university', 'universities.id', '=', 'university_majors.university.id')->select('university_majors.*');
+        $universityMajors = UniversityMajor::query()->join('universities', 'universities.id', '=', 'university_majors.university_id')->select('university_majors.*');
 
         if($request->name){
             $universityMajors->where('university_majors.name', 'LIKE', "%$request->name%");
         }
 
         if($request->country){
-            $universityMajors->where('university.country_id', $request->country);
+            $universityMajors->where('universities.country_id', $request->country);
         }
 
         if($request->state){
-            $universityMajors->where('university.state_id', $request->state);
+            $universityMajors->where('universities.state_id', $request->state);
         }
 
         return $this->sendResponse($universityMajors->paginate(15), 'University Majors retrieved successfully');
