@@ -40,7 +40,7 @@ class GlobalSearchAPIController extends AppBaseController
 
     switch ($request->keyword) {
       case 'universities': // DONE
-        $university = University::apiSearch($request->name, $request->major, $request->country, $request->state, $request->district);
+        $university = University::apiSearch($request->name, $request->major, $request->country, $request->state, $request->district, $request->user_id);
 
         return UniversityResource::collection($university->paginate(15))->toResponse(15);
         break;
@@ -52,25 +52,25 @@ class GlobalSearchAPIController extends AppBaseController
         break;
 
       case 'placetolive': // DONE
-        $placeToLive = PlaceToLive::apiSearch($request->name, $request->country, $request->state, $request->district);
+        $placeToLive = PlaceToLive::apiSearch($request->name, $request->country, $request->state, $request->district, $request->user_id);
 
         return PlaceToLiveResource::collection($placeToLive->paginate(15))->toResponse(15);
         break;
 
       case 'vendors': // DONE
-        $vendor = Vendor::apiSearch($request->name, $request->category, $request->country, $request->state, $request->district);
+        $vendor = Vendor::apiSearch($request->name, $request->category, $request->country, $request->state, $request->district, $request->user_id);
 
         return VendorResource::collection($vendor->paginate(15))->toResponse(15);
         break;
 
       case 'vendorservices': // DONE
-        $vendorService = VendorService::apiSearch($request->name, $request->vendor, $request->country, $request->state, $request->district);
+        $vendorService = VendorService::apiSearch($request->name, $request->vendor, $request->country, $request->state, $request->district, $request->user_id);
 
         return VendorServiceResource::collection($vendorService->paginate(15))->toResponse(15);
         break;
 
       case 'scholarship':
-        $universityScholarship = UniversityScholarship::apiSearch($request->name, $request->university, $request->country, $request->state, $request->district);
+        $universityScholarship = UniversityScholarship::apiSearch($request->name, $request->university, $request->country, $request->state, $request->district, $request->user_id);
 
         return UniversityScholarshipResource::collection($universityScholarship->paginate(15))->toResponse(15);
         break;
@@ -82,7 +82,7 @@ class GlobalSearchAPIController extends AppBaseController
         break;
 
       default: // University Major // DONE
-        $universityMajors = UniversityMajor::apiSearch($request->name, $request->university, $request->country, $request->state, $request->district);
+        $universityMajors = UniversityMajor::apiSearch($request->name, $request->university, $request->country, $request->state, $request->district, $request->user_id);
 
         return UniversityMajorResource::collection($universityMajors->paginate(15))->toResponse(15);
         break;

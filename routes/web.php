@@ -126,3 +126,5 @@ Route::resource('majorPrediction', 'MajorPredictionController');
 Route::resource('reviewMajors', 'ReviewMajorsController');
 
 Route::resource('questionnaireImage', 'QuestionnaireImageController');
+
+Route::resource('fOS', 'FOSController');

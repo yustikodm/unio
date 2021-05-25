@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class UniversityMajor
@@ -99,7 +100,7 @@ class UniversityMajor extends Model
     return $this->belongsTo(MasterMajor::class);
   }
 
-  public function scopeApiSearch($query, $param, $university, $country, $state, $district)
+  public function scopeApiSearch($query, $param, $university, $country, $state, $district, $user_id)
   {
     $search = $query->when($param, function ($query) use ($param) {
       return $query->where('university_majors.name', 'LIKE', "%$param%");
@@ -121,9 +122,16 @@ class UniversityMajor extends Model
         return $query->join('universities as uc', 'uc.id', 'university_majors.university_id')
           ->join('districts', 'districts.id', 'uc.district_id')
           ->where('districts.id', $district);
+      })
+      ->when($user_id, function ($query) use ($user_id) {
+        return $query->leftJoin('wishlists', "wishlists.entity_id" , '=', DB::raw("university_majors.id AND wishlists.entity_type = 'majors' AND wishlists.user_id = $user_id"));
       });
 
-    $select_list = ['university_majors.*'];
+    if($user_id != ""){
+      $select_list = ['university_majors.*', 'wishlists.id as is_checked'];
+    }else{
+      $select_list = ['university_majors.*'];
+    }        
 
     if (!empty($university)) {
       $select_list = array_merge($select_list, [

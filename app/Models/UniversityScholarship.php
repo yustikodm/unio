@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class UniversityScholarship
@@ -74,16 +75,15 @@ class UniversityScholarship extends Model
     return $this->belongsTo(University::class);
   }
 
-  public function scopeApiSearch($query, $param, $university, $country, $state, $district)
+  public function scopeApiSearch($query, $param, $university, $country, $state, $district, $user_id)
   {
     $search = $query->when($param, function ($query) use ($param) {
       return $query->where('university_scholarships.name', 'LIKE', "%$param%");
     })
-      ->when($university or $country or $state or $district, function ($query) use ($university, $country, $state, $district) {
+      ->when($university or $country or $state or $district or $user_id, function ($query) use ($university, $country, $state, $district, $user_id) {
         $univ = $query->join('universities', 'universities.id', 'university_scholarships.university_id')
           ->where('universities.name', 'LIKE', "%$university%");
           // ->orWhere('universities.id', $university);
-
         return $univ->when($country, function ($query) use ($country) {
           return $query->join('universities as ua', 'ua.id', 'university_scholarships.university_id')
             ->join('countries', 'countries.id', 'ua.country_id')
@@ -98,10 +98,17 @@ class UniversityScholarship extends Model
             return $query->join('universities as uc', 'uc.id', 'university_scholarships.university_id')
               ->join('districts', 'districts.id', 'uc.district_id')
               ->where('districts.id', $district);
+          })
+          ->when($user_id, function ($query) use ($user_id) {
+            return $query->leftJoin('wishlists', "wishlists.entity_id" , '=', DB::raw("university_scholarships.id AND wishlists.entity_type = 'scholarships' AND wishlists.user_id = $user_id"));
           });
       });
-
-    $select_list = ['university_scholarships.*'];
+    
+    if($user_id != ""){
+      $select_list = ['university_scholarships.*', 'wishlists.id as is_checked'];
+    }else{
+      $select_list = ['university_scholarships.*'];
+    }      
 
     if (!empty($university)) {
       $select_list = array_merge($select_list, [

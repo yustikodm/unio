@@ -122,7 +122,7 @@ class WishlistAPIController extends AppBaseController
                     ->where('entity_id', $input['entity_id'])
                     ->delete();
             // return Response::json(['message' => "you've bookmarked it", "success" => true, "data" => $query], 200);
-            return $this->sendResponse([], 'Unbookmarked successfully')
+            return $this->sendResponse([], 'Unbookmarked successfully');
             // return $this->sendError("you've bookmarked it");
         }
 

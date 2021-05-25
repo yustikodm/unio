@@ -82,7 +82,7 @@ class PlaceToLive extends Model
     return $this->belongsTo(District::class, 'district_id');
   }
 
-  public function scopeApiSearch($query, $param, $country, $state, $district)
+  public function scopeApiSearch($query, $param, $country, $state, $district, $user_id)
   {
     $search = $query->when($param, function ($query) use ($param) {
       return $query->where('place_to_live.name', 'LIKE', "%$param%");
@@ -98,9 +98,16 @@ class PlaceToLive extends Model
       ->when($district, function ($query) use ($district) {
         return $query->join('districts', 'districts.id', 'place_to_live.district_id')
           ->where('districts.id', $district);
+      })
+      ->when($user_id, function ($query) use ($user_id) {
+        return $query->leftJoin('wishlists', "wishlists.entity_id" , '=', DB::raw("place_to_live.id AND wishlists.entity_type = 'place_lives' AND wishlists.user_id = $user_id"));
       });
-
-    $select_list = ['place_to_live.*'];
+    
+    if($user_id != ""){
+      $select_list = ['place_to_live.*', 'wishlists.id as is_checked'];
+    }else{
+      $select_list = ['place_to_live.*'];
+    }  
 
     if (!empty($country)) {
       $select_list = array_merge($select_list, [

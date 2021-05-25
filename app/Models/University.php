@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Http\Resources\UniversityResource;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class University
@@ -139,30 +140,37 @@ class University extends Model
     return $this->hasMany(UniversityFacility::class);
   }
 
-  public function scopeApiSearch($query, $param, $major = "", $country = "", $state = "", $district = "")
+  public function scopeApiSearch($query, $param, $major = "", $country = "", $state = "", $district = "", $user_id = "")
   {
     $search = $query->when($param, function ($query) use ($param) {
       return $query->where('universities.name', 'LIKE', "%$param%");
     })
-      ->when($country, function ($query) use ($country) {
-        return $query->join('countries', 'countries.id', 'universities.country_id')
-          ->where('countries.id', $country);
-      })
-      ->when($state, function ($query) use ($state) {
-        return $query->join('states', 'states.id', 'universities.state_id')
-          ->where('states.id', $state);
-      })
-      ->when($district, function ($query) use ($district) {
-        return $query->join('districts', 'districts.id', 'universities.district_id')
-          ->where('districts.id', $district);
-      })
-      ->when($major, function ($query) use ($major) {
-        $query->join('university_majors', 'university_majors.university_id', 'universities.id')
-          ->where('university_majors.name', 'LIKE', "%$major%")
-          ->orWhere('university_majors.id', "$major");
-      });
+    ->when($country, function ($query) use ($country) {
+      return $query->join('countries', 'countries.id', 'universities.country_id')
+        ->where('countries.id', $country);
+    })
+    ->when($state, function ($query) use ($state) {
+      return $query->join('states', 'states.id', 'universities.state_id')
+        ->where('states.id', $state);
+    })
+    ->when($district, function ($query) use ($district) {
+      return $query->join('districts', 'districts.id', 'universities.district_id')
+        ->where('districts.id', $district);
+    })
+    ->when($major, function ($query) use ($major) {
+      $query->join('university_majors', 'university_majors.university_id', 'universities.id')
+        ->where('university_majors.name', 'LIKE', "%$major%")
+        ->orWhere('university_majors.id', "$major");
+    })
+    ->when($user_id, function ($query) use ($user_id) {
+      $query->leftJoin('wishlists', "wishlists.entity_id" , '=', DB::raw("universities.id AND wishlists.entity_type = 'universities' AND wishlists.user_id = $user_id"));
+    });
 
-    $select_list = ['universities.*'];
+    if($user_id != ""){
+      $select_list = ['universities.*', 'wishlists.id as is_checked'];
+    }else{
+      $select_list = ['universities.*'];
+    }    
 
     if (!empty($major)) {
       $select_list = array_merge($select_list, [

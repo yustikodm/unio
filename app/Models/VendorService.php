@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class VendorService
@@ -75,7 +76,7 @@ class VendorService extends Model
     return $this->belongsTo(Vendor::class, 'vendor_id');
   }
 
-  public function scopeApiSearch($query, $param, $vendor, $country, $state, $district)
+  public function scopeApiSearch($query, $param, $vendor, $country, $state, $district, $user_id)
   {
     $search = $query->when($param, function ($query) use ($param) {
       return $query->where('vendor_services.name', 'LIKE', "%$param%");
@@ -98,9 +99,16 @@ class VendorService extends Model
       return $query->join('vendors as vendis', 'vendis.id', 'vendor_services.vendor_id')
         ->join('districts', 'districts.id', 'vendis.district_id')
         ->where('districts.id', $district);
+    })
+    ->when($user_id, function ($query) use ($user_id) {
+      return $query->leftJoin('wishlists', "wishlists.entity_id" , '=', DB::raw("vendor_services.id AND wishlists.entity_type = 'services' AND wishlists.user_id = $user_id"));
     });
 
-    $select_list = ['vendor_services.*'];
+    if($user_id != ""){
+      $select_list = ['vendor_services.*', 'wishlists.id as is_checked'];
+    }else{
+      $select_list = ['vendor_services.*'];
+    }      
 
     if (!empty($vendor)) {
       $select_list = array_merge($select_list, [

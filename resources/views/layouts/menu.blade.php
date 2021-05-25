@@ -347,3 +347,8 @@ f{{-- Dashboard --}}
     <a href="{{ route('questionnaireImage.index') }}"><i class="fa fa-edit"></i><span>Questionnaire Image</span></a>
 </li>
 @endcan
+@can('fOS.index')
+<li class="{{ Request::is('fOS*') ? 'active' : '' }}">
+    <a href="{{ route('fOS.index') }}"><i class="fa fa-edit"></i><span>F O S</span></a>
+</li>
+@endcan
