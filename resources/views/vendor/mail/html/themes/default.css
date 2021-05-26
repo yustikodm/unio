@@ -120,7 +120,7 @@ img {
 /* Body */
 
 .body {
-    background-color: #ffffff;
+    background-color: #00aaf2;
     border-bottom: 1px solid #edeff2;
     border-top: 1px solid #edeff2;
     margin: 0;
@@ -133,7 +133,8 @@ img {
 
 .inner-body {
     background-color: #ffffff;
-    margin: 0 auto;
+    margin: 48px auto;
+    border-radius: 30px;
     padding: 0;
     width: 570px;
     -premailer-cellpadding: 0;
