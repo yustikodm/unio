@@ -15,7 +15,7 @@ class MatchWithMeAPIController extends AppBaseController
     	try{
     		$user = Biodata::where('user_id', auth()->id())->first();
     		$postRequest = json_encode(['hc' => $user->hc]);
-	    	$url = getenv('APP_URL_ML')."fos";
+	    	$url = getenv('APP_URL_ML')."v1/fos";
 			$cURLConnection = curl_init($url);
 			curl_setopt($cURLConnection, CURLOPT_POSTFIELDS, $postRequest);
 			curl_setopt($cURLConnection, CURLOPT_HTTPHEADER, array(
@@ -73,6 +73,100 @@ class MatchWithMeAPIController extends AppBaseController
 				'success' => false,
 				'message' => $err->getMessage()
 			]);
+    	}    		
+    }
+
+		public function getcip($hc) {
+			try {
+				$postRequest = json_encode(['hc' => $hc]);
+
+				$url = getenv('APP_URL_ML')."v1/cip";
+				$cURLConnection = curl_init($url);
+				curl_setopt($cURLConnection, CURLOPT_POSTFIELDS, $postRequest);
+				curl_setopt($cURLConnection, CURLOPT_HTTPHEADER, array(
+						'Accept: application/json',
+						'Content-Type: application/json'
+				));
+				curl_setopt($cURLConnection, CURLOPT_RETURNTRANSFER, true);
+
+				$apiResponse = curl_exec($cURLConnection);
+				curl_close($cURLConnection);
+				
+				$jsonArrayResponse = json_decode($apiResponse, true);
+
+				if ($jsonArrayResponse['status'] == 200) {
+					// return mactchedFos
+					$dataReturn = $jsonArrayResponse['res']['matchedFos'];
+
+					return response()->json([
+						'data' => $dataReturn,
+						'message' => $jsonArrayResponse['msg'],
+						'success' => true
+					]);
+
+				} else {
+					return response()->json([
+						// 'data' => $jsonArrayResponse['res'],
+						'success' => false,
+						'message' => $jsonArrayResponse['msg']
+					]);
+				}
+
+			} catch (\Exception $err) {
+				return response()->json([
+					// 'data' => $jsonArrayResponse['res'],
+					'success' => false,
+					'message' => $err->getMessage()
+				]);
+			}
+		}
+
+		public function index_v2(Request $request){
+    	try{
+				
+    		$postRequest = json_encode([
+					'cip' => $request->input('cip'),
+					'country_id' => $request->has('country_id') ? $request->input('country_id') : [],
+					'level'=> $request->has('level') ? $request->input('level') : []
+				]);
+
+	    	$url = getenv('APP_URL_ML')."v2/fos";
+				$cURLConnection = curl_init($url);
+				curl_setopt($cURLConnection, CURLOPT_POSTFIELDS, $postRequest);
+				curl_setopt($cURLConnection, CURLOPT_HTTPHEADER, array(
+						'Accept: application/json',
+						'Content-Type: application/json'
+				));
+				curl_setopt($cURLConnection, CURLOPT_RETURNTRANSFER, true);
+
+				$apiResponse = curl_exec($cURLConnection);
+				curl_close($cURLConnection);
+				
+				$jsonArrayResponse = json_decode($apiResponse, true);
+
+				if($jsonArrayResponse['status'] == 200){
+
+
+					$dataReturn = $jsonArrayResponse['res'];
+
+					return response()->json([
+						'data' => $dataReturn,
+						'message' => $jsonArrayResponse['msg'],
+						'success' => true
+					]);
+				}else{
+					return response()->json([
+						// 'data' => $jsonArrayResponse['res'],
+						'success' => false,
+						'message' => $jsonArrayResponse['msg']
+					]);
+				}
+    	}catch(\Exception $err){
+				return response()->json([
+					// 'data' => $jsonArrayResponse['res'],
+					'success' => false,
+					'message' => $err->getMessage()
+				]);
     	}    		
     }
 }

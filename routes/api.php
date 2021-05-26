@@ -102,6 +102,10 @@ Route::group(['middleware' => ['auth:api']], function () {
 
   Route::get('match-with-me', 'MatchWithMeAPIController@index');  
 
+  Route::get('match-with-me/cip/{hc}', 'MatchWithMeAPIController@getcip');
+
+  Route::post('match-with-me', 'MatchWithMeAPIController@index_v2');
+
   Route::resource('questionnaire_image', 'QuestionnaireImageAPIController');
   
 });
