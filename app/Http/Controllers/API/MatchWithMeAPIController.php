@@ -29,34 +29,35 @@ class MatchWithMeAPIController extends AppBaseController
 			
 			$jsonArrayResponse = json_decode($apiResponse, true);
 
-			if($jsonArrayResponse['status'] == 200){
+			if($jsonArrayResponse['status'] == 200){				
 
-				$temp = array_slice($jsonArrayResponse['res']['majors'], 0, 10);		
+				// $tempInsert = [];
 
-				$tempInsert = [];
+				// foreach ($temp as $row) {
+				// 	array_push($tempInsert, [
+				// 			'user_id' => auth()->id(), 
+				// 			'entity_id' => $row['major_id'], 
+				// 			'entity_type' => 'majors',
+				// 			'created_at' => date('Y-m-d H:i:s'),
+				// 			'updated_at' => date('Y-m-d H:i:s'),
+				// 		]);
+				// }
 
-				foreach ($temp as $row) {
-					array_push($tempInsert, [
-							'user_id' => auth()->id(), 
-							'entity_id' => $row['major_id'], 
-							'entity_type' => 'majors',
-							'created_at' => date('Y-m-d H:i:s'),
-							'updated_at' => date('Y-m-d H:i:s'),
-						]);
-				}
+				// foreach ($tempInsert as $row) {
+				// 	$check = Wishlist::query('user_id', $row['user_id'])->where('entity_id', $row['entity_id'])->where('entity_type', $row['entity_type'])->first();
+				// 	if(empty($check)){
+				// 		Wishlist::create($row);
+				// 	} 
+				// }			
 
-				foreach ($tempInsert as $row) {
-					$check = Wishlist::query('user_id', $row['user_id'])->where('entity_id', $row['entity_id'])->where('entity_type', $row['entity_type'])->first();
-					if(empty($check)){
-						Wishlist::create($row);
-					} 
-				}			
+				// $temp = array_slice($jsonArrayResponse['res']['majors'], 0, 10);
+				$dataMajors = $jsonArrayResponse['res']['majors'];
 
-
-				$dataReturn = $temp;
+				$dataFOS = $jsonArrayResponse['res']['matchedFos'];				
 
 				return response()->json([
-					'data' => $dataReturn,
+					'data' => $dataMajors,
+					'fos' => $dataFOS,
 					'message' => $jsonArrayResponse['msg'],
 					'success' => true
 				]);
