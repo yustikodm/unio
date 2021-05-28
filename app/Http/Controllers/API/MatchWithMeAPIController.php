@@ -14,7 +14,7 @@ class MatchWithMeAPIController extends AppBaseController
     public function index(){
     	try{
     		$user = Biodata::where('user_id', auth()->id())->first();
-    		$postRequest = json_encode(['hc' => $user->hc]);
+    		$postRequest = json_encode(['hc' => $user->hc, 'user_id' => auth()->id()]);
 	    	$url = getenv('APP_URL_ML')."v1/fos";
 			$cURLConnection = curl_init($url);
 			curl_setopt($cURLConnection, CURLOPT_POSTFIELDS, $postRequest);

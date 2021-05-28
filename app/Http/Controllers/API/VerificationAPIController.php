@@ -52,11 +52,25 @@ class VerificationAPIController extends AppBaseController
         if (!$user->hasVerifiedEmail()) {
             $user->markEmailAsVerified();
         }
+        
+        $this->userRepository->loginApi($user->id);
+        
+        Auth::login($user);
+        
+        $user = $this->userRepository->find($user->id);    
+
+        $pictureUser = Biodata::where('user_id', $user->id)->where('picture', null)->first();    
+        if(!empty($pictureUser)){
+          Biodata::where('user_id', $user->id)->update(['picture' => $user->image_path]);
+        }
+
+        $user->biodata = Biodata::where('user_id', $user->id)->first();
 
         return response()->json([
             "message" => "Email successfully verified.", 
             "submessage" => "You can sign in, via the unio website or application on your device.",
             "type" => 2,
+            "data" => new UserResource($user),
             "success" => true
         ]);
     }
@@ -163,10 +177,24 @@ class VerificationAPIController extends AppBaseController
 
         $user->update(['password' => Hash::make($request->input('password')) ]);    
 
+        $this->userRepository->loginApi($user->id);
+        
+        Auth::login($user);
+        
+        $user = $this->userRepository->find($user->id);    
+
+        $pictureUser = Biodata::where('user_id', $user->id)->where('picture', null)->first();    
+        if(!empty($pictureUser)){
+          Biodata::where('user_id', $user->id)->update(['picture' => $user->image_path]);
+        }
+
+        $user->biodata = Biodata::where('user_id', $user->id)->first();
+
         return response()->json([
             "message" => "Your password successfully to reset.", 
             "submessage" => "Now you can sign in with your account.",
             "type" => 2,
+            "data" => new UserResource($user),
             "success" => true
         ]);
     }
