@@ -82,7 +82,7 @@ class GlobalSearchAPIController extends AppBaseController
         break;
 
       default: // University Major // DONE
-        $universityMajors = UniversityMajor::apiSearch($request->name, $request->university, $request->country, $request->state, $request->district, $request->user_id);
+        $universityMajors = UniversityMajor::apiSearch($request->name, $request->university, $request->country, $request->state, $request->district, $request->user_id, $request->level);
 
         return UniversityMajorResource::collection($universityMajors->paginate(15))->toResponse(15);
         break;

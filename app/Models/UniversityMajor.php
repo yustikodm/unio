@@ -100,15 +100,19 @@ class UniversityMajor extends Model
     return $this->belongsTo(MasterMajor::class);
   }
 
-  public function scopeApiSearch($query, $param, $university, $country, $state, $district, $user_id)
+  public function scopeApiSearch($query, $param, $university, $country, $state, $district, $user_id, $level)
   {
     $search = $query->when($param, function ($query) use ($param) {
       return $query->where('university_majors.name', 'LIKE', "%$param%");
     })
       ->when($university , function ($query) use ($university) {
         return $query->join('universities', 'universities.id', 'university_majors.university_id')
-          ->where('universities.name', 'LIKE', "%$university%");
-      })->when($country, function ($query) use ($country) {
+          ->where('universities.name', 'LIKE', "%$university%");          
+      })
+      ->when($level , function ($query) use ($level) {
+        return $query->where('university_majors.level', 'LIKE', "%$level%");          
+      })
+      ->when($country, function ($query) use ($country) {
         return $query->join('universities as ua', 'ua.id', 'university_majors.university_id')
           ->join('countries', 'countries.id', 'ua.country_id')
           ->where('countries.id', $country);
