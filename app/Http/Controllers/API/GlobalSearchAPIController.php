@@ -79,7 +79,7 @@ class GlobalSearchAPIController extends AppBaseController
       case 'articles':
         $article = Article::apiSearch($request->name, $request->slug);
 
-        return ArticleResources::($article->paginate(15))->toResponse(15);
+        return ArticleResources::collection($article->paginate(15))->toResponse(15);
         break;
 
       default: // University Major // DONE

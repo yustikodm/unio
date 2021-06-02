@@ -16,6 +16,13 @@
     {!! Form::text('fos', null, ['class' => 'form-control']) !!}
 </div>
 
+<!-- Fos Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('mancheck', 'Man Check:') !!}
+    {!! Form::checkbox('mancheck', 1, ['class' => 'form-control']) !!}
+    <input type="hidden" name="mancheck" value="0" />
+</div>
+
 <!-- Submit Field -->
 <div class="form-group col-sm-12">
     {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
