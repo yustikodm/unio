@@ -70,7 +70,7 @@ class UniversityFee extends Model
     'university_id' => 'required|integer',
     'faculty_id' => 'required|integer',
     'major_id' => 'required|integer',
-    'type' => 'required|string|max:50',
+    'type' => 'required|string|max:50', 
     'description' => 'required|string|max:255',
     'created_at' => 'nullable',
     'updated_at' => 'nullable',
