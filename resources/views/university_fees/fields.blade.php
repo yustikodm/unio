@@ -31,18 +31,39 @@
 </div>
 
 <!-- Admission Fee Field -->
-<div class="form-group">
+<!-- <div class="form-group">
     {!! Form::label('admission_fee', 'Admission Fee:', ['class' => 'control-label col-sm-2']) !!}
     <div class="col-sm-6">
         {!! Form::number('admission_fee', null, ['class' => 'form-control']) !!}
     </div>
-</div>
+</div> -->
 
 <!-- Semester Fee Field -->
-<div class="form-group">
+<!-- <div class="form-group">
     {!! Form::label('semester_fee', 'Semester Fee:', ['class' => 'control-label col-sm-2']) !!}
     <div class="col-sm-6">
         {!! Form::number('semester_fee', null, ['class' => 'form-control']) !!}
+    </div>
+</div> -->
+
+<div class="form-group">
+    {!! Form::label('fee', 'Fee:', ['class' => 'control-label col-sm-2']) !!}
+    <div class="col-sm-6">
+        {!! Form::number('fee', null, ['class' => 'form-control']) !!}
+    </div>
+</div>
+
+<div class="form-group">
+    {!! Form::label('period', 'Period:', ['class' => 'control-label col-sm-2']) !!}
+    <div class="col-sm-6">
+        {!! Form::number('period', null, ['class' => 'form-control']) !!}
+    </div>
+</div>
+\
+<div class="form-group">
+    {!! Form::label('period_unit', 'Period Unit:', ['class' => 'control-label col-sm-2']) !!}
+    <div class="col-sm-6">
+        {!! Form::text('period_unit', null, ['class' => 'form-control']) !!}
     </div>
 </div>
 

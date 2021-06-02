@@ -23,15 +23,31 @@
 </div>
 
 <!-- Admission Fee Field -->
-<div class="form-group">
+<!-- <div class="form-group">
     {!! Form::label('admission_fee', 'Admission Fee:') !!}
     <p>{{ $universityFee->admission_fee }}</p>
-</div>
+</div> -->
 
 <!-- Semester Fee Field -->
-<div class="form-group">
+<!-- <div class="form-group">
     {!! Form::label('semester_fee', 'Semester Fee:') !!}
     <p>{{ $universityFee->semester_fee }}</p>
+</div>
+ -->
+
+<div class="form-group">
+    {!! Form::label('fee', 'Fee:') !!}
+    <p>{{ $universityFee->fee }}</p>
+</div>
+
+<div class="form-group">
+    {!! Form::label('period', 'Period:') !!}
+    <p>{{ $universityFee->period }}</p>
+</div>
+
+<div class="form-group">
+    {!! Form::label('period_unit', 'Period Unit:') !!}
+    <p>{{ $universityFee->period_unit }}</p>
 </div>
 
 <!-- Description Field -->
