@@ -83,8 +83,7 @@ class UniversityFeeDataTable extends DataTable
             Column::make('faculty.name')->title('Faculty')->width('20%'),
             Column::make('major.name')->title('Major')->width('20%'),
             Column::make('fee')->title('Fee')->width('15%'),
-            Column::make('period')->title('Period')->width('15%'),
-            Column::make('period_unit')->title('Period Unit')->width('15%'),
+            Column::make('period')->title('Period')->width('15%')
         ];
     }
 

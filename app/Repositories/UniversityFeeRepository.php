@@ -22,6 +22,9 @@ class UniversityFeeRepository extends BaseRepository
         'major_id',
         'currency_id',
         'type',
+        'fee',
+        'period',
+        'period_unit',
         'admission_fee',
         'semester_fee',
         'description'

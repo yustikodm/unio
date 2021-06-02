@@ -71,7 +71,11 @@ class UniversityFeeAPIController extends AppBaseController
             'university_id',
             'faculty_id',
             'major_id',
+            'currency_id',
             'type',
+            'fee',
+            'period',
+            'period_unit',
             'admission_fee',
             'semester_fee',
             'description'
@@ -117,7 +121,11 @@ class UniversityFeeAPIController extends AppBaseController
             'university_id',
             'faculty_id',
             'major_id',
+            'currency_id',
             'type',
+            'fee',
+            'period',
+            'period_unit',
             'admission_fee',
             'semester_fee',
             'description'
