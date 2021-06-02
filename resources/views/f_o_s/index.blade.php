@@ -2,7 +2,7 @@
 
 @section('content')
     <section class="content-header">
-        <h1>F O S</h1>
+        <h1>Majors Classification</h1>
     </section>
     <div class="content">
         <div class="clearfix"></div>

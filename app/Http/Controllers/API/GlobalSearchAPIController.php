@@ -10,7 +10,7 @@ use App\Http\Resources\UniversityResource;
 use App\Http\Resources\UniversityScholarshipResource;
 use App\Http\Resources\VendorResource;
 use App\Http\Resources\VendorServiceResource;
-use App\Http\Resources\ArticleResources;
+use App\Http\Resources\ArticleResource;
 use App\Models\PlaceToLive;
 use App\Models\University;
 use App\Models\UniversityFaculties;
@@ -79,7 +79,7 @@ class GlobalSearchAPIController extends AppBaseController
       case 'articles':
         $article = Article::apiSearch($request->name, $request->slug);
 
-        return ArticleResources::collection($article->paginate(15))->toResponse(15);
+        return ArticleResource::collection($article->paginate(15))->toResponse(15);
         break;
 
       default: // University Major // DONE

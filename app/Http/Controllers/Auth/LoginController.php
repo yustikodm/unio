@@ -102,7 +102,7 @@ class LoginController extends Controller
       $socialAccount = SocialAccount::getExistSocial($socialite->getId(), $provider);
 
       if ($socialAccount) {
-          return User::find($socialAccount->first()->user_id);
+          return User::find($socialAccount->user_id);
       }
 
       $user = User::getExistUser($socialite->getEmail());

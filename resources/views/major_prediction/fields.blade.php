@@ -18,9 +18,9 @@
 
 <!-- Fos Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('mancheck', 'Man Check:') !!}
-    {!! Form::checkbox('mancheck', 1, ['class' => 'form-control']) !!}
-    <input type="hidden" name="mancheck" value="0" />
+    {!! Form::label('man_check', 'Man Check:') !!}
+    {!! Form::checkbox('man_check', "CHECKED", ['class' => 'form-control']) !!}
+    <input type="hidden" name="man_check" value="UNCHECK" />
 </div>
 
 <!-- Submit Field -->
