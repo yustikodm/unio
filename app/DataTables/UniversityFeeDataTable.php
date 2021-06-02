@@ -29,7 +29,10 @@ class UniversityFeeDataTable extends DataTable
           ->editColumn('faculty.name', function ($query) {
               return '<a href="' . route('university-faculties.show', $query->faculty->id) . '">' . $query->faculty->name . '</a>';
           })
-          ->rawColumns(['action', 'university.name', 'faculty.name', 'major.name']);
+          ->editColumn('university_fees.fee', function ($query) {
+              return number_format($query->fee);
+          })
+          ->rawColumns(['action', 'university.name', 'faculty.name', 'major.name', 'university_fees.fee']);
     }
 
     /**
@@ -79,8 +82,9 @@ class UniversityFeeDataTable extends DataTable
             Column::make('university.name')->title('University')->width('20%'),
             Column::make('faculty.name')->title('Faculty')->width('20%'),
             Column::make('major.name')->title('Major')->width('20%'),
-            Column::make('admission_fee')->title('Admission Fee')->width('15%'),
-            Column::make('semester_fee')->title('Semester Fee')->width('15%'),
+            Column::make('fee')->title('Fee')->width('15%'),
+            Column::make('period')->title('Period')->width('15%'),
+            Column::make('period_unit')->title('Period Unit')->width('15%'),
         ];
     }
 

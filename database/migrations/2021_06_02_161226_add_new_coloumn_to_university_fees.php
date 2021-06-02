@@ -14,7 +14,9 @@ class AddNewColoumnToUniversityFees extends Migration
     public function up()
     {
         Schema::table('university_fees', function (Blueprint $table) {
-            //
+            $table->bigInteger('fee')->after('type');
+            $table->integer('period')->after('fee');
+            $table->string('period_unit')->after('period');
         });
     }
 

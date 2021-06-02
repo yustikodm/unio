@@ -38,6 +38,9 @@ class UniversityFee extends Model
     'major_id',
     'currency_id',
     'type',
+    'fee',
+    'period',
+    'period_unit',
     'admission_fee',
     'semester_fee',
     'description'
@@ -71,8 +74,6 @@ class UniversityFee extends Model
     'major_id' => 'required|integer',
     'currency_id' => 'required|integer',
     'type' => 'required|string|max:50',
-    'admission_fee' => 'required',
-    'semester_fee' => 'required',
     'description' => 'required|string|max:255',
     'created_at' => 'nullable',
     'updated_at' => 'nullable',
