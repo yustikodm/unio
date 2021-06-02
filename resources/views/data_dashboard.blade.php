@@ -8,7 +8,7 @@
             </div>
 
             <div class="icon">
-                <i class="ion ion-bag"></i>
+                <i class="fa fa-university"></i>
             </div>
 
             <!-- <a href="#" class="small-box-footer">Selengkapnya <i class="fa fa-arrow-circle-right"></i></a> -->
@@ -22,7 +22,7 @@
           <p>User</p>
         </div>
         <div class="icon">
-          <i class="ion ion-person-add"></i>
+          <i class="ion ion-person"></i>
         </div>
       </div>
     </div>
@@ -46,7 +46,7 @@
           <p>Vendor</p>
         </div>
         <div class="icon">
-          <i class="ion ion-bag"></i>
+          <i class="fa fa-users" aria-hidden="true"></i>
         </div>
       </div>
     </div>

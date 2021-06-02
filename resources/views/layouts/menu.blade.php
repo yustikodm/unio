@@ -6,8 +6,8 @@ f{{-- Dashboard --}}
 @endcan
 
 {{-- Master --}}
-@can(['countries.index', 'states.index', 'districts.index', 'questionnaires.index', 'questionnaire-answers.index'])
-    <li class="treeview {{ Request::is('countries*') || Request::is('states*') || Request::is('districts*') || Request::is('questionnaires*') || Request::is('questionnaire-answers*') ? 'active menu-open' : '' }}">
+@can(['countries.index', 'states.index', 'districts.index', 'questionnaires.index', 'questionnaire-answers.index', 'review.index', 'questionnaireImage.index'])
+    <li class="treeview {{ Request::is('countries*') || Request::is('review*') || Request::is('states*') || Request::is('questionnaireImage*') || Request::is('districts*') || Request::is('questionnaires*') || Request::is('questionnaire-answers*') ? 'active menu-open' : '' }}">
         <a href="#">
             <i class="fa fa-database"></i><span>Master</span>
             <span class="pull-right-container">
@@ -50,13 +50,25 @@ f{{-- Dashboard --}}
                     <a href="{{ route('questionnaire-answers.index') }}"><i class="fa fa-circle-thin"></i><span>Questionnaire Answers</span></a>
                 </li>
             @endcan
+
+            @can('questionnaireImage.index')
+                <li class="{{ Request::is('questionnaireImage*') ? 'active' : '' }}">
+                    <a href="{{ route('questionnaireImage.index') }}"><i class="fa fa-circle-thin"></i><span>Questionnaire Image</span></a>
+                </li>
+            @endcan
+
+            @can('review.index')
+                <li class="{{ Request::is('review*') ? 'active' : '' }}">
+                    <a href="{{ route('review.index') }}"><i class="fa fa-circle-thin"></i><span>Review</span></a>
+                </li>
+            @endcan
         </ul>
     </li>
 @endcan
 
 {{-- University --}}
-@can(['universities.index', 'university-faculties.index', 'university-majors.index', 'university-fees.index', 'university-requirements.index', 'university-scholarships.index', 'master-majors.index'])
-    <li class="treeview {{ Request::is('university*') || Request::is('universities*') || Request::is('master-majors*') ? 'active menu-open' : '' }}">
+@can(['universities.index', 'university-faculties.index', 'university-majors.index', 'university-fees.index', 'university-requirements.index', 'university-scholarships.index', 'master-majors.index', 'majorPrediction.index', 'fOS.index', 'levelMajor.index'])
+    <li class="treeview {{ Request::is('university*') || Request::is('universities*') || Request::is('levelMajor*') || Request::is('fOS*') || Request::is('majorPrediction*') || Request::is('master-majors*') ? 'active menu-open' : '' }}">
         <a href="#">
             <i class="fa fa-university"></i><span>University</span>
             <span class="pull-right-container">
@@ -107,11 +119,25 @@ f{{-- Dashboard --}}
                     <a href="{{ route('university-scholarships.index') }}"><i class="fa fa-circle-thin"></i><span>University Scholarships</span></a>
                 </li>
             @endcan
-
             @can('master-majors.index')
             <li class="{{ Request::is('master-majors*') ? 'active' : '' }}">
                 <a href="{{ route('master-majors.index') }}"><i class="fa fa-circle-thin"></i><span>Master Majors</span></a>
             </li>
+            @endcan
+            @can('majorPrediction.index')
+                <li class="{{ Request::is('majorPrediction*') ? 'active' : '' }}">
+                    <a href="{{ route('majorPrediction.index') }}"><i class="fa fa-circle-thin"></i><span>Majors Prediction</span></a>
+                </li>
+            @endcan
+            @can('fOS.index')
+                <li class="{{ Request::is('fOS*') ? 'active' : '' }}">
+                    <a href="{{ route('fOS.index') }}"><i class="fa fa-circle-thin"></i><span>Majors Classification</span></a>
+                </li>
+            @endcan
+            @can('levelMajor.index')
+                <li class="{{ Request::is('levelMajor*') ? 'active' : '' }}">
+                    <a href="{{ route('levelMajor.index') }}"><i class="fa fa-circle-thin"></i><span>Level Major</span></a>
+                </li>
             @endcan
         </ul>
     </li>
@@ -299,8 +325,8 @@ f{{-- Dashboard --}}
 @endcan
 
 {{-- Setting --}}
-<li class="treeview {{ Request::is('roles*') || Request::is('permissions*') ? 'active menu-open' : '' }}">
-    <a href="#"><i class="fa fa-cogs"></i><span>Role &amp; Permissions</span>
+<li class="treeview {{ Request::is('roles*') || Request::is('imageBanner*') || Request::is('permissions*') ? 'active menu-open' : '' }}">
+    <a href="#"><i class="fa fa-cogs"></i><span>Settings</span>
         <span class="pull-right-container">
             <i class="fa fa-angle-left pull-right"></i>
         </span>
@@ -320,6 +346,11 @@ f{{-- Dashboard --}}
                 <a href="{{ route('permissions.index') }}"><i class="fa fa-circle-thin"></i><span>Permissions</span></a>
             </li>
         @endcan
+        @can('imageBanner.index')
+            <li class="{{ Request::is('imageBanner*') ? 'active' : '' }}">
+                <a href="{{ route('imageBanner.index') }}"><i class="fa fa-circle-thin"></i><span>Image Banner</span></a>
+            </li>
+        @endcan
     </ul>
 </li>
 @can('topupPackages.index')
@@ -327,28 +358,4 @@ f{{-- Dashboard --}}
     <a href="{{ route('topupPackages.index') }}"><i class="fa fa-edit"></i><span>Topup Packages</span></a>
 </li>
 @endcan
-@can('review.index')
-<li class="{{ Request::is('review*') ? 'active' : '' }}">
-    <a href="{{ route('review.index') }}"><i class="fa fa-edit"></i><span>Review</span></a>
-</li>
-@endcan
-@can('majorPrediction.index')
-<li class="{{ Request::is('majorPrediction*') ? 'active' : '' }}">
-    <a href="{{ route('majorPrediction.index') }}"><i class="fa fa-edit"></i><span>Major Prediction</span></a>
-</li>
-@endcan
-@can('reviewMajors.index')
-<li class="{{ Request::is('reviewMajors*') ? 'active' : '' }}">
-    <a href="{{ route('reviewMajors.index') }}"><i class="fa fa-edit"></i><span>Review Majors</span></a>
-</li>
-@endcan
-@can('questionnaireImage.index')
-<li class="{{ Request::is('questionnaireImage*') ? 'active' : '' }}">
-    <a href="{{ route('questionnaireImage.index') }}"><i class="fa fa-edit"></i><span>Questionnaire Image</span></a>
-</li>
-@endcan
-@can('fOS.index')
-<li class="{{ Request::is('fOS*') ? 'active' : '' }}">
-    <a href="{{ route('fOS.index') }}"><i class="fa fa-edit"></i><span>F O S</span></a>
-</li>
-@endcan
+

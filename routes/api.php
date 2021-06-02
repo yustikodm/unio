@@ -167,3 +167,7 @@ Route::get('frontend-home', 'FrontendHomeAPIController@index');
 Route::resource('review_majors', 'ReviewMajorsAPIController');
 
 Route::resource('f_o_s', 'FOSAPIController');
+
+Route::resource('level_major', 'LevelMajorAPIController');
+
+Route::resource('image_banner', 'ImageBannerAPIController');

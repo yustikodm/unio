@@ -84,18 +84,6 @@
                 <!-- /.col -->
             </div>
         </form>
-
-        <div class="social-auth-links text-center">
-          <p>- OR -</p>
-          <a href="{{ route('auth.provider', 'google') }}" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google"></i> Sign in using
-            Google</a>
-          <a href="{{ route('auth.provider', 'facebook') }}" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign in using
-            Facebook</a>
-          <a href="{{ route('auth.provider', 'twitter') }}" class="btn btn-block btn-social btn-twitter btn-flat"><i class="fa fa-twitter"></i> Sign in using
-            Twitter</a>
-        </div>
-
-        {{-- <a href="{{ url('/password/reset') }}">I forgot my password</a><br> --}}
         <a href="{{ url('/register') }}" class="text-center">Register a new membership</a>
 
     </div>

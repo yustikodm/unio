@@ -65,9 +65,11 @@ class QuestionnaireImageAPIController extends AppBaseController
             $quest = [
                 'quest_one_img_id' => $quest_one->id,
                 'quest_one_img_src' => $quest_one->src,               
+                'quest_one_img_name' => $quest_one->name,
                 'quest_one_type' => $row[0],
                 'quest_two_img_id' => $quest_two->id,
                 'quest_two_img_src' => $quest_two->src,               
+                'quest_two_img_name' => $quest_two->name,
                 'quest_two_type' => $row[1],
             ];                        
             array_push($ret, $quest);
